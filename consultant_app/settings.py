@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,6 +78,8 @@ WSGI_APPLICATION = 'consultant_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+USER = os.getenv("POSTGRES_USER")
+DB_NAME = os.getenv("POSTRES_DB_NAME")
 
 DATABASES = {
 
@@ -81,9 +87,9 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'lawyers',
+        'NAME': DB_NAME,
 
-        'USER': '',
+        'USER': USER,
 
         'PASSWORD': '',
 
