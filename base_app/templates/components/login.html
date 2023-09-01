@@ -4,11 +4,11 @@
     <form action="" method="POST">
         {% csrf_token %}
         <label for="email">Email</label>
-        <input type="email" placeholder="Enter your email" >
+        <input type="email" placeholder="Enter your email" required>
 
         <label for="password">Password</label>
-        <input type="email" placeholder="Enter your password" >
-        
+        <input type="email" placeholder="Enter your password" required>
+
         <input type="submit" value="Login" />
     </form>
 {% endblock content %}

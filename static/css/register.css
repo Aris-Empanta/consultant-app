@@ -1,0 +1,11 @@
+#specialtyQuestioningPage {
+    display: flex;
+}
+
+#clientRegisterPage {
+    display: none;
+}
+
+#lawyerRegisterPage {
+    display: none;
+}

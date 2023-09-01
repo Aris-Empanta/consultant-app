@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
+    lawyer = models.BooleanField(default=False)
+
 # Create your models here.
 class Lawyers(models.Model):
-    name = models.CharField(max_length=50, blank=False, null=False)
-    surname = models.CharField(max_length=50, blank=False, null=False)
-    email = models.EmailField(unique=True, blank=False, null=False)
     #instead of modifying the user model, we connnect this model to it.
-    user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
+    profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
     specialties = models.TextField(blank=False, null=False)
     description = models.TextField()
     averageRating = models.IntegerField()
@@ -21,7 +22,7 @@ class Clients(models.Model):
     surname = models.CharField(max_length=50, blank=False, null=False)
     email = models.EmailField(unique=True, blank=False, null=False)
     #instead of modifying the user model, we connnect this model to it.
-    user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)   
+    profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
     
     def __str__(self):
         return f"Client Named: {self.name}" 
