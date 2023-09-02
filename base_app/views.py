@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
+from .forms import UserRegisterForm
+from .models import Profile
 
 # Create your views here.
 class Home(View):
@@ -38,7 +40,29 @@ class Logout(View):
         logout(request)
         redirect('home')
 
-class Register(View):
-
+class Register(View):    
+    
     def get(self, request):
-        return render(request, 'components/register.html')
+        form = UserRegisterForm()
+        context = { 'form': form}
+        return render(request, 'components/register.html', context)
+
+    def post(self, request):
+        form = UserRegisterForm(request.POST)
+        
+        if form.is_valid():
+            user = form.save(commit=False)
+            profile = Profile()
+            profile.user = user
+            lawyerOrClient = request.POST.get("lawyerOrClient")
+
+            if lawyerOrClient == "lawyer":
+                profile.isLawyer = True
+
+            user.save()
+            profile.save()
+            return redirect('login')
+        else:
+           pass
+        
+        return redirect('register')

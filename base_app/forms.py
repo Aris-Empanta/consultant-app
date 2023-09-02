@@ -1,7 +1,11 @@
-from django.forms import ModelForm
-from .models import Lawyers
+from django.forms import ModelForm, PasswordInput
+from django.contrib.auth.models import User
 
-class LawyerRegisterForm(ModelForm):
+class UserRegisterForm(ModelForm):
     class Meta:
-        model = Lawyers
-        fields = []
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username' ,'password']
+
+        widgets = {
+        'password': PasswordInput(),
+        }

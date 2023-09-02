@@ -14,10 +14,28 @@
     </div>
 
     <div id="clientRegisterPage">
-        Client Register
+        <form method="post" action="/register/">
+            {% csrf_token %}
+            <input type="hidden" name="lawyerOrClient" value="client">
+            {% for field in form %}
+                <label>{{field.label}}</label>
+                {{field}}
+            {% endfor %}
+        <input type="submit" value="Submit">
+        </form>
     </div>
 
     <div id="lawyerRegisterPage">
-        Lawyer Register
+        <form method="post" action="/register/">
+            {% csrf_token %}
+            <input type="hidden" name="lawyerOrClient" value="lawyer">
+            {% for field in form %}
+                <label>{{field.label}}</label>
+                {{field}}
+            {% endfor %}
+            <input type="submit" value="Submit">
+        </form>
     </div>
+
+    <a href="{% url 'login' %}">Login</a>
 {% endblock content %}
