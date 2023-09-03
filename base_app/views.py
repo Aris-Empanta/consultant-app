@@ -40,12 +40,26 @@ class Logout(View):
         logout(request)
         redirect('home')
 
-class Register(View):    
+class QuestionSpecialty(View):
     
     def get(self, request):
-        form = UserRegisterForm()
-        context = { 'form': form}
-        return render(request, 'components/register.html', context)
+        return render(request, 'components/questionSpecialty.html')
+
+class RegisterClient(View):    
+    
+    def get(self, request):
+
+        referer = request.META.get('HTTP_REFERER', None)
+
+        allowed_relative_referer = '/question-specialty/'
+        
+        if referer and referer.endswith(allowed_relative_referer):
+            form = UserRegisterForm()
+            context = { 'form': form}
+            return render(request, 'components/registerClient.html', context)
+        
+        return redirect("home")
+
 
     def post(self, request):
         form = UserRegisterForm(request.POST)
@@ -54,15 +68,46 @@ class Register(View):
             user = form.save(commit=False)
             profile = Profile()
             profile.user = user
-            lawyerOrClient = request.POST.get("lawyerOrClient")
-
-            if lawyerOrClient == "lawyer":
-                profile.isLawyer = True
 
             user.save()
             profile.save()
             return redirect('login')
         else:
-           pass
+           errors = form.errors
+
+           for key, value in errors.items():
+               messages.error(request, value)
         
-        return redirect('register')
+        return redirect('register-client')
+    
+class RegisterLawyer(View):    
+    
+    def get(self, request):
+        referer = request.META.get('HTTP_REFERER', None)
+
+        allowed_relative_referer = '/question-specialty/'
+        
+        if referer and referer.endswith(allowed_relative_referer):
+            form = UserRegisterForm()
+            context = { 'form': form}
+            return render(request, 'components/registerLawyer.html', context)
+        return redirect("home")
+
+    def post(self, request):
+        form = UserRegisterForm(request.POST)
+        
+        if form.is_valid():
+            user = form.save(commit=False)
+            profile = Profile()
+            profile.user = user
+
+            user.save()
+            profile.save()
+            return redirect('login')
+        else:
+           errors = form.errors
+
+           for key, value in errors.items():
+               messages.error(request, value)
+        
+        return redirect('register-lawyer')

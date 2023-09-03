@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div id="specialtyQuestioningPage">
+        <h1>Are you a client or a lawyer?</h1>
+        <div>
+            <a href="{% url 'register-client' %}">Client</a>
+            <a href="{% url 'register-lawyer' %}">Lawyer</a>
+        </div>
+    </div>
+{% endblock content %}

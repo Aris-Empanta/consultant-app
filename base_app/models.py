@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
-    isLawyer = models.BooleanField(default=False)
+    Lawyer = models.BooleanField(default=False)
+    Client = models.BooleanField(default=False)
 
 class Lawyer(models.Model):
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
