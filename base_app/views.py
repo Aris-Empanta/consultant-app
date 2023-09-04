@@ -47,13 +47,22 @@ class QuestionSpecialty(View):
 
 class RegisterClient(View):    
     
+    protocol = 'http'   
+    referer = None 
+    
     def get(self, request):
 
-        referer = request.META.get('HTTP_REFERER', None)
+        if request.is_secure():
+            self.protocol = 'https'
+        else:
+            self.protocol = 'http'       
 
-        allowed_relative_referer = '/question-specialty/'
+        if "HTTP_REFERER" in request.META:
+            self.referer = f'{request.META["HTTP_REFERER"]}'
+
+        url = f'{self.protocol }://{request.META["HTTP_HOST"]}/question-specialty/'
         
-        if referer and referer.endswith(allowed_relative_referer):
+        if self.referer == url:
             form = UserRegisterForm()
             context = { 'form': form}
             return render(request, 'components/registerClient.html', context)
@@ -80,17 +89,28 @@ class RegisterClient(View):
         
         return redirect('register-client')
     
-class RegisterLawyer(View):    
+class RegisterLawyer(View):
+
+    protocol = 'http'   
+    referer = None 
     
     def get(self, request):
-        referer = request.META.get('HTTP_REFERER', None)
 
-        allowed_relative_referer = '/question-specialty/'
+        if request.is_secure():
+            self.protocol = 'https'
+        else:
+            self.protocol = 'http'       
+
+        if "HTTP_REFERER" in request.META:
+            self.referer = f'{request.META["HTTP_REFERER"]}'
+
+        url = f'{self.protocol }://{request.META["HTTP_HOST"]}/question-specialty/'
         
-        if referer and referer.endswith(allowed_relative_referer):
+        if self.referer == url:
             form = UserRegisterForm()
             context = { 'form': form}
             return render(request, 'components/registerLawyer.html', context)
+        
         return redirect("home")
 
     def post(self, request):
