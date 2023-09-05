@@ -14,9 +14,6 @@ class Lawyer(models.Model):
     hourlyRate = models.IntegerField(blank=False, null=False)
     
 class Client(models.Model):
-    name = models.CharField(max_length=50, blank=False, null=False)
-    surname = models.CharField(max_length=50, blank=False, null=False)
-    email = models.EmailField(unique=True, blank=False, null=False)
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
 
 class Rating(models.Model):
