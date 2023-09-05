@@ -2,13 +2,8 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
-from models import Profile
-import sys
- 
-# setting path of parent directory
-sys.path.append('../forms')
-
-from forms import UserRegisterForm
+from ..models import Profile
+from ..forms import UserRegisterForm
 
 
 class QuestionSpecialty(View):
