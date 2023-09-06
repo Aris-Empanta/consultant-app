@@ -8,4 +8,5 @@ urlpatterns = [
     path('question-specialty/', views.QuestionSpecialty.as_view(), name="question-specialty"),  
     path('register-client/', views.RegisterUser.as_view(lawyerRegister = False), name="register-client"),
     path('register-lawyer/', views.RegisterUser.as_view(lawyerRegister = True), name="register-lawyer"),
+    path('successfully-registered/', views.SuccessFullyRegistered.as_view(), name="successfully-registered"),
 ]

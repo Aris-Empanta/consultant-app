@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from ..models import Profile
 from ..forms import UserRegisterForm
-
+import time
 
 class QuestionSpecialty(View):
     
@@ -48,7 +48,8 @@ class RegisterUser(View):
 
             user.save()
             profile.save()
-            return redirect('login')
+
+            return redirect('successfully-registered')
         else:
            errors = form.errors
 
@@ -61,8 +62,14 @@ class RegisterUser(View):
     def renderRegisterTemplate(self, request):
 
         form = UserRegisterForm()
-        context = { 'form': form}
+        context = { 'form': form }
 
         self.template = 'registerClient' if not self.lawyerRegister else 'registerLawyer'
         
         return render(request, f'components/{self.template}.html', context)
+
+class SuccessFullyRegistered(View):
+
+    def get(self, request):
+        
+        return render(request, 'components/successfullyRegistered.html', {})
