@@ -68,6 +68,7 @@ class RegisterUser(View):
         
         return render(request, f'components/{self.template}.html', context)
 
+# MAKE IT ACCESSIBLE ONLY WITH REFERER!!!
 class SuccessFullyRegistered(View):
 
     def get(self, request):
