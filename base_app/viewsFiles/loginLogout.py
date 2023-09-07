@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Login(View):
 
     def get(self, request):
-        return render(request, 'components/login.html')
+        return render(request, 'components/login.html', {})
     
     def post(self, request):
         email = request.POST["email"].lower()
@@ -27,7 +27,11 @@ class Login(View):
             return redirect('home')
         
         return redirect('login')
-        
+    
+class ExamineOauth(View):
+
+    def get(self, request):
+        return render(request, 'components/examine-oath.html', {})
 
 
 class Logout(View):

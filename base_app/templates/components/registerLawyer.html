@@ -1,9 +1,9 @@
 {% extends 'main.html' %}
-
+{% load socialaccount %}
 {% block content %}
 
-    <h1>{{successRegisterMessage}}</h1>
-
+    <a href="{% provider_login_url 'google'%}?next=/">Register with Google</a>
+    
     <div>
         <form method="post" action="">
             {% csrf_token %}

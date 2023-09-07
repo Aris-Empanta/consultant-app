@@ -34,7 +34,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-SITE_ID=1
+SITE_ID=2
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,13 +53,16 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
+#Configurations needed for allauth
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": [
             "profile",
             "email"
         ],
-        "AUTH_PARAMS": {"access_type": "online"}
+        "AUTH_PARAMS": {
+                        "access_type": "online"
+                        }
     }
 }
 
@@ -164,11 +168,15 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Configurations needed for allauth
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.accounts.auth_backends.AuthenticationBackend"
+    "allauth.account.auth_backends.AuthenticationBackend"
 )
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/examine-oauth/"
 LOGOUT_REDIRECT_URL = "/"
+
+#We set this to true to skip the default consent redirecting screen/
+SOCIALACCOUNT_LOGIN_ON_GET=True
