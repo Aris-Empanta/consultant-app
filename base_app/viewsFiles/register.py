@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
+from psycopg2 import IntegrityError
 from ..models import Profile
-from ..forms import UserRegisterForm
-import time
+from ..forms import MyUserCreationForm
+from django.db import transaction
 
 class QuestionSpecialty(View):
     
@@ -39,17 +40,30 @@ class RegisterUser(View):
 
 
     def post(self, request):
-        form = UserRegisterForm(request.POST)
+
+        form = MyUserCreationForm(request.POST)
         
         if form.is_valid():
-            user = form.save(commit=False)
-            profile = Profile()
-            profile.user = user
+                    try:
+                        with transaction.atomic():
+                            user = form.save(commit=False)
+                            profile = Profile()
+                            profile.user = user
+                            profile.Lawyer = True if self.lawyerRegister else False
+                            profile.Client = False if self.lawyerRegister else True
+                            
+                            user.save()
+                            profile.save()
 
-            user.save()
-            profile.save()
-
-            return redirect('successfully-registered')
+                        return redirect('successfully-registered')
+                    except IntegrityError as e:
+                        # Handle database integrity error here
+                        print(f"Database error: {e}")
+                        messages.error(request, "A database error occurred.")
+                    except Exception as e:
+                        # Handle other exceptions here
+                        print(f"An error occurred: {e}")
+                        messages.error(request, "An error occurred while processing your request.")
         else:
            errors = form.errors
 
@@ -61,7 +75,7 @@ class RegisterUser(View):
     
     def renderRegisterTemplate(self, request):
 
-        form = UserRegisterForm()
+        form = MyUserCreationForm()
         context = { 'form': form }
 
         self.template = 'registerClient' if not self.lawyerRegister else 'registerLawyer'

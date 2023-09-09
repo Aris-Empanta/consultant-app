@@ -31,10 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
-SITE_ID=2
+SITE_ID=3
 
 
 INSTALLED_APPS = [
@@ -52,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 ]
+
+AUTH_USER_MODEL = "base_app.User"
 
 #Configurations needed for allauth
 SOCIALACCOUNT_PROVIDERS = {
