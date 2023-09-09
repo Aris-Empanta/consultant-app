@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib import messages
-from django.contrib.auth.models import User
+from ..models import User
 
 class Login(View):
 
@@ -11,14 +11,14 @@ class Login(View):
         return render(request, 'components/login.html', {})
     
     def post(self, request):
-        email = request.POST["email"].lower()
-        password = request.POST["password"]
+        email = request.POST.get("email")
+        password = request.POST.get("password")
 
         try:
             user = User.objects.get(email=email)
-        except:
-            messages.error(request, 'Email OR password does not exit')
-            return
+        except User.DoesNotExist:
+            messages.error(request, 'Email does not exist')
+            return redirect('login')
 
         user = authenticate(request, email=email, password=password)
 
@@ -27,12 +27,6 @@ class Login(View):
             return redirect('home')
         
         return redirect('login')
-    
-class ExamineOauth(View):
-
-    def get(self, request):
-        return render(request, 'components/examine-oath.html', {})
-
 
 class Logout(View):
 

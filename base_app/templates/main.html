@@ -10,11 +10,12 @@
     <a href="{% url 'home' %}">Logo</a>
 
     {% if messages %}
-    <ul class="messages">
         {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        <div>{{ message }}</div>
         {% endfor %}
-    </ul>
+        {% for message in messages %}
+        <div>{{ message }}</div>
+        {% endfor %}
     {% endif %}
 
     {% block content %}

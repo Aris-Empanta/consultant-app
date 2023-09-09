@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
-from psycopg2 import IntegrityError
+from django.db import IntegrityError
 from ..models import Profile
 from ..forms import MyUserCreationForm
 from django.db import transaction

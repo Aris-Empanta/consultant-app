@@ -4,7 +4,6 @@ from django.shortcuts import render
 class ExamineOauth(View):
 
     def get(self, request):
-        
         return render(request, 'components/examine-oath.html', {})
     
 
