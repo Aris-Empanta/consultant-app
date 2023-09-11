@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="stylesheet" href="{% static "css/navbar.css" %}">
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+    <link rel="stylesheet" href="{% static "css/question-specialty.css" %}">
     <title>Document</title>
 </head>
 <body>
-    <a href="{% url 'home' %}">Logo</a>
+    <a href="{% url 'home' %}"><img  id="logo" alt="Logo" src="{% static "img/logo.webp" %}" ></a>
 
     {% if messages %}
         {% for message in messages %}
@@ -23,5 +27,6 @@
     {% endblock %}
 
     <script src="{% static 'js/successfullyRegistered.js' %}"></script>
+    <script src="{% static 'js/questionSpecialty.js' %}"></script>
 </body>
 </html>

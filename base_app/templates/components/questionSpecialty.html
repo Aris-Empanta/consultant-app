@@ -1,11 +1,25 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
-    <div id="specialtyQuestioningPage">
-        <h1>Are you a client or a lawyer?</h1>
-        <div>
-            <a href="{% url 'register-client' %}">Client</a>
-            <a href="{% url 'register-lawyer' %}">Lawyer</a>
+    <div id="questionSpecialtyPage">
+        <div id="questionSpecialtyWrapper">
+            <h1>How may we assist you?</h1>
+            <div id="clientLawyerQuestionWrapper">
+                <div class="lookingForWrapper" id="chooseClient">
+                    <img alt="client" src="{% static 'img/client.webp' %}" class="clientLawyerLogo">
+                    <p class="lookingForText">I am a client, looking for legal advice</p>
+                </div>
+                <div class="lookingForWrapper" id="chooseLawyer">
+                    <img alt="lawyer" src="{% static 'img/lawyer.webp' %}" class="clientLawyerLogo">
+                    <p class="lookingForText">I am a lawyer, looking for job</p>
+                </div>
+            </div>
+            
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <input id="joinButton" value="Join" type="submit" disabled name="joinButton">
+                </form>
+            
         </div>
     </div>
 {% endblock content %}

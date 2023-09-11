@@ -1,0 +1,40 @@
+#questionSpecialtyPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#questionSpecialtyWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    border: 1px solid black;
+    padding: 1%;
+    gap: 10px;
+}
+
+.clientLawyerLogo {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+#clientLawyerQuestionWrapper {
+    display: flex;
+    gap: 1%;
+}
+
+.lookingForWrapper {
+    cursor: pointer;
+    border: 1px solid black; 
+    padding: 2%;  
+}
+
+#joinButton {
+    background-color: slateblue;
+    border: none;
+    color: aliceblue;
+    cursor: not-allowed;
+    opacity: 0.8;
+}

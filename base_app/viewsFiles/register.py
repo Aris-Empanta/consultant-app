@@ -12,6 +12,15 @@ class QuestionSpecialty(View):
     def get(self, request):
         return render(request, 'components/questionSpecialty.html')
     
+    def post(self, request):
+        joinAs = request.POST.get("joinButton")
+
+        if(joinAs == "Join as Lawyer"):
+            return redirect("register-lawyer")
+        
+        return redirect("register-client")
+
+    
 class RegisterUser(View):    
 
     lawyerRegister = False

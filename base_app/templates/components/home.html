@@ -3,6 +3,13 @@
 {% block content %}
 
     {% include 'components/reusable/navbar.html' %}
+
+    <div id="homePageWrapper">
+        <h1 id="homePageHeading">Search your Lawyer/Consultant!</h1>
+        <div id="searchLawyerWrapper">
+            <input type="text" id="searchLawyer" placeholder="Name/Specialty">
+            <button id="searchLawyerButton">Search</button>
+        </div>
+    </div>
     
-    <p>Home</p>
 {% endblock content %}

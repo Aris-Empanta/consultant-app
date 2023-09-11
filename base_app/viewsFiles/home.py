@@ -6,4 +6,5 @@ class Home(View):
 
     def get(self, request):
         #User.objects.all().delete()
-        return render(request, 'components/home.html')
+        context = { "navbar_color" : "green" }
+        return render(request, 'components/home.html', context)
