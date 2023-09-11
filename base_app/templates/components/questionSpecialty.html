@@ -15,10 +15,12 @@
                 </div>
             </div>
             
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <input id="joinButton" value="Join" type="submit" disabled name="joinButton">
-                </form>
+            <form method="post" action="">
+                {% csrf_token %}
+                <input id="joinButton" value="Join" type="submit" disabled name="joinButton">
+            </form>
+
+            <span>Already a user? <a href="{% url 'login' %}">Login</a></span>
             
         </div>
     </div>

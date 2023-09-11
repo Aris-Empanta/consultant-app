@@ -2,19 +2,21 @@
 {% load socialaccount %}
 {% block content %}
 
-    <a href="{% provider_login_url 'google'%}">Register with Google</a>
-    
-    <div>
-        <form method="post" action="">
-            {% csrf_token %}
-            {% for field in form %}
-                <label>{{field.label}}</label>
-                {{field}}
-            {% endfor %}
-            <input type="submit" value="Submit">
-        </form>
+    <div class="registerFormPage">
+        <div class="registerFormWrapper">
+            <a href="{% provider_login_url 'google'%}">Register with Google</a> 
+            <form method="post" action="" class="registerForm">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="registerFieldWrapper">
+                        {{ field.label_tag }}
+                        {{field}}
+                    </div>
+                {% endfor %}
+                <input type="submit" value="Register" class="registerButton">
+            </form>
+            <span class="alreadyUser">Already a user? <a href="{% url 'login' %}">Login</a></span>
+        </div>
     </div>
-    {{url}}
 
-    <a href="{% url 'login' %}">Login</a>
 {% endblock content %}

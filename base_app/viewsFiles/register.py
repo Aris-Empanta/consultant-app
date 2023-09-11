@@ -30,6 +30,8 @@ class RegisterUser(View):
     
     def get(self, request):
 
+        # Below there is a mechanism so that this page is only accessible 
+        # through the referer page "question-specialty"
         if request.is_secure():
             self.protocol = 'https'
         else:
