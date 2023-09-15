@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
+    pass
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
