@@ -16,8 +16,10 @@ class QuestionSpecialty(View):
         joinAs = request.POST.get("joinButton")
 
         if(joinAs == "Join as Lawyer"):
-            return redirect("register-lawyer")
-        
+            request.session['isLawyer'] = True
+            return redirect("register-lawyer")       
+
+        request.session['isLawyer'] = False
         return redirect("register-client")
 
     
