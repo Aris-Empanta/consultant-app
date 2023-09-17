@@ -45,8 +45,9 @@ class RegisterUser(View):
         url = f'{ self.protocol }://{request.META["HTTP_HOST"]}'
 
         questionSpecialtyUrl = f'{url}/question-specialty/'
+        examinOauthUrl = f'{url}/examine-oauth/'
         
-        if self.referer == questionSpecialtyUrl:
+        if self.referer == questionSpecialtyUrl or examinOauthUrl:
            return self.renderRegisterTemplate(request)
         
         return redirect("home")
