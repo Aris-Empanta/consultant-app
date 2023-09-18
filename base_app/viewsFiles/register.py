@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from ..models import Profile, User
 from ..forms import MyUserCreationForm
 
 class QuestionSpecialty(View):
     
     def get(self, request):
+        request.session['loggingIn'] = False
         return render(request, 'components/questionSpecialty.html')
     
     def post(self, request):
@@ -71,7 +72,7 @@ class RegisterUser(View):
             user.save()
             profile.save()
 
-            login(request, user)
+            login(request, user, "django.contrib.auth.backends.ModelBackend")
             return redirect('home')
         else:
            errors = form.errors

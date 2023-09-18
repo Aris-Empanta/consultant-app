@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib import messages
 from ..models import User
+from django.contrib.auth.hashers import make_password
 
 class Login(View):
 
@@ -15,18 +16,13 @@ class Login(View):
         email = request.POST.get("email")
         password = request.POST.get("password")
 
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            messages.error(request, 'Email does not exist')
-            return redirect('login')
-
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, email=email, password=password)        
 
         if user is not None:
-            login(request, user)
+            login(request, user, "django.contrib.auth.backends.ModelBackend")
             return redirect('home')
         
+        messages.error(request, 'Email or password do not match a user!')        
         return redirect('login')
 
 class Logout(View):

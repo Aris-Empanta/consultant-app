@@ -169,8 +169,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Configurations needed for allauth
-
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend"
@@ -181,5 +179,3 @@ LOGOUT_REDIRECT_URL = "/"
 
 #We set this to true to skip the default consent redirecting screen/
 SOCIALACCOUNT_LOGIN_ON_GET=True
-
-SESSION_COOKIE_AGE = 3600 * 24
