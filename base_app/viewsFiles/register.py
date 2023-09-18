@@ -2,10 +2,9 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.db import IntegrityError
+from django.contrib.auth import login
 from ..models import Profile, User
 from ..forms import MyUserCreationForm
-from django.db import transaction
 
 class QuestionSpecialty(View):
     
@@ -72,6 +71,7 @@ class RegisterUser(View):
             user.save()
             profile.save()
 
+            login(request, user)
             return redirect('home')
         else:
            errors = form.errors
