@@ -8,6 +8,7 @@ from ..models import User
 class Login(View):
 
     def get(self, request):
+        request.session['loggingIn'] = True
         return render(request, 'components/login.html', {})
     
     def post(self, request):

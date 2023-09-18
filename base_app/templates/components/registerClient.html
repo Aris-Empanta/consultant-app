@@ -1,9 +1,13 @@
 {% extends 'main.html' %}
 {% load socialaccount %}
-{% block content %}
-
+{% block content %} 
     <div class="registerFormPage">
         <div class="registerFormWrapper">
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div>{{ message }}</div>
+                {% endif %}
+            {% endfor %}
             <a href="{% provider_login_url 'google'%}">Register with Google</a> 
             <form method="post" action="" class="registerForm">
                 {% csrf_token %}
@@ -18,5 +22,4 @@
             <span class="alreadyUser">Already a user? <a href="{% url 'login' %}">Login</a></span>
         </div>
     </div>
-    
 {% endblock content %}

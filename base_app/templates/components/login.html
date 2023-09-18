@@ -2,6 +2,11 @@
 {% load socialaccount %}
 {% block content %}
    
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <div>{{ message }}</div>
+        {% endif %}
+    {% endfor %}
     <h2>Google Login</h2>
     <a href="{% provider_login_url 'google' %}">Login With Google</a> 
 

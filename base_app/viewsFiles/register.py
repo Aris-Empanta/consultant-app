@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.db import IntegrityError
-from ..models import Profile
+from ..models import Profile, User
 from ..forms import MyUserCreationForm
 from django.db import transaction
 
@@ -58,26 +58,21 @@ class RegisterUser(View):
         form = MyUserCreationForm(request.POST)
         
         if form.is_valid():
-                    try:
-                        with transaction.atomic():
-                            user = form.save(commit=False)
-                            profile = Profile()
-                            profile.user = user
-                            profile.Lawyer = True if self.lawyerRegister else False
-                            profile.Client = False if self.lawyerRegister else True
-                            
-                            user.save()
-                            profile.save()
+            user = form.save(commit=False)
 
-                        return redirect('successfully-registered')
-                    except IntegrityError as e:
-                        # Handle database integrity error here
-                        print(f"Database error: {e}")
-                        messages.error(request, "A database error occurred.")
-                    except Exception as e:
-                        # Handle other exceptions here
-                        print(f"An error occurred: {e}")
-                        messages.error(request, "An error occurred while processing your request.")
+            if User.objects.filter(email=user.email).exists():
+                messages.error(request, 'User already exists!')
+                return redirect('.')
+            
+            profile = Profile()
+            profile.user = user
+            profile.Lawyer = True if self.lawyerRegister else False
+            profile.Client = False if self.lawyerRegister else True
+            
+            user.save()
+            profile.save()
+
+            return redirect('home')
         else:
            errors = form.errors
 
@@ -95,10 +90,3 @@ class RegisterUser(View):
         self.template = 'registerClient' if not self.lawyerRegister else 'registerLawyer'
         
         return render(request, f'components/{self.template}.html', context)
-
-# MAKE IT ACCESSIBLE ONLY WITH REFERER!!!
-class SuccessFullyRegistered(View):
-
-    def get(self, request):
-        
-        return render(request, 'components/successfullyRegistered.html', {})

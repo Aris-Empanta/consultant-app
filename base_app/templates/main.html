@@ -14,11 +14,7 @@
 <body>
     <a href="{% url 'home' %}"><img  id="logo" alt="Logo" src="{% static "img/logo.webp" %}" ></a>
 
-    {% if messages %}
-        {% for message in messages %}
-        <div>{{ message }}</div>
-        {% endfor %}
-    {% endif %}
+
 
     {% block content %}
 
