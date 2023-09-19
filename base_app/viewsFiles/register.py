@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth import login, authenticate
-from ..models import Profile, User
+from ..models import Profile, User, Lawyer, Client
 from ..forms import MyUserCreationForm
 
 class QuestionSpecialty(View):
@@ -68,15 +68,26 @@ class RegisterUser(View):
             profile.user = user
             profile.Lawyer = True if self.lawyerRegister else False
             profile.Client = False if self.lawyerRegister else True
-            
+
             user.save()
             profile.save()
+
+            # Depending the user, we connect the profile to a Lawyer 
+            # model or a Client.
+            if profile.Lawyer:
+                lawyer = Lawyer()
+                lawyer.profile = profile
+                lawyer.save()    
+            else:
+                client = Client()
+                client.profile = profile
+                client.save()  
 
             login(request, user, "django.contrib.auth.backends.ModelBackend")
             return redirect('home')
         else:
            errors = form.errors
-
+           print(errors)
            for key, value in errors.items():
                messages.error(request, value)
 

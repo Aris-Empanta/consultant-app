@@ -2,24 +2,26 @@
 {% load socialaccount %}
 {% block content %}
    
-    {% for message in messages %}
-        {% if message.tags == 'error' %}
-            <div>{{ message }}</div>
-        {% endif %}
-    {% endfor %}
-    <h2>Google Login</h2> 
-    <a href="{% provider_login_url 'google' %}">Login With Google</a> 
+    <div class="AuthenticationFormPage">
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div>{{ message }}</div>
+            {% endif %} 
+        {% endfor %}
+        <h2>Google Login</h2> 
+        <a href="{% provider_login_url 'google' %}">Login With Google</a> 
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Enter your email" required>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" placeholder="Enter your password" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
 
-        <input type="submit" value="Login" />
-    </form>
+            <input type="submit" value="Login" />
+        </form>
 
-    <a href="{% url 'question-specialty' %}">Register</a>
+        <a href="{% url 'question-specialty' %}">Register</a>
+    </div>
 {% endblock content %}

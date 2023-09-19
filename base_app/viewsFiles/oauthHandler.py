@@ -1,6 +1,6 @@
 from django.views import View
 from django.shortcuts import redirect
-from ..models import User, Profile
+from ..models import User, Profile, Lawyer, Client
 from django.contrib.auth import logout
 from django.contrib import messages
 
@@ -60,7 +60,18 @@ class OauthHandler(View):
                 profile.Lawyer = True if isLawyer else False
                 profile.Client = False if isLawyer else True       
                      
-        profile.save()        
+        profile.save()       
+
+        # Depending the user, we connect the profile to a Lawyer 
+        # model or a Client.
+        if profile.Lawyer:
+            lawyer = Lawyer()
+            lawyer.profile = profile
+            lawyer.save()    
+        else:
+            client = Client()
+            client.profile = profile
+            client.save()   
 
         #we delete the session variable
         if 'isLawyer' in request.session:
