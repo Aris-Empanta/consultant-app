@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from ..models import User
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.views import PasswordResetView
 
 class Login(View):
 
@@ -24,6 +25,10 @@ class Login(View):
         
         messages.error(request, 'Email or password do not match a user!')        
         return redirect('login')
+    
+
+class ResetPassword(PasswordResetView):
+    pass
 
 class Logout(View):
 

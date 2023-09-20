@@ -12,11 +12,11 @@ class Profile(models.Model):
     Client = models.BooleanField(default=False)
 
 class Lawyer(models.Model):
-    profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
-    specialties = models.TextField(blank=False, null=False)
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
+    specialties = models.TextField()
     description = models.TextField()
-    averageRating = models.IntegerField()
-    hourlyRate = models.IntegerField(blank=False, null=False)
+    averageRating = models.IntegerField(default=0)
+    hourlyRate = models.IntegerField(default=0)
     
 class Client(models.Model):
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
@@ -24,4 +24,4 @@ class Client(models.Model):
 class Rating(models.Model):
     client = models.OneToOneField(Client, on_delete=models.PROTECT)
     lawyer = models.OneToOneField(Lawyer, on_delete=models.PROTECT)
-    value = models.IntegerField(blank=False, null=False)
+    value = models.IntegerField(blank=False, default=0)

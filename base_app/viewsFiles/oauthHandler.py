@@ -46,9 +46,6 @@ class OauthHandler(View):
                     logout(request)
                     User.objects.get(id=id).delete()
                     messages.error(request, 'User already exists!')
-                    #we delete the session variable
-                    if 'isLawyer' in request.session:
-                        del request.session['isLawyer']
                     return redirect(registerUrl)
         
         # The user does not exist, so we create a new Profile with that user
@@ -72,9 +69,5 @@ class OauthHandler(View):
             client = Client()
             client.profile = profile
             client.save()   
-
-        #we delete the session variable
-        if 'isLawyer' in request.session:
-            del request.session['isLawyer']
         
         return redirect('home')

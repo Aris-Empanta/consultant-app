@@ -10,4 +10,5 @@ urlpatterns = [
     path('question-specialty/', views.QuestionSpecialty.as_view(), name="question-specialty"),  
     path('register-client/', views.RegisterUser.as_view(lawyerRegister = False), name="register-client"),
     path('register-lawyer/', views.RegisterUser.as_view(lawyerRegister = True), name="register-lawyer"),
+    path('reset-password/', views.ResetPassword.as_view(), name="reset-password"),
 ]
