@@ -4,8 +4,8 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib import messages
 from ..models import User
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from ..forms import PasswordResetForm
 
 class Login(View):
 
@@ -27,7 +27,24 @@ class Login(View):
         return redirect('login')
     
 
-class ResetPassword(PasswordResetView):
+class PasswordResetView(PasswordResetView):
+    template_name = "components/password-reset.html"
+    # email_template_name = "components/password-reset.html"
+    # extra_email_context = None
+    # form_class = PasswordResetForm
+    from_email = "empanta.aris@gmail.com"
+    # html_email_template_name = None
+    # subject_template_name = "registration/password_reset_subject.txt"
+    # # success_url = reverse_lazy("password_reset_done")
+    # template_name = "registration/password_reset_form.html"
+    
+class PasswordResetDoneView(PasswordResetDoneView):
+    pass
+
+class PasswordResetConfirmView(PasswordResetConfirmView):
+    pass
+
+class PasswordResetCompleteView(PasswordResetCompleteView):
     pass
 
 class Logout(View):
