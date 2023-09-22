@@ -6,6 +6,10 @@ from django.contrib import messages
 from ..models import User
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from ..forms import PasswordResetForm
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Login(View):
 
@@ -32,7 +36,7 @@ class PasswordResetView(PasswordResetView):
     # email_template_name = "components/password-reset.html"
     # extra_email_context = None
     # form_class = PasswordResetForm
-    from_email = "empanta.aris@gmail.com"
+    from_email = os.getenv("EMAIL_HOST_USER")
     # html_email_template_name = None
     # subject_template_name = "registration/password_reset_subject.txt"
     # # success_url = reverse_lazy("password_reset_done")
