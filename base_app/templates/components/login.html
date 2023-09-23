@@ -11,7 +11,7 @@
         <h2>Google Login</h2> 
         <a href="{% provider_login_url 'google' %}">Login With Google</a> 
 
-        <form action="" method="POST">
+        <form action="" method="POST" id="loginForm">
             {% csrf_token %}
             <label for="email">Email</label>
             <input type="email" name="email" placeholder="Enter your email" required>
@@ -21,7 +21,7 @@
 
             <input type="submit" value="Login" />
         </form>
-
+        <a href="{% url 'password_reset' %}" >Forgot Password?</a>
         <a href="{% url 'question-specialty' %}">Register</a>
     </div>
 {% endblock content %}

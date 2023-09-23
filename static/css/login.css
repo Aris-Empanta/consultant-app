@@ -1,0 +1,14 @@
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#password-reset-form ul {
+    display: none;
+}
+
+.errorlist ul {
+    display: initial;
+}
