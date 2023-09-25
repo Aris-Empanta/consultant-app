@@ -36,7 +36,7 @@ class PasswordResetView(PasswordResetView):
     email_template_name = "components/password-reset-email.html"
     from_email = os.getenv("EMAIL_HOST_USER")
     form_class = PasswordResetForm
-    
+
 class PasswordResetDoneView(PasswordResetDoneView):
     template_name = "components/password-reset-done.html"
 
