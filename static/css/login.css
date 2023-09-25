@@ -4,3 +4,83 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+#passwordResetPage {
+    background-color: darkmagenta;
+    height: 100vh;
+}
+
+#passwordResetFormWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: whitesmoke;
+    border-radius: 3px;
+    position: relative;
+    padding: 2.5%;
+}
+
+#passwordResetForm {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+#promptEmailForPasswordReset {
+    font-family: Tahoma, sans-serif;
+    font-size: 1.2rem;
+    color: #151515;
+}
+
+#resetPasswordEmailField {
+    border-radius: 3px;
+    border: 1px solid #999999;
+    padding: 0.3rem;
+    font-family: Tahoma, sans-serif;
+    font-size: 1rem;
+    width: 95%;
+    align-self: center;
+    margin-bottom: 75px;
+}
+
+#resetPasswordEmailField::placeholder {
+    font-family: Tahoma, sans-serif;
+    font-size: 1rem;
+}
+
+#resetPasswordEmailField:focus {
+    outline: none;
+}
+
+.horizontalLine {
+    border-top: 1px solid #999999;
+    border-radius: 3px;
+    position: absolute;
+    width: 99.7%;
+    bottom: 26%;
+    left: 0;
+}
+
+#proceedOrCancelWrapper {
+    position: absolute;
+    bottom: 0;
+}
+
+#cancelButton {
+    color: whitesmoke;
+    text-decoration: none;
+    background-color: red;
+    padding: 1px 6px 3px 6px;
+    border-radius: 3px;
+}
+
+#proceedButton {
+   border: none;
+   background-color: darkmagenta; 
+   border-radius: 3px;
+   cursor: pointer;   
+   padding: 3px 6px 3px 6px;
+   color: whitesmoke;
+}

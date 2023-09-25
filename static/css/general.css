@@ -15,3 +15,9 @@ body {
 #homeNavbar {
     background-color: red;
 }
+
+.centerPageContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

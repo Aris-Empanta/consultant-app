@@ -35,21 +35,17 @@ class PasswordResetView(PasswordResetView):
     template_name = "components/password-reset.html"
     email_template_name = "components/password-reset-email.html"
     from_email = os.getenv("EMAIL_HOST_USER")
-    # extra_email_context = None
-    # form_class = PasswordResetForm    
-    # html_email_template_name = None
-    # subject_template_name = "registration/password_reset_subject.txt"
-    # success_url = reverse_lazy("password_reset_done")
+    form_class = PasswordResetForm
     
 class PasswordResetDoneView(PasswordResetDoneView):
-    pass
+    template_name = "components/password-reset-done.html"
 
 class PasswordResetConfirmView(PasswordResetConfirmView):
-    # pass
     template_name = "components/password-reset-confirmation.html"
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
-    pass
+    template_name = "components/password-reset-complete.html"
+
 
 class Logout(View):
 
