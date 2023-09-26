@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from .models import User
 from django import forms
 from django.utils.translation import gettext_lazy as _
@@ -22,3 +22,17 @@ class PasswordResetForm(PasswordResetForm):
         if not User.objects.filter(email__iexact=email, is_active=True).exists():
             raise forms.ValidationError("There is no user registered with the specified email address!")
         return email
+    
+class SetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label=_("New password"),
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password", 
+                                          "class": "setNewPasswordFormField",
+                                          "placeholder": "New Password"}),
+    )
+    new_password2 = forms.CharField(
+        label=_("Confirm new password"),
+        widget=forms.PasswordInput(attrs={"autocomplete": "new-password", 
+                                          "class": "setNewPasswordFormField",
+                                          "placeholder": "Confirm New Password"}),
+    )

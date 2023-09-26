@@ -4,7 +4,7 @@
     them. Also, if more than 1 error arises, we need to show only the first 
     one, for a better UX.
 */
-let form = document.getElementById("password-reset-form")
+let form = document.getElementById("setNewPasswordForm")
 
 document.addEventListener("DOMContentLoaded", () => {
   

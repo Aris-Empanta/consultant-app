@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from ..models import User
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from ..forms import PasswordResetForm
+from ..forms import PasswordResetForm, SetPasswordForm
 import os
 from dotenv import load_dotenv
 
@@ -42,6 +42,7 @@ class PasswordResetDoneView(PasswordResetDoneView):
 
 class PasswordResetConfirmView(PasswordResetConfirmView):
     template_name = "components/password-reset-confirmation.html"
+    form_class = SetPasswordForm
 
 class PasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "components/password-reset-complete.html"

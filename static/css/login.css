@@ -1,12 +1,18 @@
+#loginFormWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20vh;
+}
+
 #loginForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-}
+} 
 
 #passwordResetPage {
-    background-color: darkmagenta;
+    background-color: #E6E6FA;
     height: 100vh;
 }
 
@@ -88,4 +94,113 @@
    cursor: pointer;   
    padding: 3px 6px 3px 6px;
    color: whitesmoke;
+}
+
+#passwordResetDone {
+    margin: 7% 4%;
+}
+
+#passwordResetDone {
+    height: 100vh;
+    background-color: #E6E6FA;
+    margin: 0;
+    padding: 7rem 4rem;
+}
+
+#passwordResetDone h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.6rem;
+    color: #202020;
+}
+
+#passwordResetDone p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    color: #151515;
+    max-width: 800px;
+}
+
+#setNewPasswordFormWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: whitesmoke;
+    border-radius: 3px;
+    position: relative;
+    padding: 2.5%;
+    margin-top: 20vh;
+    gap: 1rem;
+}
+
+#setNewPasswordFormWrapper h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.4rem;
+    color: #202020;
+    align-self: center;
+}
+
+#setNewPasswordForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.setNewPasswordFieldLabel {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.9rem;
+    color: #202020;
+}
+
+.setNewPasswordFormField {
+    border-radius: 3px;
+    border: 1px solid #999999;
+    padding: 0.4rem;
+    font-family: Tahoma, sans-serif;
+    font-size: 1rem;
+    width: 95%;
+    align-self: center;
+}
+
+.setNewPasswordFormField:focus {
+    outline: none;
+}
+
+.setNewPasswordFormField::placeholder {
+    font-size: 0.9rem;
+}
+
+#setNewPasswordSubmitButton {
+    cursor: pointer;
+    color: white;
+    background-color: darkorchid;
+    border-radius: 3px;
+    border: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    margin-top: 1rem;
+}
+
+#setNewPasswordFormError {
+    color: darkmagenta;
+    font-family: Tahoma, sans-serif;
+    margin: 0;
+}
+
+#passwordResetCompleted {
+    height: 100vh;
+    background-color: #E6E6FA;
+    margin: 0;
+    padding: 7rem 4rem;
+}
+
+#passwordResetCompleted h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.6rem;
+    color: #202020;
+}
+
+#passwordResetCompleted span {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    color: #151515;
+    max-width: 800px;
 }
