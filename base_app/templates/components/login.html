@@ -1,28 +1,28 @@
 {% extends 'main.html' %}
 {% load socialaccount %}
+{% load static %}
 {% block content %}   
     <div class="centerPageContent">
         <div id="loginFormWrapper">
+            <h1 id="loginTitle">Login</h1>
             {% for message in messages %}
                 {% if message.tags == 'error' %}
-                    <div>{{ message }}</div>
+                    <div class="loginErrorMessage">{{ message }}</div>
                 {% endif %} 
             {% endfor %}
-            <h2>Google Login</h2> 
-            <a href="{% provider_login_url 'google' %}">Login With Google</a> 
-
             <form action="" method="POST" id="loginForm">
                 {% csrf_token %}
-                <label for="email">Email</label>
-                <input type="email" name="email" placeholder="Enter your email" required>
-
-                <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Enter your password" required>
-
-                <input type="submit" value="Login" />
+                <input type="email" name="email" placeholder="Email" autocomplete="off" id="loginInputs" required>
+                <input type="password" name="password" placeholder="Password" id="loginInputs" required>
+                <a href="{% url 'password_reset' %}" id="forgotPasswordLink">Forgot Password?</a>
+                <input type="submit" value="Login" id="loginButton"/>
             </form>
-            <a href="{% url 'password_reset' %}" >Forgot Password?</a>
-            <a href="{% url 'question-specialty' %}">Register</a>
+            <span id="signupPrompt">Don't have an account? <a href="{% url 'question-specialty' %}" id="signupLink">Sign up</a></span>
+            <p id="localOrOauth2">or</p>
+            <a href="{% provider_login_url 'google' %}" id="googleLoginLink">
+                <img src="{% static 'img/google_logo.webp' %}" id="googleLoginLogo">
+                <span id="loginWithGooglePhrase">Login with Google</span>
+            </a> 
         </div>
     </div>
 {% endblock content %}
