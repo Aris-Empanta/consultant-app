@@ -8,12 +8,15 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
+    avatar = models.ImageField(null=True, default="avatar.svg")
     Lawyer = models.BooleanField(default=False)
     Client = models.BooleanField(default=False)
 
 class Lawyer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
-    specialties = models.TextField()
+    areasOfExpertise = models.TextField()
+    city = models.TextField()
+    yearsOfExperience = models.IntegerField(default=0)
     description = models.TextField()
     averageRating = models.IntegerField(default=0)
     hourlyRate = models.IntegerField(default=0)
