@@ -12,6 +12,12 @@ class Profile(models.Model):
     Lawyer = models.BooleanField(default=False)
     Client = models.BooleanField(default=False)
 
+LISENCE_STATUSES = (
+    ("active", "active"),
+    ("suspended", "suspended"),
+    ("revoked", "revoked")
+)
+
 class Lawyer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
     areasOfExpertise = models.TextField()
@@ -20,6 +26,13 @@ class Lawyer(models.Model):
     description = models.TextField()
     averageRating = models.IntegerField(default=0)
     hourlyRate = models.IntegerField(default=0)
+    address = models.TextField()
+    lisenceStatus = models.CharField(max_length=20, choices=(
+                                                                ("active", "active"),
+                                                                ("suspended", "suspended"),
+                                                                ("revoked", "revoked")
+                                                            ))
+    
     
 class Client(models.Model):
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)

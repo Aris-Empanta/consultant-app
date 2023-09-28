@@ -1,0 +1,30 @@
+-------> The guide below describes how the available appointments for a lawyer will be calculated. <-------
+
+					{---------------------------------}
+
+- Lawyers can choose and modify his available hours for the current week and 1 week in advance. 
+- Every Monday at 00:01 the new week in advance becomes available.
+- The lawyer and the client can cancel the appointment 4 hours prior in advance.
+- When an appointment is cancelled, More available hours are generated for the lawyer, estimating also the set breaks, and the appointment is deleted.
+- Lawyer chooses available hours. e.g. 09:00 - 14:00 and 17:00 and 21:00.
+	Choises: start: Day, whole hours, minutes (0, 15, 30, 45) e.g. Monday 17:45
+		 stop: Same day, whole hours, minutes (the available time will be 15 minutes advanced from the start time) e.g Monday 18:00
+- These hours are saved in the database as something. 
+- He also chooses the amount of breaks in between from 0 to 60.
+- The view that generates the appointments available calculates with the available hours and the breaks.
+- When a customer books an appointment the hours available are reduced, and the table with the appointments is filled up(has patient - doctor foreign key).
+- When a customer books an appointment the appointments should be locked. (find a way for appointments at the same time).
+
+---------> Tables Structure:
+
+Available intervals table: Available_hours, Lawyer_id
+
+- lawyer will have many available intervals. 1 available interval 1 lawyer. 1 to many relationship.
+- The intervals will be estimate as datetime object, in the database converter to strings with delimiter, 
+  and once retrived converted to datetime again.
+
+Appointments table: Appointment_duration, Layer_id, Client_id
+
+- lawyer can have many appointments but 1 appointment row only 1 lawyer. So one to many relationship
+- The appointment duration will be estimate as datetime object, in the database converter to strings with delimiter, 
+  and once retrived converted to datetime again.
