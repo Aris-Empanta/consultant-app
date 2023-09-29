@@ -20,18 +20,19 @@ LISENCE_STATUSES = (
 
 class Lawyer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
-    areasOfExpertise = models.TextField()
-    city = models.TextField()
+    areasOfExpertise = models.TextField(null=True)
+    city = models.TextField(null=True)
     yearsOfExperience = models.IntegerField(default=0)
-    description = models.TextField()
+    description = models.TextField(null=True)
     averageRating = models.IntegerField(default=0)
     hourlyRate = models.IntegerField(default=0)
-    address = models.TextField()
-    lisenceStatus = models.CharField(max_length=20, choices=(
+    address = models.TextField(null=True)
+    lisenceStatus = models.CharField(max_length=20,null=True, choices=(
                                                                 ("active", "active"),
                                                                 ("suspended", "suspended"),
                                                                 ("revoked", "revoked")
                                                             ))
+    phone = models.CharField(max_length=20, null=True)
     
     
 class Client(models.Model):

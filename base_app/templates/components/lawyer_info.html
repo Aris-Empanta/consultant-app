@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <form action="" method="POST">
+    {% csrf_token %}
+    <select>
+        {% for area_of_expertise in areas_of_expertise %}
+            <input type="checkbox" value="area_of_expertise"><option value="{{ area_of_expertise }}">{{ area_of_expertise }}</option>
+        {% endfor %}
+    </select>
+    {{ form }}
+    </form>
+    
+{% endblock content %}

@@ -4,7 +4,7 @@
 
 - Lawyers can choose and modify his available hours for the current week and 1 week in advance. 
 - Every Monday at 00:01 the new week in advance becomes available.
-- The lawyer and the client can cancel the appointment 4 hours prior in advance.
+- The lawyer and the client can cancel the appointment 4 hours prior in advance. (an email will be sent to the corresponding party)
 - When an appointment is cancelled, More available hours are generated for the lawyer, estimating also the set breaks, and the appointment is deleted.
 - Lawyer chooses available hours. e.g. 09:00 - 14:00 and 17:00 and 21:00.
 	Choises: start: Day, whole hours, minutes (0, 15, 30, 45) e.g. Monday 17:45
@@ -17,9 +17,9 @@
 
 ---------> Tables Structure:
 
-Available intervals table: Available_hours, Lawyer_id
+Hours Available table: starting_hour, ending_hour, intervals, Lawyer_id
 
-- lawyer will have many available intervals. 1 available interval 1 lawyer. 1 to many relationship.
+- lawyer will have many Hours Available. 1 available interval 1 lawyer. 1 to many relationship.
 - The intervals will be estimate as datetime object, in the database converter to strings with delimiter, 
   and once retrived converted to datetime again.
 

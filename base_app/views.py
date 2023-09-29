@@ -2,3 +2,4 @@ from .viewsFiles.loginLogout import Login, Logout, PasswordResetView, PasswordRe
 from .viewsFiles.register import QuestionSpecialty, RegisterUser
 from .viewsFiles.home import Home
 from .viewsFiles.oauthHandler import OauthHandler
+from .viewsFiles.registerLawyer import LawyerInfo

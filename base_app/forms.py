@@ -1,12 +1,19 @@
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
-from .models import User
+from .models import User, Lawyer
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from django.forms import ModelForm
+
 
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2'] 
+
+class LawyerInfoForm(ModelForm):
+     class Meta:
+        model = Lawyer
+        exclude = ['profile', 'areasOfExpertise']
 
 class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(
