@@ -2,13 +2,17 @@
 
 {% block content %}
 
-    <form action="" method="POST">
+    <form action="" method="POST" id="lawyerInfoForm">
     {% csrf_token %}
-    <select>
+    <button id="areasOfExpertiseButton">Areas of expertise</button>
+    <div id="areasOfExpertiseList">
         {% for area_of_expertise in areas_of_expertise %}
-            <input type="checkbox" value="area_of_expertise"><option value="{{ area_of_expertise }}">{{ area_of_expertise }}</option>
+        <span>
+            <input type="checkbox" value="{{area_of_expertise}}">
+            <label>{{area_of_expertise}}</label>
+        </span>
         {% endfor %}
-    </select>
+    </div>
     {{ form }}
     </form>
     

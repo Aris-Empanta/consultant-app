@@ -1,0 +1,13 @@
+#areasOfExpertiseList {
+    display: none;
+    flex-direction: column;
+    border: 1px solid black;
+    position: absolute;
+    height: 50px;
+    overflow-y: scroll;
+}
+
+#areasOfExpertiseButton {
+    position: relative;
+    cursor: pointer;
+}
