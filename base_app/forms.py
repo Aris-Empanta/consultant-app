@@ -11,9 +11,21 @@ class MyUserCreationForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2'] 
 
 class LawyerInfoForm(ModelForm):
-     class Meta:
+
+    hourlyRate = forms.IntegerField()
+    class Meta:
         model = Lawyer
-        exclude = ['profile', 'areasOfExpertise']
+        fields = ["city", "yearsOfExperience", "hourlyRate", "address", "lisenceStatus", "phone", "description"]
+        labels = {
+            "city": "City",
+            "yearsOfExperience": _("Years of experience"),
+            "hourlyRate": _("Your Hourly Rate (EUR)"),
+            "address": "Address",
+            "lisenceStatus": "Your lisence status",
+            "phone": "Phone",
+            "description": "Your profile description"
+        }
+        
 
 class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(

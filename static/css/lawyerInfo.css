@@ -1,3 +1,18 @@
+#lawyerInfoForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20vh;
+}
+
+.lawyerInfoFormFieldandLabel {
+    display: flex;
+    flex-direction: column;
+}
+
+.lawyerInfoFormFieldandLabel:nth-child(8) {
+    grid-column: span 2;
+}
+
 #areasOfExpertiseList {
     display: none;
     flex-direction: column;
@@ -5,6 +20,7 @@
     position: absolute;
     height: 50px;
     overflow-y: scroll;
+    background-color: white;
 }
 
 #areasOfExpertiseButton {

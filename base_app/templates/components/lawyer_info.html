@@ -1,19 +1,26 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-    <form action="" method="POST" id="lawyerInfoForm">
-    {% csrf_token %}
-    <button id="areasOfExpertiseButton">Areas of expertise</button>
-    <div id="areasOfExpertiseList">
-        {% for area_of_expertise in areas_of_expertise %}
-        <span>
-            <input type="checkbox" value="{{area_of_expertise}}">
-            <label>{{area_of_expertise}}</label>
-        </span>
-        {% endfor %}
+    <div class="centerPageContent">
+        <form action="" method="POST" id="lawyerInfoForm">
+            {% csrf_token %}
+            <div >
+                <button id="areasOfExpertiseButton">Areas of expertise</button>
+                <div id="areasOfExpertiseList" >
+                    {% for area_of_expertise in areas_of_expertise %}
+                    <span>
+                        <input type="checkbox" value="{{area_of_expertise}}">
+                        <label>{{area_of_expertise}}</label>
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% for field in form %}
+                <div class="lawyerInfoFormFieldandLabel">
+                    {{ field.label}}
+                    {{ field }}
+                </div>
+            {% endfor %}
+        </form>
     </div>
-    {{ form }}
-    </form>
-    
 {% endblock content %}

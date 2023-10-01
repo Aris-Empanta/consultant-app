@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.core.validators import MaxValueValidator, MinValueValidator 
 
 class User(AbstractUser):
     USERNAME_FIELD = 'email'
@@ -20,18 +20,18 @@ LISENCE_STATUSES = (
 
 class Lawyer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
-    areasOfExpertise = models.TextField(null=True)
-    city = models.TextField(null=True)
-    yearsOfExperience = models.IntegerField(default=0)
+    areasOfExpertise = models.CharField(max_length=50, null=True)
+    city = models.CharField(max_length=50, null=True)
+    yearsOfExperience = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(80)])
     description = models.TextField(null=True)
-    averageRating = models.IntegerField(default=0)
-    hourlyRate = models.IntegerField(default=0)
-    address = models.TextField(null=True)
+    averageRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    hourlyRate = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    address = models.CharField(max_length=50, null=True)
     lisenceStatus = models.CharField(max_length=20,null=True, choices=(
                                                                 ("active", "active"),
                                                                 ("suspended", "suspended"),
                                                                 ("revoked", "revoked")
-                                                            ))
+                                                            ), default=("active", "active"))
     phone = models.CharField(max_length=20, null=True)
     
     
