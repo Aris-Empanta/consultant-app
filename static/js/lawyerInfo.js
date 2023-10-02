@@ -49,3 +49,12 @@ document.addEventListener("change", (event) => {
             event.target.value = 100
         }
 })
+
+//The areas of expertise window should close if we click anywhere
+//in the page. 
+document.addEventListener("click", (event) => {
+    
+    if(event.target.id !== "areasOfExpertiseButton") {
+        areasOfExpertiseList.style.display = "none";
+    }
+})
