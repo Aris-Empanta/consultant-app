@@ -27,7 +27,7 @@
     flex-direction: column;
     border: 1px solid black;
     position: absolute;
-    height: 50px;
+    height: 150px;
     overflow-y: scroll;
     background-color: white;
 }

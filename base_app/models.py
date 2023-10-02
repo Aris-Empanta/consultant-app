@@ -20,7 +20,7 @@ LISENCE_STATUSES = (
 
 class Lawyer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
-    areasOfExpertise = models.CharField(max_length=50, null=True)
+    areasOfExpertise = models.TextField(null=True)
     city = models.CharField(max_length=50, null=True)
     yearsOfExperience = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(80)])
     description = models.TextField(null=True)

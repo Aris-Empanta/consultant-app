@@ -1,0 +1,23 @@
+from enum import Enum
+ 
+class AreasOfExpertise(Enum):
+    CRIMINAL_DEFENCE_ATTORNEY = "Criminal Defense Attorney"
+    FAMILY_LAW_ATTORNEY = "Family Law Attorney"
+    MARITIME_ATTORNEY = "Maritime Attorney"
+    BANKRUPTCY_ATTORNEY =  "Bankruptcy Attorney"
+    CIVIL_RIGHTS_ATTORNEY = "Civil Rights Attorney"
+    CORPORATE_LAW = "Corporate Law"
+    EDUCATION_LAW = "Education Law"
+    EMPLOYMENT_LAW = "Employment Law"
+    ENTERTAINMENT_LAW = "Entertainment Law"
+    ENVIRONMENTAL_LAW = "Environmental Law"
+    ESTATE_PLANNING_ATTORNEY = "Estate Planning Attorney"
+    HEALTH_LAW_ATTORNEY = "Health Law Attorney"
+    IMMIGRATION_ATTORNEY = "Immigration Attorney"
+    INTELLECTUAL_PROPERTY_ATTORNEY = "Intellectual Property Attorney"
+    INTERNATIONAL_LAW = "International Law"
+    MILITARY_LAW = "Military Law"
+    PERSONAL_INJURY_LAW = "Personal Injury Law"
+    REAL_ESTATE_ATTORNEY = "Real Estate Attorney"
+    SPORTS_LAWYER = "Sports Lawyer"
+    TAX_ATTORNEY = "Tax Attorney"
