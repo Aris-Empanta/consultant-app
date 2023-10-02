@@ -28,3 +28,8 @@ Appointments table: Appointment_duration, Layer_id, Client_id
 - lawyer can have many appointments but 1 appointment row only 1 lawyer. So one to many relationship
 - The appointment duration will be estimate as datetime object, in the database converter to strings with delimiter, 
   and once retrived converted to datetime again.
+
+HTML STRUCTURE:
+
+Arrange your available hours:
+- Each day will have a list of starting hours and a listof ending hours.  

@@ -53,8 +53,9 @@ document.addEventListener("change", (event) => {
 //The areas of expertise window should close if we click anywhere
 //in the page. 
 document.addEventListener("click", (event) => {
-    
-    if(event.target.id !== "areasOfExpertiseButton") {
+   
+    if(event.target.id !== "areasOfExpertiseButton" && 
+       event.target.type !== "checkbox") {
         areasOfExpertiseList.style.display = "none";
     }
 })

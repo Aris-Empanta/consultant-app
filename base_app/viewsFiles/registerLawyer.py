@@ -18,6 +18,7 @@ class LawyerInfo(View):
         return render(request, 'components/lawyer_info.html', context)
     
     def post(self, request):
+
         try:
             areas_of_expertise_list = request.POST.getlist("areas_of_expertise")
             areas_of_expertise = ":".join(areas_of_expertise_list)
@@ -40,11 +41,16 @@ class LawyerInfo(View):
 
             lawyer.save()
 
-            return redirect("lawyer_info")
+            return redirect("lawyer_available_hours")
 
         except Lawyer.DoesNotExist:
-            # Handle the case where the Lawyer object with the user's profile doesn't exist.
+
             raise Http404("Lawyer not found")
 
         except Exception as e:
             print(e)
+
+class LawyerAvailableHours(View):
+     
+     def get(self, request):
+        return render(request, 'components/lawyer-available-hours.html')
