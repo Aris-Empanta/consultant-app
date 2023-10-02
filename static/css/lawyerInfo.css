@@ -13,6 +13,15 @@
     grid-column: span 2;
 }
 
+.lawyerInfoFormFieldandLabel:nth-child(9) {
+    grid-column: span 2;
+}
+
+#submitLawyerInfoWrapper {
+    justify-self: end;
+    grid-column: span 2;
+}
+
 #areasOfExpertiseList {
     display: none;
     flex-direction: column;

@@ -21,6 +21,10 @@
                     {{ field }}
                 </div>
             {% endfor %}
+            <div id="submitLawyerInfoWrapper">
+                <a href="{% url 'home' %}"> Skip </a>
+                <input type="submit" value="Proceed" id="submitLawyerInfo">
+            </div>
         </form>
     </div>
 {% endblock content %}
