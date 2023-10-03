@@ -5,6 +5,8 @@ from django.contrib import messages
 from ..models import Lawyer, Profile
 from ..forms import LawyerInfoForm
 from ..enums import AreasOfExpertise
+from datetime import date, datetime, timedelta
+from ..helpers.dates import render_day_name
 
 class LawyerInfo(View):
 
@@ -53,4 +55,39 @@ class LawyerInfo(View):
 class LawyerAvailableHours(View):
      
      def get(self, request):
-        return render(request, 'components/lawyer-available-hours.html')
+        # We will create a dictionary that contains the current day and the 
+        # remaining days of the week, in order the lawyer to choose his available
+        # hours. The key will be the day's name and the key will be the day's date
+        # in format DD/MM/YYYY.
+        current_week = dict()
+        
+        todays_date = date.today()
+
+        today = date.today().isoweekday()
+
+        days_addition = 0
+
+        for x in range(today, 8):
+            day_name = render_day_name(x)
+            date_format = (todays_date + timedelta(days=days_addition)).strftime("%d/%m/%Y")
+            current_week[day_name] = date_format            
+            days_addition += 1
+
+        # We find the date of the next monday
+        days_till_monday = 8-today
+        next_monday_date = (todays_date + timedelta(days=days_till_monday))
+
+        # We will create a dictionary that contains all the days and dates of the next week. 
+        next_week = dict()
+
+        for x in range(1, 8):
+            day_name = render_day_name(x)
+            next_week[day_name] = (next_monday_date + timedelta(days=x-1)).strftime("%d/%m/%Y")
+
+        print(next_week)
+        context = {
+            "current_week": current_week,
+            "next_week": next_week,
+        }
+
+        return render(request, 'components/lawyer-available-hours.html', context)

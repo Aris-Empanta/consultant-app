@@ -1,6 +1,15 @@
 {% extends 'main.html' %}
 {% block content %}   
-    <div>
-        
+    <div class="centerPageContent">
+        <div>
+        {% for day_name, date in current_week.items %}
+            <p>{{day_name}} - {{date}}</p> 
+            <button>add interval</button>
+        {% endfor %}
+        <h2>Next Week</h2>
+        {% for day_name, date in next_week.items %}
+            <p>{{day_name}} - {{date}}</p>
+        {% endfor %}
+        </div>
     </div>
 {% endblock content %}
