@@ -84,10 +84,15 @@ class LawyerAvailableHours(View):
             day_name = render_day_name(x)
             next_week[day_name] = (next_monday_date + timedelta(days=x-1)).strftime("%d/%m/%Y")
 
-        print(next_week)
         context = {
             "current_week": current_week,
             "next_week": next_week,
         }
 
         return render(request, 'components/lawyer-available-hours.html', context)
+     
+     def post(self, request):
+         time = request.POST.get("time") 
+         timeFormat = datetime.strptime(time, "%H:%M:%S")
+         print( type(timeFormat) )
+         return redirect('lawyer_available_hours')

@@ -3,8 +3,14 @@
     <div class="centerPageContent">
         <div>
         {% for day_name, date in current_week.items %}
+        <div class="hoursScheduleWrapper">
             <p>{{day_name}} - {{date}}</p> 
+            <span>From                 
+                {% csrf_token %}
+                <input type="time" value = "00:00" class="startingTime" name="time" id="availableHoursStartingPoint">
+                To <input class="endingTime" type="time" value="23:59"></span>
             <button>add interval</button>
+        </div>
         {% endfor %}
         <h2>Next Week</h2>
         {% for day_name, date in next_week.items %}
