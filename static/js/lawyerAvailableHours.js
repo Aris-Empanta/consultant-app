@@ -4,76 +4,72 @@ const twoDigitFormat = (number) => {
     return number < 10 ? "0" + number : number
 }
 
-let startingTime = document.querySelector(".startingTime")
-let endingTime = document.querySelector(".endingTime")
-let hoursScheduleWrapper = document.querySelector(".hoursScheduleWrapper")
-
-// The first starting hour should be from the current 
-// time and on. 
-let today = new Date();
-let timeNow = twoDigitFormat(today.getHours()) + ":" + twoDigitFormat(today.getMinutes()) + ":" + "00"
-startingTime.value = timeNow
-
-//The starting time should start maximum at 22:59
-if(timeNow > "22:59") {
-    hoursScheduleWrapper.style.display = "none";
-}
-
-startingTime.addEventListener("change", () => {
-    
-    if(startingTime.value > "22:59") {
-        startingTime.value = "22:59";
-    }
-})
-
-
-
-endingTime.addEventListener('change', () => {
-
-    startingTimeFullDate = today.getFullYear() + "-" + twoDigitFormat(today.getMonth()) + 
-                           "-" + twoDigitFormat(today.getDate()) + " " + startingTime.value
-    
-    startingTimeDateObject = new Date(startingTimeFullDate)
-
-    // The ending time should be at least one hour later than the starting time.
-    let oneHourLaterTimestamp = startingTimeDateObject.setMinutes(startingTimeDateObject.getMinutes() + 60)
-    let oneHourLaterDateObject = new Date(oneHourLaterTimestamp);
-    let oneHourLater = twoDigitFormat(oneHourLaterDateObject.getHours()) + ":" + twoDigitFormat(oneHourLaterDateObject.getMinutes());
-    
-    if (endingTime.value < oneHourLater) {
-        endingTime.value = oneHourLater;
-    }
-  }
-)
-
-//Now we will apply the same logic for all the other days:
 let startingTimes = document.querySelectorAll(".startingTime")
 let endingTimes = document.querySelectorAll(".endingTime")
+let hoursScheduleWrapper = document.querySelector(".hoursScheduleWrapper")
 
-for(let i=1; i<startingTimes.length; i++) {
-    //starting time should always be maximum 22:59
-    startingTimes[i].addEventListener("change", () => {
-        if(startingTimes[i].value > "22:59") startingTimes[i].value = "22:59"
-    })
+for(let i =0; i<startingTimes.length; i++) {
     
-    // ending time should have 1 hour distance
+    let examinedDate = new Date()
+    examinedDate.setDate(examinedDate.getDate() + i)
+    let timeNow = twoDigitFormat(examinedDate.getHours()) + ":" + twoDigitFormat(examinedDate.getMinutes());
+
+    if(i===0) {
+        // The starting hour for today should be from the time now and on.
+        startingTimes[i].value = timeNow;
+
+        // The starting time should start maximum at 22:59. Otherwise we don't 
+        // let the choise of available hours.
+        if(timeNow > "22:59") {
+            hoursScheduleWrapper.style.display = "none";
+        }
+
+        //restrict today's time being less than current time.
+        if(startingTimes[i].value < timeNow) {
+            startingTimes[i].value = timeNow;
+        }
+    }
+
+    startingTimes[i].addEventListener("change", () => {
+            
+        //We wont let the user choose as starting time after 22:59.
+        if(startingTimes[i].value > "22:59") {
+            startingTimes[i].value = "22:59";
+        }
+
+        //restrict today's time being less than current time.
+        if(startingTimes[i].value < timeNow && i===0) {
+            startingTimes[i].value = timeNow;
+        }
+        // The starting time should always be 1 hour prior the ending time, so we apply this 
+        // restriction on starting time change.
+        let endingTimeString = examinedDate.getFullYear() + "-" + twoDigitFormat(examinedDate.getMonth()) + "-" + 
+                               twoDigitFormat(examinedDate.getDate()) + " " + endingTimes[i].value + ":00";
+        let endingTimeDateObject = new Date(endingTimeString);  
+        let oneHourBeforeTimestamp = endingTimeDateObject.setMinutes(endingTimeDateObject.getMinutes() - 60)
+        let oneHourBeforeObject = new Date(oneHourBeforeTimestamp);  
+        let oneHourBefore = twoDigitFormat(oneHourBeforeObject.getHours()) + ":" + twoDigitFormat(oneHourBeforeObject.getMinutes());
+
+        if(startingTimes[i].value > oneHourBefore) {
+            startingTimes[i].value = oneHourBefore
+        }
+    })
+
     endingTimes[i].addEventListener("change", () => {
 
-        //With the procedure below we estimate the date and time one hour later of the starting time.
-        let date = new Date()
-        date.setDate(date.getDate() + i)
-        let dateString  = date.getFullYear() + "-" + twoDigitFormat(date.getMonth()) + "-" + 
-                    twoDigitFormat(date.getDate()) + " " + startingTimes[i].value
+        let startingTimeDateString  = examinedDate.getFullYear() + "-" + twoDigitFormat(examinedDate.getMonth()) + "-" + 
+                                      twoDigitFormat(examinedDate.getDate()) + " " + startingTimes[i].value + ":00";
 
-        let examinedDate = new Date(dateString)
-        examinedDate.setMinutes(examinedDate.getMinutes() + 60)
-
-        let oneHourLater = twoDigitFormat(examinedDate.getHours()) + ":" + twoDigitFormat(examinedDate.getMinutes()) ;
-
+        // We set an ending time 1 hour later from the starting set time, and convert it 
+        // to a string format of hh:mm
+        let endingTimeDateObject = new Date(startingTimeDateString);
+        let oneHourLaterTimestamp = endingTimeDateObject.setMinutes(endingTimeDateObject.getMinutes() + 60);
+        let oneHourLaterDateObject = new Date(oneHourLaterTimestamp);        
+        let oneHourLater = twoDigitFormat(oneHourLaterDateObject.getHours()) + ":" + twoDigitFormat(oneHourLaterDateObject.getMinutes());
+        
+        //We restrict the ending time to be one hour later from the starting time.
         if(endingTimes[i].value < oneHourLater) {
             endingTimes[i].value = oneHourLater
         }
     })
 }
-
-//ADD EVENT LISTENERS TO THE STARTING TIME TO EXAMINE THE ENDING TIME AND IF THEY HAVE 1 HOUR DIFFERENCE TO CONVERT IT.
