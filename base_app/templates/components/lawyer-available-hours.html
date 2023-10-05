@@ -4,7 +4,7 @@
         <div>
         {% for day_name, date in current_week.items %}
         <div class="hoursScheduleWrapper">
-            <p>{{day_name}} - {{date}}</p> 
+            <p>{{day_name}} - <span class="scheduleDate">{{date}}</span></p> 
             <span>From                 
                 {% csrf_token %}
                 <input type="time" value = "00:00" class="startingTime" name="time" id="availableHoursStartingPoint">

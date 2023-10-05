@@ -26,16 +26,21 @@ startingTime.addEventListener("change", () => {
     }
 })
 
-// The ending time should be at least one hour later than the starting time.
-let oneHourLaterTimestamp = today.setMinutes(today.getMinutes() + 60)
-let oneHourLaterDateObject = new Date(oneHourLaterTimestamp);
-let oneHourLater = twoDigitFormat(oneHourLaterDateObject.getHours()) + ":" + twoDigitFormat(oneHourLaterDateObject.getMinutes()) + ":" + "00";
 
-endingTime.min = oneHourLater
 
 endingTime.addEventListener('change', () => {
+
+    startingTimeFullDate = today.getFullYear() + "-" + twoDigitFormat(today.getMonth()) + 
+                           "-" + twoDigitFormat(today.getDate()) + " " + startingTime.value
     
-    if (endingTime.value < endingTime.min) {
+    startingTimeDateObject = new Date(startingTimeFullDate)
+
+    // The ending time should be at least one hour later than the starting time.
+    let oneHourLaterTimestamp = startingTimeDateObject.setMinutes(startingTimeDateObject.getMinutes() + 60)
+    let oneHourLaterDateObject = new Date(oneHourLaterTimestamp);
+    let oneHourLater = twoDigitFormat(oneHourLaterDateObject.getHours()) + ":" + twoDigitFormat(oneHourLaterDateObject.getMinutes());
+    
+    if (endingTime.value < oneHourLater) {
         endingTime.value = oneHourLater;
     }
   }
@@ -45,14 +50,30 @@ endingTime.addEventListener('change', () => {
 let startingTimes = document.querySelectorAll(".startingTime")
 let endingTimes = document.querySelectorAll(".endingTime")
 
-
 for(let i=1; i<startingTimes.length; i++) {
     //starting time should always be maximum 22:59
     startingTimes[i].addEventListener("change", () => {
         if(startingTimes[i].value > "22:59") startingTimes[i].value = "22:59"
     })
+    
     // ending time should have 1 hour distance
     endingTimes[i].addEventListener("change", () => {
 
+        //With the procedure below we estimate the date and time one hour later of the starting time.
+        let date = new Date()
+        date.setDate(date.getDate() + i)
+        let dateString  = date.getFullYear() + "-" + twoDigitFormat(date.getMonth()) + "-" + 
+                    twoDigitFormat(date.getDate()) + " " + startingTimes[i].value
+
+        let examinedDate = new Date(dateString)
+        examinedDate.setMinutes(examinedDate.getMinutes() + 60)
+
+        let oneHourLater = twoDigitFormat(examinedDate.getHours()) + ":" + twoDigitFormat(examinedDate.getMinutes()) ;
+
+        if(endingTimes[i].value < oneHourLater) {
+            endingTimes[i].value = oneHourLater
+        }
     })
 }
+
+//ADD EVENT LISTENERS TO THE STARTING TIME TO EXAMINE THE ENDING TIME AND IF THEY HAVE 1 HOUR DIFFERENCE TO CONVERT IT.
