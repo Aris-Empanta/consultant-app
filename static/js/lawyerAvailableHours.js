@@ -7,11 +7,16 @@ const twoDigitFormat = (number) => {
 let startingTimes = document.querySelectorAll(".startingTime")
 let endingTimes = document.querySelectorAll(".endingTime")
 let hoursScheduleWrapper = document.querySelector(".hoursScheduleWrapper")
+let addIntervalButton = document.querySelectorAll(".addIntervalButton")
 
 for(let i =0; i<startingTimes.length; i++) {
     
     let examinedDate = new Date()
     examinedDate.setDate(examinedDate.getDate() + i)
+    //We will format the year, month and day of the current date
+    year = examinedDate.getFullYear()
+    month = examinedDate.getMonth() < 12 ? twoDigitFormat(examinedDate.getMonth() + 1) : "01"
+    day = twoDigitFormat(examinedDate.getDate())
     let timeNow = twoDigitFormat(examinedDate.getHours()) + ":" + twoDigitFormat(examinedDate.getMinutes());
 
     if(i===0) {
@@ -41,10 +46,11 @@ for(let i =0; i<startingTimes.length; i++) {
         if(startingTimes[i].value < timeNow && i===0) {
             startingTimes[i].value = timeNow;
         }
+
+        console.log(examinedDate.getMonth())
         // The starting time should always be 1 hour prior the ending time, so we apply this 
         // restriction on starting time change.
-        let endingTimeString = examinedDate.getFullYear() + "-" + twoDigitFormat(examinedDate.getMonth()) + "-" + 
-                               twoDigitFormat(examinedDate.getDate()) + " " + endingTimes[i].value + ":00";
+        let endingTimeString = year+ "-" + month + "-" + day + " " + endingTimes[i].value + ":00";
         let endingTimeDateObject = new Date(endingTimeString);  
         let oneHourBeforeTimestamp = endingTimeDateObject.setMinutes(endingTimeDateObject.getMinutes() - 60)
         let oneHourBeforeObject = new Date(oneHourBeforeTimestamp);  
@@ -57,8 +63,7 @@ for(let i =0; i<startingTimes.length; i++) {
 
     endingTimes[i].addEventListener("change", () => {
 
-        let startingTimeDateString  = examinedDate.getFullYear() + "-" + twoDigitFormat(examinedDate.getMonth()) + "-" + 
-                                      twoDigitFormat(examinedDate.getDate()) + " " + startingTimes[i].value + ":00";
+        let startingTimeDateString  = year + "-" + month + "-" + day + " " + startingTimes[i].value + ":00";
 
         // We set an ending time 1 hour later from the starting set time, and convert it 
         // to a string format of hh:mm
@@ -71,5 +76,23 @@ for(let i =0; i<startingTimes.length; i++) {
         if(endingTimes[i].value < oneHourLater) {
             endingTimes[i].value = oneHourLater
         }
+    })
+    
+    let startOfInterval = document.querySelectorAll(".startOfInterval" + (i + 1))
+    let endOfInterval = document.querySelectorAll(".endOfInterval" + (i + 1))
+    let addIntervalButton = document.querySelector(".addIntervalButton" + (i + 1))
+    let currentHoursScheduleWrapper = document.querySelectorAll(".hoursScheduleWrapper")[i]
+
+    addIntervalButton.addEventListener("click", () => {
+        
+        let extraInterval = document.createElement("div")
+        extraInterval.innerHTML = `<span>
+                                        From                 
+                                        <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
+                                        To 
+                                        <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="23:59">
+                                   </span>`
+
+        currentHoursScheduleWrapper.appendChild(extraInterval)
     })
 }

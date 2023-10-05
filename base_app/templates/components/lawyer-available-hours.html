@@ -1,15 +1,19 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}   
+
     <div class="centerPageContent">
         <div>
         {% for day_name, date in current_week.items %}
         <div class="hoursScheduleWrapper">
             <p>{{day_name}} - <span class="scheduleDate">{{date}}</span></p> 
-            <span>From                 
-                {% csrf_token %}
-                <input type="time" value = "00:00" class="startingTime" name="time" id="availableHoursStartingPoint">
-                To <input class="endingTime" type="time" value="23:59"></span>
-            <button>add interval</button>
+            <span>
+                From                 
+                <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
+                To 
+                <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="23:59">
+            </span>
+            <button class="addIntervalButton{{forloop.counter}}">add interval</button>
         </div>
         {% endfor %}
         <h2>Next Week</h2>
@@ -18,4 +22,6 @@
         {% endfor %}
         </div>
     </div>
+    
+    <script src="{% static 'js/lawyerAvailableHours.js' %}"></script>
 {% endblock content %}
