@@ -34,6 +34,7 @@ for(let i =0; i<startingTimes.length; i++) {
             startingTimes[i].value = timeNow;
         }
     }
+    let addIntervalButton = document.querySelector(".addIntervalButton" + (i + 1))
 
     startingTimes[i].addEventListener("change", () => {
             
@@ -76,23 +77,33 @@ for(let i =0; i<startingTimes.length; i++) {
         if(endingTimes[i].value < oneHourLater) {
             endingTimes[i].value = oneHourLater
         }
+
+        if(endingTimes[i].value < "22:59") {
+            addIntervalButton.disabled = false
+        }
     })
     
     let startOfInterval = document.querySelectorAll(".startOfInterval" + (i + 1))
     let endOfInterval = document.querySelectorAll(".endOfInterval" + (i + 1))
-    let addIntervalButton = document.querySelector(".addIntervalButton" + (i + 1))
     let currentHoursScheduleWrapper = document.querySelectorAll(".hoursScheduleWrapper")[i]
 
     addIntervalButton.addEventListener("click", () => {
         
         let extraInterval = document.createElement("div")
-        extraInterval.innerHTML = `<span>
+        extraInterval.innerHTML = `<span ">
                                         From                 
-                                        <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
+                                        <input type="time" value = "00:00" class="startingTime startOfInterval${i + 1}_2" name="time">
                                         To 
-                                        <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="23:59">
+                                        <input class="endingTime endOfInterval{{forloop.counter}}_2" type="time" value="23:59">
                                    </span>`
 
         currentHoursScheduleWrapper.appendChild(extraInterval)
+
+        let secondIntervalStartingTime = document.querySelector(`.startOfInterval${i + 1}_2`)
+        let previousEndingIntervalTime = document.querySelector(`.endOfInterval${i + 1}`)
+
+        secondIntervalStartingTime.value = previousEndingIntervalTime.value
+
+        addIntervalButton.disabled = true
     })
 }
