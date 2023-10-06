@@ -3,11 +3,14 @@ const twoDigitFormat = (number) => {
 
     return number < 10 ? "0" + number : number
 }
+//The method to delete an available hours interval
+const deleteInterval = () => {
+    this.parentElement.remove()
+}
 
 let startingTimes = document.querySelectorAll(".startingTime")
 let endingTimes = document.querySelectorAll(".endingTime")
 let hoursScheduleWrapper = document.querySelector(".hoursScheduleWrapper")
-let addIntervalButton = document.querySelectorAll(".addIntervalButton")
 
 for(let i =0; i<startingTimes.length; i++) {
     
@@ -34,9 +37,10 @@ for(let i =0; i<startingTimes.length; i++) {
             startingTimes[i].value = timeNow;
         }
     }
-    let addIntervalButton = document.querySelector(".addIntervalButton" + (i + 1))
 
     startingTimes[i].addEventListener("change", () => {
+
+        console.log("change starting time")
             
         //We wont let the user choose as starting time after 22:59.
         if(startingTimes[i].value > "22:59") {
@@ -48,7 +52,6 @@ for(let i =0; i<startingTimes.length; i++) {
             startingTimes[i].value = timeNow;
         }
 
-        console.log(examinedDate.getMonth())
         // The starting time should always be 1 hour prior the ending time, so we apply this 
         // restriction on starting time change.
         let endingTimeString = year+ "-" + month + "-" + day + " " + endingTimes[i].value + ":00";
@@ -87,23 +90,60 @@ for(let i =0; i<startingTimes.length; i++) {
     let endOfInterval = document.querySelectorAll(".endOfInterval" + (i + 1))
     let currentHoursScheduleWrapper = document.querySelectorAll(".hoursScheduleWrapper")[i]
 
+    if(endOfInterval < '22:59') {
+        addIntervalButton.disabled = false
+    }
+
+    //The addIntervalButton for the examined date
+    let addIntervalButton = document.querySelector(".addIntervalButton" + (i + 1))
+
     addIntervalButton.addEventListener("click", () => {
-        
-        let extraInterval = document.createElement("div")
-        extraInterval.innerHTML = `<span ">
-                                        From                 
-                                        <input type="time" value = "00:00" class="startingTime startOfInterval${i + 1}_2" name="time">
-                                        To 
-                                        <input class="endingTime endOfInterval{{forloop.counter}}_2" type="time" value="23:59">
-                                   </span>`
+
+        console.log(startOfInterval)
+
+        //We create and append a span element
+        let extraInterval = document.createElement("span")
+        extraInterval.classList.add(`interval_${i+1}`);
+        extraInterval.innerHTML = ` From                 
+                                    <input type="time" value = "00:00" class="startingTime startOfInterval${i + 1}" name="time">
+                                    To 
+                                    <input class="endingTime endOfInterval${i + 1}" type="time" value="23:59">
+                                    <button data-counter="${i + 1}" onclick="removeParentElement(this)">Delete</button>
+                                   `
 
         currentHoursScheduleWrapper.appendChild(extraInterval)
 
-        let secondIntervalStartingTime = document.querySelector(`.startOfInterval${i + 1}_2`)
+        //The span elements of the hoursScheduleWrapper
+        intervals = document.querySelectorAll(`.interval_${i+1}`)
+
+        let secondIntervalStartingTime = document.querySelectorAll(`.startOfInterval${i + 1}`)
         let previousEndingIntervalTime = document.querySelector(`.endOfInterval${i + 1}`)
 
-        secondIntervalStartingTime.value = previousEndingIntervalTime.value
+        console.log(previousEndingIntervalTime)
+        //The starting time of the new interval will take either the previous ending
+        //time or if not exist the current time
+        if(previousEndingIntervalTime) {
+            secondIntervalStartingTime[intervals.length - 1].value = previousEndingIntervalTime.value
+        } else {
+            startOfInterval[0].value = timeNow
+        }
+        
+        //We will allow only two intervals for the lawyer to choose.
+       if(intervals.length >= 2) {
+            addIntervalButton.disabled = true
+       }
+    }) 
 
-        addIntervalButton.disabled = true
-    })
+    /*
+        The problem starts when I delete all the intervals. It allows to add interval even if ending hour > 22:59,
+        and choose ending hour less than starting hour.
+    */
+}
+
+function removeParentElement(buttonElement) {
+    var counter = buttonElement.getAttribute("data-counter");
+    let addIntervalButton = document.querySelector(`.addIntervalButton${counter}`)
+
+    addIntervalButton.disabled = false
+    buttonElement.parentElement.remove();
 }

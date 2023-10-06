@@ -7,11 +7,12 @@
         {% for day_name, date in current_week.items %}
         <div class="hoursScheduleWrapper">
             <p>{{day_name}} - <span class="scheduleDate">{{date}}</span></p> 
-            <span>
+            <span class="interval_{{forloop.counter}}">
                 From                 
                 <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
                 To 
                 <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="23:59">
+                <button data-counter="{{ forloop.counter }}" onclick="removeParentElement(this)">Delete</button>
             </span>
             <button class="addIntervalButton{{forloop.counter}}" disabled>add interval</button>
         </div>
