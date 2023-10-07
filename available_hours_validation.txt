@@ -1,0 +1,12 @@
+When a lawyer chooses his available hours, the following restrictions should be applied: 
+- He can choose 2 intervals maximum during a day.
+- The addIntervals button default should be unclickable.
+- The addIntervals button should be clickable only if the there is no interval or if the last interval's ending time is 
+  <= 22:59 and the existing intervals are <2.
+- The first(or only) interval's starting time should be >= the current time and <= the ending time of the interval
+  minus 1 hour. Its default value will be the current time.
+- The first(or only) interval's ending time should be >= the starting time plus 1 hour and <= 22:59 or in the case 
+  there is a second interval, <= the second interval's starting time. 
+- The second interval's(if exist) starting time should be >= the previous interval's ending time, with default value 
+  the previous interval's ending time, and <= the current interval's ending time minus 1 hour.
+- The second interval's(if exist) ending time should be >= the current interval's starting time plus 1 hour.

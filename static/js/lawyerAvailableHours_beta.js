@@ -39,8 +39,6 @@ for(let i =0; i<startingTimes.length; i++) {
     }
 
     startingTimes[i].addEventListener("change", () => {
-
-        console.log("change starting time")
             
         //We wont let the user choose as starting time after 22:59.
         if(startingTimes[i].value > "22:59") {
@@ -99,8 +97,6 @@ for(let i =0; i<startingTimes.length; i++) {
 
     addIntervalButton.addEventListener("click", () => {
 
-        console.log(startOfInterval)
-
         //We create and append a span element
         let extraInterval = document.createElement("span")
         extraInterval.classList.add(`interval_${i+1}`);
@@ -112,32 +108,100 @@ for(let i =0; i<startingTimes.length; i++) {
                                    `
 
         currentHoursScheduleWrapper.appendChild(extraInterval)
-
+        let intervalsStartingTime = document.querySelectorAll(`.startOfInterval${i + 1}`)
+        let intervalsEndingTime = document.querySelectorAll(`.endOfInterval${i + 1}`)
         //The span elements of the hoursScheduleWrapper
         intervals = document.querySelectorAll(`.interval_${i+1}`)
 
-        let secondIntervalStartingTime = document.querySelectorAll(`.startOfInterval${i + 1}`)
-        let previousEndingIntervalTime = document.querySelector(`.endOfInterval${i + 1}`)
-
-        console.log(previousEndingIntervalTime)
-        //The starting time of the new interval will take either the previous ending
-        //time or if not exist the current time
-        if(previousEndingIntervalTime) {
-            secondIntervalStartingTime[intervals.length - 1].value = previousEndingIntervalTime.value
+        // If there are no intervals, the starting time takes the time now,
+        // otherwise, the last ending time.
+        if(intervals.length === 1) {
+            intervalsStartingTime[0].value = timeNow
         } else {
-            startOfInterval[0].value = timeNow
+            intervalsStartingTime[1].value = intervalsEndingTime[0].value
+        }
+
+    
+        // I will add event listeners to all starting and ending times by 
+        // looping through them, in order to validate the values. We technically
+        // reapply the validations we applied in the initial tiume inputs.
+        for(let j=0; j < intervalsStartingTime.length; j++) {
+            
+            // Ending time should be at least 1 hour after starting time
+            intervalsEndingTime[j].addEventListener('change', () => {
+
+                let startingTimeDateString  = year + "-" + month + "-" + day + " " + intervalsStartingTime[j].value + ":00";
+
+                // We set an ending time 1 hour later from the starting set time, and convert it 
+                // to a string format of hh:mm
+                let endingTimeDateObject = new Date(startingTimeDateString);
+                let oneHourLaterTimestamp = endingTimeDateObject.setMinutes(endingTimeDateObject.getMinutes() + 60);
+                let oneHourLaterDateObject = new Date(oneHourLaterTimestamp);        
+                let oneHourLater = twoDigitFormat(oneHourLaterDateObject.getHours()) + ":" + twoDigitFormat(oneHourLaterDateObject.getMinutes());
+                
+                //We restrict the ending time to be one hour later from the starting time.
+                if(intervalsEndingTime[j].value < oneHourLater) {
+                    intervalsEndingTime[j].value = oneHourLater
+                }
+
+                // If this is the last interval's ending time, the add intervals button should
+                // be disabled if the time is after 22:59
+                if(j === intervals.length - 1 && intervalsEndingTime[j].value > "22:59") {
+                    addIntervalButton.disabled = true
+                } else if(j === intervals.length - 1 && intervalsEndingTime[j].value <= "22:59"){
+                    addIntervalButton.disabled = false
+                }
+                
+                //The ending time should be less or equal to the next interval's starting time
+                if(intervals.length === 2 ) {
+                    if( j === intervals.length - 2 && 
+                        intervalsEndingTime[j].value > intervalsStartingTime[j + 1].value) {
+                            intervalsEndingTime[j].value = intervalsStartingTime[j + 1].value
+                    }
+                }
+            })
+
+            //Starting time should be at least the current time and on
+            intervalsStartingTime[j].addEventListener('change', () => {
+
+                //We wont let the user choose as starting time after 22:59.
+                if(intervalsStartingTime[j].value > "22:59") {
+                    intervalsStartingTime[j].value = "22:59";
+                }
+                //restrict today's time being less than current time, and for the second interval less than last ending time.
+                if(intervalsStartingTime[j].value < timeNow && intervalsStartingTime.length === 1) {
+                    intervalsStartingTime[j].value = timeNow;                    
+                } else if( intervalsStartingTime.length > 1){
+                    if(intervalsStartingTime[j].value < intervalsEndingTime[j-1].value) {
+                        intervalsStartingTime[j].value = intervalsEndingTime[j-1].value;
+                    }
+                }
+
+                // The starting time should always be 1 hour prior the ending time, so we apply this 
+                // restriction on starting time change.
+                let endingTimeString = year+ "-" + month + "-" + day + " " + intervalsEndingTime[j].value + ":00";
+                let endingTimeDateObject = new Date(endingTimeString);  
+                let oneHourBeforeTimestamp = endingTimeDateObject.setMinutes(endingTimeDateObject.getMinutes() - 60)
+                let oneHourBeforeObject = new Date(oneHourBeforeTimestamp);  
+                let oneHourBefore = twoDigitFormat(oneHourBeforeObject.getHours()) + ":" + twoDigitFormat(oneHourBeforeObject.getMinutes());
+
+                if(intervalsStartingTime[j].value > oneHourBefore) {
+                    intervalsStartingTime[j].value = oneHourBefore
+                }
+            })
         }
         
         //We will allow only two intervals for the lawyer to choose.
        if(intervals.length >= 2) {
             addIntervalButton.disabled = true
        }
+       //The add intervals button will be disabled if the last ending time is after 22:59
+       if(intervalsEndingTime[intervals.length-1] > "22:59") {
+         addIntervalButton.disabled = true
+       } 
     }) 
 
-    /*
-        The problem starts when I delete all the intervals. It allows to add interval even if ending hour > 22:59,
-        and choose ending hour less than starting hour.
-    */
+    
 }
 
 function removeParentElement(buttonElement) {
@@ -146,4 +210,5 @@ function removeParentElement(buttonElement) {
 
     addIntervalButton.disabled = false
     buttonElement.parentElement.remove();
+
 }
