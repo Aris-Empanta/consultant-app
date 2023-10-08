@@ -1,3 +1,8 @@
+/*
+    This file contains all the frontend validation for the lawyer's available hours.
+    It primarily serves the User Experience and my any means the security. All the validations
+    regarding protection from attackers will be made in the backend.
+*/
 let hoursScheduleWrapper = document.querySelectorAll(".hoursScheduleWrapper")
 
 // We have to loop through each parent element of the available days for appointments 
