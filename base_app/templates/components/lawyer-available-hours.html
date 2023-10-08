@@ -10,9 +10,9 @@
             <div id="hoursScheduleWrapperOfDay{{forloop.counter}}">
                 <span class="intervalOfDay{{forloop.counter}}">
                     From                 
-                    <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
+                    <input type="time" value = "00:00" class="startOfInterval{{forloop.counter}}" name="time">
                     To 
-                    <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="22:59">
+                    <input class="endOfInterval{{forloop.counter}}" type="time" value="22:59">
                     <button data-counter="{{ forloop.counter }}" onclick="removeParentElement(this)">Remove</button>
                 </span>
             </div>
