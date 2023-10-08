@@ -4,23 +4,21 @@
 
     <div class="centerPageContent">
         <div>
-        {% for day_name, date in current_week.items %}
+        {% for day_name, date in days_of_available_hours.items %}
         <div class="hoursScheduleWrapper">
-            <p>{{day_name}} - <span class="scheduleDate">{{date}}</span></p> 
-            <span class="interval_{{forloop.counter}}">
-                From                 
-                <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
-                To 
-                <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="23:59">
-                <button data-counter="{{ forloop.counter }}" onclick="removeParentElement(this)">Delete</button>
-            </span>
+            <p>{{day_name|slice:"2:"}} - <span class="scheduleDate">{{date}}</span></p> 
+            <div id="hoursScheduleWrapperOfDay{{forloop.counter}}">
+                <span class="intervalOfDay{{forloop.counter}}">
+                    From                 
+                    <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
+                    To 
+                    <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="23:59">
+                    <button data-counter="{{ forloop.counter }}" onclick="removeParentElement(this)">Remove</button>
+                </span>
+            </div>
             <button class="addIntervalButton{{forloop.counter}}" disabled>add interval</button>
         </div>
-        {% endfor %}
-        <h2>Next Week</h2>
-        {% for day_name, date in next_week.items %}
-            <p>{{day_name}} - {{date}}</p>
-        {% endfor %}
+        {% endfor %}       
         </div>
     </div>
     

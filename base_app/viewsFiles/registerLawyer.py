@@ -59,7 +59,7 @@ class LawyerAvailableHours(View):
         # remaining days of the week, in order the lawyer to choose his available
         # hours. The key will be the day's name and the key will be the day's date
         # in format DD/MM/YYYY.
-        current_week = dict()
+        days_of_available_hours= dict()
         
         todays_date = date.today()
 
@@ -70,7 +70,7 @@ class LawyerAvailableHours(View):
         for x in range(today, 8):
             day_name = render_day_name(x)
             date_format = (todays_date + timedelta(days=days_addition)).strftime("%d/%m/%Y")
-            current_week[day_name] = date_format            
+            days_of_available_hours[f"1_{day_name}"] = date_format            
             days_addition += 1
 
         # We find the date of the next monday
@@ -78,15 +78,15 @@ class LawyerAvailableHours(View):
         next_monday_date = (todays_date + timedelta(days=days_till_monday))
 
         # We will create a dictionary that contains all the days and dates of the next week. 
+        
         next_week = dict()
 
         for x in range(1, 8):
             day_name = render_day_name(x)
-            next_week[day_name] = (next_monday_date + timedelta(days=x-1)).strftime("%d/%m/%Y")
+            days_of_available_hours[f"2_{day_name}"] = (next_monday_date + timedelta(days=x-1)).strftime("%d/%m/%Y")
 
         context = {
-            "current_week": current_week,
-            "next_week": next_week,
+            "days_of_available_hours": days_of_available_hours,
         }
 
         return render(request, 'components/lawyer-available-hours.html', context)
