@@ -12,11 +12,11 @@
                     From                 
                     <input type="time" value = "00:00" class="startingTime startOfInterval{{forloop.counter}}" name="time">
                     To 
-                    <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="23:59">
+                    <input class="endingTime endOfInterval{{forloop.counter}}" type="time" value="22:59">
                     <button data-counter="{{ forloop.counter }}" onclick="removeParentElement(this)">Remove</button>
                 </span>
             </div>
-            <button class="addIntervalButton{{forloop.counter}}" disabled>add interval</button>
+            <button class="addIntervalButton{{forloop.counter}}">add interval</button>
         </div>
         {% endfor %}       
         </div>
