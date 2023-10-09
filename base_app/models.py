@@ -33,7 +33,11 @@ class Lawyer(models.Model):
                                                                 ("revoked", "revoked")
                                                             ), default=("active", "active"))
     phone = models.CharField(max_length=20, null=True)
-    
+
+class AvailableHours(models.Model):
+    lawyer = models.OneToOneField(Lawyer, on_delete=models.PROTECT)
+    startingTime = models.DateTimeField(null=True)
+    endingTime = models.DateField(null=True)
     
 class Client(models.Model):
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
