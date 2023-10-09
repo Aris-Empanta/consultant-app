@@ -1,4 +1,6 @@
 When a lawyer chooses his available hours, the following restrictions should be applied: 
+
+FRONTEND:
 - He can choose 2 intervals maximum during a day.
 - There will be 1 interval default. 
 - The addIntervals button default should be unclickable.
@@ -14,5 +16,17 @@ When a lawyer chooses his available hours, the following restrictions should be 
 - The second interval's(if exist) starting time should be >= the previous interval's ending time, with default value 
   the previous interval's ending time, and <= the current interval's ending time minus 1 hour.
 - The second interval's(if exist) ending time should be >= the current interval's starting time plus 1 hour.
+
+BACKEND:
+- We have the request body as a dictionary, having the date as a key, and starting/ending hours as values (type list) <----- Ok
+- We wont validate the starting time. It will deviate from the current starting time anyway. in any case it will 
+  create non valid appointments(valid appointments will be examined based on current time). <----- Ok
+- Now we start the comparisons. so we convert all the times to datetime.datetime objects and save them to variables.
+- We compare the starting and ending time. The ending time should be greater than starting time by one hour at least.
+- In case of 2 intervals, we check that the second interval starting time is later than or equal to the first 
+  intervals ending time. In case this doesnt happen, we send an error to the frontend without further processing the data.
+  Also we evaluate if the ending time is same as the next starting time. if that is the case, we combine 2 intervals to one.	
+- We have to save the available hours in the database as a DateTimeField. The columns would be: Id, LawyerId, startingTime, EndingTime. 
+- Once the evaluation is done, we save each interval in a database row (an interval is one starting and one ending time).
 
 *** The restrictions above might be extended in the codebase. In any case, sufficient comments are provided***
