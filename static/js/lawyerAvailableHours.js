@@ -3,6 +3,7 @@
     It primarily serves the User Experience and my any means the security. All the validations
     regarding protection from attackers will be made in the backend.
 */
+
 let hoursScheduleWrapper = document.querySelectorAll(".hoursScheduleWrapper")
 
 // We have to loop through each parent element of the available days for appointments 
@@ -114,14 +115,16 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
 
     // When we click the addIntervalsButton, a new pair of time intervals input should be created.
     addIntervalsButton.addEventListener("click", () => {
+
+            let intervalDate = document.querySelectorAll(".scheduleDate")[i].innerText
     
             //We create and append a span element to the div that contains the intervals
             let extraInterval = document.createElement("span")
             extraInterval.classList.add(`intervalOfDay${i+1}`);
             extraInterval.innerHTML = ` From                 
-                                        <input type="time" value = "00:00" class="startOfInterval${i + 1}" name="time">
+                                        <input type="time" value = "00:00" class="startOfInterval${i + 1}" name="${intervalDate}">
                                         To 
-                                        <input class="endOfInterval${i + 1}" type="time" value="23:59">
+                                        <input class="endOfInterval${i + 1}" type="time" value="23:59" name="${intervalDate}">
                                         <button data-counter="${i + 1}" onclick="removeParentElement(this)">Remove</button>
                                         `
             currentHoursScheduleWrapper.appendChild(extraInterval);

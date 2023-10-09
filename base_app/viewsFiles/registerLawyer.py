@@ -92,7 +92,58 @@ class LawyerAvailableHours(View):
         return render(request, 'components/lawyer-available-hours.html', context)
      
      def post(self, request):
-         time = request.POST.get("time") 
-         timeFormat = datetime.strptime(time, "%H:%M:%S")
-         print( type(timeFormat) )
-         return redirect('lawyer_available_hours')
+        # We create a dictionary with only the date/time key value pairs and without the 
+        # csrf token and keep only the dates in the dictionary 
+        available_hours_dict = request.POST.copy()
+        available_hours_dict.pop('csrfmiddlewaretoken')
+
+        # We loop though all the dates that have lawyer's available hours, in order
+        # to validate the times given and save them to the database.
+        for key, values in available_hours_dict.lists():
+            # We convert the current examined date from this string format "dd/mm/yyyy" 
+            # to 3 different integer variables: year, month, day, in order to construct 
+            # the datetime objects later successfully, and after the validation save them 
+            # to the database.
+            day_month_year_list = [ int(x) for x in key.split("/") ]
+            year = day_month_year_list[2]
+            month = day_month_year_list[1]
+            day = day_month_year_list[0]            
+            
+            #We create datetime objects for the starting and ending time of the interval
+            starting_time_hours_and_minutes = [int(x) for x in values[0].split(":")]
+            ending_time_hours_and_minutes = [int(x) for x in values[1].split(":")]
+            
+            starting_time_1_hours = starting_time_hours_and_minutes[0]
+            starting_time_1_minutes = starting_time_hours_and_minutes[1]
+            ending_time_1_hours = ending_time_hours_and_minutes[0]
+            ending_time_1_minutes = ending_time_hours_and_minutes[1]
+
+            starting_time_1 = datetime(year, month, day, starting_time_1_hours, starting_time_1_minutes)
+            ending_time_1 = datetime(year, month, day, ending_time_1_hours, ending_time_1_minutes)
+
+            print(starting_time_1)
+
+            #validate
+
+            #Now we handle the case the intervals in a day to be 2.
+            if(len(values) == 4):
+                starting_time_hours_and_minutes_2 = [int(x) for x in values[2].split(":")]
+                ending_time_hours_and_minutes_2 = [int(x) for x in values[3].split(":")]
+                
+                starting_time_2_hours = starting_time_hours_and_minutes_2[0]
+                starting_time_2_minutes = starting_time_hours_and_minutes_2[1]
+                ending_time_2_hours = ending_time_hours_and_minutes_2[0]
+                ending_time_2_minutes = ending_time_hours_and_minutes_2[1]
+
+                starting_time_2 = datetime(year, month, day, starting_time_2_hours, starting_time_2_minutes)
+                ending_time_2 = datetime(year, month, day, ending_time_2_hours, ending_time_2_minutes)
+
+                print(starting_time_2)
+
+                #validate
+
+            
+            #save them to the database the final intervals. Might be 2 or 1 if combined.
+                               
+
+        return redirect('lawyer_available_hours')
