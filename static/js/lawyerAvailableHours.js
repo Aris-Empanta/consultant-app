@@ -188,7 +188,7 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
 
                 endingTime[j].addEventListener('change', () => {
                     
-                    let startingTimeDateString  = year + "-" + month + "-" + day + " " + endingTime[j].value + ":00";
+                    let startingTimeDateString  = year + "-" + month + "-" + day + " " + startingTime[j].value + ":00";
 
                     // We set an ending time 1 hour later from the starting set time, and convert it 
                     // to a string format of hh:mm

@@ -121,9 +121,14 @@ class LawyerAvailableHours(View):
             starting_time_1 = datetime(year, month, day, starting_time_1_hours, starting_time_1_minutes)
             ending_time_1 = datetime(year, month, day, ending_time_1_hours, ending_time_1_minutes)
 
-            print(starting_time_1)
+            # The ending time should be at least 1 hour after the starting time, 
+            # otherwise it should return an error message
+            ending_one_hour_later = starting_time_1 + timedelta(hours=1)
 
-            #validate
+            if ending_one_hour_later > ending_time_1:
+                error_message = "Ending times should be at least 1 hour after starting times"
+                messages.error(request, error_message)
+                return redirect('lawyer_available_hours')
 
             #Now we handle the case the intervals in a day to be 2.
             if(len(values) == 4):
@@ -138,12 +143,36 @@ class LawyerAvailableHours(View):
                 starting_time_2 = datetime(year, month, day, starting_time_2_hours, starting_time_2_minutes)
                 ending_time_2 = datetime(year, month, day, ending_time_2_hours, ending_time_2_minutes)
 
-                print(starting_time_2)
+                # The second interval's starting time should not be before the first interval's ending time.
+                if(starting_time_2 < ending_time_1):
+                    error_message = """ 
+                                        The second interval's starting time should be at the same time or 
+                                        later from the starting interval's ending time
+                                    """
+                    messages.error(request, error_message)
+                    return redirect('lawyer_available_hours')
+                
+                # The second intervals ending time should be at least one hour after the starting time.
+                ending_2_one_hour_later = starting_time_2 + timedelta(hours=1)
 
-                #validate
-
+                if ending_2_one_hour_later > ending_time_2:
+                    error_message = "Ending times should be at least 1 hour after starting times"
+                    messages.error(request, error_message)
+                    return redirect('lawyer_available_hours')
+                
+                # If the second interval's starting time is the same as the first interval's ending time, 
+                # we combine the 2 intervals in one, and empty the starting and ending time of the second 
+                # interval variables.
+                if(starting_time_2 == ending_time_1):
+                    ending_time_1 = ending_time_2
+                    starting_time_2 = None
+                    ending_time_2 = None
             
             #save them to the database the final intervals. Might be 2 or 1 if combined.
-                               
+            print(starting_time_1)
+            print(ending_time_1)
+            if starting_time_2 is not None:
+                print(starting_time_2)
+                print(ending_time_2)
 
         return redirect('lawyer_available_hours')
