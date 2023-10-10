@@ -24,8 +24,8 @@ BACKEND:
 - Now we start the comparisons. so we convert all the times to datetime.datetime objects and save them to variables. <----- Ok
 - We compare the starting and ending time. The ending time should be greater than starting time by one hour at least. <----- Ok
 - In case of 2 intervals, we check that the second interval starting time is later than or equal to the first 
-  intervals ending time. In case this doesnt happen, we send an error to the frontend without further processing the data.
-  Also we evaluate if the ending time is same as the next starting time. if that is the case, we combine 2 intervals to one.	
+  intervals ending time. In case this doesnt happen, we send an error to the frontend without further processing the data. <----- Ok
+-  We also evaluate if the ending time is same as the next starting time. if that is the case, we combine 2 intervals to one. <----- Ok
 - We have to save the available hours in the database as a DateTimeField. The columns would be: Id, LawyerId, startingTime, EndingTime. 
 - Once the evaluation is done, we save each interval in a database row (an interval is one starting and one ending time).
 

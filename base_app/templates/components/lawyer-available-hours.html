@@ -21,6 +21,23 @@
                         To 
                         <input class="endOfInterval{{forloop.counter}}" type="time" value="22:59" name="{{date}}">
                         <button data-counter="{{ forloop.counter }}" onclick="removeParentElement(this)">Remove</button>
+                        <label>Appointments Duration</label>
+                        <select name="{{date}}">
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="60">60</option>
+                        </select>
+                        <p>min</p>
+                        <label>Breaks Between Appointments</label>
+                        <select name="{{date}}">
+                            <option value="0">0</option> 
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="60">60</option>
+                        </select>
+                        <p>min</p>
                     </span>
                 </div>
                 <button class="addIntervalButton{{forloop.counter}}">add interval</button>
