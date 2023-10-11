@@ -111,6 +111,11 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
         if(endingTime[0].value < oneHourLater) {
             endingTime[0].value = oneHourLater
         }
+
+        //If there are 2 intervals, the addIntervals button should always be disabled.
+        if(intervals.length === 2) {
+            addIntervalsButton.disabled = true
+        }
     })
 
     // When we click the addIntervalsButton, a new pair of time intervals input should be created.
@@ -126,6 +131,23 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
                                         To 
                                         <input class="endOfInterval${i + 1}" type="time" value="23:59" name="${intervalDate}">
                                         <button data-counter="${i + 1}" onclick="removeParentElement(this)">Remove</button>
+                                        <label>Appointments Duration</label>
+                                        <select name="${intervalDate}">
+                                            <option value="15">15</option>
+                                            <option value="30">30</option>
+                                            <option value="45">45</option>
+                                            <option value="60">60</option>
+                                        </select>
+                                        <p>min</p>
+                                        <label>Breaks Between Appointments</label>
+                                        <select name="${intervalDate}">
+                                            <option value="0">0</option> 
+                                            <option value="15">15</option>
+                                            <option value="30">30</option>
+                                            <option value="45">45</option>
+                                            <option value="60">60</option>
+                                        </select>
+                                        <p>min</p>
                                         `
             currentHoursScheduleWrapper.appendChild(extraInterval);
 
@@ -206,8 +228,6 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
                     // be disabled if the time is after 22:59
                     if(j === intervals.length - 1 && endingTime[j].value > "22:59") {
                         addIntervalsButton.disabled = true
-                    } else if(j === intervals.length - 1 && endingTime[j].value <= "22:59"){
-                        addIntervalsButton.disabled = false
                     }
                     
                     //The ending time should be less or equal to the next interval's starting time
