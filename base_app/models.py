@@ -38,7 +38,13 @@ class AvailableHours(models.Model):
     lawyer = models.OneToOneField(Lawyer, on_delete=models.PROTECT)
     startingTime = models.DateTimeField(null=True)
     endingTime = models.DateField(null=True)
-    
+
+class Appointments(models.Model):
+    interval = models.ForeignKey(AvailableHours, on_delete=models.CASCADE)
+    booked = models.BooleanField(default=False)
+    startingTime = models.DateTimeField(null=True)
+    endingTime = models.DateField(null=True)
+
 class Client(models.Model):
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
 
