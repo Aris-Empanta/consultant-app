@@ -1,3 +1,4 @@
+from typing import Any
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import View
@@ -13,10 +14,9 @@ class LawyerInfo(View):
     def get(self, request):
 
         form = LawyerInfoForm()
-
         areas_of_expertise = list(map(lambda x : x.value, AreasOfExpertise))
-
         context = { 'form': form, 'areas_of_expertise': areas_of_expertise }
+        
         return render(request, 'components/lawyer_info.html', context)
     
     def post(self, request):
@@ -53,18 +53,17 @@ class LawyerInfo(View):
             print(e)
 
 class LawyerAvailableHours(View):
+
+
      
-     def get(self, request):
+    def get(self, request):
         # We will create a dictionary that contains the current day and the 
         # remaining days of the week, in order the lawyer to choose his available
         # hours. The key will be the day's name and the key will be the day's date
         # in format DD/MM/YYYY.
-        days_of_available_hours= dict()
-        
+        days_of_available_hours= dict()        
         todays_date = date.today()
-
         today = date.today().isoweekday()
-
         days_addition = 0
 
         for x in range(today, 8):
@@ -91,11 +90,14 @@ class LawyerAvailableHours(View):
 
         return render(request, 'components/lawyer-available-hours.html', context)
      
-     def post(self, request):
+    def post(self, request):
         # We create a dictionary with only the date/time key value pairs and without the 
         # csrf token and keep only the dates in the dictionary 
         available_hours_dict = request.POST.copy()
         available_hours_dict.pop('csrfmiddlewaretoken')
+        # We will need the object of the logged in lawyer later when saving the available
+        #  hours / appointments
+        lawyer = Lawyer.objects.get(pk=request.user.profile.lawyer.id)
 
         # We loop though all the dates that have lawyer's available hours, in order
         # to validate the times given and save them to the database.
@@ -120,14 +122,6 @@ class LawyerAvailableHours(View):
 
             starting_time_1 = datetime(year, month, day, starting_time_1_hours, starting_time_1_minutes)
             ending_time_1 = datetime(year, month, day, ending_time_1_hours, ending_time_1_minutes)
-            appointments_duration_1 = int(values[2])
-            breaks_between_appointments_1= int(values[3])
-
-            # The list with the appointments of the first interval
-            appointments_per_interval = DateUtils.generate_appointments_per_interval(starting_time_1, 
-                                                                                      ending_time_1,
-                                                                                      appointments_duration_1,
-                                                                                      breaks_between_appointments_1)
 
             # The ending time should be at least 1 hour after the starting time, 
             # otherwise it should return an error message
@@ -137,6 +131,20 @@ class LawyerAvailableHours(View):
                 error_message = "Ending times should be at least 1 hour after starting times"
                 messages.error(request, error_message)
                 return redirect('lawyer_available_hours')
+            
+            appointments_duration_1 = int(values[2])
+            breaks_between_appointments_1= int(values[3])
+
+            # The list with the appointments of the first interval
+            appointments_per_interval = DateUtils.generate_appointments_per_interval(starting_time_1, 
+                                                                                      ending_time_1,
+                                                                                      appointments_duration_1,
+                                                                                      breaks_between_appointments_1)
+            # We save the intervals and the appointments in the database
+            DateUtils.save_intervals_and_appointments(lawyer,
+                                                      starting_time_1, 
+                                                      ending_time_1 ,
+                                                      appointments_per_interval)
             
             # We initialise the starting and ending time of a potential second interval
             starting_time_2 = None
@@ -191,5 +199,11 @@ class LawyerAvailableHours(View):
                                                                                            ending_time_2,
                                                                                            appointments_duration_2,
                                                                                            breaks_between_appointments_2)
+                # We save the intervals and the appointments in the database
+                DateUtils.save_intervals_and_appointments(lawyer,
+                                                          starting_time_2, 
+                                                          ending_time_2,
+                                                          appointments_per_second_interval)
+
 
         return redirect('lawyer_available_hours')

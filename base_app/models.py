@@ -12,11 +12,8 @@ class Profile(models.Model):
     Lawyer = models.BooleanField(default=False)
     Client = models.BooleanField(default=False)
 
-LISENCE_STATUSES = (
-    ("active", "active"),
-    ("suspended", "suspended"),
-    ("revoked", "revoked")
-)
+    def __str__(self):
+        return f'This is the Profile object of {self.user.first_name} {self.user.last_name}'
 
 class Lawyer(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
@@ -34,16 +31,19 @@ class Lawyer(models.Model):
                                                             ), default=("active", "active"))
     phone = models.CharField(max_length=20, null=True)
 
+    def __str__(self):
+        return f'This is the Lawyer object of {self.profile.user.first_name} {self.profile.user.last_name}'
+
 class AvailableHours(models.Model):
-    lawyer = models.OneToOneField(Lawyer, on_delete=models.PROTECT)
-    startingTime = models.DateTimeField(null=True)
-    endingTime = models.DateField(null=True)
+    lawyer = models.ForeignKey(Lawyer, on_delete=models.CASCADE)
+    starting_time = models.DateTimeField(null=True)
+    ending_time = models.DateTimeField(null=True)
 
 class Appointments(models.Model):
     interval = models.ForeignKey(AvailableHours, on_delete=models.CASCADE)
     booked = models.BooleanField(default=False)
-    startingTime = models.DateTimeField(null=True)
-    endingTime = models.DateField(null=True)
+    starting_time = models.DateTimeField(null=True)
+    ending_time = models.DateTimeField(null=True)
 
 class Client(models.Model):
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)

@@ -1,5 +1,7 @@
 import math
 from datetime import timedelta
+from ..models import AvailableHours, Appointments
+from django.db import IntegrityError, transaction
 
 class DateUtils:    
 
@@ -41,3 +43,26 @@ class DateUtils:
             appointments.append(starting_ending_times_dict)
 
         return appointments
+    
+    @staticmethod
+    def save_intervals_and_appointments(lawyer,starting_time, ending_time ,appointments_per_interval):
+        try:
+            with transaction.atomic():
+                # First we save the interval of available hours
+                available_hours_model = AvailableHours(lawyer = lawyer,
+                                                       starting_time = starting_time,
+                                                       ending_time = ending_time)
+                available_hours_model.save()
+                # Then we save all the appointments
+                for appointment in appointments_per_interval:
+                    print(appointment)
+                    appointment_model = Appointments(interval=available_hours_model,
+                                                     booked=False,
+                                                     starting_time=appointment["starting"],
+                                                     ending_time=appointment["ending"])
+                    appointment_model.save()
+
+        except IntegrityError as e:
+            print(f"IntegrityError: {e}")
+        except Exception as e:
+            print(f"General Exception: {e}")
