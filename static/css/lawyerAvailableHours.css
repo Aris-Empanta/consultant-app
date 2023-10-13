@@ -1,0 +1,56 @@
+#availableHoursPage {
+    background-color: whitesmoke;
+}
+#availableHoursWrapper {
+    background-color: #E6E6FA;
+    min-width: 70%;
+    max-width: 96%;
+    margin-top: 12vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 5px;
+}
+
+#availableHoursTitle {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+    font-size: 1.5rem;
+}
+
+.hoursScheduleWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.intervalInputsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.selectAppointmentsDurationWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selectBreaksWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.addIntervalButton {
+    align-self: flex-start;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #d3d3d3;
+    background-color: whitesmoke;
+    width: 2rem;
+    height: 2rem;
+    box-shadow: 1px 1px 4px #d3d3d3;
+}

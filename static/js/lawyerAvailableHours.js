@@ -124,30 +124,39 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
             let intervalDate = document.querySelectorAll(".scheduleDate")[i].innerText
     
             //We create and append a span element to the div that contains the intervals
-            let extraInterval = document.createElement("span")
+            let extraInterval = document.createElement("div")
+            extraInterval.classList.add("intervalInputsWrapper")
             extraInterval.classList.add(`intervalOfDay${i+1}`);
             extraInterval.innerHTML = ` From                 
-                                        <input type="time" value = "00:00" class="startOfInterval${i + 1}" name="${intervalDate}">
+                                        <input type="time" value = "00:00" class="timeInput startOfInterval${i + 1}" name="${intervalDate}">
                                         To 
-                                        <input class="endOfInterval${i + 1}" type="time" value="23:59" name="${intervalDate}">
+                                        <input class="timeInput endOfInterval${i + 1}" type="time" value="23:59" name="${intervalDate}">
+                                        <div>
+                                            <label>Appointments Duration</label>
+                                            <div class="selectAppointmentsDurationWrapper">
+                                                <select name="${intervalDate}">
+                                                    <option value="15">15</option>
+                                                    <option value="30">30</option>
+                                                    <option value="45">45</option>
+                                                    <option value="60">60</option>
+                                                </select>
+                                                <p>min</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label>Breaks Between Appointments</label>
+                                            <div class="selectBreaksWrapper">
+                                                <select name="${intervalDate}">
+                                                    <option value="0">0</option> 
+                                                    <option value="15">15</option>
+                                                    <option value="30">30</option>
+                                                    <option value="45">45</option>
+                                                    <option value="60">60</option>
+                                                </select>
+                                                <p>min</p>
+                                            </div>
+                                        </div>
                                         <button data-counter="${i + 1}" onclick="removeParentElement(this)">Remove</button>
-                                        <label>Appointments Duration</label>
-                                        <select name="${intervalDate}">
-                                            <option value="15">15</option>
-                                            <option value="30">30</option>
-                                            <option value="45">45</option>
-                                            <option value="60">60</option>
-                                        </select>
-                                        <p>min</p>
-                                        <label>Breaks Between Appointments</label>
-                                        <select name="${intervalDate}">
-                                            <option value="0">0</option> 
-                                            <option value="15">15</option>
-                                            <option value="30">30</option>
-                                            <option value="45">45</option>
-                                            <option value="60">60</option>
-                                        </select>
-                                        <p>min</p>
                                         `
             currentHoursScheduleWrapper.appendChild(extraInterval);
 
@@ -246,12 +255,26 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
 
 //The function to remove an interval.
 function removeParentElement(buttonElement) {
-    var counter = buttonElement.getAttribute("data-counter");
+    let counter = buttonElement.getAttribute("data-counter");
     let addIntervalButton = document.querySelector(`.addIntervalButton${counter}`)
 
-    // We enable the addIntervalButton once we remove an interval, since it will always 
-    // be less than 2.
-    addIntervalButton.disabled = false
+
+    
+
+    // We get the second class of the parent element that represents the day, so 
+    // that we can check if the element to be deleted is the first or the second
+    // interval.
+    let parentClass = document.querySelectorAll(`.${buttonElement.parentElement.classList[1]}`)
+    console.log()
+
+    // If 2 intervals exist and the deleted interval is the first interval we 
+    // leave the button disabled. Otherwise we set disabled false.
+    if(parentClass.length === 2 && parentClass[0] === buttonElement.parentElement) {
+        addIntervalButton.disabled = true
+    } else {
+        addIntervalButton.disabled = false
+    }
+    
     buttonElement.parentElement.remove();
 }
 

@@ -2,8 +2,9 @@
 {% load static %}
 {% block content %}   
 
-    <div class="centerPageContent">
+    <div class="centerPageContent" id="availableHoursPage">
         <div id="availableHoursWrapper">
+            <h1 id="availableHoursTitle">Arrange Your Available Hours</h1>
             {% for message in messages %}
                     {% if message.tags == 'error' %}
                         <div>{{ message }}</div>
@@ -15,32 +16,40 @@
             <div class="hoursScheduleWrapper">
                 <p>{{day_name|slice:"2:"}} - <span class="scheduleDate">{{date}}</span></p> 
                 <div id="hoursScheduleWrapperOfDay{{forloop.counter}}">
-                    <span class="intervalOfDay{{forloop.counter}}">
-                        From                 
-                        <input type="time" value = "00:00" class="startOfInterval{{forloop.counter}}" name="{{date}}">
-                        To 
-                        <input class="endOfInterval{{forloop.counter}}" type="time" value="22:59" name="{{date}}">
+                    <div class="intervalInputsWrapper intervalOfDay{{forloop.counter}}">
+                        <p>From</p>                 
+                        <input type="time" value = "00:00" class="timeInput startOfInterval{{forloop.counter}}" name="{{date}}">
+                        <p>To</p> 
+                        <input class="timeInput endOfInterval{{forloop.counter}}" type="time" value="22:59" name="{{date}}">
+                        <div>
+                            <label>Appointments Duration</label>
+                            <div class="selectAppointmentsDurationWrapper">
+                                <select name="{{date}}">
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                    <option value="60">60</option>
+                                </select>
+                                <p>min</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Breaks Between Appointments</label>
+                            <div class="selectBreaksWrapper">
+                                <select name="{{date}}">
+                                    <option value="0">0</option> 
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                    <option value="60">60</option>
+                                </select>
+                                <p>min</p>
+                            </div>
+                        </div>
                         <button data-counter="{{ forloop.counter }}" onclick="removeParentElement(this)">Remove</button>
-                        <label>Appointments Duration</label>
-                        <select name="{{date}}">
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                            <option value="60">60</option>
-                        </select>
-                        <p>min</p>
-                        <label>Breaks Between Appointments</label>
-                        <select name="{{date}}">
-                            <option value="0">0</option> 
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                            <option value="60">60</option>
-                        </select>
-                        <p>min</p>
-                    </span>
+                    </div>
                 </div>
-                <button class="addIntervalButton{{forloop.counter}}">add interval</button>
+                <button class="addIntervalButton{{forloop.counter}} addIntervalButton">+</button>
             </div>
             {% endfor %}  
             <input type="submit">     
