@@ -8,6 +8,8 @@ from ..forms import LawyerInfoForm
 from ..enums import AreasOfExpertise
 from datetime import date, datetime, timedelta
 from ..utils.dates import DateUtils
+from django.utils.decorators import method_decorator
+from ..decorators import allowed_users
 
 class LawyerInfo(View):
 
@@ -52,10 +54,8 @@ class LawyerInfo(View):
         except Exception as e:
             print(e)
 
+@method_decorator(allowed_users(allowed_roles=["lawyers"]), name='dispatch')
 class LawyerAvailableHours(View):
-
-
-     
     def get(self, request):
         # We will create a dictionary that contains the current day and the 
         # remaining days of the week, in order the lawyer to choose his available
