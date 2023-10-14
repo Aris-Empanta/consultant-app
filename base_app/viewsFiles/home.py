@@ -7,5 +7,4 @@ class Home(View):
     def get(self, request):
                 
         context = { }
-        print(request.user)
         return render(request, 'components/home.html', context)

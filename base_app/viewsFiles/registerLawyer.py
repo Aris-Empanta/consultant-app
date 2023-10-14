@@ -1,4 +1,3 @@
-from typing import Any
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import View
@@ -10,7 +9,10 @@ from datetime import date, datetime, timedelta
 from ..utils.dates import DateUtils
 from django.utils.decorators import method_decorator
 from ..decorators import allowed_users
+from django.contrib.auth.decorators import login_required
 
+@method_decorator(login_required(login_url="login"), name='dispatch')
+@method_decorator(allowed_users(allowed_roles=["lawyers"]), name='dispatch')
 class LawyerInfo(View):
 
     def get(self, request):
@@ -54,6 +56,7 @@ class LawyerInfo(View):
         except Exception as e:
             print(e)
 
+@method_decorator(login_required(login_url="login"), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=["lawyers"]), name='dispatch')
 class LawyerAvailableHours(View):
     def get(self, request):

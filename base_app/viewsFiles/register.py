@@ -2,10 +2,13 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from ..models import Profile, User, Lawyer, Client
 from ..forms import MyUserCreationForm
+from django.utils.decorators import method_decorator
+from ..decorators import login_register_view
 
+@method_decorator(login_register_view(redirect_url="home"), name='dispatch')
 class QuestionSpecialty(View):
     
     def get(self, request):
@@ -22,7 +25,7 @@ class QuestionSpecialty(View):
         request.session['isLawyer'] = False
         return redirect("register-client")
 
-    
+@method_decorator(login_register_view(redirect_url="home"), name='dispatch')
 class RegisterUser(View):    
 
     lawyerRegister = False

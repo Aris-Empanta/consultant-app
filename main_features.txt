@@ -1,0 +1,23 @@
+LAWYER'S APPOINTMENT APP FEATURES:
+
+- A user can register with username/password django built-in mechanism and google oauth.
+- There will be forgot password functionality sent to the email 
+- During registration the user chooses lawyer or client role. 
+- The laywer can choose his/her available hours, appointments durations and breaks, for the current week 
+  and one in advance.In order the app to generate his appointments. 
+- There are pages that can be seen only if the user isnt logged in, and other that can be seen only if he is logged in.
+- There are pages/actions that can be accessed only by client or lawyer. If a client tries to access a lawyer's page
+  and vice versa, he/she will be redirected to the unauthorised page.
+- There will be a lawyer profile page that the lawyer can edit his info. Same goes for the client.
+- Both lawyer and client can search through lawyers.
+- Lawyers should be restricted to book an appointment with other lawyer.
+- A client can see only the appointments that are 1 hour after the current time.
+- a client can book an appointment.
+- The lawyer  is notified for a new appointment in real time, and has to accept it.
+- The lawyer can see his appointments and the data of each client.
+- A lawyer can cancel an appointment at least 3 hours prior, and the client will receive an email (asynchronous)
+- A lawyer can modify his available hours. If the contain an appointment and is after 3 hours, it gets cancelled with the mentioned procedure.
+- A client can cancel the appointment anytime.
+- The available/hours appointments of the past should be deleted from the database(those that are 2 days and before so that the client can rate.).
+- If the appointment is accomplished, the customer can rate the lawyer (maximum 2 days after the appointment).
+- Unit tests should be applied wherever needed.
