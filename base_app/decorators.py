@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 
 # The decorator below restricts the access of certain pages 
 # if the user is logged in.
@@ -26,7 +26,7 @@ def allowed_users(allowed_roles=[]):
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else: 
-                return redirect("home")
+                return render(request, "components/reusable/403.html")
             
         return wrapper_func
     return decorator

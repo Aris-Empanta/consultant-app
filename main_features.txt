@@ -7,7 +7,7 @@ LAWYER'S APPOINTMENT APP FEATURES:
   and one in advance.In order the app to generate his appointments. 
 - There are pages that can be seen only if the user isnt logged in, and other that can be seen only if he is logged in.
 - There are pages/actions that can be accessed only by client or lawyer. If a client tries to access a lawyer's page
-  and vice versa, he/she will be redirected to the unauthorised page.
+  and vice versa, he/she will be redirected to the unauthorised page 403.
 - There will be a lawyer profile page that the lawyer can edit his info. Same goes for the client.
 - Both lawyer and client can search through lawyers.
 - Lawyers should be restricted to book an appointment with other lawyer.
