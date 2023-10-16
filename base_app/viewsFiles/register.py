@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from ..models import Profile, User, Lawyer, Client
 from ..forms import MyUserCreationForm
 from django.utils.decorators import method_decorator
-from ..decorators import login_register_view
+from ..decorators import allowed_referers, login_register_view
 
 @method_decorator(login_register_view(redirect_url="home"), name='dispatch')
 class QuestionSpecialty(View):
@@ -25,6 +25,7 @@ class QuestionSpecialty(View):
         request.session['isLawyer'] = False
         return redirect("register-client")
 
+@method_decorator(allowed_referers(referers=['question-specialty']), name='dispatch')
 @method_decorator(login_register_view(redirect_url="home"), name='dispatch')
 class RegisterUser(View):    
 
@@ -38,9 +39,7 @@ class RegisterUser(View):
         # Below there is a mechanism so that this page is only accessible 
         # through the referer page "question-specialty"
         if request.is_secure():
-            self.protocol = 'https'
-        else:
-            self.protocol = 'http'       
+            self.protocol = 'https'      
 
         if "HTTP_REFERER" in request.META:
             self.referer = f'{request.META["HTTP_REFERER"]}'
