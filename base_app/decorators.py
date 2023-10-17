@@ -50,10 +50,10 @@ def allowed_referers(referers=[]):
                 # we get the referer's url name (if exists)
                 if referer:
                     referer = resolve(referer.replace(url, "")).url_name
-
+                    
                 if referer in referers:
                     return view_func(request, *args, **kwargs)
                 else:
-                    return render(request, "components/reusable/403.html")
+                    return render(request, "components/reusable/400.html")
         return wrapper_func
     return decorator

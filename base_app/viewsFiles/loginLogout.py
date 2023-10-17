@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-from ..decorators import login_register_view
+from ..decorators import allowed_referers, login_register_view
 from ..models import User
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from ..forms import PasswordResetForm, SetPasswordForm
@@ -48,11 +48,10 @@ class PasswordResetDoneView(PasswordResetDoneView):
 class PasswordResetConfirmView(PasswordResetConfirmView):
     template_name = "components/password-reset-confirmation.html"
     form_class = SetPasswordForm
-    
+
 @method_decorator(login_register_view(redirect_url="home"), name='dispatch')
 class PasswordResetCompleteView(PasswordResetCompleteView):
     template_name = "components/password-reset-complete.html"
-
 
 class Logout(View):
 

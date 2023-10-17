@@ -7,6 +7,7 @@ from ..models import Profile, User, Lawyer, Client
 from ..forms import MyUserCreationForm
 from django.utils.decorators import method_decorator
 from ..decorators import allowed_referers, login_register_view
+from ..utils.authorization import Authorization
 
 @method_decorator(login_register_view(redirect_url="home"), name='dispatch')
 class QuestionSpecialty(View):
@@ -25,35 +26,15 @@ class QuestionSpecialty(View):
         request.session['isLawyer'] = False
         return redirect("register-client")
 
-@method_decorator(allowed_referers(referers=['question-specialty']), name='dispatch')
 @method_decorator(login_register_view(redirect_url="home"), name='dispatch')
 class RegisterUser(View):    
 
     lawyerRegister = False
-    referer = None 
-    protocol = 'http'
     template = 'registerClient'
-    
+
+    @method_decorator(allowed_referers(referers=['question-specialty', 'examine-oauth']))
     def get(self, request):
-
-        # Below there is a mechanism so that this page is only accessible 
-        # through the referer page "question-specialty"
-        if request.is_secure():
-            self.protocol = 'https'      
-
-        if "HTTP_REFERER" in request.META:
-            self.referer = f'{request.META["HTTP_REFERER"]}'
-
-        url = f'{ self.protocol }://{request.META["HTTP_HOST"]}'
-
-        questionSpecialtyUrl = f'{url}/question-specialty/'
-        examinOauthUrl = f'{url}/examine-oauth/'
-        
-        if self.referer == questionSpecialtyUrl or examinOauthUrl:
-           return self.renderRegisterTemplate(request)
-        
-        return redirect("home")
-
+        return self.renderRegisterTemplate(request)
 
     def post(self, request):
 
@@ -80,12 +61,17 @@ class RegisterUser(View):
                 lawyer = Lawyer()
                 lawyer.profile = profile
                 lawyer.save()    
+
+                login(request, user, "django.contrib.auth.backends.ModelBackend")
+                Authorization.add_into_group(user, 'lawyers')
+                return redirect('lawyer_info')
             else:
                 client = Client()
                 client.profile = profile
                 client.save()  
 
             login(request, user, "django.contrib.auth.backends.ModelBackend")
+            Authorization.add_into_group(user, 'clients')
             return redirect('home')
         else:
            errors = form.errors

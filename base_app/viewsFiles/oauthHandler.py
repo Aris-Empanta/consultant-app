@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from ..models import User, Profile, Lawyer, Client
 from django.contrib.auth import logout
 from django.contrib import messages
+from ..utils.authorization import Authorization
 
 # The view class that does all the validation/configurations 
 # after the user authenticates via oauth and returns to the 
@@ -60,14 +61,17 @@ class OauthHandler(View):
         profile.save()       
 
         # Depending the user, we connect the profile to a Lawyer 
-        # model or a Client.
+        # model or a Client, and add the corresponding group.
         if profile.Lawyer:
             lawyer = Lawyer()
             lawyer.profile = profile
-            lawyer.save()    
+            lawyer.save()  
+            Authorization.add_into_group(request.user, 'lawyers')
+            return redirect('lawyer_info')  
         else:
             client = Client()
             client.profile = profile
             client.save()   
+            Authorization.add_into_group(request.user, 'clients')
         
         return redirect('home')
