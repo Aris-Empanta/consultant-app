@@ -1,5 +1,6 @@
-from .viewsFiles.loginLogout import Login, Logout, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from .viewsFiles.register import QuestionSpecialty, RegisterUser
-from .viewsFiles.home import Home
-from .viewsFiles.oauthHandler import OauthHandler
-from .viewsFiles.registerLawyer import LawyerInfo, LawyerAvailableHours
+from .views_files.login_logout import Login, Logout, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from .views_files.register import QuestionSpecialty, RegisterUser
+from .views_files.home import Home
+from .views_files.oauth_handler import OauthHandler
+from .views_files.register_lawyer import LawyerInfo, LawyerAvailableHours
+from .views_files.lawyer_profile import LawyerProfile
