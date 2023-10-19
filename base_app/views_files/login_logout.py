@@ -1,7 +1,6 @@
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from ..decorators import allowed_referers, login_register_view
