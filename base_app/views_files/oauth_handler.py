@@ -4,6 +4,7 @@ from ..models import User, Profile, Lawyer, Client
 from django.contrib.auth import logout
 from django.contrib import messages
 from ..utils.authorization import Authorization
+from allauth.socialaccount.models import SocialAccount
 
 # The view class that does all the validation/configurations 
 # after the user authenticates via oauth and returns to the 
@@ -56,8 +57,14 @@ class OauthHandler(View):
             profile.user = request.user
             if 'isLawyer' in request.session:
                 profile.Lawyer = True if isLawyer else False
-                profile.Client = False if isLawyer else True       
-                     
+                profile.Client = False if isLawyer else True      
+        
+        # we save the url of the social account's picture as 
+        # profile's avatar
+        account = SocialAccount.objects.filter(user=request.user)
+        social_account_avatar = account[0].extra_data.get('picture')
+        profile.avatar = social_account_avatar
+
         profile.save()       
 
         # Depending the user, we connect the profile to a Lawyer 

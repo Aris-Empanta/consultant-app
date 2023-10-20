@@ -49,9 +49,9 @@ class LawyerInfo(View):
 
             return redirect("lawyer_available_hours")
 
-        except Lawyer.DoesNotExist:
+        except Lawyer.DoesNotExist as e:
 
-            raise Http404("Lawyer not found")
+            print(e)
 
         except Exception as e:
             print(e)

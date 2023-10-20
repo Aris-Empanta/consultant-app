@@ -1,9 +1,15 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 
     {% include 'components/reusable/navbar.html' %}
 
     <h1>Edit Lawyer</h1>
+    {% if is_static %}
+    <img src= "{% static avatar_url %}" /> 
+    {% else %}
+    <img src="{{avatar_url}}" />
+    {% endif %}   
+    <p>{{avatar_url}}</p>
     
 {% endblock content %}

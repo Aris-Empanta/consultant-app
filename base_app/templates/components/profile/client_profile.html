@@ -1,9 +1,23 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 
     {% include 'components/reusable/navbar.html' %}
-
-    <h1>Client</h1>
+    <div id="clientProfileWrapper">
+        <div id="clientInfoWrapper">
+            {% if is_static %}
+            <img src= "{% static avatar_url %}" id="profilePic" /> 
+            {% else %}
+            <img src="{{avatar_url}}" id="profilePic" />
+            {% endif %} 
+            <p id="fullname">{{first_name}} {{last_name}}</p>
+            <p id="username">@{{username}}</p>
+            <p id="memberSinceWrapper">
+                <span id="memberSince">Member since
+                </span><span id="memberSinceDate">{{member_since}}</span>
+            </p>
+            <button id="sendMessageToProfile"> Send Message </button>
+        </div>  
+    </div>
     
 {% endblock content %}
