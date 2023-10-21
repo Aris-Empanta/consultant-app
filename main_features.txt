@@ -14,7 +14,10 @@ LAWYER'S APPOINTMENT APP FEATURES:
 - Both lawyer and client can search through lawyers.
 - Lawyers should be restricted to book an appointment with other lawyer.
 - A client can see only the appointments that are 1 hour after the current time.
-- a client can book an appointment.
+- a client can book an appointment. Once he/she clicks the book an appointment button, 
+  it will show a modal with the available appointments to choose.
+- Once the client chooses the appointment, it will navigate to a different page that either 
+  he/she can confirm the appointment or he/she can login.
 - The lawyer  is notified for a new appointment in real time, and has to accept it.
 - The lawyer can see his appointments and the data of each client.
 - A lawyer can cancel an appointment at least 3 hours prior, and the client will receive an email (asynchronous)

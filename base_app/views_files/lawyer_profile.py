@@ -1,6 +1,6 @@
 from django.views import View
 from django.shortcuts import redirect, render
-from ..models import User
+from ..models import User, Lawyer
 import urllib.parse
 
 class Profile(View):
@@ -32,6 +32,19 @@ class Profile(View):
                         'username': username,
                         'is_static': is_static }
             
+            # if the user is a lawyer, we add some extra context with the lawyer's details.
+            if user.profile.Lawyer: 
+                    lawyer = Lawyer.objects.get(profile=user.profile)
+                    context['description'] = lawyer.description if hasattr(lawyer, 'description') else "No description available"
+                    context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if hasattr(lawyer, 'areasOfExpertise') else None
+                    context['city']  = lawyer.city  if hasattr(lawyer, 'city') else "Not available"
+                    context['yearsOfExperience']  = lawyer.yearsOfExperience
+                    context['averageRating']  = lawyer.averageRating if lawyer.averageRating > 1 else "This lawyer has no ratings yet" 
+                    context['hourlyRate']  = lawyer.hourlyRate  if hasattr(lawyer, 'hourlyRate') else "Contact Lawyer to learn price"
+                    context['address']  = lawyer.address  if hasattr(lawyer, 'address') else "Not available"
+                    context['lisenceStatus']  = lawyer.lisenceStatus
+                    context['phone']  = lawyer.phone if hasattr(lawyer, 'phone') else "Not available"
+            print(context['averageRating'])    
             # First we check if there is an authenticated user, and if his username 
             # is the same as the username in the url parameter. Then, depending if 
             # the user is a lawyer or a client, we render the appropriate template.
@@ -43,7 +56,7 @@ class Profile(View):
                     return render(request,'components/profile/editable_client_profile.html', context)
             else:
 
-                if user.profile.Lawyer:             
+                if user.profile.Lawyer:                      
                     return render(request, 'components/profile/lawyer_profile.html', context)
                 else:                                        
                     return render(request, 'components/profile/client_profile.html', context)

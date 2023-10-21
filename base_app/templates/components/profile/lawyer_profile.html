@@ -4,12 +4,38 @@
 
     {% include 'components/reusable/navbar.html' %}
 
-    <h1>Lawyer</h1>
-    {% if is_static %}
-    <img src= "{% static avatar_url %}" /> 
-    {% else %}
-    <img src="{{avatar_url}}" />
-    {% endif %}   
-    <p>{{avatar_url}}</p>
+    <div id="lawyerProfileWrapper">
+        <div id="lawyerInfoWrapper">
+            {% if is_static %}
+            <img src= "{% static avatar_url %}" id="profilePic" /> 
+            {% else %}
+            <img src="{{avatar_url}}" id="profilePic" />
+            {% endif %} 
+            <p id="fullname">{{first_name}} {{last_name}}</p>
+            <p id="username">@{{username}}</p>
+            <p id="lawyerAddress"><i class="fas fa-map-marker-alt"></i> {{address}}, {{city}}</p>
+            <p id="memberSinceWrapper">
+                <span id="memberSince"> Member since</span>
+                <span id="memberSinceDate">{{member_since}}</span>
+            </p>          
+            <p id="yearsOfExperienceWrapper">
+                <span id="yearsOfExperience">Years Of Experience</span>
+                <span id="yearsOfExperienceAmount">{{yearsOfExperience}}</span>
+            </p>      
+            <button id="sendMessageToProfile"> Send Message </button>
+            <button id="bookAppointment"> Book An Appointment </button>            
+        </div>  
+        <div>
+            <p>{{averageRating}}</p>
+            <p>Why to choose {{first_name}} {{last_name}}</p>
+            <p>{{description}}</p>
+            <p>Areas of expertise</p>
+            {% for area in areasOfExpertise %}
+            <p>{{area}}</p>
+            {% endfor %}   
+            <p>Price <span>{{hourlyRate}}</span>EUR / hr</p>  
+            <p>Phone <span>{{phone}}</span></p>      
+        </div>
+    </div>
     
 {% endblock content %}

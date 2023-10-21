@@ -3,10 +3,31 @@
     padding-top: 10%;
 }
 
+#lawyerProfileWrapper {
+    height: 100%;
+    width: 100%;
+    padding-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 300px;
+}
+
 #clientInfoWrapper {
     background-color: wheat;
     width: fit-content;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 3.5rem;
+    border-radius: 3px;
+}
+
+#lawyerInfoWrapper {
+    background-color: wheat;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,8 +57,15 @@
     font-size: 0.9rem;
 }
 
+#lawyerAddress {
+    margin: 0.8rem 0;
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+    font-size: 0.9rem;
+}
+
 #memberSinceWrapper {
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 #memberSince {
@@ -51,17 +79,45 @@
     color: #151515;
 }
 
+#yearsOfExperienceWrapper {
+    margin: 0.2rem 0 1rem 0; 
+}
+
+#yearsOfExperience {
+    margin-right: 4rem;
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+}
+
+#yearsOfExperienceAmount {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+}
+
 #sendMessageToProfile {
     cursor: pointer;
     width: 100%;
     padding: 0.5rem 0;
     font-family: Tahoma, sans-serif;
     color: #151515;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 1rem 0 0 0;
     border: none;
     border-radius: 3px;
     background-color: blueviolet;
+}
+
+#bookAppointment {
+    cursor: pointer;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-family: Tahoma, sans-serif;
+    color: whitesmoke;
+    font-size: 1rem;
+    margin: 0.5rem 0 0 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #F40009;
 }
 
 #sendMessageToProfile:focus {
