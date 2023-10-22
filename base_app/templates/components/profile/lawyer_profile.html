@@ -17,24 +17,32 @@
             <p id="memberSinceWrapper">
                 <span id="memberSince"> Member since</span>
                 <span id="memberSinceDate">{{member_since}}</span>
-            </p>          
-            <p id="yearsOfExperienceWrapper">
-                <span id="yearsOfExperience">Years Of Experience</span>
-                <span id="yearsOfExperienceAmount">{{yearsOfExperience}}</span>
-            </p>      
+            </p>              
             <button id="sendMessageToProfile"> Send Message </button>
-            <button id="bookAppointment"> Book An Appointment </button>            
         </div>  
-        <div>
-            <p>{{averageRating}}</p>
-            <p>Why to choose {{first_name}} {{last_name}}</p>
-            <p>{{description}}</p>
-            <p>Areas of expertise</p>
+        <div id="lawyerDetailsWrapper">
+            {% if averageRating < 1 %}
+            <p id="noRatingsYet">There are no ratings yet</p>
+            {% else %}
+            {% endif %}
+            <div id="appointmentButtonAndPriceWrapper">
+                <button id="bookAppointment"> Book An Appointment </button>  
+                <p id="pricePerHour">Price: <span>{{hourlyRate}} </span> EUR / hr</p>
+            </div>    
+            <p id="lawyerDescriptionTitle"><i class="fas fa-user"></i> Who is {{first_name}} {{last_name}}</p>
+            <p id="lawyerDescription">{{description}}</p>
+            <div id="yearsOfExperienceWrapper">
+                <p id="yearsOfExperience">{{yearsOfExperience}} Years Of Experience</p>
+            </div>    
+            <p id="areasOfExpertiseTitle">Areas of expertise:</p>
+            <div id="areasOfExpertiseWrapper">
             {% for area in areasOfExpertise %}
-            <p>{{area}}</p>
-            {% endfor %}   
-            <p>Price <span>{{hourlyRate}}</span>EUR / hr</p>  
-            <p>Phone <span>{{phone}}</span></p>      
+            <div class="areaOfExpertiseBox">
+                <p>{{area}}</p>
+            </div>
+            {% endfor %}  
+            </div> 
+            <p><i class="fas fa-phone"></i> <span>{{phone}}</span></p>      
         </div>
     </div>
     

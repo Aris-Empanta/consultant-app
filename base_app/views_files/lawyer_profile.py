@@ -39,12 +39,11 @@ class Profile(View):
                     context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if hasattr(lawyer, 'areasOfExpertise') else None
                     context['city']  = lawyer.city  if hasattr(lawyer, 'city') else "Not available"
                     context['yearsOfExperience']  = lawyer.yearsOfExperience
-                    context['averageRating']  = lawyer.averageRating if lawyer.averageRating > 1 else "This lawyer has no ratings yet" 
+                    context['averageRating']  = lawyer.averageRating 
                     context['hourlyRate']  = lawyer.hourlyRate  if hasattr(lawyer, 'hourlyRate') else "Contact Lawyer to learn price"
                     context['address']  = lawyer.address  if hasattr(lawyer, 'address') else "Not available"
                     context['lisenceStatus']  = lawyer.lisenceStatus
                     context['phone']  = lawyer.phone if hasattr(lawyer, 'phone') else "Not available"
-            print(context['averageRating'])    
             # First we check if there is an authenticated user, and if his username 
             # is the same as the username in the url parameter. Then, depending if 
             # the user is a lawyer or a client, we render the appropriate template.

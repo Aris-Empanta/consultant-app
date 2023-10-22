@@ -11,11 +11,11 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: 300px;
+    gap: 5%;
 }
 
 #clientInfoWrapper {
-    background-color: wheat;
+    background-color: #FFF5EE;
     width: fit-content;
     margin: 0 auto;
     display: flex;
@@ -26,7 +26,7 @@
 }
 
 #lawyerInfoWrapper {
-    background-color: wheat;
+    background-color: #FFF5EE;
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -79,21 +79,6 @@
     color: #151515;
 }
 
-#yearsOfExperienceWrapper {
-    margin: 0.2rem 0 1rem 0; 
-}
-
-#yearsOfExperience {
-    margin-right: 4rem;
-    font-family: Tahoma, sans-serif;
-    color: #151515;
-}
-
-#yearsOfExperienceAmount {
-    font-family: Tahoma, sans-serif;
-    color: #151515;
-}
-
 #sendMessageToProfile {
     cursor: pointer;
     width: 100%;
@@ -107,9 +92,31 @@
     background-color: blueviolet;
 }
 
+#sendMessageToProfile:focus {
+    outline: none;
+}
+
+#lawyerDetailsWrapper {
+    background-color: #FFF5EE;
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+#noRatingsYet {
+    align-self: flex-start;
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+}
+
+#appointmentButtonAndPriceWrapper {
+    display: flex;
+    gap: 30%;
+}
+
 #bookAppointment {
     cursor: pointer;
-    width: 100%;
     padding: 0.5rem 0;
     font-family: Tahoma, sans-serif;
     color: whitesmoke;
@@ -118,8 +125,69 @@
     border: none;
     border-radius: 3px;
     background-color: #F40009;
+    align-self: flex-start;
+    padding: 0.6rem 1rem;
 }
 
-#sendMessageToProfile:focus {
-    outline: none;
+#pricePerHour {
+    font-family: Tahoma, sans-serif;
+    font-size: 0.9rem;
+}
+
+#lawyerDescriptionTitle {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+    margin: 2rem 0 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+#lawyerDescription {
+    font-family: Tahoma, sans-serif;
+    color: #252525;
+    margin: 0.5rem 0 0 0;
+}
+
+#yearsOfExperienceWrapper {
+    margin-top: 2rem;
+    background-color: #D3D3D3;
+    align-self: flex-start;
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
+#yearsOfExperience {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+#areasOfExpertiseTitle {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+    font-size: 0.9rem;
+    margin: 2rem 0 0 0;
+}
+
+#areasOfExpertiseWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.areaOfExpertiseBox {
+    background-color: violet;
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    display: flex;   
+}
+
+.areaOfExpertiseBox p {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+    font-size: 0.9rem;
+    margin: 0;
 }
