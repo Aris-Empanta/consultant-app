@@ -41,35 +41,17 @@
             </p>              
         </div>  
         <div id="lawyerDetailsWrapper">
-            {% if averageRating < 1 %}
-            <p id="noRatingsYet">You have no ratings yet</p>
-            {% else %}
-            {% endif %}
-            <div id="authenticatedLawyerInfo">
-                <button id="editLawyerInfoButton">      
-                    <i class="fas fa-pencil"></i>
-                </button> 
-                <p id="lawyerDescriptionTitle"><i class="fas fa-user"></i> Who is {{first_name}} {{last_name}}</p>
-                <p id="lawyerDescription">{{description}}</p>
-                <div id="yearsOfExperienceWrapper">
-                    <p id="yearsOfExperience">{{yearsOfExperience}} Years Of Experience</p>
-                </div>    
-                <p id="areasOfExpertiseTitle">Areas of expertise:</p>
-                <div id="areasOfExpertiseWrapper">
-                {% for area in areasOfExpertise %}
-                <div class="areaOfExpertiseBox">
-                    <p>{{area}}</p>
-                </div>
-                {% endfor %}  
-                </div> 
-                <p><i class="fas fa-phone"></i> <span>{{phone}}</span></p>  
+            <div>
+                <button id="lawyerInfoLink">info</button>
+                <button id="lawyerAvailableHoursLink">available hours</button>
+                <button id="lawyerAppointmentsLink">appointments</button>
             </div>
-            <form action="" method="post" id="editLawyerInfoForm">
-                <input>
-                <button id="cancelUpdatingLawyerInfo">Cancel</button>
-            </form>    
+            {% include 'components/profile/lawyer_editable_info.html' %}
+            {% include 'components/profile/lawyer_appointments.html' %}
+            {% include 'components/profile/lawyer_available_hours.html' %}
         </div>
     </div>
+    
     <script src="{% static 'js/lawyerProfile.js' %}"></script>
     
 {% endblock content %}

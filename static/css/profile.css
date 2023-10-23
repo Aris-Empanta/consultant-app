@@ -246,3 +246,11 @@
 #editLawyerInfoForm {
     display: none;
 }
+
+#editableLawyerAvailableHoursWrapper {
+    display: none;
+}
+
+#lawyerAppointmentsWrapper {
+    display: none;
+}
