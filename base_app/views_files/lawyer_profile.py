@@ -15,6 +15,12 @@ class Profile(View):
             last_name = user.last_name
             is_static = False
 
+            # The variable that indicates if the authenticated user is a lawyer
+            lawyer_authenticated = False 
+            # The variable that indicates if the visited profile is the 
+            # authenticated user's profile
+            my_own_profile = False
+
             # We parse the url, to get the encoded special characters (/, :, etc...)
             avatar_url = urllib.parse.unquote(avatar.url[1:])
 
@@ -35,19 +41,33 @@ class Profile(View):
             # if the user is a lawyer, we add some extra context with the lawyer's details.
             if user.profile.Lawyer: 
                     lawyer = Lawyer.objects.get(profile=user.profile)
-                    context['description'] = lawyer.description if hasattr(lawyer, 'description') else "No description available"
-                    context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if hasattr(lawyer, 'areasOfExpertise') else None
-                    context['city']  = lawyer.city  if hasattr(lawyer, 'city') else "Not available"
+                    context['description'] = lawyer.description if lawyer.description is not None else "No description available"
+                    context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise is not None else ""
+                    context['city']  = lawyer.city  
                     context['yearsOfExperience']  = lawyer.yearsOfExperience
                     context['averageRating']  = lawyer.averageRating 
-                    context['hourlyRate']  = lawyer.hourlyRate  if hasattr(lawyer, 'hourlyRate') else "Contact Lawyer to learn price"
-                    context['address']  = lawyer.address  if hasattr(lawyer, 'address') else "Not available"
+                    context['hourlyRate']  = lawyer.hourlyRate  if lawyer.hourlyRate is not None else "Contact Lawyer to learn price"
+                    context['address']  = lawyer.address
                     context['lisenceStatus']  = lawyer.lisenceStatus
-                    context['phone']  = lawyer.phone if hasattr(lawyer, 'phone') else "Not available"
+                    context['phone']  = lawyer.phone if lawyer.phone is not None else "Not available"
+                    context['lawyer_authenticated'] = lawyer_authenticated
+                    context['my_own_profile'] = my_own_profile
+            
+
+            # If there is an authenticated user and this user is a lawyer, we mention
+            # it through a boolean, in order to hide the appointment button from other 
+            # lawyers. Only a client can book appointments.
+            if request.user.is_authenticated and request.user.profile.Lawyer:
+                lawyer_authenticated = True
+                context['lawyer_authenticated'] = lawyer_authenticated
+
             # First we check if there is an authenticated user, and if his username 
             # is the same as the username in the url parameter. Then, depending if 
             # the user is a lawyer or a client, we render the appropriate template.
             if request.user.is_authenticated and request.user.username == username:
+
+                my_own_profile = True
+                context['my_own_profile'] = my_own_profile
 
                 if user.profile.Lawyer:             
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)

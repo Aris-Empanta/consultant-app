@@ -13,7 +13,9 @@
             {% endif %} 
             <p id="fullname">{{first_name}} {{last_name}}</p>
             <p id="username">@{{username}}</p>
+            {% if address is not None %}
             <p id="lawyerAddress"><i class="fas fa-map-marker-alt"></i> {{address}}, {{city}}</p>
+            {% endif %}
             <p id="memberSinceWrapper">
                 <span id="memberSince"> Member since</span>
                 <span id="memberSinceDate">{{member_since}}</span>
@@ -25,10 +27,12 @@
             <p id="noRatingsYet">There are no ratings yet</p>
             {% else %}
             {% endif %}
+            {% if not lawyer_authenticated %}
             <div id="appointmentButtonAndPriceWrapper">
-                <button id="bookAppointment"> Book An Appointment </button>  
+                <button id="bookAppointment"> Book An Appointment </button>
                 <p id="pricePerHour">Price: <span>{{hourlyRate}} </span> EUR / hr</p>
             </div>    
+            {% endif %}  
             <p id="lawyerDescriptionTitle"><i class="fas fa-user"></i> Who is {{first_name}} {{last_name}}</p>
             <p id="lawyerDescription">{{description}}</p>
             <div id="yearsOfExperienceWrapper">

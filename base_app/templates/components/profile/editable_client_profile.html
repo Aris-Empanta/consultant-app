@@ -3,12 +3,15 @@
 {% block content %}
 
     {% include 'components/reusable/navbar.html' %}
-
-    <h1>Edit client</h1>
-    {% if is_static %}
-    <img src= "{% static avatar_url %}" /> 
-    {% else %}
-    <img src="{{avatar_url}}" />
-    {% endif %}   
-    <p>{{avatar_url}}</p>
+    {% include 'components/profile/client_profile.html' %}
+    {% if my_own_profile %}
+    <div id="editClientProfileModal">
+        <div class="editProfileFormWrapper">
+            <button class="closeModalButton" id="closeClientEditModal">
+                x
+            </button>
+        </div>
+    </div>
+    <script src="{% static 'js/clientProfile.js' %}"></script>
+    {% endif %}
 {% endblock content %}

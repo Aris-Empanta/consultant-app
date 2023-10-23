@@ -4,12 +4,72 @@
 
     {% include 'components/reusable/navbar.html' %}
 
-    <h1>Edit Lawyer</h1>
-    {% if is_static %}
-    <img src= "{% static avatar_url %}" /> 
-    {% else %}
-    <img src="{{avatar_url}}" />
-    {% endif %}   
-    <p>{{avatar_url}}</p>
+    <div id="lawyerProfileWrapper">
+        <div id="lawyerInfoWrapper">
+            {% if is_static %}
+            <img src= "{% static avatar_url %}" id="profilePic" /> 
+            {% else %}
+            <img src="{{avatar_url}}" id="profilePic" />
+            {% endif %} 
+            <p id="fullname">
+                {{first_name}} {{last_name}}
+                <button class="editButton" >
+                    <i class="fas fa-pencil"></i>
+                </button>
+            </p>
+            <p id="username">@{{username}}</p>
+            {% if address and city is not None %}
+            <p id="lawyerAddress">
+                <i class="fas fa-map-marker-alt"></i> 
+                {{address}}, {{city}}
+                <button class="editButton" >
+                    <i class="fas fa-pencil"></i>
+                </button>
+            </p>
+            {% else %}
+            <p id="lawyerAddress">
+                <i class="fas fa-map-marker-alt"></i>
+                <span> No address set</span>
+                <button class="editButton" >
+                    <i class="fas fa-pencil"></i>
+                </button>
+            </p>            
+            {% endif %}
+            <p id="memberSinceWrapper">
+                <span id="memberSince"> Member since</span>
+                <span id="memberSinceDate">{{member_since}}</span>
+            </p>              
+        </div>  
+        <div id="lawyerDetailsWrapper">
+            {% if averageRating < 1 %}
+            <p id="noRatingsYet">You have no ratings yet</p>
+            {% else %}
+            {% endif %}
+            <div id="authenticatedLawyerInfo">
+                <button id="editLawyerInfoButton">      
+                    <i class="fas fa-pencil"></i>
+                </button> 
+                <p id="lawyerDescriptionTitle"><i class="fas fa-user"></i> Who is {{first_name}} {{last_name}}</p>
+                <p id="lawyerDescription">{{description}}</p>
+                <div id="yearsOfExperienceWrapper">
+                    <p id="yearsOfExperience">{{yearsOfExperience}} Years Of Experience</p>
+                </div>    
+                <p id="areasOfExpertiseTitle">Areas of expertise:</p>
+                <div id="areasOfExpertiseWrapper">
+                {% for area in areasOfExpertise %}
+                <div class="areaOfExpertiseBox">
+                    <p>{{area}}</p>
+                </div>
+                {% endfor %}  
+                </div> 
+                <p><i class="fas fa-phone"></i> <span>{{phone}}</span></p>  
+            </div>
+            <form action="" method="post" id="editLawyerInfoForm">
+                <input>
+                <button id="cancelUpdatingLawyerInfo">Cancel</button>
+            </form>    
+        </div>
+    </div>
+    <script src="{% static 'js/lawyerProfile.js' %}"></script>
     
 {% endblock content %}

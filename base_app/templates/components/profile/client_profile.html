@@ -10,13 +10,22 @@
             {% else %}
             <img src="{{avatar_url}}" id="profilePic" />
             {% endif %} 
-            <p id="fullname">{{first_name}} {{last_name}}</p>
+            <p id="fullname">
+                {{first_name}} {{last_name}}
+                {% if my_own_profile %}
+                <button class="editButton" id="openClientEditModal">
+                    <i class="fas fa-pencil"></i>
+                </button>
+                {% endif %}
+            </p>
             <p id="username">@{{username}}</p>
             <p id="memberSinceWrapper">
                 <span id="memberSince">Member since
                 </span><span id="memberSinceDate">{{member_since}}</span>
             </p>
+            {% if not my_own_profile %}
             <button id="sendMessageToProfile"> Send Message </button>
+            {% endif %}
         </div>  
     </div>
     
