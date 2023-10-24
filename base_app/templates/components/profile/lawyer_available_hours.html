@@ -1,5 +1,8 @@
 <div id="editableLawyerAvailableHoursWrapper">
-    <!-- {% for interval in available_hours %}
-    <p>{{interval.day_name}} {{interval.date}}: {{interval.intervals}}</p>
-    {% endfor %} -->
+    {% for day in available_hours %}
+    <h2>{{day.dayname}} {{day.date}}</h2>
+        {% for interval in day.intervals %}
+        <p>{{interval.starting_time}} - {{interval.ending_time}}</p>
+        {% endfor %}
+    {% endfor %}
 </div>

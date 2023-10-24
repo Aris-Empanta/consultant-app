@@ -72,7 +72,7 @@ class Profile(View):
 
                 if user.profile.Lawyer:  
                     available_hours = AvailableHours.objects.filter(lawyer=lawyer)
-                    available_hours_list = DateUtils.create_formatted_available_hours_list(available_hours)  
+                    available_hours_list = DateUtils.format_available_hours_list(available_hours)  
                     # DateUtils.create_formatted_available_hours_list(available_hours) 
                     context['available_hours'] = available_hours_list
                     print(available_hours_list)
@@ -92,5 +92,3 @@ class Profile(View):
         except Exception as e:
             print(f'General exception: {e}')
             return render(request, 'components/reusable/500.html')      
-        
-        # { dayname: str, date: str, intervals: [ starting_time-ending_time, .... ]}

@@ -69,19 +69,45 @@ class DateUtils:
 
     # The following method takes the AvailableHours Queryset and 
     # creates a list of dictionaries with the following format: 
-    # {day_name: str, date: str, starting_time: str, ending_time: str}
+    # { dayname: str, date: str, intervals: [{starting_time: str, ending_time: str}, .... ]}
     @staticmethod
-    def create_formatted_available_hours_list(available_hours):
+    def format_available_hours_list(available_hours):
         available_hours_list = list(available_hours)
 
+        # if 2 intervals have the same date, we concatonate them to a list.
         for i in range(len(available_hours_list)):
-            print(available_hours_list[i].starting_time.strftime('%d/%m/%Y'))
+            if available_hours_list[i-1] is not None:
+                previous_interval_date = available_hours_list[i-1].starting_time.strftime('%d/%m/%Y')
+            else:
+                continue
+            current_interval_date = available_hours_list[i].starting_time.strftime('%d/%m/%Y')
+
+            if previous_interval_date == current_interval_date:
+                available_hours_list[i-1] = [available_hours_list[i-1], available_hours_list[i]]
+                available_hours_list[i] = None
+
+        while None in available_hours_list:
+            available_hours_list.remove(None)
         
-        # for i in range(len(available_hours_list)):
-        #     interval_dictionary = dict()
-        #     interval_dictionary['day_name'] = available_hours_list[i].starting_time.strftime('%A')
-        #     interval_dictionary['date'] = available_hours_list[i].starting_time.strftime('%d/%m/%Y')
-        #     interval_dictionary['intervals'] =  f"{available_hours_list[i].starting_time.strftime('%H:%M')}/{available_hours_list[i].ending_time.strftime('%H:%M')}"
-        #     available_hours_list[i] = interval_dictionary
+        available_hours = list()
+
+        # We fillup the available hours list to be used with the following format:
+        # { dayname: str, date: str, intervals: [{starting_time: str, ending_time: str}, .... ]}
+        for i in range(len(available_hours_list)):
+            available_hours_in_day_dict = dict()
+
+            if type(available_hours_list[i]) == list:
+                available_hours_in_day_dict['dayname'] = available_hours_list[i][0].starting_time.strftime("%A")
+                available_hours_in_day_dict['date'] = available_hours_list[i][0].starting_time.strftime("%d/%m/%Y")
+                available_hours_in_day_dict['intervals'] = [{'starting_time': available_hours_list[i][0].starting_time.strftime("%H:%M"),
+                                                             'ending_time': available_hours_list[i][0].ending_time.strftime("%H:%M")}, 
+                                                             {'starting_time': available_hours_list[i][1].starting_time.strftime("%H:%M"),
+                                                             'ending_time': available_hours_list[i][1].ending_time.strftime("%H:%M")}]
+            else:
+                available_hours_in_day_dict['dayname'] = available_hours_list[i].starting_time.strftime("%A")
+                available_hours_in_day_dict['date'] = available_hours_list[i].starting_time.strftime("%d/%m/%Y")
+                available_hours_in_day_dict['intervals'] = [{'starting_time': available_hours_list[i].starting_time.strftime("%H:%M"),
+                                                             'ending_time': available_hours_list[i].ending_time.strftime("%H:%M")}]
+            available_hours.append(available_hours_in_day_dict)
         
-        return available_hours_list
+        return available_hours

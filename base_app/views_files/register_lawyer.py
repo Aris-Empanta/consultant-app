@@ -192,16 +192,15 @@ class LawyerAvailableHours(View):
                     ending_time_2 = None
             
             #save them to the database the final intervals. Might be 2 or 1 if combined.
-            
             if starting_time_2 is not None:
                 appointments_duration_2 = int(values[6])
                 breaks_between_appointments_2 = int(values[7])
                 
                 # The list with the appointments of the second interval
                 appointments_per_second_interval = DateUtils.generate_appointments_per_interval(starting_time_2, 
-                                                                                           ending_time_2,
-                                                                                           appointments_duration_2,
-                                                                                           breaks_between_appointments_2)
+                                                                                                ending_time_2,
+                                                                                                appointments_duration_2,
+                                                                                                breaks_between_appointments_2)
                 # We save the intervals and the appointments in the database
                 DateUtils.save_intervals_and_appointments(lawyer,
                                                           starting_time_2, 
