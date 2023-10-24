@@ -1,7 +1,8 @@
 from django.views import View
-from django.shortcuts import redirect, render
-from ..models import User, Lawyer
+from django.shortcuts import render
+from ..models import User, Lawyer, AvailableHours
 import urllib.parse
+from ..utils.dates import DateUtils
 
 class Profile(View):
     
@@ -69,7 +70,12 @@ class Profile(View):
                 my_own_profile = True
                 context['my_own_profile'] = my_own_profile
 
-                if user.profile.Lawyer:             
+                if user.profile.Lawyer:  
+                    available_hours = AvailableHours.objects.filter(lawyer=lawyer)
+                    available_hours_list = DateUtils.create_formatted_available_hours_list(available_hours)  
+                    DateUtils.create_formatted_available_hours_list(available_hours) 
+                    context['available_hours'] = available_hours_list
+                    print(available_hours_list)
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 else:
                     return render(request,'components/profile/editable_client_profile.html', context)
@@ -85,4 +91,6 @@ class Profile(View):
             return render(request, 'components/reusable/404.html')
         except Exception as e:
             print(f'General exception: {e}')
-            return render(request, 'components/reusable/500.html')        
+            return render(request, 'components/reusable/500.html')      
+        
+        # { dayname: str, date: str, intervals: [ starting_time-ending_time, .... ]}

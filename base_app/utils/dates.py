@@ -66,3 +66,22 @@ class DateUtils:
             print(f"IntegrityError: {e}")
         except Exception as e:
             print(f"General Exception: {e}")
+
+    # The following method takes the AvailableHours Queryset and 
+    # creates a list of dictionaries with the following format: 
+    # {day_name: str, date: str, starting_time: str, ending_time: str}
+    @staticmethod
+    def create_formatted_available_hours_list(available_hours):
+        available_hours_list = list(available_hours)
+
+        for i in range(len(available_hours_list)):
+            print(available_hours_list[i].starting_time.strftime('%d/%m/%Y'))
+        
+        # for i in range(len(available_hours_list)):
+        #     interval_dictionary = dict()
+        #     interval_dictionary['day_name'] = available_hours_list[i].starting_time.strftime('%A')
+        #     interval_dictionary['date'] = available_hours_list[i].starting_time.strftime('%d/%m/%Y')
+        #     interval_dictionary['intervals'] =  f"{available_hours_list[i].starting_time.strftime('%H:%M')}/{available_hours_list[i].ending_time.strftime('%H:%M')}"
+        #     available_hours_list[i] = interval_dictionary
+        
+        return available_hours_list
