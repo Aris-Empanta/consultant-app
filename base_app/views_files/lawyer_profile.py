@@ -73,7 +73,7 @@ class Profile(View):
                 if user.profile.Lawyer:  
                     available_hours = AvailableHours.objects.filter(lawyer=lawyer)
                     available_hours_list = DateUtils.create_formatted_available_hours_list(available_hours)  
-                    DateUtils.create_formatted_available_hours_list(available_hours) 
+                    # DateUtils.create_formatted_available_hours_list(available_hours) 
                     context['available_hours'] = available_hours_list
                     print(available_hours_list)
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)

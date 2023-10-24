@@ -119,7 +119,8 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
     })
 
     // When we click the addIntervalsButton, a new pair of time intervals input should be created.
-    addIntervalsButton.addEventListener("click", () => {
+    addIntervalsButton.addEventListener("click", (e) => {
+            e.preventDefault()
 
             let intervalDate = document.querySelectorAll(".scheduleDate")[i].innerText
     
@@ -187,6 +188,11 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
                 addIntervalsButton.disabled = true
             }
 
+            //If the ending interval value is after 22:59 we disable the add intervals button
+            if(endingTime[intervals.length - 1] > '22:59') {
+                addIntervalsButton.disabled = true
+            } 
+
             //We loop through all the starting and ending intervals and we put event listeners to them.
             for(let j=0; j < intervals.length; j++) {
 
@@ -220,7 +226,9 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
                 })
 
                 endingTime[j].addEventListener('change', () => {
-                    
+                    // We re-create the intervals variable for the case of deletion of an interval.
+                    let intervals = document.querySelectorAll(`.intervalOfDay${i+1}`)
+
                     let startingTimeDateString  = year + "-" + month + "-" + day + " " + startingTime[j].value + ":00";
 
                     // We set an ending time 1 hour later from the starting set time, and convert it 
@@ -240,9 +248,14 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
                     if(j === intervals.length - 1 && endingTime[j].value > "22:59") {
                         addIntervalsButton.disabled = true
                     }
+
+                    //We enable the add intervals button if it is before or equal to 22:59
+                    if(j === intervals.length - 1 && endingTime[j].value <= "22:59") {
+                        addIntervalsButton.disabled = false
+                    }
                     
                     //The ending time should be less or equal to the next interval's starting time
-                    if(intervals.length === 2 ) {
+                    if(intervals.length === 2) {
                         if( j === intervals.length - 2 && 
                             endingTime[j].value > startingTime[j + 1].value) {
                                 endingTime[j].value = startingTime[j + 1].value
@@ -258,26 +271,20 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
 //The function to remove an interval.
 function removeParentElement(buttonElement) {
     let counter = buttonElement.getAttribute("data-counter");
-    let addIntervalButton = document.querySelector(`.addIntervalButton${counter}`)
+    let addIntervalButton = document.querySelector(`.addIntervalButton${counter}`);
 
-
-    
-
-    // We get the second class of the parent element that represents the day, so 
-    // that we can check if the element to be deleted is the first or the second
-    // interval.
-    let parentClass = document.querySelectorAll(`.${buttonElement.parentElement.classList[1]}`)
-    console.log()
-
-    // If 2 intervals exist and the deleted interval is the first interval we 
-    // leave the button disabled. Otherwise we set disabled false.
-    if(parentClass.length === 2 && parentClass[0] === buttonElement.parentElement) {
-        addIntervalButton.disabled = true
-    } else {
-        addIntervalButton.disabled = false
-    }
-    
+    // Remove the parent element.
     buttonElement.parentElement.remove();
+
+    // After removing an interval, recompute the intervals variable.
+    let intervals = document.querySelectorAll(`.intervalOfDay${counter}`);
+
+    // Check the number of remaining intervals and update the addIntervalsButton accordingly.
+    if (intervals.length === 2) {
+        addIntervalButton.disabled = true;
+    } else {
+        addIntervalButton.disabled = false;
+    }
 }
 
 //A method helping with date and time making even single digits 2 digit format e.g. 5 = 05
