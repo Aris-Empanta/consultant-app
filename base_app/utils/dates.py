@@ -25,6 +25,10 @@ class DateUtils:
             
     @staticmethod
     def generate_appointments_per_interval(starting_time, ending_time, duration, breaks):
+        # We onvert starting_time and ending_time to aware datetime objects
+        starting_time = starting_time
+        ending_time = ending_time
+
         interval_length = ending_time - starting_time
         interval_length_in_minutes = interval_length.total_seconds() / 60
         appointments_per_interval = math.floor(interval_length_in_minutes / (duration + breaks))
@@ -55,13 +59,23 @@ class DateUtils:
                 available_hours_model.save()
                 # Then we save all the appointments
                 for appointment in appointments_per_interval:
-                    print(appointment)
                     appointment_model = Appointments(interval=available_hours_model,
                                                      booked=False,
                                                      starting_time=appointment["starting"],
                                                      ending_time=appointment["ending"])
                     appointment_model.save()
 
+        except IntegrityError as e:
+            print(f"IntegrityError: {e}")
+        except Exception as e:
+            print(f"General Exception: {e}")
+    
+    def update_ending_time(lawyer, ending_time_1, ending_time_2):
+        try:
+            with transaction.atomic():
+                interval = AvailableHours.objects.filter(lawyer=lawyer, ending_time=ending_time_1)
+                ending_time_1 = ending_time_2
+                interval.update(ending_time=ending_time_1)
         except IntegrityError as e:
             print(f"IntegrityError: {e}")
         except Exception as e:
@@ -76,7 +90,8 @@ class DateUtils:
 
         # if 2 intervals have the same date, we concatonate them to a list.
         for i in range(len(available_hours_list)):
-            if available_hours_list[i-1] is not None:
+            
+            if available_hours_list[i-1] is not None and i-1 >= 0:
                 previous_interval_date = available_hours_list[i-1].starting_time.strftime('%d/%m/%Y')
             else:
                 continue
@@ -88,6 +103,8 @@ class DateUtils:
 
         while None in available_hours_list:
             available_hours_list.remove(None)
+        # print(available_hours_list)
+
         
         available_hours = list()
 
@@ -103,11 +120,13 @@ class DateUtils:
                                                              'ending_time': available_hours_list[i][0].ending_time.strftime("%H:%M")}, 
                                                              {'starting_time': available_hours_list[i][1].starting_time.strftime("%H:%M"),
                                                              'ending_time': available_hours_list[i][1].ending_time.strftime("%H:%M")}]
+                
             else:
                 available_hours_in_day_dict['dayname'] = available_hours_list[i].starting_time.strftime("%A")
                 available_hours_in_day_dict['date'] = available_hours_list[i].starting_time.strftime("%d/%m/%Y")
                 available_hours_in_day_dict['intervals'] = [{'starting_time': available_hours_list[i].starting_time.strftime("%H:%M"),
                                                              'ending_time': available_hours_list[i].ending_time.strftime("%H:%M")}]
+                
             available_hours.append(available_hours_in_day_dict)
-        
+       
         return available_hours

@@ -189,7 +189,7 @@ for(let i = 0; i < hoursScheduleWrapper.length; i++) {
             }
 
             //If the ending interval value is after 22:59 we disable the add intervals button
-            if(endingTime[intervals.length - 1] > '22:59') {
+            if(endingTime[intervals.length - 1].value > '22:59') {
                 addIntervalsButton.disabled = true
             } 
 

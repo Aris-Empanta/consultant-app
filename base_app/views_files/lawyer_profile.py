@@ -4,6 +4,7 @@ from ..models import User, Lawyer, AvailableHours
 import urllib.parse
 from ..utils.dates import DateUtils
 
+
 class Profile(View):
     
     def get(self, request, username):
@@ -71,11 +72,10 @@ class Profile(View):
                 context['my_own_profile'] = my_own_profile
 
                 if user.profile.Lawyer:  
-                    available_hours = AvailableHours.objects.filter(lawyer=lawyer)
-                    available_hours_list = DateUtils.format_available_hours_list(available_hours)  
-                    # DateUtils.create_formatted_available_hours_list(available_hours) 
+                    available_hours = AvailableHours.objects.filter(lawyer=lawyer)                   
+                    available_hours_list = DateUtils.format_available_hours_list(available_hours)
                     context['available_hours'] = available_hours_list
-                    print(available_hours_list)
+                    
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 else:
                     return render(request,'components/profile/editable_client_profile.html', context)

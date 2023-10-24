@@ -20,7 +20,7 @@
                         <p>From</p>                 
                         <input type="time" value = "00:00" class="timeInput startOfInterval{{forloop.counter}}" name="{{date}}">
                         <p>To</p> 
-                        <input class="timeInput endOfInterval{{forloop.counter}}" type="time" value="22:59" name="{{date}}">
+                        <input class="timeInput endOfInterval{{forloop.counter}}" type="time" value="23:59" name="{{date}}">
                         <div class="appointmentsDurationWrapper">
                             <label>Appointments Duration</label>
                             <div class="selectAppointmentsDurationWrapper">
@@ -52,7 +52,7 @@
                     </div>
                     <hr class="intervalHorizontalLine">
                 </div>
-                <button class="addIntervalButton{{forloop.counter}} addIntervalButton">+</button>
+                <button class="addIntervalButton{{forloop.counter}} addIntervalButton" disabled>+</button>
             </div>
             {% endfor %}  
             <input type="submit" value="Generate Appointments" class="generateAppointmentsButton">     

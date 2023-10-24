@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
-from ..models import Lawyer, Profile
+from ..models import Lawyer, Profile, AvailableHours
 from ..forms import LawyerInfoForm
 from ..enums import AreasOfExpertise
 from datetime import date, datetime, timedelta
@@ -10,6 +10,7 @@ from ..utils.dates import DateUtils
 from django.utils.decorators import method_decorator
 from ..decorators import allowed_users
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 @method_decorator(login_required(login_url="login"), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=["lawyers"]), name='dispatch')
@@ -65,7 +66,7 @@ class LawyerAvailableHours(View):
         # hours. The key will be the day's name and the key will be the day's date
         # in format DD/MM/YYYY.
         days_of_available_hours= dict()        
-        todays_date = date.today()
+        todays_date = timezone.now()
         today = date.today().isoweekday()
         days_addition = 0
 
@@ -78,10 +79,6 @@ class LawyerAvailableHours(View):
         # We find the date of the next monday
         days_till_monday = 8-today
         next_monday_date = (todays_date + timedelta(days=days_till_monday))
-
-        # We will create a dictionary that contains all the days and dates of the next week. 
-        
-        next_week = dict()
 
         for x in range(1, 8):
             day_name = DateUtils.render_day_name(x)
@@ -101,6 +98,12 @@ class LawyerAvailableHours(View):
         # We will need the object of the logged in lawyer later when saving the available
         #  hours / appointments
         lawyer = Lawyer.objects.get(pk=request.user.profile.lawyer.id)
+
+        # if there are already available hours we erase them and replace with the new ones
+        existing_available_hours = AvailableHours.objects.filter(lawyer=lawyer)
+
+        if len(existing_available_hours) > 0:
+            existing_available_hours.delete()
 
         # We loop though all the dates that have lawyer's available hours, in order
         # to validate the times given and save them to the database.
@@ -123,8 +126,8 @@ class LawyerAvailableHours(View):
             ending_time_1_hours = ending_time_hours_and_minutes[0]
             ending_time_1_minutes = ending_time_hours_and_minutes[1]
 
-            starting_time_1 = datetime(year, month, day, starting_time_1_hours, starting_time_1_minutes)
-            ending_time_1 = datetime(year, month, day, ending_time_1_hours, ending_time_1_minutes)
+            starting_time_1 = timezone.make_aware(datetime(year, month, day, starting_time_1_hours, starting_time_1_minutes))
+            ending_time_1 = timezone.make_aware(datetime(year, month, day, ending_time_1_hours, ending_time_1_minutes))
 
             # The ending time should be at least 1 hour after the starting time, 
             # otherwise it should return an error message
@@ -163,9 +166,8 @@ class LawyerAvailableHours(View):
                 ending_time_2_hours = ending_time_hours_and_minutes_2[0]
                 ending_time_2_minutes = ending_time_hours_and_minutes_2[1]
 
-                starting_time_2 = datetime(year, month, day, starting_time_2_hours, starting_time_2_minutes)
-                ending_time_2 = datetime(year, month, day, ending_time_2_hours, ending_time_2_minutes)
-
+                starting_time_2 = timezone.make_aware(datetime(year, month, day, starting_time_2_hours, starting_time_2_minutes))
+                ending_time_2 = timezone.make_aware(datetime(year, month, day, ending_time_2_hours, ending_time_2_minutes))
                 # The second interval's starting time should not be before the first interval's ending time.
                 if(starting_time_2 < ending_time_1):
                     error_message = """ 
@@ -187,7 +189,9 @@ class LawyerAvailableHours(View):
                 # we combine the 2 intervals in one, and empty the starting and ending time of the second 
                 # interval variables.
                 if(starting_time_2 == ending_time_1):
-                    ending_time_1 = ending_time_2
+                    # We will update the ending time of this interval with the new one
+                    DateUtils.update_ending_time(lawyer, ending_time_1, ending_time_2)
+                    # and we remove the values from the second interval's starting/ending time
                     starting_time_2 = None
                     ending_time_2 = None
             
@@ -207,5 +211,4 @@ class LawyerAvailableHours(View):
                                                           ending_time_2,
                                                           appointments_per_second_interval)
 
-
-        return redirect('lawyer_available_hours')
+        return redirect('lawyer_profile', username=request.user.username)
