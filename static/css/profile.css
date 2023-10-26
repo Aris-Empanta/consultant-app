@@ -254,3 +254,12 @@
 #lawyerAppointmentsWrapper {
     display: none;
 }
+
+#appointmentsModalWrapper {
+    position: absolute;
+    background-color: white;
+    overflow-y: scroll;
+    height: 400px;
+    margin:auto;
+    padding: 10px;
+}

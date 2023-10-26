@@ -1,6 +1,6 @@
 from django.views import View
 from django.shortcuts import render
-from ..models import User, Lawyer, AvailableHours
+from ..models import User, Lawyer, AvailableHours, Appointments
 import urllib.parse
 from ..utils.dates import DateUtils
 
@@ -42,7 +42,12 @@ class Profile(View):
             
             # if the user is a lawyer, we add some extra context with the lawyer's details.
             if user.profile.Lawyer: 
+                    # First we fetch the appointments and put it into the context. 
+                    # Then we put the rest info.
                     lawyer = Lawyer.objects.get(profile=user.profile)
+                    appointments = Appointments.objects.all()
+
+                    context['appointments'] = appointments
                     context['description'] = lawyer.description if lawyer.description is not None else "No description available"
                     context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise is not None else ""
                     context['city']  = lawyer.city  
@@ -54,6 +59,7 @@ class Profile(View):
                     context['phone']  = lawyer.phone if lawyer.phone is not None else "Not available"
                     context['lawyer_authenticated'] = lawyer_authenticated
                     context['my_own_profile'] = my_own_profile
+                    context['available_appointments'] = appointments
             
 
             # If there is an authenticated user and this user is a lawyer, we mention

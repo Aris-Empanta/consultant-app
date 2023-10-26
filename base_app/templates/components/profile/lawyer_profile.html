@@ -46,8 +46,13 @@
             </div>
             {% endfor %}  
             </div> 
-            <p><i class="fas fa-phone"></i> <span>{{phone}}</span></p>      
+            <p><i class="fas fa-phone"></i> <span>{{phone}}</span></p>    
         </div>
+        <div id="appointmentsModalWrapper">
+            {% for appointment in appointments %}
+            <p>{{appointment.starting_time}} - {{appointment.ending_time}} <button>Book</button></p>
+            {% endfor %}
+        </div>  
     </div>
     
 {% endblock content %}
