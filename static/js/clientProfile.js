@@ -1,6 +1,6 @@
-openClientEditModal = document.getElementById('openClientEditModal')
-editClientProfileModal = document.getElementById('editClientProfileModal')
-closeClientEditModal = document.getElementById('closeClientEditModal')
+const openClientEditModal = document.getElementById('openClientEditModal')
+const editClientProfileModal = document.getElementById('editClientProfileModal')
+const closeClientEditModal = document.getElementById('closeClientEditModal')
 
 openClientEditModal.addEventListener('click', () => {
     editClientProfileModal.style.display = 'flex'

@@ -16,4 +16,5 @@ urlpatterns = [
     path('profile/<slug:username>/', views.Profile.as_view(), name="lawyer_profile"),
     path('lawyer-info/', views.LawyerInfo.as_view(), name='lawyer_info'),
     path('lawyer-available-hours/', views.LawyerAvailableHours.as_view(), name='lawyer_available_hours'),
+    path('book-appointment/', views.BookAppointment.as_view(), name='book_appointment'),
 ]

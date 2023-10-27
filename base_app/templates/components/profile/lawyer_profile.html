@@ -50,9 +50,9 @@
         </div>
         <div id="appointmentsModalWrapper">
             {% for appointment in appointments %}
-            <p>{{appointment.starting_time}} - {{appointment.ending_time}} <button>Book</button></p>
+            <p>{{appointment.starting_time}} - {{appointment.ending_time}} <button class="bookAppointmentButton">Book</button></p>
             {% endfor %}
         </div>  
     </div>
-    
+    <script src="{% static 'js/appointments.js' %}"></script>
 {% endblock content %}
