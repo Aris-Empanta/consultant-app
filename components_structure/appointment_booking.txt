@@ -1,0 +1,15 @@
+Real time appointment booking notification functionality:
+
+- When the user clicks the button for the appointment booking, an http post 
+  request will be sent to the BookAppointment view.
+- Once the view saves successfuly the appointment as booked, it will send a 
+  websocket request(through websockets library) to the AppointMentBookingConsumer.
+- The AppointMentBookingConsumer inherits from AsyncWebsocketConsumer for increasing performance.
+- When a page of the app loads, it will send a websocket request to the consumer (through the javascript 
+  Websocket object which script will be in the navbar component for the notifications).
+- The consumer, in its overwritten connect method, will close the connection of any unauthenticated user 
+  and accept the authenticated once.
+- If the user is authenticated, it will evaluate if the user is a lawyer or not. If it is, the channel of 
+  the user will be added in a room that has the name of his username.
+- In the overwritten receive method of the consumer, the text data will be broadcasted to the room that has 
+  the same name with the lawyer's name sent in the payload.
