@@ -1,19 +1,24 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from asgiref.sync import async_to_sync
 from .models import Profile
+from channels.db import database_sync_to_async
 
-# This consumer's sole purpose is to send a notification to 
-# a lawyer when an appointment of his is booked by a client.
-# So, since it is one-directional, we just have to write only 
-# the connect method.
+
 class AppointmentsConsumer(AsyncWebsocketConsumer):
 
-    def connect(self):
-        pass
+    async def connect(self):
+        user = self.scope['user']
+       
+        profile = await self.get_profile(user)
+        print(profile)
+        self.accept()
         
-    def disconnect(self, code):
+    async def disconnect(self, code):
         pass
     
-    def receive(self, text_data):
+    async def receive(self, text_data):
         pass
+
+    @database_sync_to_async
+    def get_profile(self, user):
+        return Profile.objects.filter(user=user)[0]

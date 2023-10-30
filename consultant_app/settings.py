@@ -192,6 +192,8 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend"
 )
 
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+
 LOGIN_REDIRECT_URL = "/examine-oauth/"
 LOGOUT_REDIRECT_URL = "/"
 
