@@ -1,4 +1,17 @@
-Real time appointment booking notification functionality:
+APPOINTMENTS BOOKING:
+
+- When a client books an appointment, it updates its status in a database to booked = True 
+and the client name in the appointments table. 
+- The logged in lawyer should receive a real-time notification (explained below) that an appointment 
+has been booked (through websokets). While receiving the notification, a number appears in the navbar
+counting all the unchecked appointments. This number is obtained as the javascript sends an http request
+to fetch the amount of all the unchecked appointments.
+- Once the lawyer clicks on the notification bell, the appointments become checked, and a modal appears
+that shows all the appointments sorted by data (through an http request)
+- The appointment becomes checked every time the lawyer clicks the modal, checks his profile appointments 
+section(which has refresh button) or checks the appointments page.
+
+APPOINTMENTS REAL-TIME NOTIFICATION MECHANISM:
 
 - A user(lawyer only) connects by sending a websocket request to the consumer via the Websocket objects. 
 - The script that connects the user(for lawyer only) exists on navbar. it runs only if the user is authenticated. 
