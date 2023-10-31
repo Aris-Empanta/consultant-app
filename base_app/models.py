@@ -44,6 +44,7 @@ class Appointments(models.Model):
     booked = models.BooleanField(default=False)
     starting_time = models.DateTimeField(null=True)
     ending_time = models.DateTimeField(null=True)
+    client_username = models.CharField(max_length=150, null=True)
 
 class Client(models.Model):
     profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
