@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from ..decorators import allowed_referers, login_register_view
-from ..models import User
+from ..models import Profile
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from ..forms import PasswordResetForm, SetPasswordForm
 import os
@@ -27,6 +27,14 @@ class Login(View):
 
         if user is not None:
             login(request, user, "django.contrib.auth.backends.ModelBackend")
+            # We add in the session an indicator that this is a lawyer
+            #  profile or not
+            profile = Profile.objects.filter(user=user).first()
+            if profile.Lawyer:
+                request.session['is_lawyer'] = True
+            else:
+                request.session['is_lawyer'] = False
+
             return redirect('home')
         
         messages.error(request, 'Email or password do not match a user!')        

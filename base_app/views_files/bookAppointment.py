@@ -1,7 +1,8 @@
-from django.views import View
-from django.http import JsonResponse
 import json
-from websockets.sync.client import connect
+import asyncio
+from websockets import connect
+from django.http import JsonResponse
+from django.views import View
 
 class BookAppointment(View):
     def post(self, request):
@@ -13,12 +14,14 @@ class BookAppointment(View):
         current_scheme = "wss" if request.is_secure() else "ws"
         websocket_url = f"{current_scheme}://{request.get_host()}{ws_relative_url}"
 
-
-        with connect(websocket_url) as websocket:
-            data = {
+        async def send_websocket_data():
+            async with connect(websocket_url) as websocket:
+                data = {
                     'client': client,
                     'lawyer': lawyer,
                 }
-            websocket.send(json.dumps(data)) 
+                await websocket.send(json.dumps(data))
+
+        asyncio.run(send_websocket_data())
 
         return JsonResponse({'data': 'received'})

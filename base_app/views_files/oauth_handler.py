@@ -21,6 +21,14 @@ class OauthHandler(View):
         # the first registration, we raise an error.
         if 'loggingIn' in request.session and request.session['loggingIn']:
             if Profile.objects.filter(user=user).exists():
+                # We add in the session an indicator that this is a lawyer
+                #  profile or not
+                profile = Profile.objects.filter(user=user).first()
+                if profile.Lawyer:
+                    request.session['is_lawyer'] = True
+                else:
+                    request.session['is_lawyer'] = False
+                    
                 return redirect('home')
             else:
                 id=user.id                
