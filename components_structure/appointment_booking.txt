@@ -13,6 +13,7 @@ section(which has refresh button) or checks the appointments page.
 
 APPOINTMENTS REAL-TIME NOTIFICATION MECHANISM:
 
+- We will use django channels with Redis as channel layer (temporary group/channel info).
 - A user(lawyer only) connects by sending a websocket request to the consumer via the Websocket objects. 
 - The script that connects the user(for lawyer only) exists on navbar. it runs only if the user is authenticated. 
 - When the user clicks the button for the appointment booking, an http post 
