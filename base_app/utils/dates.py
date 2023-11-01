@@ -2,6 +2,7 @@ import math
 from datetime import timedelta
 from ..models import AvailableHours, Appointments
 from django.db import IntegrityError, transaction
+from datetime import datetime
 
 class DateUtils:    
 
@@ -62,7 +63,8 @@ class DateUtils:
                     appointment_model = Appointments(interval=available_hours_model,
                                                      booked=False,
                                                      starting_time=appointment["starting"],
-                                                     ending_time=appointment["ending"])
+                                                     ending_time=appointment["ending"],
+                                                     lawyer= lawyer)
                     appointment_model.save()
 
         except IntegrityError as e:
@@ -103,8 +105,6 @@ class DateUtils:
 
         while None in available_hours_list:
             available_hours_list.remove(None)
-        # print(available_hours_list)
-
         
         available_hours = list()
 
@@ -130,3 +130,58 @@ class DateUtils:
             available_hours.append(available_hours_in_day_dict)
        
         return available_hours
+    
+    # We will convert the available appointments to this 3-dimesion list: 
+    # [[day_name, date, ["starting_time - ending_time", "starting_time - ending_time", etc...]], 
+    #  [date_name, date, ["starting_time - ending_time", "starting_time - ending_time", etc...]], 
+    #  etc...]
+    @staticmethod
+    def format_appointments(appointments):
+        # This is the first dimension (outer) list.
+        appointments_list = list()
+        # This is the list that will contain the appointments of each 
+        # date and will be reset in the end of each loop.
+        day_of_the_week = list()
+        # This is the list that will hold the starting and ending time of 
+        # the appointments of each day.
+        appointments_of_the_day = list()
+        for i in range(len(appointments)):
+            day_name = appointments[i].starting_time.strftime("%A")
+            date = appointments[i].starting_time.strftime("%d/%m/%Y")
+            appointment_duration = f'{appointments[i].starting_time.strftime("%H:%M")}-{appointments[i].ending_time.strftime("%H:%M")}'
+            if i == 0:
+                day_of_the_week.append(day_name)
+                day_of_the_week.append(date)
+                appointments_of_the_day.append(appointment_duration)
+                day_of_the_week.append(appointments_of_the_day)
+                # Now we add the appointments of the day in the outer list
+                appointments_list.append(day_of_the_week)
+            else:
+                previous_day_name = appointments[i-1].starting_time.strftime("%A")
+                
+                if day_name != previous_day_name:
+                    day_of_the_week.append(day_name)
+                    day_of_the_week.append(date)
+                    # Now we add the appointments of the day in the outer list
+                    appointments_list.append(day_of_the_week)
+                    # We changed day, so we empty the list with the appointments 
+                    # of the day
+                    appointments_of_the_day = list()
+                    appointments_of_the_day.append(appointment_duration)
+                    day_of_the_week.append(appointments_of_the_day)
+                else:
+                    appointments_of_the_day.append(appointment_duration)
+            day_of_the_week = list()
+        return appointments_list
+    
+    # This methos gets a string that contains the date, starting time and 
+    # ending time of an appointment, and convert it to a datetime object of 
+    # the starting time.
+    @staticmethod
+    def extract_starting_time(appointment_date_string):
+        starting_time_string= appointment_date_string.split('-')[0]
+        string_format = "%d/%m/%Y %H:%M"
+
+        date_object = datetime.strptime(starting_time_string, string_format)
+        
+        return date_object

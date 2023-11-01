@@ -1,0 +1,14 @@
+.bookAppointmentButton {
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background-color: #9370DB;
+    color: white;
+    font-size: 0.9rem;
+    font-size: Tahoma, sans-serif;
+    padding: 0.2rem 0.5rem;
+}
+
+#availableAppointmentsDays {
+    display: flex;
+}

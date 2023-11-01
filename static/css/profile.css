@@ -260,6 +260,7 @@
     background-color: white;
     overflow-y: scroll;
     height: 400px;
+    width: 500px;
     margin:auto;
     padding: 10px;
 }

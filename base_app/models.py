@@ -16,7 +16,7 @@ class Profile(models.Model):
         return f'This is the Profile object of {self.user.first_name} {self.user.last_name}'
 
 class Lawyer(models.Model):
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, default=None)
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
     areasOfExpertise = models.TextField(null=True)
     city = models.CharField(max_length=50, null=True)
     yearsOfExperience = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(80)])
@@ -41,6 +41,7 @@ class AvailableHours(models.Model):
 
 class Appointments(models.Model):
     interval = models.ForeignKey(AvailableHours, on_delete=models.CASCADE)
+    lawyer = models.ForeignKey(Lawyer, on_delete=models.CASCADE, null=True)
     booked = models.BooleanField(default=False)
     starting_time = models.DateTimeField(null=True)
     ending_time = models.DateTimeField(null=True)

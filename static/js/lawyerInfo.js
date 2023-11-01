@@ -12,7 +12,7 @@ areasOfExpertiseButton.addEventListener("click", (event) => {
     
     return areasOfExpertiseList.style.display = "none";
 })
-
+ 
 //We allow only integers in the following fields:
 document.addEventListener("keydown", (event) => {
 
@@ -28,10 +28,21 @@ document.addEventListener("keydown", (event) => {
 
         if (event.target.name === "yearsOfExperience") {
 
-            if(event.target.value > 80) 
+            if(event.target.value > 80) {
+              
                 event.target.value = 80
-            }
-    
+              }
+            }   
+})
+
+document.addEventListener("change", (event) => {
+    if(event.target.name === "hourlyRate") {
+        
+        if(event.target.value < 0 ) {
+          
+            event.target.value = 0
+          }
+        }
 })
 
 //I set maximu values or the following fields:

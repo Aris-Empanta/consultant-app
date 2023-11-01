@@ -21,6 +21,12 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
             let lawyerUsernameWithSlashes = window.location.href.split('profile')[1]
             // We remove the remaining slashes forward and after
             let lawyerUsername = lawyerUsernameWithSlashes.substring(1, lawyerUsernameWithSlashes.length - 1)
+            
+            // We start the loading spinner
+            startLoading(bookAppointmentButton[i])
+            
+            //The date and time of the appointment to be sent to the backend.
+            let appointmentDateAndTime = document.querySelectorAll('.appointmentDateAndTime')[i].value
 
             //We define the request attributes:
             const request = new Request(url, {
@@ -30,7 +36,8 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
                   'Content-Type': 'application/json', 
                 },
                 // Include the request body, if applicable
-                body: JSON.stringify({ 'lawyer': lawyerUsername }),
+                body: JSON.stringify({ 'lawyer': lawyerUsername, 
+                                       'appointment_date_and_time': appointmentDateAndTime }),
                 credentials: "same-origin"
               });
 
@@ -45,8 +52,7 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
             // We parse the JSON response
             const data = await response.json();
 
-            // Handle the JSON data
-            console.log(data);
+            //handle data 
 
             // You can perform further operations with the data here
         } catch (error) {
@@ -54,4 +60,10 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
             console.error('An unexpected error occured, please try again later');
         }
     })
+}
+
+function startLoading(button) {
+    
+    button.innerText = `Please Wait`
+    button.style.backgroundColor = 'red'
 }

@@ -42,12 +42,13 @@ class Profile(View):
             
             # if the user is a lawyer, we add some extra context with the lawyer's details.
             if user.profile.Lawyer: 
-                    # First we fetch the appointments and put it into the context. 
-                    # Then we put the rest info.
+                    # First we fetch the unbooked appointments of the lawyer so that a 
+                    # client can choose them.
                     lawyer = Lawyer.objects.get(profile=user.profile)
-                    appointments = Appointments.objects.all()
+                    appointments = Appointments.objects.filter(lawyer=lawyer, booked=False)
+                    # We format the appointments starting and ending time:
+                    formated_appointments = DateUtils.format_appointments(appointments)
 
-                    context['appointments'] = appointments
                     context['description'] = lawyer.description if lawyer.description is not None else "No description available"
                     context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise is not None else ""
                     context['city']  = lawyer.city  
@@ -59,7 +60,7 @@ class Profile(View):
                     context['phone']  = lawyer.phone if lawyer.phone is not None else "Not available"
                     context['lawyer_authenticated'] = lawyer_authenticated
                     context['my_own_profile'] = my_own_profile
-                    context['available_appointments'] = appointments
+                    context['appointments'] = formated_appointments
             
 
             # If there is an authenticated user and this user is a lawyer, we mention
@@ -78,9 +79,11 @@ class Profile(View):
                 context['my_own_profile'] = my_own_profile
 
                 if user.profile.Lawyer:  
-                    available_hours = AvailableHours.objects.filter(lawyer=lawyer)                   
+                    available_hours = AvailableHours.objects.filter(lawyer=lawyer)   
+                    booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True)                
                     available_hours_list = DateUtils.format_available_hours_list(available_hours)
                     context['available_hours'] = available_hours_list
+                    context['booked_appointments'] = booked_appointments
                     
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 else:
