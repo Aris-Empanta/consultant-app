@@ -3,6 +3,13 @@
 <div id="navbar">
     {% if request.user.is_authenticated %}
         {% if request.session.is_lawyer %}
+        <button id="appointmentsNotificationBellButton">
+            <i class="fas fa-bell"></i>
+            <div id="uncheckedAppointmentsWrapper">
+                <p id="uncheckedAppointments"></p>
+            </div>
+        </button>
+        
         {% endif %}
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
@@ -12,6 +19,6 @@
 </div>
 {% if request.user.is_authenticated %}
     {% if request.session.is_lawyer %}
-    <script src="{% static 'js/appointmentNotification.js' %}"></script>
+    <script type="module" src="{% static 'js/appointmentNotification.js' %}"></script>
     {% endif %}
 {% endif %}

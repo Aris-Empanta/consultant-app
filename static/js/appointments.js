@@ -1,3 +1,5 @@
+import { getCsrfToken } from './csrf.js';
+
 const bookAppointmentButton = document.querySelectorAll('.bookAppointmentButton')
 
 for(let i=0; i < bookAppointmentButton.length; i++) {
@@ -5,18 +7,9 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
     bookAppointmentButton[i].addEventListener('click', async () => {  
 
         try {
-            // First we extract the csrf token to include it to the sent body.
-            const cookies = document.cookie.split(";").map(cookie => cookie.trim());
-            let csrftoken
-            for (let cookie of cookies) {
-
-                if (cookie.startsWith("csrftoken=")) {
-                    csrftoken = cookie.substring("csrftoken=".length, cookie.length);
-                    break;
-                }
-            }
-            // We define the backend's url as relative, since it has the same origin as the frontend.
+            const csrftoken = getCsrfToken();
             const url = '/book-appointment/';
+            
             // We extract the lawyer's username from the url
             let lawyerUsernameWithSlashes = window.location.href.split('profile')[1]
             // We remove the remaining slashes forward and after

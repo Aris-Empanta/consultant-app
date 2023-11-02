@@ -1,7 +1,8 @@
-from .views_files.login_logout import Login, Logout, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from .views_files.register import QuestionSpecialty, RegisterUser
-from .views_files.home import Home
-from .views_files.oauth_handler import OauthHandler
-from .views_files.register_lawyer import LawyerInfo, LawyerAvailableHours
-from .views_files.profile import Profile
-from .views_files.bookAppointment import BookAppointment
+from .template_views.login_logout import Login, Logout, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from .template_views.register import QuestionSpecialty, RegisterUser
+from .template_views.home import Home
+from .template_views.oauth_handler import OauthHandler
+from .template_views.register_lawyer import LawyerInfo, LawyerAvailableHours
+from .template_views.profile import Profile
+from .api_views.bookAppointment import BookAppointment
+from .api_views.checkAppointment import CheckAppointment

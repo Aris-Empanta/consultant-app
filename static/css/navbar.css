@@ -24,3 +24,23 @@
     border-radius: 3px;
     margin-right: 5%;
 }
+
+#appointmentsNotificationBellButton {
+    cursor: pointer;
+    position: relative;
+    margin-top: 20px;
+}
+
+#uncheckedAppointmentsWrapper {
+    display: none;
+    position: absolute;
+    padding: 0.3rem 0.5rem;
+    border-radius: 50%;
+    background-color: aqua;
+    bottom: 10px;
+    left: 10px;
+}
+
+#uncheckedAppointments {
+    margin: 0;
+}

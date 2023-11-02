@@ -28,8 +28,10 @@ class AppointmentsConsumer(AsyncWebsocketConsumer):
 
         # Send message to room group
         await self.channel_layer.group_send(
-            f'lawyer_{lawyer}', {"type": "appointment.notification", "client": client}
-        )
+            f'lawyer_{lawyer}', {
+                                 "type": "appointment.notification", 
+                                 "client": client
+                                 })
 
     @database_sync_to_async
     def get_profile(self, user):
@@ -39,5 +41,5 @@ class AppointmentsConsumer(AsyncWebsocketConsumer):
     async def appointment_notification(self, event):
         client = event["client"]       
 
-        # Send message to WebSocket
+        # We send to the WebSocket both client and lawyer information
         await self.send(text_data=json.dumps({"client": client}))
