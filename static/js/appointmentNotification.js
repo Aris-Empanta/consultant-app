@@ -6,10 +6,5 @@ socket.onopen = () => {
 }
 
 socket.onmessage = function(e) {
-    console.log(e.data)
-};
-
-// Event handler for connection errors
-socket.onerror = function (error) {
-    console.error("WebSocket error:", error);
-};
+    
+}
