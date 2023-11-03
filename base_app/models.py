@@ -34,6 +34,9 @@ class Lawyer(models.Model):
     def __str__(self):
         return f'This is the Lawyer object of {self.profile.user.first_name} {self.profile.user.last_name}'
 
+class Client(models.Model):
+    profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
+
 class AvailableHours(models.Model):
     lawyer = models.ForeignKey(Lawyer, on_delete=models.CASCADE)
     starting_time = models.DateTimeField(null=True)
@@ -42,14 +45,11 @@ class AvailableHours(models.Model):
 class Appointments(models.Model):
     interval = models.ForeignKey(AvailableHours, on_delete=models.CASCADE)
     lawyer = models.ForeignKey(Lawyer, on_delete=models.CASCADE, null=True)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
     booked = models.BooleanField(default=False)
     starting_time = models.DateTimeField(null=True)
     ending_time = models.DateTimeField(null=True)
-    client_username = models.CharField(max_length=150, null=True)
     checked = models.BooleanField(default=False)
-
-class Client(models.Model):
-    profile = models.OneToOneField(Profile, blank=False, on_delete=models.CASCADE, default=None)
 
 class Rating(models.Model):
     client = models.OneToOneField(Client, on_delete=models.PROTECT)

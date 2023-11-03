@@ -43,11 +43,18 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
             }
 
             // We parse the JSON response
-            const data = await response.json();
+            const responseData = await response.json();
 
             //handle data 
+            if(responseData.data === 'Booked!') {
 
-            // You can perform further operations with the data here
+                appointmentSuccessfullyBooked(bookAppointmentButton[i], responseData.data)
+            } else {
+                //Create Modal later
+                alert(responseData.data)
+            }
+
+            setTimeout(() => location.reload(), 2000);
         } catch (error) {
             // Handle any errors that occur during the fetch or response handling (change it in production)
             console.error('An unexpected error occured, please try again later');
@@ -59,4 +66,10 @@ function startLoading(button) {
     
     button.innerText = `Please Wait`
     button.style.backgroundColor = 'red'
+}
+
+function appointmentSuccessfullyBooked(button, response) {
+
+    button.innerText = response
+    button.style.backgroundColor = 'green'
 }

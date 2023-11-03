@@ -1,20 +1,27 @@
-import { getCsrfToken } from './csrf.js';
+import { getBookedAppointments, 
+         getUncheckedAppointmentsAmount, 
+         markAppointmentAsChecked } from './appointmentHelpers.js';
 
 //We fetch all the unchecked appointments and show it in the navbar.
 let uncheckedAppointments = document.getElementById('uncheckedAppointments')
 let uncheckedAppointmentsWrapper = document.getElementById('uncheckedAppointmentsWrapper')
-let amount = await getUncheckedAppointments()
+let amount = await getUncheckedAppointmentsAmount()
 let appointmentsNotificationBellButton = document.getElementById('appointmentsNotificationBellButton')
 
-appointmentsNotificationBellButton.addEventListener('click', () => {
-    // We hide the uncheckedAppointmentsWrapper and we set the inner 
-    // text of uncheckedAppointmentsWrapper to 0.
+appointmentsNotificationBellButton.addEventListener('click', async () => {
+    
+    // Intitially we just hide the indicator, so that we still know 
+    // which messages are unchecked to highlight them.
+    uncheckedAppointmentsWrapper.style.display = 'none'
+    uncheckedAppointments.innerText = 0
 
     // We fetch all the lawyer's future appointments and we highlight the unchecked
     // All the appointments are links to the appointments page. 
+    await getBookedAppointments()
 
     // We send http request to the backend to make all the lawyer's appointments 
     // checked field to True.
+    await markAppointmentAsChecked()
 })
 
 // The unchecked appointments amount circle will be shown only if there is at least 
@@ -35,40 +42,9 @@ socket.onopen = () => {
 
 socket.onmessage = async function(event) {
 
-    let uncheckedAppointmentsAmount = await getUncheckedAppointments()
+    // If the appointments modal is open we refetch the notifications without 
+    // a loader. If it is now, we show the unchecked appointments amount.
+    let uncheckedAppointmentsAmount = await getUncheckedAppointmentsAmount()
     uncheckedAppointmentsWrapper.style.display = 'initial'
     uncheckedAppointments.innerText = uncheckedAppointmentsAmount
-
-    // We should handle the case of the modal being open and receiving notifications, 
-    // when we might need to refetch the appointments.
 };         
-
-// The helper function to get the unchecked appointments
-async function getUncheckedAppointments() {
-
-    // We retrieve all the amount of the appointments that the lawyer 
-    // hasn't checked yet
-    let url = `/unchecked-appointments/`
-    let csrftoken = getCsrfToken()
-
-    const request = new Request(url, {
-        method: 'GET',
-        headers: {
-            'X-CSRFToken': csrftoken,
-        },
-        credentials: "same-origin"
-    })
-
-    const response = await fetch(request)
-
-    // Check if the response status is OK (status code 200)
-    if (!response.ok) {
-        throw new Error('A Network error occured, please try again later.');
-    }
-
-    // We parse the JSON response
-    let responseData = await response.json();
-    let amount = responseData.amount
-
-    return amount
-}

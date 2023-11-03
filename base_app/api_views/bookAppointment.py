@@ -7,19 +7,21 @@ from ..models import Appointments
 from ..utils.dates import DateUtils
 from django.db import transaction
 from ..base_classes.lawyers import BaseLawyer
+from ..base_classes.clients import BaseClient
 
-class BookAppointment(View, BaseLawyer):
+class BookAppointment(View, BaseLawyer, BaseClient):
 
     def post(self, request):
         body = json.loads(request.body)
-        client = request.user.username
+        client_username = request.user.username
         lawyer_username = body['lawyer']
         appointment_date_and_time = body['appointment_date_and_time']
 
         # We fetch the lawyer object using the received username.
         lawyer = self.get_lawyer_by_username(lawyer_username)
+        client = self.get_client_by_username(client_username)
 
-        # We received via body the appointments day, starting and ending 
+        # We received the appointment's day via body, starting and ending 
         # time in a string format. We will extract from it the date and starting time,
         # and convert it to datetime object.
         starting_time = DateUtils.extract_starting_time(appointment_date_and_time)
@@ -31,6 +33,7 @@ class BookAppointment(View, BaseLawyer):
                 appointment = Appointments.objects.select_for_update().get(lawyer=lawyer, starting_time=starting_time)
                 if not appointment.booked:
                     appointment.booked = True
+                    appointment.client = client
                     appointment.save()
 
                     # Once the appointment gets booked, we send notification to the lawyer user via 
@@ -39,11 +42,11 @@ class BookAppointment(View, BaseLawyer):
                     current_scheme = "wss" if request.is_secure() else "ws"
                     websocket_url = f"{current_scheme}://{request.get_host()}{ws_relative_url}"
 
-                    asyncio.run(self.send_websocket_data(websocket_url, client, lawyer_username))
+                    asyncio.run(self.send_websocket_data(websocket_url, client_username, lawyer_username))
 
-                    return JsonResponse({'data': 'received'})
+                    return JsonResponse({'data': 'Booked!'})
                 else:
-                    return JsonResponse({'data': 'Appointment is already booked'})
+                    return JsonResponse({'data': 'This Appointment has been already booked'})
 
             except Appointments.DoesNotExist:
                 return JsonResponse({'data': 'Appointment not found'})

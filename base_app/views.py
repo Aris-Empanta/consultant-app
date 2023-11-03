@@ -6,3 +6,4 @@ from .template_views.register_lawyer import LawyerInfo, LawyerAvailableHours
 from .template_views.profile import Profile
 from .api_views.bookAppointment import BookAppointment
 from .api_views.checkAppointment import CheckAppointment
+from .api_views.allBookedAppointments import AllBookedAppointments
