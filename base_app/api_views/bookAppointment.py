@@ -8,10 +8,11 @@ from ..utils.dates import DateUtils
 from django.db import transaction
 from ..base_classes.lawyers import BaseLawyer
 from ..base_classes.clients import BaseClient
+from django.utils import timezone
 
 class BookAppointment(View, BaseLawyer, BaseClient):
 
-    def post(self, request):
+    def patch(self, request):
         body = json.loads(request.body)
         client_username = request.user.username
         lawyer_username = body['lawyer']
@@ -31,9 +32,11 @@ class BookAppointment(View, BaseLawyer, BaseClient):
         with transaction.atomic():
             try:
                 appointment = Appointments.objects.select_for_update().get(lawyer=lawyer, starting_time=starting_time)
+                
                 if not appointment.booked:
                     appointment.booked = True
                     appointment.client = client
+                    appointment.time_booked = timezone.now()
                     appointment.save()
 
                     # Once the appointment gets booked, we send notification to the lawyer user via 
@@ -43,7 +46,7 @@ class BookAppointment(View, BaseLawyer, BaseClient):
                     websocket_url = f"{current_scheme}://{request.get_host()}{ws_relative_url}"
 
                     asyncio.run(self.send_websocket_data(websocket_url, client_username, lawyer_username))
-
+                    print('appointment booked')
                     return JsonResponse({'data': 'Booked!'})
                 else:
                     return JsonResponse({'data': 'This Appointment has been already booked'})

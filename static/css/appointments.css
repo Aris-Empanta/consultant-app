@@ -12,3 +12,22 @@
 #availableAppointmentsDays {
     display: flex;
 }
+
+#appointmentsModal {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    border: 1px solid black;
+    background-color: white;
+    top: 40px;
+}
+
+.checkedAppointmentWrapper {
+    background-color: red;
+    padding: 1rem;
+}
+
+.uncheckedAppointmentWrapper {
+    background-color: silver;
+    padding: 1rem
+}

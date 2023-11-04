@@ -17,6 +17,7 @@ urlpatterns = [
     path('lawyer-info/', views.LawyerInfo.as_view(), name='lawyer_info'),
     path('lawyer-available-hours/', views.LawyerAvailableHours.as_view(), name='lawyer_available_hours'),
     path('book-appointment/', views.BookAppointment.as_view(), name='book_appointment'),
-    path('unchecked-appointments/', views.CheckAppointment.as_view(), name='unchecked-appointments'),
-    path('booked-appointments/', views.AllBookedAppointments.as_view(), name='booked_appointments')
+    path('unchecked-appointments/', views.GetUncheckedAppointments.as_view(), name='unchecked-appointments'),
+    path('booked-appointments/', views.AllBookedAppointments.as_view(), name='booked_appointments'),
+    path('mark-appointment-as-checked/', views.MarkAppointmentAsChecked.as_view(), name='mark_appointment_as_checked'),
 ]

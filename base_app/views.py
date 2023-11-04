@@ -5,5 +5,6 @@ from .template_views.oauth_handler import OauthHandler
 from .template_views.register_lawyer import LawyerInfo, LawyerAvailableHours
 from .template_views.profile import Profile
 from .api_views.bookAppointment import BookAppointment
-from .api_views.checkAppointment import CheckAppointment
+from .api_views.getUncheckedAppointments import GetUncheckedAppointments
 from .api_views.allBookedAppointments import AllBookedAppointments
+from .api_views.markAppointmentAsChecked import MarkAppointmentAsChecked

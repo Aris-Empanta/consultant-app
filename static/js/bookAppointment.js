@@ -23,7 +23,7 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
 
             //We define the request attributes:
             const request = new Request(url, {
-                method: 'POST', // Specify the HTTP method (e.g., GET, POST)
+                method: 'PATCH', // Specify the HTTP method (e.g., GET, POST)
                 headers: {
                   'X-CSRFToken': csrftoken,
                   'Content-Type': 'application/json', 

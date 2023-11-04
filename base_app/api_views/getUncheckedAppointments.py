@@ -3,7 +3,7 @@ from django.views import View
 from ..base_classes.lawyers import BaseLawyer
 from ..models import Appointments
 
-class CheckAppointment(View, BaseLawyer):
+class GetUncheckedAppointments(View, BaseLawyer):
 
     # The method to get all the unchecked appointments of a lawyer
     def get(self, request):
@@ -14,5 +14,6 @@ class CheckAppointment(View, BaseLawyer):
         lawyer = self.get_lawyer_by_username(lawyer_username)
         unchecked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True, checked=False)
         amount = len(unchecked_appointments)
+        print(amount)
 
         return JsonResponse({'amount': amount})
