@@ -9,7 +9,10 @@ from django.db import transaction
 from ..base_classes.lawyers import BaseLawyer
 from ..base_classes.clients import BaseClient
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from ..decorators import allowed_users
 
+@method_decorator(allowed_users(allowed_roles=["clients"]), name='dispatch')
 class BookAppointment(View, BaseLawyer, BaseClient):
 
     def patch(self, request):
@@ -46,7 +49,6 @@ class BookAppointment(View, BaseLawyer, BaseClient):
                     websocket_url = f"{current_scheme}://{request.get_host()}{ws_relative_url}"
 
                     asyncio.run(self.send_websocket_data(websocket_url, client_username, lawyer_username))
-                    print('appointment booked')
                     return JsonResponse({'data': 'Booked!'})
                 else:
                     return JsonResponse({'data': 'This Appointment has been already booked'})

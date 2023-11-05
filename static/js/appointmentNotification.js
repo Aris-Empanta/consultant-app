@@ -12,6 +12,7 @@ let appointmentsNotificationBellButton = document.getElementById('appointmentsNo
 let loadingAppointments = document.getElementById('loadingAppointments')
 let appointmentsModal = document.getElementById('appointmentsModal')
 
+
 appointmentsNotificationBellButton.addEventListener('click', async () => {
 
     // If the modal is open we close it.

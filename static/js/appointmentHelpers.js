@@ -1,4 +1,5 @@
 import { getCsrfToken } from './csrf.js';
+import { profileAvatarLink } from './generalHelpers.js';
 
 // The function to get the Amount of the unchecked appointments
 async function getUncheckedAppointmentsAmount() {
@@ -82,26 +83,30 @@ function showBookedAppointments(appointments, appointmentsModal, loadingAppointm
     for(let i = 0; i < appointments.length; i++) {
         let appointmentDetails
         let currentAppointment = appointments[i]
+        let appointmentsPageLink = "/booked-appointments-page/"
+        let avatarLink = profileAvatarLink(currentAppointment.client_avatar)
 
         // We render diferent HTML for the checked and unchecked appointments.
         if(currentAppointment.checked) {
-            appointmentDetails = `<div class="checkedAppointmentWrapper">
-                                    <p>
+            appointmentDetails = `<a class="checkedAppointmentWrapper" href=${appointmentsPageLink}>
+                                     <img src=${avatarLink} >
+                                     <p>
                                         ${currentAppointment.client_first_name} 
                                         ${currentAppointment.client_last_name} 
                                         booked an appointment
-                                    </p>  
-                                    <p>${currentAppointment.time_since} ago</p>
-                                    </div>`
+                                     </p>  
+                                     <p>${currentAppointment.time_since} ago</p>
+                                   </a>`
         } else {
-            appointmentDetails = `<div class="uncheckedAppointmentWrapper">
-                                    <p>
+            appointmentDetails = `<a class="uncheckedAppointmentWrapper" href=${appointmentsPageLink}>
+                                     <img src=${avatarLink} >
+                                     <p>
                                         ${currentAppointment.client_first_name} 
                                         ${currentAppointment.client_last_name} 
                                         booked an appointment
-                                    </p> 
-                                    <p>${currentAppointment.time_since} ago</p>
-                                    </div>`
+                                     </p> 
+                                     <p>${currentAppointment.time_since} ago</p>
+                                   </a>`
         }
         
         appointmentsModal.insertAdjacentHTML('beforeend', appointmentDetails)

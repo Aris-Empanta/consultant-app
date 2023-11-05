@@ -4,7 +4,10 @@ from ..base_classes.lawyers import BaseLawyer
 from ..models import Appointments
 from django.utils.timesince import timesince
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from ..decorators import allowed_users
 
+@method_decorator(allowed_users(allowed_roles=["lawyers"]), name='dispatch')
 class AllBookedAppointments(View, BaseLawyer):
 
     def get(self, request):
@@ -20,6 +23,7 @@ class AllBookedAppointments(View, BaseLawyer):
                 'ending_time': appointment.ending_time.strftime('%H:%M'), 
                 'client_first_name': appointment.client.profile.user.first_name, 
                 'client_last_name': appointment.client.profile.user.last_name,
+                'client_avatar': appointment.client.profile.avatar.name,
                 'checked': appointment.checked,
                 'time_since': timesince(appointment.time_booked, timezone.now())
             }

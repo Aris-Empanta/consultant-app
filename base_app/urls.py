@@ -20,4 +20,5 @@ urlpatterns = [
     path('unchecked-appointments/', views.GetUncheckedAppointments.as_view(), name='unchecked-appointments'),
     path('booked-appointments/', views.AllBookedAppointments.as_view(), name='booked_appointments'),
     path('mark-appointment-as-checked/', views.MarkAppointmentAsChecked.as_view(), name='mark_appointment_as_checked'),
+    path('booked-appointments-page/', views.BookedAppointmentsPage.as_view(), name='booked_appointments_page' )
 ]
