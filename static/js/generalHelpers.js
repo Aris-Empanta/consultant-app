@@ -7,7 +7,7 @@ function profileAvatarLink(image_name) {
     if(image_name.startsWith('https') || image_name.startsWith('http')) {
         avatarLink = `${image_name}`;
     } else {
-        avatarLink = `../img/profile-pics/${image_name}`;
+        avatarLink = `/static/img/profile-pics/${image_name}`;
     }    
 
     return avatarLink;
