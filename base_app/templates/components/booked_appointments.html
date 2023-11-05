@@ -1,10 +1,27 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 
     {% include 'components/reusable/navbar.html' %}
 
     <div id="bookedAppointmentsPage">
+        <div id="allAppointmentsWrapper">
+            {% for appointment in appointments %}
+            <a href="{{appointment.profile_link}}" class="appointmentDetailsWrapper">
+                {% if appointment.avatar_is_external_link %}
+                <img src="{{appointment.avatar}}">
+                {% else %}
+                <img src="{% static 'img/profile-pics/'|add:appointment.avatar %}">
+                {% endif %}
+                <p>
+                    You have an appointment with <b>{{appointment.first_name}} {{appointment.last_name}}</b> on 
+                    <b>{{appointment.day_name}} {{appointment.date}}</b> from 
+                    <b>{{appointment.starting_time}}</b> to <b>{{appointment.ending_time}}</b>
+                </p>
+            </a>    
+            <p>Booked {{appointment.time_since}} ago</p>
+            {% endfor %}
+        </div>
     </div>
-    
+     
 {% endblock content %}

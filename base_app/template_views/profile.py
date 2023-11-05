@@ -3,9 +3,10 @@ from django.shortcuts import render
 from ..models import User, Lawyer, AvailableHours, Appointments
 import urllib.parse
 from ..utils.dates import DateUtils
+from ..base_classes.lawyers import BaseLawyer
 
 
-class Profile(View):
+class Profile(View, BaseLawyer):
     
     def get(self, request, username):
         
@@ -80,10 +81,13 @@ class Profile(View):
 
                 if user.profile.Lawyer:  
                     available_hours = AvailableHours.objects.filter(lawyer=lawyer)   
-                    booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True)                
+                    booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True).order_by('-ending_time')            
                     available_hours_list = DateUtils.format_available_hours_list(available_hours)
+
                     context['available_hours'] = available_hours_list
-                    context['booked_appointments'] = booked_appointments
+                    context['booked_appointments'] = self.format_booked_appointments_data(booked_appointments)
+
+                    print(context['booked_appointments'])
                     
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 else:

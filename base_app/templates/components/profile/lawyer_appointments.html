@@ -1,5 +1,10 @@
 <div id="lawyerAppointmentsWrapper">
+    <a href="{% url 'booked_appointments_page' %}" target="_blank">
+        Go to appointments details page
+    </a>
     {% for appointment in booked_appointments %}
-    <p>{{appointment.starting_time}} - {{appointment.ending_time}}</p>
+    <p>{{appointment.day_name}} {{appointment.date}}</p>
+    <p> Client: <b>{{appointment.first_name}} {{appointment.last_name}}</b> 
+        Time: <b>{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b></p>
     {% endfor %}
 </div>

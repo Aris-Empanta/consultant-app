@@ -1,6 +1,7 @@
 from ..models import User, Profile, Client
+from .profile import BaseProfile
 
-class BaseClient:
+class BaseClient(BaseProfile):
 
     def get_client_by_username(self, client_username)-> Client:
         # We fetch the lawyer object using the received username.

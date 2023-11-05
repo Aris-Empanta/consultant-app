@@ -32,4 +32,21 @@
 .uncheckedAppointmentWrapper {
     background-color: silver;
     padding: 1rem
+} 
+
+#bookedAppointmentsPage {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+#allAppointmentsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.appointmentDetailsWrapper {
+    display: flex;
 }
