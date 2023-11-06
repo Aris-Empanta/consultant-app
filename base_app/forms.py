@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
-from .models import User, Lawyer
+from .models import User, Profile, Lawyer
 from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.forms import ModelForm

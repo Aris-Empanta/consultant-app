@@ -16,7 +16,7 @@ class Profile(View, BaseLawyer):
             member_since = user.date_joined.strftime("%b %Y")
             first_name = user.first_name
             last_name = user.last_name
-            is_static = False
+            is_locally_stored = False
 
             # The variable that indicates if the authenticated user is a lawyer
             lawyer_authenticated = False 
@@ -24,22 +24,25 @@ class Profile(View, BaseLawyer):
             # authenticated user's profile
             my_own_profile = False
 
+            media_folder = '/media/'
+            
             # We parse the url, to get the encoded special characters (/, :, etc...)
-            avatar_url = urllib.parse.unquote(avatar.url[1:])
+            avatar_url = urllib.parse.unquote(avatar.url).replace(media_folder, '')
 
             # we examine if the avatar's url is a file belonging to our server 
             # or a google image url. We save this info in a variable and pass it 
             # to the template through context
-            if(avatar_url[0:4] != 'http'):
-                is_static = True
-                avatar_url = f'img/profile-pics/{avatar.url}'
+            if(not avatar_url.startswith('http') or avatar_url.startswith('/http')):
+                is_locally_stored = True
+                avatar_url = f'{media_folder}{avatar_url}'
             
             context = { 'avatar_url': avatar_url,
                         'member_since': member_since,
                         'first_name': first_name,
                         'last_name': last_name,
                         'username': username,
-                        'is_static': is_static }
+                        'is_locally_stored': is_locally_stored }
+            print(avatar_url)
             
             # if the user is a lawyer, we add some extra context with the lawyer's details.
             if user.profile.Lawyer: 
@@ -86,8 +89,6 @@ class Profile(View, BaseLawyer):
 
                     context['available_hours'] = available_hours_list
                     context['booked_appointments'] = self.format_booked_appointments_data(booked_appointments)
-
-                    print(context['booked_appointments'])
                     
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 else:

@@ -6,6 +6,7 @@ from .template_views.oauth_handler import OauthHandler
 from .template_views.register_lawyer import LawyerInfo, LawyerAvailableHours
 from .template_views.profile import Profile
 from .template_views.bookedAppointmentsPage import BookedAppointmentsPage
+from .template_views.updateProfilePic import UpdateProfilePic
 
 # The views that work as an api. 
 from .api_views.bookAppointment import BookAppointment
