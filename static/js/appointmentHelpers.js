@@ -85,6 +85,7 @@ function showBookedAppointments(appointments, appointmentsModal, loadingAppointm
         let currentAppointment = appointments[i]
         let appointmentsPageLink = "/booked-appointments-page/"
         let avatarLink = profileAvatarLink(currentAppointment.client_avatar)
+        console.log(currentAppointment.client_avatar)
 
         // We render diferent HTML for the checked and unchecked appointments.
         if(currentAppointment.checked) {

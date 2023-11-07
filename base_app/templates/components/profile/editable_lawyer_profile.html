@@ -5,6 +5,11 @@
     {% include 'components/reusable/navbar.html' %}
 
     <div id="lawyerProfileWrapper">
+        {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <div id="editProfileError">{{ message }}</div>
+                {% endif %} 
+        {% endfor %}
         <div id="lawyerInfoWrapper">
             {% if is_locally_stored %}            
             <img src= "{{avatar_url}}" id="profilePic" /> 

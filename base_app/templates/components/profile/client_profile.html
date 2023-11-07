@@ -4,6 +4,13 @@
 
     {% include 'components/reusable/navbar.html' %}
     <div id="clientProfileWrapper">
+        {% if my_own_profile %}
+            {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <div id="editProfileError">{{ message }}</div>
+                    {% endif %} 
+            {% endfor %}
+        {% endif %}
         <div id="clientInfoWrapper">
             {% if is_static %}
             <img src= "{% static avatar_url %}" id="profilePic" /> 
@@ -13,6 +20,10 @@
             <p id="fullname">
                 {{first_name}} {{last_name}}
                 {% if my_own_profile %}
+                <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_pic' %}">
+                    {% csrf_token %}
+                    <input type="file" name="profile_pic" accept="image/*" onchange="this.form.submit()">
+                </form>
                 <button class="editButton" id="openClientEditModal">
                     <i class="fas fa-pencil"></i>
                 </button>

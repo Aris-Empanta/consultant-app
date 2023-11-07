@@ -11,7 +11,6 @@ from ..decorators import allowed_users
 class AllBookedAppointments(View, BaseLawyer):
 
     def get(self, request):
-
         lawyer = self.get_lawyer_by_username(request.user.username)
         booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True).order_by('-time_booked')
 
@@ -23,7 +22,7 @@ class AllBookedAppointments(View, BaseLawyer):
                 'ending_time': appointment.ending_time.strftime('%H:%M'), 
                 'client_first_name': appointment.client.profile.user.first_name, 
                 'client_last_name': appointment.client.profile.user.last_name,
-                'client_avatar': appointment.client.profile.avatar.name,
+                'client_avatar': self.format_avatar_link(request, appointment.client.profile.avatar.name),
                 'checked': appointment.checked,
                 'time_since': timesince(appointment.time_booked, timezone.now())
             }

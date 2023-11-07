@@ -264,3 +264,9 @@
     margin:auto;
     padding: 10px;
 }
+
+#editProfileError {
+    position: absolute;
+    top: 100px;
+    color: #F40009;
+}
