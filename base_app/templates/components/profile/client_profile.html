@@ -17,14 +17,23 @@
             {% else %}
             <img src="{{avatar_url}}" id="profilePic" />
             {% endif %} 
-            <p id="fullname">
-                {{first_name}} {{last_name}}
-                {% if my_own_profile %}
+            {% if my_own_profile %}
                 <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_pic' %}">
                     {% csrf_token %}
                     <input type="file" name="profile_pic" accept="image/*" onchange="this.form.submit()">
                 </form>
-                <button class="editButton" id="openClientEditModal">
+            {% endif %}
+            <p id="clientFullname">
+                {{first_name}} {{last_name}}
+                {% if my_own_profile %}
+                <form action="{% url 'update_client_info' %}" method="POST" id="editClientFullNameForm">
+                    {% csrf_token %}
+                    <input type="text" placeholder="First Name" value="{{first_name}}" name="clientFirstName">
+                    <input type="text" placeholder="Last Name" value="{{last_name}}" name="clientLastName">
+                    <button id="cancelUpdateClientFullname">Cancel</button>
+                    <input type="submit" value="Save">
+                </form>
+                <button class="editButton" id="editClientFullName">
                     <i class="fas fa-pencil"></i>
                 </button>
                 {% endif %}
@@ -40,4 +49,5 @@
         </div>  
     </div>
     
+    <script src="{% static 'js/clientProfile.js' %}"></script>
 {% endblock content %}

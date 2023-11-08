@@ -1,19 +1,26 @@
-authenticatedLawyerInfo = document.getElementById('authenticatedLawyerInfo')
-editLawyerInfoForm = document.getElementById('editLawyerInfoForm')
-editLawyerInfoButton = document.getElementById('editLawyerInfoButton')
-cancelUpdatingLawyerInfo = document.getElementById('cancelUpdatingLawyerInfo')
-lawyerInfoLink = document.getElementById('lawyerInfoLink')
-lawyerAvailableHoursLink = document.getElementById('lawyerAvailableHoursLink')
-lawyerAppointmentsLink = document.getElementById('lawyerAppointmentsLink')
-lawyerInfoWrapper = document.getElementById('lawyerEditableInfoWrapper')
-availableHoursWrapper = document.getElementById('editableLawyerAvailableHoursWrapper')
-appointmentsWrapper = document.getElementById('lawyerAppointmentsWrapper')
+let authenticatedLawyerInfo = document.getElementById('authenticatedLawyerInfo')
+let editLawyerInfoForm = document.getElementById('editLawyerInfoForm')
+let editLawyerInfoButton = document.getElementById('editLawyerInfoButton')
+let cancelUpdatingLawyerInfo = document.getElementById('cancelUpdatingLawyerInfo')
+let lawyerInfoLink = document.getElementById('lawyerInfoLink')
+let lawyerAvailableHoursLink = document.getElementById('lawyerAvailableHoursLink')
+let lawyerAppointmentsLink = document.getElementById('lawyerAppointmentsLink')
+let lawyerInfoWrapper = document.getElementById('lawyerEditableInfoWrapper')
+let availableHoursWrapper = document.getElementById('editableLawyerAvailableHoursWrapper')
+let appointmentsWrapper = document.getElementById('lawyerAppointmentsWrapper')
+let editLawyerProfileInfoModal = document.getElementById('editLawyerProfileInfoModal')
+let editLawyerProfileInfoButton = document.getElementById('editLawyerProfileInfoButton')
 
 editLawyerInfoButton.addEventListener('click', () => {
     authenticatedLawyerInfo.style.display = 'none'
     editLawyerInfoForm.style.display = 'flex'
     lawyerAvailableHoursLink.disabled = true
     lawyerAppointmentsLink.disabled = true
+})
+
+editLawyerProfileInfoButton.addEventListener('click', () => {
+    editLawyerProfileInfoModal.style.display='flex'
+    console.log('pressed')
 })
 
 cancelUpdatingLawyerInfo.addEventListener('click', (e) => {

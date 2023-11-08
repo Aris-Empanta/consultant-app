@@ -22,7 +22,7 @@
             {% endif %} 
             <p id="fullname">
                 {{first_name}} {{last_name}}
-                <button class="editButton">
+                <button class="editButton" id="editLawyerProfileInfoButton">
                     <i class="fas fa-pencil"></i>
                 </button>
             </p>
@@ -31,9 +31,6 @@
             <p id="lawyerAddress">
                 <i class="fas fa-map-marker-alt"></i> 
                 {{address}}, {{city}}
-                <button class="editButton" >
-                    <i class="fas fa-pencil"></i>
-                </button>
             </p>
             {% else %}
             <p id="lawyerAddress">
@@ -59,8 +56,9 @@
             {% include 'components/profile/lawyer_appointments.html' %}
             {% include 'components/profile/lawyer_available_hours.html' %}
         </div>
+        <div id="editLawyerProfileInfoModal">
+        </div>
     </div>
     
-    <script src="{% static 'js/lawyerProfile.js' %}"></script>
-    
+    <script src="{% static 'js/lawyerProfile.js' %}"></script>   
 {% endblock content %}

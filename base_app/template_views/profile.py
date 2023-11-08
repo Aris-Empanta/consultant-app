@@ -92,7 +92,7 @@ class Profile(View, BaseLawyer):
                     
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 else:
-                    return render(request,'components/profile/editable_client_profile.html', context)
+                    return render(request,'components/profile/client_profile.html', context)
             else:
 
                 if user.profile.Lawyer:                      
