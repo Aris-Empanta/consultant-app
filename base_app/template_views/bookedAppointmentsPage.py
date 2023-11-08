@@ -13,7 +13,7 @@ class BookedAppointmentsPage(View, BaseLawyer):
         lawyer = self.get_lawyer_by_username(request.user.username)
         appointments = Appointments.objects.filter(lawyer=lawyer, booked=True).order_by('-time_booked')
 
-        appointments_list = self.format_booked_appointments_data(appointments)
+        appointments_list = self.format_booked_appointments_data(request, appointments)
         
         context = {'appointments': appointments_list}
         return render(request, "components/booked_appointments.html", context)

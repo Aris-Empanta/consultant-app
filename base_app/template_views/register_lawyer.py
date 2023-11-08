@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -18,7 +17,7 @@ class LawyerInfo(View):
 
     def get(self, request):
 
-        form = LawyerInfoForm()
+        form = LawyerInfoForm() 
         areas_of_expertise = list(map(lambda x : x.value, AreasOfExpertise))
         context = { 'form': form, 'areas_of_expertise': areas_of_expertise }
         
@@ -48,8 +47,12 @@ class LawyerInfo(View):
 
             lawyer.save()
 
-            return redirect("lawyer_available_hours")
+            referring_url = request.META.get('HTTP_REFERER', None)
 
+            if referring_url and 'lawyer_info' in referring_url:
+                return redirect("lawyer_available_hours")
+            
+            return redirect('profile', username=request.user.username)    
         except Lawyer.DoesNotExist as e:
 
             print(e)

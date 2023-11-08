@@ -22,8 +22,27 @@
         </div> 
         <p><i class="fas fa-phone"></i> <span>{{phone}}</span></p>  
     </div>
-    <form action="" method="post" id="editLawyerInfoForm">
-        <input>
-        <button id="cancelUpdatingLawyerInfo">Cancel</button>
-    </form>  
+
+    <div id="updateLawyerInfoWrapper">
+        <form action="{% url 'lawyer_info' %}" method="post" id="editLawyerInfoForm">
+            {% csrf_token %}
+            <button id="areasOfExpertiseButton">Areas of expertise</button>
+            <div id="areasOfExpertiseList">
+                {% for area_of_expertise in areas_of_expertise %}
+                <span>
+                    <input type="checkbox" value="{{area_of_expertise}}" name="areas_of_expertise">
+                    <label>{{area_of_expertise}}</label>
+                </span>
+                {% endfor %}
+            </div>
+            {% for field in lawyer_info_form %}
+                <div class="lawyerInfoFormFieldandLabel">
+                    {{ field.label}}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button id="closeUpdateLawyerInfoModalButton">x</button>
+            <input type="submit" value="Proceed" id="submitLawyerInfo">
+        </form>
+    </div>  
 </div> 

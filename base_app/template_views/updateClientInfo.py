@@ -17,10 +17,12 @@ class UpdateClientInfo(View):
         with transaction.atomic():
             try:
                 user = User.objects.select_for_update().get(username=request.user.username)
+
                 if(not first_name == "" and not first_name.isspace()):
                     user.first_name = first_name
                 if(not last_name == "" and not last_name.isspace()):
                     user.last_name = last_name
+                    
                 user.save()
             except Exception as e:
                 messages.error(request, 'Unexpected error occured, please try again later')

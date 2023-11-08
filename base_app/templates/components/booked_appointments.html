@@ -8,11 +8,7 @@
         <div id="allAppointmentsWrapper">
             {% for appointment in appointments %}
             <a href="{{appointment.profile_link}}" class="appointmentDetailsWrapper">
-                {% if appointment.avatar_is_external_link %}
                 <img src="{{appointment.avatar}}">
-                {% else %}
-                <img src="{% static 'img/profile-pics/'|add:appointment.avatar %}">
-                {% endif %}
                 <p>
                     You have an appointment with <b>{{appointment.first_name}} {{appointment.last_name}}</b> on 
                     <b>{{appointment.day_name}} {{appointment.date}}</b> from 

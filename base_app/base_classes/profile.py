@@ -23,7 +23,7 @@ class BaseProfile:
             
         return is_external
     
-    # The method to add in avatar's name the /media/ in front 
+    # The method to add in avatar's name the /media/ in front  
     # if it is from our server's files.
     def format_avatar_link(self, request, avatar_link):
         if(not avatar_link.startswith('http') or avatar_link.startswith('/http')):

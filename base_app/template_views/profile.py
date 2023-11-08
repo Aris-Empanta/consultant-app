@@ -1,10 +1,11 @@
 from django.views import View
 from django.shortcuts import render
 from ..models import User, Lawyer, AvailableHours, Appointments
+from ..enums import AreasOfExpertise
 import urllib.parse
 from ..utils.dates import DateUtils
 from ..base_classes.lawyers import BaseLawyer
-
+from ..forms import LawyerInfoForm
 
 class Profile(View, BaseLawyer):
     
@@ -86,9 +87,12 @@ class Profile(View, BaseLawyer):
                     available_hours = AvailableHours.objects.filter(lawyer=lawyer)   
                     booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True).order_by('-ending_time')            
                     available_hours_list = DateUtils.format_available_hours_list(available_hours)
+                    areas_of_expertise = list(map(lambda x : x.value, AreasOfExpertise))
 
                     context['available_hours'] = available_hours_list
-                    context['booked_appointments'] = self.format_booked_appointments_data(booked_appointments)
+                    context['lawyer_info_form'] = LawyerInfoForm()
+                    context['booked_appointments'] = self.format_booked_appointments_data(request, booked_appointments)
+                    context['areas_of_expertise'] = areas_of_expertise
                     
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 else:

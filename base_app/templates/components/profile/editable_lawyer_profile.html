@@ -51,14 +51,13 @@
                 <button id="lawyerInfoLink">info</button>
                 <button id="lawyerAvailableHoursLink">available hours</button>
                 <button id="lawyerAppointmentsLink">appointments</button>
-            </div>
+            </div> 
             {% include 'components/profile/lawyer_editable_info.html' %}
             {% include 'components/profile/lawyer_appointments.html' %}
             {% include 'components/profile/lawyer_available_hours.html' %}
         </div>
-        <div id="editLawyerProfileInfoModal">
-        </div>
     </div>
     
-    <script src="{% static 'js/lawyerProfile.js' %}"></script>   
+    <script src="{% static 'js/editLawyerProfileInfo.js' %}"></script>   
+    <script src="{% static 'js/lawyerInfo.js' %}"></script>
 {% endblock content %}
