@@ -4,11 +4,27 @@ let updateLawyerInfoWrapper = document.getElementById('updateLawyerInfoWrapper')
 let lawyerInfoLink = document.getElementById('lawyerInfoLink')
 let lawyerAvailableHoursLink = document.getElementById('lawyerAvailableHoursLink')
 let lawyerAppointmentsLink = document.getElementById('lawyerAppointmentsLink')
-let editLawyerProfileInfoButton = document.getElementById('editLawyerProfileInfoButton')
+let editLawyerFullName = document.getElementById('editLawyerFullName')
 let editLawyerProfileInfoModal = document.getElementById('editLawyerProfileInfoModal')
 let lawyerInfoWrapper = document.getElementById('lawyerEditableInfoWrapper')
 let availableHoursWrapper = document.getElementById('editableLawyerAvailableHoursWrapper')
 let appointmentsWrapper = document.getElementById('lawyerAppointmentsWrapper')
+let editLawyerFullNameForm = document.getElementById('editLawyerFullNameForm')
+let cancelUpdateLawyerFullname = document.getElementById('cancelUpdateLawyerFullname')
+let lawyerFullName = document.getElementById('lawyerFullname')
+
+//The function to open the form that edits lawyer's full name.
+editLawyerFullName.addEventListener('click', () => {
+    lawyerFullName.style.display = 'none';
+    editLawyerFullNameForm.style.display = 'flex'
+})
+
+cancelUpdateLawyerFullname.addEventListener('click', (e) => {
+    e.preventDefault();
+    editLawyerFullNameForm.style.display = 'none';
+    lawyerFullName.style.display = 'initial';
+    editLawyerFullName.style.display = 'initial';
+})
 
 //The function to open the lawyer info edit modal
 editLawyerInfoButton.addEventListener('click', () => {
@@ -19,11 +35,6 @@ editLawyerInfoButton.addEventListener('click', () => {
 closeUpdateLawyerInfoModalButton.addEventListener('click', (e) => {
     e.preventDefault();
     updateLawyerInfoWrapper.style.display = 'none'
-})
-
-//The function to edit the lawyer's full name.
-editLawyerProfileInfoButton.addEventListener('click', () => {
-    editLawyerProfileInfoModal.style.display='flex'
 })
 
 //The function to show only the lawyer's info in lawyer's profile

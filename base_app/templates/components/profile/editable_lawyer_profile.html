@@ -20,12 +20,19 @@
             {% else %}
             <img src="{{avatar_url}}" id="profilePic" />
             {% endif %} 
-            <p id="fullname">
+            <p id="lawyerFullname">
                 {{first_name}} {{last_name}}
-                <button class="editButton" id="editLawyerProfileInfoButton">
+                <button class="editButton" id="editLawyerFullName">
                     <i class="fas fa-pencil"></i>
                 </button>
             </p>
+            <form action="{% url 'update_user_fullname' %}" method="POST" id="editLawyerFullNameForm">
+                {% csrf_token %}
+                <input type="text" placeholder="First Name" value="{{first_name}}" name="firstName">
+                <input type="text" placeholder="Last Name" value="{{last_name}}" name="lastName">
+                <button id="cancelUpdateLawyerFullname">Cancel</button>
+                <input type="submit" value="Save">
+            </form>
             <p id="username">@{{username}}</p>
             {% if address and city is not None %}
             <p id="lawyerAddress">

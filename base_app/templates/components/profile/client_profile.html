@@ -26,10 +26,10 @@
             <p id="clientFullname">
                 {{first_name}} {{last_name}}
                 {% if my_own_profile %}
-                <form action="{% url 'update_client_info' %}" method="POST" id="editClientFullNameForm">
+                <form action="{% url 'update_user_fullname' %}" method="POST" id="editClientFullNameForm">
                     {% csrf_token %}
-                    <input type="text" placeholder="First Name" value="{{first_name}}" name="clientFirstName">
-                    <input type="text" placeholder="Last Name" value="{{last_name}}" name="clientLastName">
+                    <input type="text" placeholder="First Name" value="{{first_name}}" name="firstName">
+                    <input type="text" placeholder="Last Name" value="{{last_name}}" name="lastName">
                     <button id="cancelUpdateClientFullname">Cancel</button>
                     <input type="submit" value="Save">
                 </form>

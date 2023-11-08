@@ -2,17 +2,15 @@ from django.views import View
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import allowed_users
 from ..models import User
 from django.db import transaction
 from django.contrib import messages
 
 @method_decorator(login_required(login_url="login"), name='dispatch')
-@method_decorator(allowed_users(allowed_roles=["clients"]), name='dispatch')
-class UpdateClientInfo(View):
+class UpdateUserFullname(View):
     def post(self, request):
-        first_name = request.POST.get('clientFirstName')
-        last_name = request.POST.get('clientLastName')
+        first_name = request.POST.get('firstName')
+        last_name = request.POST.get('lastName')
 
         with transaction.atomic():
             try:
