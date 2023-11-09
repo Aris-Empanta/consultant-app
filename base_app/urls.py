@@ -23,4 +23,5 @@ urlpatterns = [
     path('booked-appointments-page/', views.BookedAppointmentsPage.as_view(), name='booked_appointments_page' ),
     path('update-profile-pic/', views.UpdateProfilePic.as_view() , name='update_profile_pic'),
     path('update-user-fullname/', views.UpdateUserFullname.as_view(), name='update_user_fullname'),
+    path('messages/<slug:username>/', views.MessagesPage.as_view() ,name='messages'),
 ]

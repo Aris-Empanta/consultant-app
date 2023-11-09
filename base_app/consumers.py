@@ -4,7 +4,7 @@ from .models import Profile
 from channels.db import database_sync_to_async
 from django.contrib.auth.models import AnonymousUser
 
-
+# The consumer for the appointment notifications
 class AppointmentsConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
@@ -41,5 +41,44 @@ class AppointmentsConsumer(AsyncWebsocketConsumer):
     async def appointment_notification(self, event):
         client = event["client"]       
 
-        # We send to the WebSocket both client and lawyer information
+        # We send to the WebSocket client the client's info
         await self.send(text_data=json.dumps({"client": client}))
+
+
+
+
+
+
+# The consumer for the messaging between users
+class PrivateMessagingConsumer(AsyncWebsocketConsumer):
+
+    async def connect(self):
+        user = self.scope['user']
+
+        # We add the connected user in a group that contains his/her username
+        if not isinstance(user, AnonymousUser):
+            self.group_name = f"user_{user.username}"
+            await self.channel_layer.group_add(self.group_name, self.channel_name)
+
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        print("Disconnected!")
+
+    async def receive(self, text_data=None, bytes_data=None):
+        text_data_json = json.loads(text_data)
+        receiver = text_data_json['receiver']
+        message = text_data_json['message']
+
+        # Send message to the receiver
+        await self.channel_layer.group_send(
+            f'user_{receiver}', {
+                                 "type": "private.message", 
+                                 'message': message
+                                 })
+
+    async def private_message(self, event):
+        message = event['message']
+
+        # We send to the WebSocket both client and lawyer information
+        await self.send(text_data=json.dumps({"message": message}))
