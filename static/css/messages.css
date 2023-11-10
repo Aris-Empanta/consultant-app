@@ -13,6 +13,10 @@
 }
 
 #conversationScreen {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 90%;
 }
 
 #messageInputFieldWrapper {

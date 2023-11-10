@@ -3,6 +3,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from .models import Profile
 from channels.db import database_sync_to_async
 from django.contrib.auth.models import AnonymousUser
+from django.utils import timezone
+from channels.layers import get_channel_layer
 
 # The consumer for the appointment notifications
 class AppointmentsConsumer(AsyncWebsocketConsumer):
@@ -45,10 +47,6 @@ class AppointmentsConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({"client": client}))
 
 
-
-
-
-
 # The consumer for the messaging between users
 class PrivateMessagingConsumer(AsyncWebsocketConsumer):
 
@@ -58,27 +56,60 @@ class PrivateMessagingConsumer(AsyncWebsocketConsumer):
         # We add the connected user in a group that contains his/her username
         if not isinstance(user, AnonymousUser):
             self.group_name = f"user_{user.username}"
+
             await self.channel_layer.group_add(self.group_name, self.channel_name)
+            print(f'{self.channel_name} registered')
 
         await self.accept()
 
     async def disconnect(self, close_code):
-        print("Disconnected!")
+        pass
 
     async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
         receiver = text_data_json['receiver']
         message = text_data_json['message']
+        
+        sender_object = self.scope['user']
 
-        # Send message to the receiver
+        username = sender_object.username
+        avatar = sender_object.profile.avatar.url
+        time_sent = timezone.now()
+        formatted_time_sent = time_sent.strftime('%d/%m/%Y %H:%M')
+
+        # First we send the message back to the sender
+        await self.send(text_data=json.dumps({
+            'message': message,
+            'username': username,
+            'avatar': avatar,
+            'time_sent': formatted_time_sent,
+            'receiver': receiver,
+        }))
+
+        #We will create a group if not exists between the 2 users and register the 2 users.
+        group_name = f'{username}_{receiver}'
+
+        # Then we send message to the receiver if he/she is different
+        # than ourselves
         await self.channel_layer.group_send(
             f'user_{receiver}', {
-                                 "type": "private.message", 
-                                 'message': message
-                                 })
+                                "type": "private.message", 
+                                'message': message,
+                                'username': username,
+                                'receiver': receiver,
+                                'avatar': avatar,
+                                'time_sent': formatted_time_sent
+                                })
 
     async def private_message(self, event):
-        message = event['message']
+
+        data = {
+                'message' : event['message'],
+                'username' : event['username'],
+                'receiver': event['receiver'],
+                'avatar' : event['avatar'],
+                'time_sent' : event['time_sent'],
+               }
 
         # We send to the WebSocket both client and lawyer information
-        await self.send(text_data=json.dumps({"message": message}))
+        await self.send(text_data=json.dumps(data))

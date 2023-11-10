@@ -2,6 +2,9 @@
 const webHost = window.location.host;
 const websocket = new WebSocket(`ws://${webHost}/ws/private-messaging/`);
 
+//The necessary functions imports
+import { showMessage, isEmptyOrWhiteSpace } from "./privateMessagingHelpers.js";
+
 websocket.onopen = () => {
     console.log('user in to send messages')
 }
@@ -38,22 +41,35 @@ if(currentUrl.startsWith(messagingPageUrl)) {
             }
 
             websocket.send(JSON.stringify(data))
+            messageInputField.value = ''
           }
     })    
 
-    function isEmptyOrWhiteSpace(str) {
-        return str.trim() === '';
-      }
+    //We will make the send button clickable with enter
+    window.onkeydown = function(event){
+        if(event.keyCode === 13) {
+            event.preventDefault();
+            sendMessageButton.click(); //This will trigger a click on the first <a> element.
+        }
+    };
 
     // The receiving messages functionality
     websocket.onmessage = async (event) => {
-        console.log(event)
-        console.log('received')
+        let data = JSON.parse(event.data)
+
+        let message = data.message
+        let senderUsername = data.username
+        let receiverUsername = data.receiver
+        let avatar = data.avatar
+        let time_sent = data.time_sent
+        let senderInUrl = window.location.pathname.replace('/messages/', '')
+        senderInUrl = senderInUrl.slice(0, senderInUrl.length-1)
+        
+        // We will show the newly receive message only in the conversation 
+        // screen with the sender
+        if(senderUsername===senderInUrl || receiverUsername===senderInUrl) {
+            showMessage(message, senderUsername, avatar, time_sent)
+        }
     }
 } else {
-    // The receiving messages functionality
-    websocket.onmessage = async (event) => {
-        console.log(event)
-        console.log('received')
-    }
 }
