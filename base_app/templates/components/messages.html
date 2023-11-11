@@ -5,8 +5,16 @@
     <div id="messagesPage">
         <div id="conversationWrapper">
             <div id="conversationScreen">
+                {% for message in messages %}
+                <div class="privateMessage">
+                    <p>{{message.sender_username}}</p>
+                    <img src='{{message.sender_avatar}}'>
+                    <p>{{message.message}}</p>
+                    <p>{{message.time_sent}}</p>
+                 </div>`
+                {% endfor %}
             </div>
-            <input type="hidden" id="user-info" value="{{ sender.username }}">
+            <input type="hidden" id="user-info" value="{{ user.username }}">
             <div id="messageInputFieldWrapper">
                 <input type="text" id="messageInputField">
                 <button id="sendMessageButton">Send</button>

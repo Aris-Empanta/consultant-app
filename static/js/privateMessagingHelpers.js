@@ -27,7 +27,6 @@ function formatAvatarUrl(avatar) {
     // Configuration for google images
     if(avatar.startsWith('/media/http')) {
       let decodedURL = decodeURIComponent(avatar.replace('/media/', ''));
-      console.log(decodedURL)
       return decodedURL
     }
     console.log('no')
