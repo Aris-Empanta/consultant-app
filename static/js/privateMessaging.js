@@ -6,13 +6,9 @@ const websocket = new WebSocket(`ws://${webHost}/ws/private-messaging/`);
 import { showMessage, isEmptyOrWhiteSpace } from "./privateMessagingHelpers.js";
 
 websocket.onopen = () => {
-    console.log('user in to send messages')
+    console.log('user connected')
 }
 
-websocket.onmessage = async (event) => {
-    console.log(event)
-    console.log('received')
-}
 
 // We check if it is the private messaging page to put the listener to 
 // the send message button, so that we avoid any malfunction on message 
@@ -58,16 +54,17 @@ if(currentUrl.startsWith(messagingPageUrl)) {
         let data = JSON.parse(event.data)
 
         let message = data.message
-        let senderUsername = data.username
-        let receiverUsername = data.receiver
+        let senderUsername = data.sender
+        let currentUser = document.getElementById('user-info').value
         let avatar = data.avatar
         let time_sent = data.time_sent
         let senderInUrl = window.location.pathname.replace('/messages/', '')
+
         senderInUrl = senderInUrl.slice(0, senderInUrl.length-1)
         
         // We will show the newly receive message only in the conversation 
         // screen with the sender
-        if(senderUsername===senderInUrl || receiverUsername===senderInUrl) {
+        if(senderUsername===senderInUrl || senderUsername===currentUser) {
             showMessage(message, senderUsername, avatar, time_sent)
         }
     }

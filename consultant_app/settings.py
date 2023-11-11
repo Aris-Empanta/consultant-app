@@ -63,14 +63,22 @@ INSTALLED_APPS = [
 
 ASGI_APPLICATION = "consultant_app.asgi.application"
 
-CHANNEL_LAYERS = {
+# We use Redis for the channel layer only in production.
+if DEBUG:
+    CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [(os.getenv('REDIS_HOST'))],
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+  }
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [(os.getenv('REDIS_HOST'))],
+            },
         },
-    },
-}
+    }
 
 AUTH_USER_MODEL = "base_app.User"
 

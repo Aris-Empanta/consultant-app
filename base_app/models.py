@@ -56,3 +56,9 @@ class Rating(models.Model):
     client = models.OneToOneField(Client, on_delete=models.PROTECT)
     lawyer = models.OneToOneField(Lawyer, on_delete=models.PROTECT)
     value = models.IntegerField(blank=False, default=0)
+
+class Messages(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    receiver = models.CharField(max_length=150, null=True)
+    time_sent = models.DateTimeField(auto_now_add=True)
+    message = models.TextField(null=False)

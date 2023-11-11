@@ -1,6 +1,6 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from .models import Profile
+from .models import Profile, Messages
 from channels.db import database_sync_to_async
 from django.contrib.auth.models import AnonymousUser
 from django.utils import timezone
@@ -72,22 +72,22 @@ class PrivateMessagingConsumer(AsyncWebsocketConsumer):
         
         sender_object = self.scope['user']
 
-        username = sender_object.username
+        sender = sender_object.username
         avatar = sender_object.profile.avatar.url
         time_sent = timezone.now()
         formatted_time_sent = time_sent.strftime('%d/%m/%Y %H:%M')
 
+        #We save the message to the database.
+        await self.save_message(sender_object, receiver, message)
+
         # First we send the message back to the sender
         await self.send(text_data=json.dumps({
             'message': message,
-            'username': username,
+            'sender': sender,
             'avatar': avatar,
             'time_sent': formatted_time_sent,
             'receiver': receiver,
         }))
-
-        #We will create a group if not exists between the 2 users and register the 2 users.
-        group_name = f'{username}_{receiver}'
 
         # Then we send message to the receiver if he/she is different
         # than ourselves
@@ -95,7 +95,7 @@ class PrivateMessagingConsumer(AsyncWebsocketConsumer):
             f'user_{receiver}', {
                                 "type": "private.message", 
                                 'message': message,
-                                'username': username,
+                                'sender': sender,
                                 'receiver': receiver,
                                 'avatar': avatar,
                                 'time_sent': formatted_time_sent
@@ -105,7 +105,7 @@ class PrivateMessagingConsumer(AsyncWebsocketConsumer):
 
         data = {
                 'message' : event['message'],
-                'username' : event['username'],
+                'sender' : event['sender'],
                 'receiver': event['receiver'],
                 'avatar' : event['avatar'],
                 'time_sent' : event['time_sent'],
@@ -113,3 +113,10 @@ class PrivateMessagingConsumer(AsyncWebsocketConsumer):
 
         # We send to the WebSocket both client and lawyer information
         await self.send(text_data=json.dumps(data))
+
+    @database_sync_to_async
+    def save_message(self, sender_object, receiver, message):
+        message = Messages(sender=sender_object, 
+                           receiver=receiver, 
+                           message=message)
+        message.save()
