@@ -3,12 +3,9 @@ const webHost = window.location.host;
 const websocket = new WebSocket(`ws://${webHost}/ws/private-messaging/`);
 
 //The necessary functions imports
-import { showMessage, isEmptyOrWhiteSpace } from "./privateMessagingHelpers.js";
-
-websocket.onopen = () => {
-    console.log('user connected')
-}
-
+import { showMessage, isEmptyOrWhiteSpace, 
+         getUncheckedMessagesAmount, markMessagesAsChecked,
+         fetchConversations } from "./privateMessagingHelpers.js";
 
 // We check if it is the private messaging page to put the listener to 
 // the send message button, so that we avoid any malfunction on message 
@@ -16,6 +13,28 @@ websocket.onopen = () => {
 const currentUrl = window.location.href;
 const origin = window.location.origin
 const messagingPageUrl = `${origin}/messages/`
+
+// The messages modal mechanism
+const messagesNotificationButton = document.getElementById('messagesNotificationButton')
+const messagesPreviewModal = document.getElementById('messagesPreviewModal')
+const appointmentsModal = document.getElementById('appointmentsModal')
+const uncheckedMessagesWrapper = document.getElementById('uncheckedMessagesWrapper')
+const uncheckedMessages = document.getElementById('uncheckedMessages')
+
+// When a user clicks on the messages notification button, all the messages of the 
+// user are marked as checked, and the messages previewmodal appears.
+messagesNotificationButton.addEventListener('click', async () => {
+
+    if(messagesPreviewModal.style.display !== 'flex') {
+        await markMessagesAsChecked()
+        uncheckedMessagesWrapper.style.display = 'none'
+        messagesPreviewModal.style.display = 'flex'
+        const conversations = await fetchConversations()
+        console.log(conversations)
+    } else {
+        messagesPreviewModal.style.display = 'none'
+    }
+})
 
 if(currentUrl.startsWith(messagingPageUrl)) {
 
@@ -69,4 +88,22 @@ if(currentUrl.startsWith(messagingPageUrl)) {
         }
     }
 } else {
+    
+    websocket.onmessage = async (event) => {
+        //We close the apointments modal
+        appointmentsModal.style.display = 'none';
+
+        // If the messagesPreviewModal is  closed, just fetch and show the 
+        // amount of all the user's unchecked messages.
+        if(messagesPreviewModal.style.display !== 'flex') {
+           let uncheckedMessagesAmount = await getUncheckedMessagesAmount()
+           uncheckedMessagesWrapper.style.display = 'initial'
+           uncheckedMessages.innerText = uncheckedMessagesAmount
+        }
+
+        // If the messagesPreviewModal is open, re-fetch all the messages
+        // and mark them all as checked.
+
+        // 
+    }
 }

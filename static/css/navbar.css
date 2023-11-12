@@ -44,3 +44,34 @@
 #uncheckedAppointments {
     margin: 0;
 }
+
+#messagesNotificationButton {
+    cursor: pointer;
+    position: relative;
+    margin-top: 20px;
+}
+
+#uncheckedMessagesWrapper {
+    display: none;
+    position: absolute;
+    padding: 0.3rem 0.5rem;
+    border-radius: 50%;
+    background-color: greenyellow;
+    bottom: 10px;
+    left: 10px;
+}
+
+#uncheckedMessages {
+    margin: 0;
+}
+
+#messagesPreviewModal {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    border: 1px solid black;
+    background-color: white;
+    top: 40px;
+    height: 400px;
+    overflow-y: scroll;
+}

@@ -59,6 +59,8 @@ class Rating(models.Model):
 
 class Messages(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    receiver = models.CharField(max_length=150, null=True)
+    receiver = models.CharField(max_length=150, null=True)    
     time_sent = models.DateTimeField(auto_now_add=True)
     message = models.TextField(null=False)
+    read = models.BooleanField(default=False)
+    checked = models.BooleanField(default=False)
