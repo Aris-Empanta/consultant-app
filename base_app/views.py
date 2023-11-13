@@ -16,5 +16,6 @@ from .api_views.getUncheckedAppointments import GetUncheckedAppointments
 from .api_views.allBookedAppointments import AllBookedAppointments
 from .api_views.markAppointmentAsChecked import MarkAppointmentAsChecked
 from .api_views.getUncheckedMessages import GetUncheckedMessages
-from .api_views.markMessagesAsChecked import MarkAppointmentAsChecked
+from .api_views.markMessagesAsChecked import MarkMessagesAsChecked
 from .api_views.getAllConversations import GetAllConversations
+from .api_views.markMessagesAsRead import MarkMessagesAsRead

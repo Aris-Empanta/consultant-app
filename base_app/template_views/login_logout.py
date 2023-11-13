@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-from ..decorators import allowed_referers, login_register_view
+from ..decorators import login_register_view
 from ..models import Profile
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from ..forms import PasswordResetForm, SetPasswordForm

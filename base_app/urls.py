@@ -25,6 +25,7 @@ urlpatterns = [
     path('update-user-fullname/', views.UpdateUserFullname.as_view(), name='update_user_fullname'),
     path('messages/<slug:username>/', views.MessagesPage.as_view() ,name='messages'),
     path('unchecked-messages/', views.GetUncheckedMessages.as_view(), name='unchecked-messages'),
-    path('mark-messages-as-checked/', views.MarkAppointmentAsChecked.as_view(), name='mark_messages_as_checked'),
-    path('get-all-conversations/', views.GetAllConversations.as_view(), name="get_all_conversations")
+    path('mark-messages-as-checked/', views.MarkMessagesAsChecked.as_view(), name='mark_messages_as_checked'),
+    path('get-all-conversations/', views.GetAllConversations.as_view(), name="get_all_conversations"),
+    path('mark-messages-as-read/', views.MarkMessagesAsRead.as_view(), name='mark_messages_as_read'),
 ]

@@ -1,6 +1,7 @@
 #messagesPage {
     height: 90%;
     margin-top: 100px;
+    display: flex;
 }
 
 #conversationWrapper {  
@@ -33,3 +34,5 @@
 #sendMessageButton {
     width: 10%;
 }
+
+ 

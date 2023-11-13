@@ -1,5 +1,6 @@
 import uuid
 import time
+from urllib.parse import unquote 
 
 class BaseProfile:
 
@@ -35,7 +36,7 @@ class BaseProfile:
                 avatar_link = f'{ protocol }://{request.META["HTTP_HOST"]}/media/{avatar_link}'
                 return avatar_link
         
-        return avatar_link
+        return unquote(avatar_link)
     
     # The method to rename a profile pic image so that it has a
     #  unique name in the server

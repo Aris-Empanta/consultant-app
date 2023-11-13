@@ -124,15 +124,69 @@ async function fetchConversations() {
         }
   
         // // We parse the JSON response
-        // let responseData = await response.json();
-        // let amount = responseData.amount
-  
-  
-        // return amount
+        let responseData = await response.json();
+        let conversations = responseData.conversations
+
+        return conversations  
     } catch (error) {
         // Handle any errors that occur during the fetch or response handling (change it in production)
         console.error('An unexpected error occured, please try again later');
     }
   }
 
-export {showMessage, isEmptyOrWhiteSpace, getUncheckedMessagesAmount, markMessagesAsChecked, fetchConversations }
+function renderConversations(conversations, messagesPreviewModal) {    
+
+    messagesPreviewModal.innerHTML = ''   
+
+    for(let i=0; i<conversations.length; i++) {
+        let sender = conversations[i].sender
+        let avatar = conversations[i].avatar
+        let message = conversations[i].message
+        let timeAgo = conversations[i].time_sent
+        let read =  conversations[i].read
+
+        let readStatusClass = read ? 'messageRead' : 'messageUnread'
+
+        let conversationPreview = `<a href='/messages/${sender}/'  class="conversationWrapper ${readStatusClass}">
+                                       <img src='${avatar}' >
+                                       <p>${sender}</p>
+                                       <p>${message}</p> 
+                                       <p>${timeAgo} ago</p> 
+                                   </a>`
+        messagesPreviewModal.insertAdjacentHTML('beforeend', conversationPreview)
+    }
+}
+
+
+async function markMessagesAsRead() {
+    
+    try {
+        const csrftoken = getCsrfToken();
+        const url = '/mark-messages-as-read/';
+
+        //We define the request attributes:
+        const request = new Request(url, {
+            method: 'PATCH', // Specify the HTTP method (e.g., GET, POST)
+            headers: {
+              'X-CSRFToken': csrftoken,
+              'Content-Type': 'application/json',
+            },
+            credentials: "same-origin"
+          });
+
+        // Use the Fetch API with async/await to make the GET request
+        const response = await fetch(request);
+
+        // Check if the response status is OK (status code 200)
+        if (!response.ok) {
+            throw new Error('A Network error occured, please try again later.');
+        }
+        } catch (error) {
+            // Handle any errors that occur during the fetch or response handling (change it in production)
+            console.error('An unexpected error occured, please try again later');
+        }
+}
+
+export {showMessage, isEmptyOrWhiteSpace, 
+        getUncheckedMessagesAmount, markMessagesAsChecked, 
+        fetchConversations, renderConversations, markMessagesAsRead }

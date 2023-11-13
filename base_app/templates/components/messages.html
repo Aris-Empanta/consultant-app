@@ -3,6 +3,9 @@
 {% block content %}
     {% include 'components/reusable/navbar.html' %}
     <div id="messagesPage">
+        <div id="conversationsListWrapper">   
+            <p id="loadingSideConversations">Loading...</p>         
+        </div>
         <div id="conversationWrapper">
             <div id="conversationScreen">
                 {% for message in messages %}

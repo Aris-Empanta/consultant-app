@@ -75,3 +75,16 @@
     height: 400px;
     overflow-y: scroll;
 }
+
+.conversationWrapper {
+    display: flex;
+    border: 1px solid black;
+}
+
+.messageRead {
+    background-color: white;
+}
+
+.messageUnread {
+    background-color: aquamarine;
+}

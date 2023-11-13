@@ -3,7 +3,7 @@ from django.views import View
 from ..base_classes.lawyers import BaseLawyer
 from ..models import Appointments
 from django.utils.timesince import timesince
-from django.utils import timezone
+from django.utils import timezone 
 from django.utils.decorators import method_decorator
 from ..decorators import allowed_users
 
