@@ -5,7 +5,7 @@ from django.shortcuts import render
 from ..models import User, Messages
 from django.db.models import Q
 from ..base_classes.profile import BaseProfile
-from urllib.parse import unquote
+from urllib.parse import unquote 
 
 @method_decorator(login_required(login_url="login"), name='dispatch')
 class MessagesPage(View, BaseProfile):

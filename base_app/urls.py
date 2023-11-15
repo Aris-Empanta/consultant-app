@@ -29,3 +29,9 @@ urlpatterns = [
     path('get-all-conversations/', views.GetAllConversations.as_view(), name="get_all_conversations"),
     path('mark-messages-as-read/', views.MarkMessagesAsRead.as_view(), name='mark_messages_as_read'),
 ]
+
+daemon_urls = [
+    path('delete-past-appointments/', views.DeletePastAppointments.as_view(), name='delete_past_appointments')
+]
+
+urlpatterns += daemon_urls
