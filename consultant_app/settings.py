@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-
+ 
 SITE_ID=3
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'base_app.apps.BaseAppConfig',
+    'base_app',
     'django.contrib.sites',
     'allauth',
     'allauth.account',

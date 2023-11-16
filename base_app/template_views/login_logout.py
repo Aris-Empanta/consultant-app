@@ -9,7 +9,7 @@ from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, 
 from ..forms import PasswordResetForm, SetPasswordForm
 import os
 from dotenv import load_dotenv
-
+ 
 load_dotenv()
 
 @method_decorator(login_register_view(redirect_url="home"), name='dispatch')

@@ -31,7 +31,8 @@ urlpatterns = [
 ]
 
 daemon_urls = [
-    path('delete-past-appointments/', views.DeletePastAppointments.as_view(), name='delete_past_appointments')
+    path('delete-past-appointments/', views.DeletePastAppointments.as_view(), name='delete_past_appointments'),
+    path('remind-appointments/', views.RemindAppointments.as_view(), name='remind_appointments'),
 ]
 
 urlpatterns += daemon_urls
