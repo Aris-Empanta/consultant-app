@@ -61,7 +61,7 @@ class LawyerInfo(View):
             print(e)
 
 @method_decorator(login_required(login_url="login"), name='dispatch')
-@method_decorator(allowed_users(allowed_roles=["lawyers"]), name='dispatch')
+@method_decorator(allowed_users(allowed_roles=["lawyers"]), name='dispatch') 
 class LawyerAvailableHours(View):
     def get(self, request):
         # We will create a dictionary that contains the current day and the 
@@ -214,4 +214,4 @@ class LawyerAvailableHours(View):
                                                           ending_time_2,
                                                           appointments_per_second_interval)
 
-        return redirect('lawyer_profile', username=request.user.username)
+        return redirect('profile', username=request.user.username)

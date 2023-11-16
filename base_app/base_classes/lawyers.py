@@ -17,7 +17,7 @@ class BaseLawyer(BaseProfile):
     # This method takes a list of appointments object, and creates a context from 
     # their fields with all the info needed to be rendered.
     def format_booked_appointments_data(self,  request, appointments_objects_list)->list:
-        
+                
         return [
                   {
                     'day_name': appointment.starting_time.strftime('%A'),

@@ -34,6 +34,8 @@ class AppointmentsDaemon:
                     print(response['message'])
             except RequestException as e:
                 print(f"An error occurred during the request: {e}")
+            except Exception as e:
+                print(f"General Exception in Daemon: {e}")
 
             # The daemon will run every 10 minutes for the appointments reminder.
-            time.sleep(10*60)
+            time.sleep(2)

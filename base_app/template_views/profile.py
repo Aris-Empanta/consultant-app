@@ -6,6 +6,7 @@ import urllib.parse
 from ..utils.dates import DateUtils
 from ..base_classes.lawyers import BaseLawyer
 from ..forms import LawyerInfoForm
+from datetime import datetime
 
 class Profile(View, BaseLawyer):
     
@@ -50,7 +51,9 @@ class Profile(View, BaseLawyer):
                     # First we fetch the unbooked appointments of the lawyer so that a 
                     # client can choose them.
                     lawyer = Lawyer.objects.get(profile=user.profile)
-                    appointments = Appointments.objects.filter(lawyer=lawyer, booked=False)
+                    appointments = Appointments.objects.filter(lawyer=lawyer, 
+                                                               booked=False, 
+                                                               starting_time__gt = datetime.now())
                     # We format the appointments starting and ending time:
                     formated_appointments = DateUtils.format_appointments(appointments)
 
@@ -83,6 +86,7 @@ class Profile(View, BaseLawyer):
                 my_own_profile = True
                 context['my_own_profile'] = my_own_profile
 
+                # The case I logged in as a lawyer:
                 if user.profile.Lawyer:  
                     available_hours = AvailableHours.objects.filter(lawyer=lawyer)   
                     booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True).order_by('-ending_time')            
@@ -95,6 +99,7 @@ class Profile(View, BaseLawyer):
                     context['areas_of_expertise'] = areas_of_expertise
                     
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
+                # The case I logged in as a client:
                 else:
                     return render(request,'components/profile/client_profile.html', context)
             else:
@@ -108,5 +113,5 @@ class Profile(View, BaseLawyer):
             print('user does not exist')
             return render(request, 'components/reusable/404.html')
         except Exception as e:
-            print(f'General exception: {e}')
+            print(f'General exception in Profile: {e}')
             return render(request, 'components/reusable/500.html')      

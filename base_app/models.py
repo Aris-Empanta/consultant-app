@@ -51,6 +51,7 @@ class Appointments(models.Model):
     ending_time = models.DateTimeField(null=True)
     checked = models.BooleanField(default=False)
     time_booked = models.DateTimeField(null=True)
+    informed_client = models.BooleanField(default=False)
 
 class Rating(models.Model):
     client = models.OneToOneField(Client, on_delete=models.PROTECT)
