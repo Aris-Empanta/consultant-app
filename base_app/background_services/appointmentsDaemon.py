@@ -9,15 +9,24 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class AppointmentsDaemon:
+
+    def __init__(self):
+        self.running = True
     
     def start(self):
+        if not self.running:
+            self.running = True
+            
         process = Process(target=self.task,daemon=True)
         process.start()
+
+    def stop(self):
+        self.running = False
         
     def task(self):
-        while True:
+        while self.running:
             try:
-                remind_appointment_headers = {'Api-Key': os.getenv('REMIND_APPOINTMENTS_API_KEY')}
+                remind_appointment_headers = {'Api-Key': os.getenv('API_KEY')}
                 remind_appointments = requests.post(os.getenv('REMIND_APPOINTMENTS_URL'),
                                                     headers=remind_appointment_headers)
                 response = remind_appointments.json()
@@ -26,10 +35,10 @@ class AppointmentsDaemon:
                 # We will delete the past appointments every midnight.
                 hour_now = int(datetime.now().strftime('%H'))
 
-                if hour_now == 0:
-                    delete_appointments_headers = {'Api-Key': os.getenv('DELETE_APPOINTMENTS_API_KEY')}
+                if hour_now == 15:
+                    delete_appointments_headers = {'Api-Key': os.getenv('API_KEY')}
                     delete_appointments = requests.delete(os.getenv('DELETE_APPOINTMENTS_URL'), 
-                                                        headers=delete_appointments_headers)
+                                                          headers=delete_appointments_headers)
                     response = delete_appointments.json()
                     print(response['message'])
             except RequestException as e:
@@ -38,4 +47,4 @@ class AppointmentsDaemon:
                 print(f"General Exception in Daemon: {e}")
 
             # The daemon will run every 10 minutes for the appointments reminder.
-            time.sleep(2)
+            time.sleep(10 * 60)

@@ -6,9 +6,12 @@ from datetime import datetime,timedelta
 from django.core.mail import send_mail
 import os
 from dotenv import load_dotenv
+from django.utils.decorators import method_decorator
+from ..decorators import api_key_required
 
 load_dotenv()
 
+@method_decorator(api_key_required(), name='dispatch')
 class RemindAppointments(View):
 
     @csrf_exempt
@@ -20,8 +23,8 @@ class RemindAppointments(View):
         #  has not been informed.
         now = datetime.now()
         _3_hours_later = now + timedelta(hours = 3)
-        upcoming_appointments = Appointments.objects.filter(# starting_time__gte=now,
-                                                            # starting_time__lte=_3_hours_later,
+        upcoming_appointments = Appointments.objects.filter(starting_time__gte=now,
+                                                            starting_time__lte=_3_hours_later,
                                                             booked=True,
                                                             informed_client=False)
 

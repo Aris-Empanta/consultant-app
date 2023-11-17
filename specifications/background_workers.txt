@@ -1,5 +1,5 @@
 We will use 2 background workers:
-- For deleting appointments that ended 2 days ago or more.
+- For deleting appointments that ended 7 days ago or more.
 - For reminding appointments that will happen in 3 hours to the client and a lawyer.
 
 For the above functionalities i use Python multiprocessing. The reasons why:

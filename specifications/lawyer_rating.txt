@@ -1,0 +1,4 @@
+Lawyer Rating mechanism:
+- A client can rate a lawyer within 7 days after the appointment.
+- Every time a patient navigates to a lawyer's profile, if he had a recent appointment, he can rate a lawyer.
+- If it is after 7 days he can modify the rating if he/she had rated before.

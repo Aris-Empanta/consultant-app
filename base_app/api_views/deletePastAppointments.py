@@ -3,7 +3,10 @@ from django.http import JsonResponse
 from ..models import Appointments
 from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime,timedelta
+from django.utils.decorators import method_decorator
+from ..decorators import api_key_required
 
+@method_decorator(api_key_required(), name='dispatch')
 class DeletePastAppointments(View):
 
     @csrf_exempt
@@ -11,12 +14,12 @@ class DeletePastAppointments(View):
         return super().dispatch(*args, **kwargs)
      
     def delete(self, request): 
-        _2_days_ago = datetime.now() - timedelta(days = 2)
+        _7_days_ago = datetime.now() - timedelta(days=7)
         # We fetch and delete all the appointments that ended more than 2 days ago.
         try:
-            past_appointments = Appointments.objects.filter(ending_time__lt=_2_days_ago)
+            past_appointments = Appointments.objects.filter(ending_time__lt=_7_days_ago)
             past_appointments.delete()
 
-            return JsonResponse(f"{past_appointments.count()} past appointments deleted successfully.")
+            return JsonResponse({'message': "Past appointments deleted successfully."})
         except Exception as e:
-            return JsonResponse(f"An error occurred while deleting past appointments: {e}")
+            return JsonResponse({'message': f"An error occurred while deleting past appointments: {e}"})
