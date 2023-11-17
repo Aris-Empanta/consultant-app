@@ -1,5 +1,23 @@
 import { getCsrfToken } from './csrf.js';
 
+const openBookAppointmentModalButton = document.getElementById('bookAppointment')
+
+openBookAppointmentModalButton.addEventListener('click', () => {
+
+    let modal = document.getElementById('appointmentsModalWrapper')
+
+    modal.style.display = 'flex'
+})
+
+const closeAppointmentsModal = document.getElementById('closeAppointmentsModal')
+
+closeAppointmentsModal.addEventListener('click', () => {
+
+    let modal = document.getElementById('appointmentsModalWrapper')
+
+    modal.style.display = 'none'
+})
+
 const bookAppointmentButton = document.querySelectorAll('.bookAppointmentButton')
 
 for(let i=0; i < bookAppointmentButton.length; i++) {

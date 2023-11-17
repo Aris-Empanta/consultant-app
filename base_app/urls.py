@@ -28,6 +28,7 @@ urlpatterns = [
     path('mark-messages-as-checked/', views.MarkMessagesAsChecked.as_view(), name='mark_messages_as_checked'),
     path('get-all-conversations/', views.GetAllConversations.as_view(), name="get_all_conversations"),
     path('mark-messages-as-read/', views.MarkMessagesAsRead.as_view(), name='mark_messages_as_read'),
+    path('lawyer-ratings/', views.LawyerRatings.as_view(), name='lawyer_ratings'),
 ]
 
 daemon_urls = [

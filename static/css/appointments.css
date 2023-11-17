@@ -5,12 +5,16 @@
     background-color: #9370DB;
     color: white;
     font-size: 0.9rem;
-    font-size: Tahoma, sans-serif;
+    font-size: Tahoma, sans-serif; 
     padding: 0.2rem 0.5rem;
 }
 
 #availableAppointmentsDays {
     display: flex;
+}
+
+#appointmentsModalWrapper {
+    display: none;
 }
 
 #appointmentsModal {
