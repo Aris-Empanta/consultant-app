@@ -71,6 +71,7 @@ class Profile(View, BaseLawyer, BaseClient):
                     context['lawyer_authenticated'] = self.lawyer_authenticated
                     context['my_own_profile'] = self.my_own_profile
                     context['appointments'] = formated_appointments
+                    context['ratings'] = self.calculateAverageRating(lawyer) # A decimal number or a string
             
 
             # If there is an authenticated user and this user is a lawyer, we mention

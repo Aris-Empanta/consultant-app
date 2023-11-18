@@ -25,10 +25,7 @@
             <button id="sendMessageToProfile"> Send Message </button>
         </div>  
         <div id="lawyerDetailsWrapper">
-            {% if averageRating < 1 %}
-            <p id="noRatingsYet">There are no ratings yet</p>
-            {% else %}
-            {% endif %}
+            <p>{{ratings}}</p>
 
             {% if can_rate_lawyer %}
             <button id="rateLawyerButton">Rate this Lawyer</button>

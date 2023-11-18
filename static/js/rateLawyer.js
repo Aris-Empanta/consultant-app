@@ -22,6 +22,9 @@ if(rateLawyerButton) {
             const csrftoken = getCsrfToken();
             const url = '/lawyer-ratings/';
             
+            //Start the loader
+            waitingForRating()
+
             // We extract the lawyer's username from the url
             let lawyerUsernameWithSlashes = window.location.href.split('profile')[1]
             // We remove the remaining slashes forward and after
@@ -51,11 +54,31 @@ if(rateLawyerButton) {
 
             // Check if the response status is OK (status code 200)
             if (!response.ok) {
-                throw new Error('A Network error occured, please try again later.');
+                restoreRatingSubmitButton()
+                return alert('A Network error occured, please try again later.');
             }
+
+            ratingSubmitted()
         } catch (error) {
             // Handle any errors that occur during the fetch or response handling (change it in production)
-            console.error('An unexpected error occured, please try again later');
+            restoreRatingSubmitButton()
+           alert('An unexpected error occured, please try again later');
         }
     })
+
+    function waitingForRating() {
+        submitLawyerRatingButton.innerHTML = 'Please Wait'
+        submitLawyerRatingButton.style.backgroundColor = 'green'
+    }
+
+    function ratingSubmitted() {
+        submitLawyerRatingButton.innerHTML = 'Rating submited!'
+        submitLawyerRatingButton.style.backgroundColor = 'blue'
+        setTimeout(() => window.location.reload(), 2000)
+    }
+
+    function restoreRatingSubmitButton() {
+        submitLawyerRatingButton.innerHTML = 'Submit'
+        submitLawyerRatingButton.style.backgroundColor = 'silver'
+    }
 }

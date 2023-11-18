@@ -1,7 +1,9 @@
-from ..models import User, Profile, Lawyer
+from ..models import User, Profile, Lawyer, Rating
 from .profile import BaseProfile
 from django.utils import timezone
 from django.utils.timesince import timesince
+from functools import reduce
+import math
 
 class BaseLawyer(BaseProfile):
 
@@ -33,3 +35,16 @@ class BaseLawyer(BaseProfile):
                   } 
                   for appointment in appointments_objects_list
                 ] 
+    # The method to calculate the average rating if ratings exist.
+    def calculateAverageRating(self, lawyer):
+        ratings_queryset = Rating.objects.filter(lawyer=lawyer)
+
+        if len(ratings_queryset) > 0:
+          ratings = list(map(lambda x : x.value , ratings_queryset))
+          average_rating = math.ceil((reduce(lambda x, y : x + y, ratings) / len(ratings)) * 10) / 10
+
+          return average_rating
+        
+        return 'There are no ratings yet'
+
+       

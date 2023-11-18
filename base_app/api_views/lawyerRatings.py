@@ -8,9 +8,7 @@ from ..models import Rating
 
 @method_decorator(allowed_users(allowed_roles=["clients"]), name='dispatch')
 class LawyerRatings(View, BaseLawyer):
-    def get(self, request):
-        pass
-
+    
     def post(self, request):
         body = json.loads(request.body)
         rating = body['rating']
