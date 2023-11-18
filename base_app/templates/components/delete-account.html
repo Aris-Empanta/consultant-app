@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'components/reusable/navbar.html' %}
+
+    <div id="deleteAccountPage">
+        <div id="deleteAccountWrapper">
+            <h2 id="deleteAccountConfirmation">Are you sure you want to delete your account?</h2>
+            <button id="deleteAccountButton">Delete Account</button>
+        </div>
+    </div>
+    <script type="module" src="{% static 'js/deleteAccount.js' %}"></script>
+
+{% endblock content %}

@@ -1,11 +1,6 @@
 {% load static %}
-
 <div id="navbar">
     {% if request.user.is_authenticated %}
-
-
-
-
         <button id="messagesNotificationButton">
             <i class="fas fa-message"></i>
             <div id="uncheckedMessagesWrapper">
@@ -15,12 +10,6 @@
         <div id="messagesPreviewModal">
             <div id="loadingMessages">Loading</div>
         </div>
-
-
-
-
-
-
         {% if request.session.is_lawyer %}
             <button id="appointmentsNotificationBellButton">
                 <i class="fas fa-bell"></i>
@@ -32,12 +21,16 @@
                 <div id="loadingAppointments">Loading</div>
             </div>
         {% endif %}
-
-
-
-
-        <a href="{% url 'profile' request.user.username %}">Profile</a>
-        <a href="{% url 'logout' %}">Logout</a>
+        {% if request.user.profile.avatar|truncatechars:5 == "http…" %}
+        <img src="{{request.user.profile.avatar}}" id="navbarAvatar">
+        {% else %}
+        <img src="/media/{{request.user.profile.avatar}}" id="navbarAvatar">
+        {% endif %}
+        <div id="navbarAccountMenu">
+            <a href="{% url 'profile' request.user.username %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+            <a id="deleteAccount" href="{% url 'delete_account' %}">Delete Account</a>
+        </div>
     {% else %}
         <a href="{% url 'login' %}" class="navbarLink"  id="loginLink">Login</a>
         <a href="{% url 'question-specialty' %}" class="navbarLink" id="joinLink">Join</a>
@@ -45,6 +38,7 @@
 </div>
 {% if request.user.is_authenticated %}
     <script type="module" src="{% static 'js/privateMessaging.js' %}"></script>
+    <script type="module" src="{% static 'js/navbar.js' %}"></script>
     {% if request.session.is_lawyer %}
         <script type="module" src="{% static 'js/appointmentNotification.js' %}"></script>
     {% endif %}

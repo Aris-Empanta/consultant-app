@@ -9,6 +9,7 @@ from .template_views.bookedAppointmentsPage import BookedAppointmentsPage
 from .template_views.updateProfilePic import UpdateProfilePic
 from .template_views.updateUserFullname import UpdateUserFullname
 from .template_views.messagesPage import MessagesPage
+from .template_views.delete_account import DeleteAccount
 
 # The views that work as an api. 
 from .api_views.bookAppointment import BookAppointment

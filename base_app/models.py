@@ -45,7 +45,7 @@ class AvailableHours(models.Model):
 class Appointments(models.Model):
     interval = models.ForeignKey(AvailableHours, on_delete=models.CASCADE)
     lawyer = models.ForeignKey(Lawyer, on_delete=models.CASCADE, null=True)
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
     booked = models.BooleanField(default=False)
     starting_time = models.DateTimeField(null=True)
     ending_time = models.DateTimeField(null=True)
@@ -54,8 +54,8 @@ class Appointments(models.Model):
     informed_client = models.BooleanField(default=False)
 
 class Rating(models.Model):
-    client = models.OneToOneField(Client, on_delete=models.PROTECT)
-    lawyer = models.OneToOneField(Lawyer, on_delete=models.PROTECT)
+    client = models.OneToOneField(Client, on_delete=models.CASCADE)
+    lawyer = models.OneToOneField(Lawyer, on_delete=models.CASCADE)
     value = models.IntegerField(blank=False, default=0)
     comments = models.TextField(null=True)
 

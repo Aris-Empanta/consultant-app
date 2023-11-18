@@ -29,6 +29,7 @@ urlpatterns = [
     path('get-all-conversations/', views.GetAllConversations.as_view(), name="get_all_conversations"),
     path('mark-messages-as-read/', views.MarkMessagesAsRead.as_view(), name='mark_messages_as_read'),
     path('lawyer-ratings/', views.LawyerRatings.as_view(), name='lawyer_ratings'),
+    path('delete-account/', views.DeleteAccount.as_view(), name='delete_account'),
 ]
 
 daemon_urls = [
