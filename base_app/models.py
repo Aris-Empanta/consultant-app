@@ -8,7 +8,7 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
-    avatar = models.ImageField(null=True, blank=True, default="avatar.png", upload_to='images/profile-pics/')
+    avatar = models.ImageField(null=True, blank=True, default="images/profile-pics/avatar.png", upload_to='images/profile-pics/')
     Lawyer = models.BooleanField(default=False)
     Client = models.BooleanField(default=False)
 

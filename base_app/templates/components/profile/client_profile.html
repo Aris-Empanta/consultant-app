@@ -46,8 +46,23 @@
             {% if not my_own_profile %}
             <button id="sendMessageToProfile"> Send Message </button>
             {% endif %}
-        </div>  
+        </div> 
+        {% if my_own_profile %}
+        <div id="clientArrangedAppointmentsWrapper">
+            <h1>Arranged appointments</h1>
+            {% for appointment in client_booked_appointments %}
+                <p>{{appointment.day_name}} <span class="appointmentDates">{{appointment.date}}</span></p>
+                <p>Lawyer: <b>{{appointment.lawyer_first_name}} {{appointment.lawyer_last_name}}</b>
+                   Time: <b class="startingTimes">{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b>
+                   <button class="cancelAppointmentButton">Cancel Appointment</button>
+                </p>
+            {% endfor %}
+        </div>
+        {% endif %} 
     </div>
     
     <script src="{% static 'js/clientProfile.js' %}"></script>
+    {% if my_own_profile %}
+        <script type="module" src="{% static 'js/cancelAppointment.js' %}"></script>
+    {% endif %}
 {% endblock content %}

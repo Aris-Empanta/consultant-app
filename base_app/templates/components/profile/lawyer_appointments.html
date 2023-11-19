@@ -3,8 +3,9 @@
         Go to appointments details page
     </a>
     {% for appointment in booked_appointments %}
-    <p>{{appointment.day_name}} {{appointment.date}}</p>
+    <p>{{appointment.day_name}} <span class="appointmentDates">{{appointment.date}}</span></p>
     <p> Client: <b>{{appointment.first_name}} {{appointment.last_name}}</b> 
-        Time: <b>{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b></p>
+        Time: <b class="startingTimes">{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b></p>
+        <button class="cancelAppointmentButton">Cancel Appointment</button>
     {% endfor %}
 </div>

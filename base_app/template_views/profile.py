@@ -55,7 +55,7 @@ class Profile(View, BaseLawyer, BaseClient):
                     lawyer = Lawyer.objects.get(profile=user.profile)
                     appointments = Appointments.objects.filter(lawyer=lawyer, 
                                                                booked=False, 
-                                                               starting_time__gt = datetime.now())
+                                                               starting_time__gt = datetime.now()).order_by('starting_time')
                     # We format the appointments starting and ending time:
                     formated_appointments = DateUtils.format_appointments(appointments)
 
@@ -104,6 +104,7 @@ class Profile(View, BaseLawyer, BaseClient):
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)
                 # The case I logged in as a client:
                 else:
+                    context['client_booked_appointments'] = self.get_client_appointments(request)
                     return render(request,'components/profile/client_profile.html', context)
             # The case someone (logged in or not) checks a random profile 
             # (belonging to someone else if logged in)

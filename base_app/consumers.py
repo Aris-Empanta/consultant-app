@@ -1,6 +1,6 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from .models import Profile, Messages
+from .models import User, Profile, Messages
 from channels.db import database_sync_to_async
 from django.contrib.auth.models import AnonymousUser
 from django.utils import timezone
@@ -68,9 +68,14 @@ class PrivateMessagingConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
         receiver = text_data_json['receiver']
-        message = text_data_json['message']
+        message = text_data_json['message'] 
         
         sender_object = self.scope['user']
+
+        if isinstance(sender_object, AnonymousUser):
+            sender = text_data_json['sender']
+            print(sender)
+            sender_object = User.objects.filter(username=sender).first()
 
         sender = sender_object.username
         avatar = sender_object.profile.avatar.url

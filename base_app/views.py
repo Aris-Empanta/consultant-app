@@ -23,3 +23,4 @@ from .api_views.markMessagesAsRead import MarkMessagesAsRead
 from .api_views.deletePastAppointments import DeletePastAppointments
 from .api_views.remindAppointments import RemindAppointments
 from .api_views.lawyerRatings import LawyerRatings
+from .api_views.cancel_appointment import CancelAppointment

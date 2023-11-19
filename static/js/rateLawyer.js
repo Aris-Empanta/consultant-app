@@ -49,7 +49,6 @@ if(rateLawyerButton) {
                 credentials: "same-origin"
               });
 
-            // Use the Fetch API with async/await to make the GET request
             const response = await fetch(request);
 
             // Check if the response status is OK (status code 200)

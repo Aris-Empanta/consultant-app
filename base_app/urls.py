@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views 
 
-urlpatterns = [
+urlpatterns = list()
+
+template_urls = [
     path('', views.Home.as_view(), name="home"),
     path('login/', views.Login.as_view(), name="login"),
     path('logout/', views.Logout.as_view(), name="logout"),
@@ -16,20 +18,24 @@ urlpatterns = [
     path('profile/<slug:username>/', views.Profile.as_view(), name="profile"),
     path('lawyer-info/', views.LawyerInfo.as_view(), name='lawyer_info'),
     path('lawyer-available-hours/', views.LawyerAvailableHours.as_view(), name='lawyer_available_hours'),
-    path('book-appointment/', views.BookAppointment.as_view(), name='book_appointment'),
-    path('unchecked-appointments/', views.GetUncheckedAppointments.as_view(), name='unchecked-appointments'),
-    path('booked-appointments/', views.AllBookedAppointments.as_view(), name='booked_appointments'),
-    path('mark-appointment-as-checked/', views.MarkAppointmentAsChecked.as_view(), name='mark_appointment_as_checked'),
     path('booked-appointments-page/', views.BookedAppointmentsPage.as_view(), name='booked_appointments_page' ),
     path('update-profile-pic/', views.UpdateProfilePic.as_view() , name='update_profile_pic'),
     path('update-user-fullname/', views.UpdateUserFullname.as_view(), name='update_user_fullname'),
     path('messages/<slug:username>/', views.MessagesPage.as_view() ,name='messages'),
+    path('delete-account/', views.DeleteAccount.as_view(), name='delete_account'),
+]
+
+api_urls = [
+    path('book-appointment/', views.BookAppointment.as_view(), name='book_appointment'),
+    path('unchecked-appointments/', views.GetUncheckedAppointments.as_view(), name='unchecked-appointments'),
+    path('booked-appointments/', views.AllBookedAppointments.as_view(), name='booked_appointments'),
+    path('mark-appointment-as-checked/', views.MarkAppointmentAsChecked.as_view(), name='mark_appointment_as_checked'),
     path('unchecked-messages/', views.GetUncheckedMessages.as_view(), name='unchecked-messages'),
     path('mark-messages-as-checked/', views.MarkMessagesAsChecked.as_view(), name='mark_messages_as_checked'),
     path('get-all-conversations/', views.GetAllConversations.as_view(), name="get_all_conversations"),
     path('mark-messages-as-read/', views.MarkMessagesAsRead.as_view(), name='mark_messages_as_read'),
     path('lawyer-ratings/', views.LawyerRatings.as_view(), name='lawyer_ratings'),
-    path('delete-account/', views.DeleteAccount.as_view(), name='delete_account'),
+    path('cancel-appointment/', views.CancelAppointment.as_view(), name='cancel_appointment'),
 ]
 
 daemon_urls = [
@@ -37,4 +43,6 @@ daemon_urls = [
     path('remind-appointments/', views.RemindAppointments.as_view(), name='remind_appointments'),
 ]
 
+urlpatterns += template_urls
+urlpatterns += api_urls
 urlpatterns += daemon_urls

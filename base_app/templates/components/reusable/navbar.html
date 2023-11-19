@@ -10,7 +10,7 @@
         <div id="messagesPreviewModal">
             <div id="loadingMessages">Loading</div>
         </div>
-        {% if request.session.is_lawyer %}
+        {% if request.user.profile.lawyer %}
             <button id="appointmentsNotificationBellButton">
                 <i class="fas fa-bell"></i>
                 <div id="uncheckedAppointmentsWrapper">
@@ -39,7 +39,7 @@
 {% if request.user.is_authenticated %}
     <script type="module" src="{% static 'js/privateMessaging.js' %}"></script>
     <script type="module" src="{% static 'js/navbar.js' %}"></script>
-    {% if request.session.is_lawyer %}
+    {% if request.user.profile.lawyer %}
         <script type="module" src="{% static 'js/appointmentNotification.js' %}"></script>
     {% endif %}
 {% endif %}
