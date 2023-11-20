@@ -20,7 +20,7 @@ class CancelAppointment(View, BaseProfile):
             # The case the user is a lawyer
             if(len(lawyer_queryset) > 0):
                 lawyer = request.user.profile.lawyer
-                appointment = Appointments.objects.filter(lawyer=lawyer, starting_time=starting_time).first()
+                appointment = Appointments.objects.select_for_update().filter(lawyer=lawyer, starting_time=starting_time).first()
                 receiver = appointment.client.profile.user.username
 
                 self.cancel_appointment(appointment)
@@ -28,7 +28,7 @@ class CancelAppointment(View, BaseProfile):
             # The case the user is a client
             else:
                 client = request.user.profile.client
-                appointment = Appointments.objects.filter(client=client, starting_time=starting_time).first()
+                appointment = Appointments.objects.select_for_update().filter(client=client, starting_time=starting_time).first()
                 receiver = appointment.lawyer.profile.user.username
 
                 self.cancel_appointment(appointment)

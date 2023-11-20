@@ -21,7 +21,6 @@ class Lawyer(models.Model):
     city = models.CharField(max_length=50, null=True)
     yearsOfExperience = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(80)])
     description = models.TextField(null=True)
-    averageRating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     hourlyRate = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     address = models.CharField(max_length=50, null=True)
     lisenceStatus = models.CharField(max_length=20,null=True, choices=(

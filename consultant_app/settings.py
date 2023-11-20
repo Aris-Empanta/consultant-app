@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'fontawesomefree',
+    'django_seed',
 ]
 
 ASGI_APPLICATION = "consultant_app.asgi.application"

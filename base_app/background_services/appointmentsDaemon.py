@@ -1,10 +1,12 @@
 from multiprocessing import Process
+import socket
 import time
 from datetime import datetime
 import requests
 from requests import RequestException
 import os
 from dotenv import load_dotenv
+from django.conf import settings
 
 load_dotenv()
 
@@ -16,6 +18,10 @@ class AppointmentsDaemon:
     def start(self):
         if not self.running:
             self.running = True
+
+        # We start the daemon with a delay so that it does not conflict 
+        # with the start of the app process.
+        time.sleep(30)
             
         process = Process(target=self.task,daemon=True)
         process.start()
@@ -41,10 +47,17 @@ class AppointmentsDaemon:
                                                           headers=delete_appointments_headers)
                     response = delete_appointments.json()
                     print(response['message'])
+            except socket.error as e:
+                # We retry to start the process after 2 seconds if the 
+                # "Port is occupied error" appears
+                print(f"Port is already in use. Retrying in 2 seconds.")
+                time.sleep(2) 
+                continue
             except RequestException as e:
                 print(f"An error occurred during the request: {e}")
             except Exception as e:
                 print(f"General Exception in Daemon: {e}")
+
 
             # The daemon will run every 10 minutes for the appointments reminder.
             time.sleep(10 * 60)

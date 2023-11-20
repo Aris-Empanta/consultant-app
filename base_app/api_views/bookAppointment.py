@@ -37,6 +37,7 @@ class BookAppointment(View, BaseLawyer, BaseClient):
                 appointment = Appointments.objects.select_for_update().get(lawyer=lawyer, starting_time=starting_time)
                 
                 if not appointment.booked:
+                    # Client books the appointment
                     appointment.booked = True
                     appointment.client = client
                     appointment.time_booked = timezone.now()
