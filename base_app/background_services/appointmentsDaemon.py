@@ -18,10 +18,6 @@ class AppointmentsDaemon:
     def start(self):
         if not self.running:
             self.running = True
-
-        # We start the daemon with a delay so that it does not conflict 
-        # with the start of the app process.
-        time.sleep(30)
             
         process = Process(target=self.task,daemon=True)
         process.start()

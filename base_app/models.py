@@ -9,8 +9,8 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
     avatar = models.ImageField(null=True, blank=True, default="images/profile-pics/avatar.png", upload_to='images/profile-pics/')
-    Lawyer = models.BooleanField(default=False)
-    Client = models.BooleanField(default=False)
+    isLawyer = models.BooleanField(default=False)
+    isClient = models.BooleanField(default=False)
 
     def __str__(self):
         return f'This is the Profile object of {self.user.first_name} {self.user.last_name}'
@@ -53,8 +53,8 @@ class Appointments(models.Model):
     informed_client = models.BooleanField(default=False)
 
 class Rating(models.Model):
-    client = models.OneToOneField(Client, on_delete=models.CASCADE)
-    lawyer = models.OneToOneField(Lawyer, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    lawyer = models.ForeignKey(Lawyer, on_delete=models.CASCADE)
     value = models.IntegerField(blank=False, default=0)
     comments = models.TextField(null=True)
 
