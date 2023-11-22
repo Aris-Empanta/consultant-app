@@ -28,7 +28,7 @@ class DateUtils:
     def generate_appointments_per_interval(starting_time, ending_time, duration, breaks):
         # We onvert starting_time and ending_time to aware datetime objects
         starting_time = starting_time
-        ending_time = ending_time
+        ending_time = ending_time 
 
         interval_length = ending_time - starting_time
         interval_length_in_minutes = interval_length.total_seconds() / 60

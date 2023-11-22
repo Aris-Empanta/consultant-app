@@ -21,7 +21,7 @@ class BaseClient(BaseProfile):
 
         client_can_rate = False
 
-        if request.user.is_authenticated and request.user.profile.client:
+        if request.user.is_authenticated and request.user.profile.isClient:
             current_client = Client.objects.filter(profile=request.user.profile).first()
             client_appointments = Appointments.objects.filter(client=current_client).order_by('ending_time')
             

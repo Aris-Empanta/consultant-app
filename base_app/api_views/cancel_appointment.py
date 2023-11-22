@@ -6,6 +6,7 @@ import json
 from ..utils.dates import DateUtils
 from ..models import Lawyer, Appointments
 from ..base_classes.profile import BaseProfile
+from django.db import transaction
 
 @method_decorator(login_required(login_url="login"), name='dispatch')
 class CancelAppointment(View, BaseProfile):
@@ -19,21 +20,22 @@ class CancelAppointment(View, BaseProfile):
 
             # The case the user is a lawyer
             if(len(lawyer_queryset) > 0):
-                lawyer = request.user.profile.lawyer
-                appointment = Appointments.objects.select_for_update().filter(lawyer=lawyer, starting_time=starting_time).first()
-                receiver = appointment.client.profile.user.username
+                with transaction.atomic():
+                    lawyer = request.user.profile.lawyer
+                    appointment = Appointments.objects.select_for_update().filter(lawyer=lawyer, starting_time=starting_time).first()
+                    receiver = appointment.client.profile.user.username
 
-                self.cancel_appointment(appointment)
-                self.inform_about_cancellation(request, receiver, lawyer)
+                    self.cancel_appointment(appointment)
+                    self.inform_about_cancellation(request, receiver, lawyer)
             # The case the user is a client
             else:
-                client = request.user.profile.client
-                appointment = Appointments.objects.select_for_update().filter(client=client, starting_time=starting_time).first()
-                receiver = appointment.lawyer.profile.user.username
+                with transaction.atomic():
+                    client = request.user.profile.client
+                    appointment = Appointments.objects.select_for_update().filter(client=client, starting_time=starting_time).first()
+                    receiver = appointment.lawyer.profile.user.username
 
-                self.cancel_appointment(appointment)
-                self.inform_about_cancellation(request, receiver, client)
-                
+                    self.cancel_appointment(appointment)
+                    self.inform_about_cancellation(request, receiver, client)                
                 
             return JsonResponse({'message': 'appointment cancelled'})
         except Exception as e:

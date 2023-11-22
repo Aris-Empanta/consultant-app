@@ -54,9 +54,7 @@ class LawyerInfo(View):
             
             return redirect('profile', username=request.user.username)    
         except Lawyer.DoesNotExist as e:
-
             print(e)
-
         except Exception as e:
             print(e)
 

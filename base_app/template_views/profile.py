@@ -49,7 +49,7 @@ class Profile(View, BaseLawyer, BaseClient):
                        }
             
             # If the profile belongs to a lawyer we add some extra details to the context.
-            if user.profile.Lawyer: 
+            if user.profile.isLawyer: 
                     # First we fetch the unbooked appointments of the lawyer so that a 
                     # client can choose them.
                     lawyer = Lawyer.objects.get(profile=user.profile)
@@ -63,7 +63,6 @@ class Profile(View, BaseLawyer, BaseClient):
                     context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise is not None else ""
                     context['city']  = lawyer.city  
                     context['yearsOfExperience']  = lawyer.yearsOfExperience
-                    context['averageRating']  = lawyer.averageRating 
                     context['hourlyRate']  = lawyer.hourlyRate  if lawyer.hourlyRate is not None else "Contact Lawyer to learn price"
                     context['address']  = lawyer.address
                     context['lisenceStatus']  = lawyer.lisenceStatus
@@ -77,7 +76,7 @@ class Profile(View, BaseLawyer, BaseClient):
             # If there is an authenticated user and this user is a lawyer, we mention
             # it through a boolean, in order to hide the appointment button from other 
             # lawyers. Only a client can book appointments.
-            if request.user.is_authenticated and request.user.profile.Lawyer:
+            if request.user.is_authenticated and request.user.profile.isLawyer:
                 self.lawyer_authenticated = True
                 context['lawyer_authenticated'] = self.lawyer_authenticated
 
@@ -90,7 +89,7 @@ class Profile(View, BaseLawyer, BaseClient):
                 context['my_own_profile'] = self.my_own_profile
 
                 # The case I logged in as a lawyer:
-                if user.profile.Lawyer:  
+                if user.profile.isLawyer:  
                     available_hours = AvailableHours.objects.filter(lawyer=lawyer)   
                     booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True).order_by('-ending_time')            
                     available_hours_list = DateUtils.format_available_hours_list(available_hours)
@@ -109,7 +108,7 @@ class Profile(View, BaseLawyer, BaseClient):
             # The case someone (logged in or not) checks a random profile 
             # (belonging to someone else if logged in)
             else:
-                if user.profile.Lawyer:  
+                if user.profile.isLawyer:  
 
                     # If the logged in user is a client we examine if he /she has a recent 
                     # appointment and can rate the lawyer.    

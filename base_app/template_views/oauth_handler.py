@@ -24,7 +24,7 @@ class OauthHandler(View):
                 # We add in the session an indicator that this is a lawyer
                 #  profile or not
                 profile = Profile.objects.filter(user=user).first()
-                if profile.Lawyer:
+                if profile.isLawyer:
                     request.session['is_lawyer'] = True
                 else:
                     request.session['is_lawyer'] = False
@@ -64,8 +64,8 @@ class OauthHandler(View):
         if request.user.is_authenticated:
             profile.user = request.user
             if 'isLawyer' in request.session:
-                profile.Lawyer = True if isLawyer else False
-                profile.Client = False if isLawyer else True      
+                profile.isLawyer = True if isLawyer else False
+                profile.isClient = False if isLawyer else True      
         
         # we save the url of the social account's picture as 
         # profile's avatar
@@ -77,7 +77,7 @@ class OauthHandler(View):
 
         # Depending the user, we connect the profile to a Lawyer 
         # model or a Client, and add the corresponding group.
-        if profile.Lawyer:
+        if profile.isLawyer:
             lawyer = Lawyer()
             lawyer.profile = profile
             lawyer.save()  

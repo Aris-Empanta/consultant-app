@@ -6,7 +6,7 @@
     <div id="clientProfileWrapper">
         {% if my_own_profile %}
             {% for message in messages %}
-                    {% if message.tags == 'error' %}
+                    {% if message.tags == 'error' %} 
                     <div id="editProfileError">{{ message }}</div>
                     {% endif %} 
             {% endfor %}
@@ -44,7 +44,7 @@
                 </span><span id="memberSinceDate">{{member_since}}</span>
             </p>
             {% if not my_own_profile %}
-            <button id="sendMessageToProfile"> Send Message </button>
+            <a id="sendMessageToProfile" href="{% url 'messages' username=username %}"> Send Message </a>
             {% endif %}
         </div> 
         {% if my_own_profile %}

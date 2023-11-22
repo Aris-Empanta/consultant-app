@@ -22,7 +22,7 @@
                 <span id="memberSince"> Member since</span>
                 <span id="memberSinceDate">{{member_since}}</span>
             </p>              
-            <button id="sendMessageToProfile"> Send Message </button>
+            <a id="sendMessageToProfile" href="{% url 'messages' username=username %}"> Send Message </a>
         </div>  
         <div id="lawyerDetailsWrapper">
             <p>{{ratings}}</p>

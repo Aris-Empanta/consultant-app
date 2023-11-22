@@ -22,7 +22,7 @@ class Lawyer(models.Model):
     yearsOfExperience = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(80)])
     description = models.TextField(null=True)
     hourlyRate = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
-    address = models.CharField(max_length=50, null=True)
+    address = models.TextField(null=True)
     lisenceStatus = models.CharField(max_length=20,null=True, choices=(
                                                                 ("active", "active"),
                                                                 ("suspended", "suspended"),
