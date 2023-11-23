@@ -36,6 +36,7 @@ api_urls = [
     path('mark-messages-as-read/', views.MarkMessagesAsRead.as_view(), name='mark_messages_as_read'),
     path('lawyer-ratings/', views.LawyerRatings.as_view(), name='lawyer_ratings'),
     path('cancel-appointment/', views.CancelAppointment.as_view(), name='cancel_appointment'),
+    path('areas-of-expertise/<slug:area>/', views.AreasOfExpertiseView.as_view(), name='areas_of_expertise'),
 ]
 
 daemon_urls = [

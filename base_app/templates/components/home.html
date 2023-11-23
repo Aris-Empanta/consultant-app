@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
     {% include 'components/reusable/navbar.html' %}
@@ -6,9 +7,18 @@
     <div id="homePageWrapper">
         <h1 id="homePageHeading">Search your Lawyer/Consultant!</h1>
         <div id="searchLawyerWrapper">
+            <div id="filterAreaOfExpertiseWrapper" class="areasOfExpertiseSearchWrapper">
+                <input type="text" id="areasOfExpertiseSearchInput" class="areasOfExpertiseSearchInput" placeholder="Areas of expertsise">
+                <button id="showAreasOfExpertiseButton" class="showAreasOfExpertiseButton">
+                    <i class="fas fa-arrow-down" id="searchAreasOfExpertiseArrow"></i>
+                    <div id="areasOfExpertiseloader"></div>
+                </button>
+                <div id="areasOfExpertiseDropdownList">
+                </div>
+            </div>
             <input type="text" id="searchLawyer" placeholder="Name/Specialty">
             <button id="searchLawyerButton">Search</button>
         </div>
     </div>
-    
+    <script type="module" src="{% static 'js/areasOfExpertise.js' %}"></script>
 {% endblock content %}

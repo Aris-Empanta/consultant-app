@@ -24,3 +24,4 @@ from .api_views.deletePastAppointments import DeletePastAppointments
 from .api_views.remindAppointments import RemindAppointments
 from .api_views.lawyerRatings import LawyerRatings
 from .api_views.cancel_appointment import CancelAppointment
+from .api_views.areas_of_expertise import AreasOfExpertiseView
