@@ -1,3 +1,5 @@
+import { getCsrfToken } from './csrf.js';
+
 const areasOfExpertiseDropdownList = document.getElementById('areasOfExpertiseDropdownList')
 const showAreasOfExpertiseButton = document.getElementById('showAreasOfExpertiseButton')
 const areasOfExpertiseSearchInput = document.getElementById('areasOfExpertiseSearchInput')
@@ -5,8 +7,8 @@ const areasOfExpertiseloader = document.getElementById('areasOfExpertiseloader')
 const searchAreasOfExpertiseArrow = document.getElementById('searchAreasOfExpertiseArrow')
 
 // Once we click the arrow down button we show all the areas of expertise
-showAreasOfExpertiseButton.addEventListener('click', async () => {
-
+showAreasOfExpertiseButton.addEventListener('click', async (e) => {
+    e.preventDefault()
     let areasOfExpertise = await fetchAreasOfExpertise('all')
 })
 
@@ -34,14 +36,19 @@ async function fetchAreasOfExpertise(areaOfExpertise) {
     }
 
     try {
-        const url = `/areas-of-expertise/${areaOfExpertise}/`;
+        const url = `/areas-of-expertise/`;
+        const csrftoken = getCsrfToken()
+
+        console.log(areaOfExpertise)
 
         //We define the request attributes:
         const request = new Request(url, {
-            method: 'GET', // Specify the HTTP method (e.g., GET, POST)
+            method: 'POST', // Specify the HTTP method (e.g., GET, POST)
             headers: {
-              'Content-Type': 'application/json', 
+                'X-CSRFToken': csrftoken,
+                'Content-Type': 'application/json', 
             },
+            body: JSON.stringify({ 'areaOfExpertise': areaOfExpertise}),
             credentials: "same-origin"
           });
 
@@ -98,14 +105,26 @@ function dataSuccessfullyFetched(data) {
     if(areas.length > 0) {
         // logic to show areas
         areasOfExpertiseDropdownList.innerHTML = '<p>All areas</p>'
+
+        for(let i=0; i<areas.length; i++) {
+            let area = `<p class="eachAreaOfExpertise">${areas[i]}</p>`
+            areasOfExpertiseDropdownList.innerHTML += area
+        }
+
+        //We make each area of expertise to pupulate the search input onclick
+        const eachAreaOfExpertise = document.querySelectorAll('.eachAreaOfExpertise')
+
+        for(let i=0; i < eachAreaOfExpertise.length; i++) {
+            eachAreaOfExpertise[i].addEventListener('click', () => {
+
+                let areaValue = eachAreaOfExpertise[i].innerText
+                areasOfExpertiseSearchInput.value = areaValue
+            })
+        }
         return
     } 
-
+ 
     showNoResults()
-
-    // logic to inform that no areas with that name exist
-
-    //areasOfExpertiseDropdownList.insertAdjacentHTML('beforeend', conversationPreview)
 }
 
 function showNoResults() {

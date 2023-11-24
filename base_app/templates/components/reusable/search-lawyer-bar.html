@@ -1,0 +1,19 @@
+{% load static %}
+
+<form id="searchLawyerWrapper" action="{% url 'search_lawyers' %}" method="get" class="searchLawyerBar">
+    <div id="filterAreaOfExpertiseWrapper" class="areasOfExpertiseSearchWrapper">
+        <input type="text" id="areasOfExpertiseSearchInput" 
+         class="areasOfExpertiseSearchInput" placeholder="Areas of expertise"
+         name="expertise">
+        <button id="showAreasOfExpertiseButton" class="showAreasOfExpertiseButton">
+            <i class="fas fa-arrow-down" id="searchAreasOfExpertiseArrow"></i>
+            <div id="areasOfExpertiseloader"></div>
+        </button>
+        <div id="areasOfExpertiseDropdownList">
+        </div>
+    </div>
+    <input type="text" id="searchLawyer" placeholder="Name" name="name">
+    <button type="submit" id="searchLawyerButton">Search</button>
+</form>
+
+<script  src="{% static 'js/areasOfExpertise.js' %}"></script>

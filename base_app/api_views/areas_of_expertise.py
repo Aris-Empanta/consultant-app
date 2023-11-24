@@ -1,10 +1,14 @@
 from django.http import JsonResponse
 from django.views import View
 from ..enums import AreasOfExpertise
+import json
 
 class AreasOfExpertiseView(View):
 
-    def get(self, request, area):
+    def post(self, request):
+
+        body = json.loads(request.body)
+        area = body['areaOfExpertise']
 
         areas_of_expertise = list(map(lambda x : x.value, AreasOfExpertise))
 

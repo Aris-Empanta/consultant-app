@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% include 'components/reusable/navbar.html' %}
+
+    {% include 'components/reusable/search-lawyer-bar.html' %}
+
+    <div id="searchLawyersPage">
+        <div id="searchLawyersWrapper">
+            {% for lawyer in lawyers_data %}
+            <div class="searchLawyerDataWrapper">
+                <img src="{{lawyer.avatar}}">
+                <p>{{lawyer.first_name}} {{lawyer.last_name}}</p>
+                <p>{{lawyer.ratings}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

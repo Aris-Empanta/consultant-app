@@ -10,6 +10,7 @@ from .template_views.updateProfilePic import UpdateProfilePic
 from .template_views.updateUserFullname import UpdateUserFullname
 from .template_views.messagesPage import MessagesPage
 from .template_views.delete_account import DeleteAccount
+from .template_views.lawyers_search_results import LawyersSearchResults
 
 # The views that work as an api. 
 from .api_views.bookAppointment import BookAppointment

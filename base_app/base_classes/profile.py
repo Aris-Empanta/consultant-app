@@ -36,6 +36,9 @@ class BaseProfile:
                 if request.is_secure():
                     protocol = 'https' 
 
+                if avatar_link.startswith('/media/'):
+                    avatar_link = avatar_link.replace('/media/', '')
+
                 avatar_link = f'{ protocol }://{request.META["HTTP_HOST"]}/media/{avatar_link}'
                 return avatar_link
         

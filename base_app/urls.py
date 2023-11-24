@@ -23,6 +23,7 @@ template_urls = [
     path('update-user-fullname/', views.UpdateUserFullname.as_view(), name='update_user_fullname'),
     path('messages/<slug:username>/', views.MessagesPage.as_view() ,name='messages'),
     path('delete-account/', views.DeleteAccount.as_view(), name='delete_account'),
+    path('search-lawyers/', views.LawyersSearchResults.as_view(), name='search_lawyers'),
 ]
 
 api_urls = [
@@ -36,7 +37,7 @@ api_urls = [
     path('mark-messages-as-read/', views.MarkMessagesAsRead.as_view(), name='mark_messages_as_read'),
     path('lawyer-ratings/', views.LawyerRatings.as_view(), name='lawyer_ratings'),
     path('cancel-appointment/', views.CancelAppointment.as_view(), name='cancel_appointment'),
-    path('areas-of-expertise/<slug:area>/', views.AreasOfExpertiseView.as_view(), name='areas_of_expertise'),
+    path('areas-of-expertise/', views.AreasOfExpertiseView.as_view(), name='areas_of_expertise'),
 ]
 
 daemon_urls = [
