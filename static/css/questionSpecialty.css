@@ -3,38 +3,68 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: whitesmoke;
 }
-
+ 
 #questionSpecialtyWrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    background-color: rgb(218, 228, 235);
     align-items: center;
     margin: auto;
-    border: 1px solid black;
-    padding: 1%;
+    border: none;
+    padding: 2%;
     gap: 10px;
+    border-radius: 2px;
+}
+
+#lawyerOrClientQuestion {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    font-size: 1.6rem;
 }
 
 .clientLawyerLogo {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3.7rem;
+    height: 3.7rem;
 }
 
 #clientLawyerQuestionWrapper {
     display: flex;
-    gap: 1%;
+    gap: 2%;
 }
 
 .lookingForWrapper {
     cursor: pointer;
-    border: 1px solid black; 
     padding: 2%;  
+    background-color: whitesmoke;
+    border-radius: 2px;
+}
+
+.lookingForText {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
 }
 
 #joinButton {
-    background-color: slateblue;
+    background-color: rgb(105, 53, 156);
     border: none;
-    color: aliceblue;
+    color: whitesmoke;
     cursor: not-allowed;
     opacity: 0.8;
+    font-size: 1rem;
+    border-radius: 2px;
+    padding: 0.3rem 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+#alreadyUserQuestioning {
+    font-family: Tahoma, sans-serif;
+    color: #151515;
+}
+
+#alreadyUserQuestioning a {
+    text-decoration: none;
+    color: rgb(105, 53, 156);
 }

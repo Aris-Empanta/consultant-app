@@ -30,7 +30,7 @@ class Login(View):
             # We add in the session an indicator that this is a lawyer
             #  profile or not
             profile = Profile.objects.filter(user=user).first()
-            if profile.Lawyer:
+            if profile.isLawyer:
                 request.session['is_lawyer'] = True
             else:
                 request.session['is_lawyer'] = False

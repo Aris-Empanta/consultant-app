@@ -14,7 +14,7 @@ class AppointmentsConsumer(AsyncWebsocketConsumer):
 
         if not isinstance(user, AnonymousUser):
             profile = await self.get_profile(user)
-            if profile.Lawyer:
+            if profile.isLawyer:
                 self.group_name = f"lawyer_{user.username}"
                 await self.channel_layer.group_add(self.group_name, self.channel_name)
 

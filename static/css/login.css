@@ -1,14 +1,21 @@
+.loginPage {
+    background-color: whitesmoke;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #loginFormWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20vh;
-    background-color: beige;
-    border: 1px solid black;
-    border-radius: 5px;
+    margin-top: 18vh; 
+    background-color: rgb(218, 228, 235);
+    border-radius: 2px;
     padding: 2.5%;
     width: 300px;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 #loginForm {
@@ -19,60 +26,68 @@
     width: 100%;
 } 
 
-#loginInputs {
-    border-radius: 5px;
-    border: 1px solid #999999;
+.loginInputs {
+    border: none;
     padding: 0.5rem;
     font-family: Tahoma, sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     width: 95%;
     align-self: center;
+    color: rgb(105, 53, 156);
 }
 
-#loginInputs:focus {
+.loginInputs:focus {
     outline: none;
+}
+
+.loginInputs::placeholder {
+    color: rgb(105, 53, 156, 0.6);
 }
 
 #loginTitle {
     font-family: Tahoma, sans-serif;
-    color: #404040;
-    font-size: 1.5rem;
-    margin-bottom: 2.2rem;
+    color: rgb(105, 53, 156);
+    font-size: 1.7rem;
+    margin-bottom: 2.3rem;
 }
 
 .loginErrorMessage {
     font-family: Tahoma, sans-serif;
-    color: red;
+    color: #E32636;
     margin-bottom: 1rem;
 }
 
 #forgotPasswordLink {
+    margin: 0.8rem 0;
     text-decoration: none;
-    color: darkmagenta;
-    font-size: 0.9rem;
+    color: rgb(105, 53, 156);
+    font-size: 1rem;
     font-family: Tahoma, sans-serif;
 }
 
 #loginButton {
    width: 103%;
-   border-radius: 5px;
-   border: 1px solid #999999;
-   padding: 0.5rem;
+   border: none;
+   border-radius: 2px;
+   padding: 0.6rem;
    font-family: Tahoma, sans-serif;
-   font-size: 1.1rem;
+   font-size: 1.2rem;
    cursor: pointer;
+   background-color: #4286A8;
+   color: #DFEDF7;
 }
 
 #signupPrompt {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-family: Tahoma, sans-serif;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    color: #146b97;
 }
 
 #signupLink {
     text-decoration: none;
-    color: darkmagenta;
+    color: rgb(105, 53, 156);
 }
 
 #localOrOauth2 {
@@ -80,6 +95,8 @@
     position: relative;
     max-width: 500px;
     text-align: center;
+    color: rgb(105, 53, 156);
+    font-size: 1.1rem;
 }
 
 #localOrOauth2::before {
@@ -90,7 +107,7 @@
     position: absolute;
     left: -100px;
     top: 11px;
-    background: silver;
+    background: #4286A8;
 }
 
 #localOrOauth2::after {
@@ -101,7 +118,7 @@
     position: absolute;
     left: 22px;
     top: 11px;
-    background: silver;
+    background: #4286A8;
 }
 
 #googleLoginLink {
@@ -109,9 +126,9 @@
     margin-bottom: 1.5rem;
     text-decoration: none;
     color: #151515;
-    background-color: silver;
+    background-color: rgb(105, 53, 156);
     padding: 0.6rem 1rem;
-    border-radius: 5px;
+    border-radius: 2px;
     width: 91%;
     display: flex;
     justify-content: flex-start;
@@ -125,200 +142,6 @@
 
 #loginWithGooglePhrase {
     font-family: Tahoma, sans-serif;
-    color: #151515;
+    color: rgb(218, 228, 235);
     font-size: 1.1rem;
-}
-
-#passwordResetPage {
-    background-color: #E6E6FA;
-    height: 100vh;
-}
-
-#passwordResetFormWrapper {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    background-color: whitesmoke;
-    border-radius: 3px;
-    position: relative;
-    padding: 2.5%;
-}
-
-#passwordResetValidationError {
-    color: darkmagenta;
-    font-family: Tahoma, sans-serif;
-}
-
-#passwordResetForm {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.5rem;
-}
-
-#promptEmailForPasswordReset {
-    font-family: Tahoma, sans-serif;
-    font-size: 1.2rem;
-    color: #151515;
-}
-
-#resetPasswordEmailField {
-    border-radius: 3px;
-    border: 1px solid #999999;
-    padding: 0.3rem;
-    font-family: Tahoma, sans-serif;
-    font-size: 1rem;
-    width: 95%;
-    align-self: center;
-    margin-bottom: 75px;
-}
-
-#resetPasswordEmailField::placeholder {
-    font-family: Tahoma, sans-serif;
-    font-size: 1rem;
-}
-
-#resetPasswordEmailField:focus {
-    outline: none;
-}
-
-.horizontalLine {
-    border-top: 1px solid #999999;
-    border-radius: 3px;
-    position: absolute;
-    width: 99.7%;
-    bottom: 26%;
-    left: 0;
-}
-
-#proceedOrCancelWrapper {
-    position: absolute;
-    bottom: 0;
-}
-
-#cancelButton {
-    color: whitesmoke;
-    text-decoration: none;
-    background-color: red;
-    padding: 1px 6px 3px 6px;
-    border-radius: 3px;
-}
-
-#proceedButton {
-   border: none;
-   background-color: darkmagenta; 
-   border-radius: 3px;
-   cursor: pointer;   
-   padding: 3px 6px 3px 6px;
-   color: whitesmoke;
-}
-
-#passwordResetDone {
-    margin: 7% 4%;
-}
-
-#passwordResetDone {
-    height: 100vh;
-    background-color: #E6E6FA;
-    margin: 0;
-    padding: 7rem 4rem;
-}
-
-#passwordResetDone h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.6rem;
-    color: #202020;
-}
-
-#passwordResetDone p {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1rem;
-    color: #151515;
-    max-width: 800px;
-}
-
-#setNewPasswordFormWrapper {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    background-color: whitesmoke;
-    border-radius: 3px;
-    position: relative;
-    padding: 2.5%;
-    margin-top: 20vh;
-    gap: 1rem;
-}
-
-#setNewPasswordFormWrapper h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.4rem;
-    color: #202020;
-    align-self: center;
-}
-
-#setNewPasswordForm {
-    display: flex;
-    flex-direction: column;
-}
-
-.setNewPasswordFieldLabel {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 0.9rem;
-    color: #202020;
-}
-
-.setNewPasswordFormField {
-    border-radius: 3px;
-    border: 1px solid #999999;
-    padding: 0.4rem;
-    font-family: Tahoma, sans-serif;
-    font-size: 1rem;
-    width: 95%;
-    align-self: center;
-}
-
-.setNewPasswordFormField:focus {
-    outline: none;
-}
-
-.setNewPasswordFormField::placeholder {
-    font-size: 0.9rem;
-}
-
-#setNewPasswordSubmitButton {
-    cursor: pointer;
-    color: white;
-    background-color: darkorchid;
-    border-radius: 3px;
-    border: none;
-    padding-top: 0.6rem;
-    padding-bottom: 0.6rem;
-    margin-top: 1rem;
-}
-
-#setNewPasswordFormError {
-    color: darkmagenta;
-    font-family: Tahoma, sans-serif;
-    margin: 0;
-}
-
-#passwordResetCompleted {
-    height: 100vh;
-    background-color: #E6E6FA;
-    margin: 0;
-    padding: 7rem 4rem;
-}
-
-#passwordResetCompleted h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.6rem;
-    color: #202020;
-}
-
-#passwordResetCompleted span {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1rem;
-    color: #151515;
-    max-width: 800px;
 }

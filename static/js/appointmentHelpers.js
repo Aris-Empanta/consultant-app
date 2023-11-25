@@ -80,6 +80,13 @@ function showBookedAppointments(appointments, appointmentsModal, loadingAppointm
     // We empty the modal's content to refresh it for the case the modal was open.
     appointmentsModal.innerHTML = ''
 
+    //The case there are no appointments
+    if (appointments.length === 0) {
+        let message = `<p id="appointmentsModalTitle">Appointments</p>
+                       <p id="noAppointmentsMessage">You have no appointments<p>`
+        appointmentsModal.insertAdjacentHTML('beforeend', message)
+    }
+
     for(let i = 0; i < appointments.length; i++) {
         let appointmentDetails
         let currentAppointment = appointments[i]

@@ -31,7 +31,7 @@ class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(
         label=_("Email"),
         max_length=254,
-        widget=forms.EmailInput(attrs={"autocomplete": "email", 
+        widget=forms.EmailInput(attrs={"autocomplete": "off", 
                                        "placeholder":"Email",
                                        "id": "resetPasswordEmailField"}),
     )

@@ -7,8 +7,8 @@ const areasOfExpertiseloader = document.getElementById('areasOfExpertiseloader')
 const searchAreasOfExpertiseArrow = document.getElementById('searchAreasOfExpertiseArrow')
 
 // Once we click the arrow down button we show all the areas of expertise
-showAreasOfExpertiseButton.addEventListener('click', async (e) => {
-    e.preventDefault()
+showAreasOfExpertiseButton.addEventListener('click', async () => {
+    
     let areasOfExpertise = await fetchAreasOfExpertise('all')
 })
 
@@ -25,6 +25,7 @@ window.addEventListener('click', () => {
     exitFetchingData()
 })
 
+// The function to fetch the areas of expertsise that match the user's input
 async function fetchAreasOfExpertise(areaOfExpertise) {
 
     waitingForData()
@@ -38,8 +39,6 @@ async function fetchAreasOfExpertise(areaOfExpertise) {
     try {
         const url = `/areas-of-expertise/`;
         const csrftoken = getCsrfToken()
-
-        console.log(areaOfExpertise)
 
         //We define the request attributes:
         const request = new Request(url, {
@@ -104,10 +103,12 @@ function dataSuccessfullyFetched(data) {
 
     if(areas.length > 0) {
         // logic to show areas
-        areasOfExpertiseDropdownList.innerHTML = '<p>All areas</p>'
+        areasOfExpertiseDropdownList.innerHTML = '<p class="areasPreviewTitle">All areas</p>'
 
         for(let i=0; i<areas.length; i++) {
-            let area = `<p class="eachAreaOfExpertise">${areas[i]}</p>`
+            let area = `<div class="eachAreaOfExpertise">
+                        <p>${areas[i]}</p>
+                        </div>`
             areasOfExpertiseDropdownList.innerHTML += area
         }
 
@@ -136,5 +137,5 @@ function showNoResults() {
     areasOfExpertiseDropdownList.innerHTML = ''
 
     // Then we append the message
-    areasOfExpertiseDropdownList.innerHTML = '<p>No results</p>'
+    areasOfExpertiseDropdownList.innerHTML = '<p class="areasPreviewTitle">No results found</p>'
 }

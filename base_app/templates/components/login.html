@@ -2,7 +2,7 @@
 {% load socialaccount %}
 {% load static %}
 {% block content %}   
-    <div class="centerPageContent">
+    <div class="loginPage">
         <div id="loginFormWrapper">
             <h1 id="loginTitle">Login</h1>
             {% for message in messages %}
@@ -12,8 +12,8 @@
             {% endfor %}
             <form action="" method="POST" id="loginForm">
                 {% csrf_token %}
-                <input type="email" name="email" placeholder="Email" autocomplete="off" id="loginInputs" required>
-                <input type="password" name="password" placeholder="Password" id="loginInputs" required>
+                <input type="email" name="email" placeholder="Email" autocomplete="off" class="loginInputs" required>
+                <input type="password" name="password" placeholder="Password" class="loginInputs" required>
                 <a href="{% url 'password_reset' %}" id="forgotPasswordLink">Forgot Password?</a>
                 <input type="submit" value="Login" id="loginButton"/>
             </form>

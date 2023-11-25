@@ -1,9 +1,9 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
-    <div id="questionSpecialtyPage">
+    <div id="questionSpecialtyPage"> 
         <div id="questionSpecialtyWrapper">
-            <h1>How may we assist you?</h1>
+            <h1 id="lawyerOrClientQuestion">Are you a lawyer or a client?</h1>
             <div id="clientLawyerQuestionWrapper">
                 <div class="lookingForWrapper" id="chooseClient">
                     <img alt="client" src="{% static 'img/client.webp' %}" class="clientLawyerLogo">
@@ -13,15 +13,12 @@
                     <img alt="lawyer" src="{% static 'img/lawyer.webp' %}" class="clientLawyerLogo">
                     <p class="lookingForText">I am a lawyer, looking for job</p>
                 </div>
-            </div>
-            
+            </div>            
             <form method="post" action="">
                 {% csrf_token %}
                 <input id="joinButton" value="Join" type="submit" disabled name="joinButton">
             </form>
-
-            <span>Already a user? <a href="{% url 'login' %}">Login</a></span>
-            
+            <span id="alreadyUserQuestioning">Already a user? <a href="{% url 'login' %}">Login</a></span>            
         </div>
     </div>
     <script src="{% static 'js/questionSpecialty.js' %}"></script>
