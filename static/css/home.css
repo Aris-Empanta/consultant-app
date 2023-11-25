@@ -1,16 +1,18 @@
 #homePageWrapper {
-    background-color: darkviolet;
+    background-color: #DAE4EB;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20vh;
+    padding-top: 30vh;
 }
 
 #homePageHeading {
-    color: aliceblue;
+    color: #69359C;
     font-family: Tahoma, sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
 }
 
 #searchLawyerWrapper {
@@ -18,37 +20,29 @@
     gap: 3px;
 }
 
-#searchLawyer {
-    border: none;
-    height: 2rem;
-    padding: 0.2rem 0.7rem;
-    font-size: 1.3rem;
-    font-family: Tahoma, sans-serif;
-}
-
 #searchLawyer:focus {
     outline: none;
-}
-
-#searchLawyerButton {
-    height: 2.4rem;
-    cursor: pointer;
-    border: none;
 }
 
 .areasOfExpertiseSearchWrapper {
     position: relative;
 }
 
-.areasOfExpertiseSearchInput {
-    border: none;
+.homePageSearchInput {
     height: 2rem;
-    padding: 0.2rem 0.7rem;
+    padding: 0.3rem 0.7rem;
     font-size: 1.3rem;
     font-family: Tahoma, sans-serif;
+    color: #69359C;
+    background-color: whitesmoke;
+    border: none;
 }
 
-.areasOfExpertiseSearchInput:focus {
+.homePageSearchInput::placeholder {
+    color: #8D56C0;
+}
+
+.homePageSearchInput:focus {
     outline: none;
 }
 
@@ -64,10 +58,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #69359C;
+    font-size: 1.3rem;
 }
 
 .showAreasOfExpertiseButton:focus {
     outline: none;
+}
+
+.homePageSearchLawyerButton {
+    padding: 0.6rem 0.7rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: none;
+    background-color: #4286A8;
+    color: #DFEDF7;
+    border-radius: 2px;
+    height: 2.6rem;
 }
 
 #areasOfExpertiseloader {

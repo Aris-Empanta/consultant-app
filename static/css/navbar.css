@@ -9,7 +9,7 @@
 .navbarLink {
     margin: 2%;
     text-decoration: none;
-    color: aliceblue;
+    color: #69359C;
     font-family: Tahoma, sans-serif;
     font-size: 1.1rem;
 }
@@ -18,11 +18,20 @@
     padding-top: 0.5rem;
 }
 
+#loginLink:hover {
+    color: #4286A8;
+}
+
 #joinLink {
-    border: 2px solid aliceblue;
+    border: 2px solid #69359C;
     padding: 0.5rem 0.8rem;
-    border-radius: 3px;
+    border-radius: 1px;
     margin-right: 5%;
+}
+
+#joinLink:hover {
+    border: 2px solid #4286A8;
+    color: #4286A8;
 }
 
 #appointmentsNotificationBellButton {
