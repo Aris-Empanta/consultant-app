@@ -15,11 +15,15 @@ let appointmentsModal = document.getElementById('appointmentsModal')
 
 appointmentsNotificationBellButton.addEventListener('click', async () => {
 
+    messagesPreviewModal.style.display = 'none'
+    navbarAccountMenu.style.display = 'none'
+
     // If the modal is open we close it.
     if(appointmentsModal.style.display === 'flex') {
 
         hideBookedAppointments(appointmentsModal)
-        appointmentsModal.innerHTML = '<div id="loadingAppointments">Loading</div>'
+        appointmentsModal.innerHTML = `<p id="appointmentsModalTitle">Appointments</p>
+                                        <div id="loadingAppointments"></div>`
         await markAppointmentAsChecked()
         return
     }

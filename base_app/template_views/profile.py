@@ -70,9 +70,8 @@ class Profile(View, BaseLawyer, BaseClient):
                     context['lawyer_authenticated'] = self.lawyer_authenticated
                     context['my_own_profile'] = self.my_own_profile
                     context['appointments'] = formated_appointments
-                    context['ratings'] = self.calculateAverageRating(lawyer) # A decimal number or a string
+                    context['ratings'] = self.calculateAverageRating(lawyer)
             
-
             # If there is an authenticated user and this user is a lawyer, we mention
             # it through a boolean, in order to hide the appointment button from other 
             # lawyers. Only a client can book appointments.
@@ -90,8 +89,10 @@ class Profile(View, BaseLawyer, BaseClient):
 
                 # The case I logged in as a lawyer:
                 if user.profile.isLawyer:  
-                    available_hours = AvailableHours.objects.filter(lawyer=lawyer)   
-                    booked_appointments = Appointments.objects.filter(lawyer=lawyer, booked=True).order_by('-ending_time')            
+                    available_hours = AvailableHours.objects.filter(lawyer=lawyer, starting_time__gt = datetime.now())   
+                    booked_appointments = Appointments.objects.filter(lawyer=lawyer, 
+                                                                      booked=True, 
+                                                                      starting_time__gt = datetime.now()).order_by('-ending_time')            
                     available_hours_list = DateUtils.format_available_hours_list(available_hours)
                     areas_of_expertise = list(map(lambda x : x.value, AreasOfExpertise))
 
@@ -109,7 +110,6 @@ class Profile(View, BaseLawyer, BaseClient):
             # (belonging to someone else if logged in)
             else:
                 if user.profile.isLawyer:  
-
                     # If the logged in user is a client we examine if he /she has a recent 
                     # appointment and can rate the lawyer.    
                     self.can_rate_lawyer = self.check_if_client_can_rate(request)

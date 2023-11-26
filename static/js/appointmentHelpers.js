@@ -78,12 +78,11 @@ function showBookedAppointments(appointments, appointmentsModal, loadingAppointm
     loadingAppointments.style.display = 'none'
         
     // We empty the modal's content to refresh it for the case the modal was open.
-    appointmentsModal.innerHTML = ''
+    appointmentsModal.innerHTML = '<p id="appointmentsModalTitle">Appointments</p>'
 
     //The case there are no appointments
     if (appointments.length === 0) {
-        let message = `<p id="appointmentsModalTitle">Appointments</p>
-                       <p id="noAppointmentsMessage">You have no appointments<p>`
+        let message = `<p id="noAppointmentsMessage">You have no appointments<p>`
         appointmentsModal.insertAdjacentHTML('beforeend', message)
     }
 
@@ -92,28 +91,35 @@ function showBookedAppointments(appointments, appointmentsModal, loadingAppointm
         let currentAppointment = appointments[i]
         let appointmentsPageLink = "/booked-appointments-page/"
         let avatarLink = profileAvatarLink(currentAppointment.client_avatar)
-        console.log(currentAppointment.client_avatar)
 
         // We render diferent HTML for the checked and unchecked appointments.
         if(currentAppointment.checked) {
             appointmentDetails = `<a class="checkedAppointmentWrapper" href=${appointmentsPageLink}>
-                                     <img src=${avatarLink} >
-                                     <p>
+                                    <div class="appointmentImageAndPhrase">
+                                      <img src=${avatarLink} class="bookedAppointmentAvatar">
+                                      <p class="bookedSAppointmentPhrase">
+                                        <b>
                                         ${currentAppointment.client_first_name} 
-                                        ${currentAppointment.client_last_name} 
+                                        ${currentAppointment.client_last_name}
+                                        </b> 
                                         booked an appointment
-                                     </p>  
-                                     <p>${currentAppointment.time_since} ago</p>
+                                      </p>  
+                                    </div>
+                                    <p class="appointmentBookingTime">${currentAppointment.time_since} ago</p>
                                    </a>`
         } else {
             appointmentDetails = `<a class="uncheckedAppointmentWrapper" href=${appointmentsPageLink}>
-                                     <img src=${avatarLink} >
-                                     <p>
+                                    <div class="appointmentImageAndPhrase">
+                                      <img src=${avatarLink} class="bookedAppointmentAvatar">
+                                      <p class="bookedSAppointmentPhrase">
+                                        <b>
                                         ${currentAppointment.client_first_name} 
-                                        ${currentAppointment.client_last_name} 
-                                        booked an appointment
-                                     </p> 
-                                     <p>${currentAppointment.time_since} ago</p>
+                                        ${currentAppointment.client_last_name}
+                                        </b> 
+                                        booked an appointment 
+                                      </p>
+                                    </div> 
+                                    <p class="appointmentBookingTime">${currentAppointment.time_since} ago</p>
                                    </a>`
         }
         

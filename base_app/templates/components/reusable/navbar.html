@@ -8,7 +8,7 @@
             </div> 
         </button> 
         <div id="messagesPreviewModal">
-            <div id="loadingMessages">Loading</div>
+            <div id="loadingMessages"></div>
         </div>
         {% if request.user.profile.lawyer %}
             <button id="appointmentsNotificationBellButton">
@@ -19,7 +19,7 @@
             </button>
             <div id="appointmentsModal">
                 <p id="appointmentsModalTitle">Appointments</p>
-                <div id="loadingAppointments">Loading</div>
+                <div id="loadingAppointments"></div>
             </div>
         {% endif %}
         {% if request.user.profile.avatar|truncatechars:5 == "http…" %}

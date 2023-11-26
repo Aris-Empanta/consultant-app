@@ -1,16 +1,48 @@
+#messagesPreviewModal {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    background-color: whitesmoke;
+    width: 300px;
+    max-width: 100%;
+    top: 85px;
+    overflow-y: scroll;
+    height: 300px;
+    z-index: 2;
+}
+
+#loadingMessages {
+    margin: 1rem auto;
+    border: 6px solid #70b1c7;
+    border-radius: 50%;
+    border-top: 6px solid #4286A8;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.messagePreviewAvatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
 #messagesPage {
     height: 90%;
     margin-top: 100px;
     display: flex;
-}
-
-#conversationWrapper {  
-    border: 1px solid black;
-    position: relative;
-    height: 90%;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #conversationScreen {
@@ -35,4 +67,64 @@
     width: 10%;
 }
 
- 
+#messagesNotificationButton {
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.2rem;
+    background-color: rgb(105, 53, 156, 0.8);
+    color: whitesmoke;
+}
+
+#uncheckedMessagesWrapper {
+    display: none;
+    position: absolute;
+    padding: 0.3rem 0.5rem;
+    border-radius: 50%;
+    background-color: #E32636;
+    bottom: 23px;
+    left: 20px;
+    font-size: 0.9rem;
+}
+
+#uncheckedMessages {
+    margin: 0;
+}
+
+.conversationWrapper {
+    display: flex;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    align-items: center;
+}
+
+.messageRead {
+    background-color: whitesmoke;
+}
+
+.messageRead:hover {
+    background-color: #DFEDF7;
+}
+
+.messageUnread {
+    background-color: #DFEDF7;
+}
+
+.messagePreviewAndTimeAgoWrapper {
+    width: 100%;
+}
+
+.messagePreviewInModal {
+    margin-left: 1rem;
+    color: rgb(105, 53, 156);
+}
+
+.timeAgoMessagePreview {
+    text-align: end;
+    color: rgb(105, 53, 156, 0.9);
+    font-size: 0.9rem;
+}

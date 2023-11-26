@@ -148,13 +148,22 @@ function renderConversations(conversations, messagesPreviewModal) {
         let readStatusClass = read ? 'messageRead' : 'messageUnread'
 
         let conversationPreview = `<a href='/messages/${sender}/'  class="conversationWrapper ${readStatusClass}">
-                                       <img src='${avatar}' >
-                                       <p>${sender}</p>
-                                       <p>${message}</p> 
-                                       <p>${timeAgo} ago</p> 
+                                      <img src='${avatar}' class="messagePreviewAvatar" >
+                                      <div class="messagePreviewAndTimeAgoWrapper">
+                                         <p class="messagePreviewInModal">${formatMessagePreview(message)}</p>
+                                         <p class="timeAgoMessagePreview">${timeAgo} ago </p> 
+                                      </div>
                                    </a>`
         messagesPreviewModal.insertAdjacentHTML('beforeend', conversationPreview)
     }
+}
+
+function formatMessagePreview(message) {
+    if(message.length > 20) {
+        message = message.slice(0,20) + '...'
+    }
+
+    return message
 }
 
 

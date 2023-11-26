@@ -9,10 +9,12 @@ navbarAvatar.addEventListener('click', () => {
     const appointmentsModal= document.getElementById('appointmentsModal')
 
     if (navbarAccountMenu.style.display !== 'flex') {
+
         navbarAccountMenu.style.display = 'flex';
         messagesModal.style.display = 'none';
         appointmentsModal.style.display = 'none';
     } else {
+        
         navbarAccountMenu.style.display = 'none'
     }
 })

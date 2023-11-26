@@ -27,14 +27,37 @@
     top: 85px;
     overflow-y: scroll;
     height: 300px;
+    z-index: 2;
 }
 
 #appointmentsModalTitle {
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #69359C;
     font-family: Tahoma, sans-serif; 
-    margin-bottom: 0;
+    margin-bottom: 1rem;
+}
+
+#loadingAppointments {
+    margin: 1rem auto;
+    border: 6px solid #70b1c7;
+    border-radius: 50%;
+    border-top: 6px solid #4286A8;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 #noAppointmentsMessage {
@@ -45,14 +68,47 @@
 }
 
 .checkedAppointmentWrapper {
-    background-color: red;
+    background-color: whitesmoke;
     padding: 1rem;
+    text-decoration: none;
+}
+
+.checkedAppointmentWrapper:hover {
+    background-color: #DFEDF7;
 }
 
 .uncheckedAppointmentWrapper {
-    background-color: silver;
-    padding: 1rem
+    background-color: #DFEDF7;
+    padding: 1rem;
+    text-decoration: none;
 } 
+
+.bookedAppointmentAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;   
+}
+
+.appointmentImageAndPhrase {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bookedSAppointmentPhrase {
+    font-family: Tahoma, sans-serif;
+    color: #69359C;
+    font-size: 0.9rem;
+}
+
+.appointmentBookingTime {
+    margin: 0;
+    text-align: end;
+    font-family: Tahoma, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #69359C;
+}
 
 #bookedAppointmentsPage {
     display: flex;

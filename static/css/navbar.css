@@ -40,12 +40,12 @@
 #appointmentsNotificationBellButton {
     cursor: pointer;
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: none;
     font-size: 1.3rem;
-    background-color: rgb(105, 53, 156, 0.9);
+    background-color: rgb(105, 53, 156, 0.8);
     color: whitesmoke;
 }
 
@@ -54,79 +54,35 @@
     position: absolute;
     padding: 0.3rem 0.5rem;
     border-radius: 50%;
-    background-color: aqua;
-    bottom: 10px;
-    left: 10px;
+    background-color: #E32636;
+    bottom: 23px;
+    left: 20px;
+    font-size: 0.9rem;
 }
 
 #uncheckedAppointments {
     margin: 0;
 }
 
-#messagesNotificationButton {
-    cursor: pointer;
-    position: relative;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: none;
-    font-size: 1.2rem;
-    background-color: rgb(105, 53, 156, 0.9);
-    color: whitesmoke;
-}
-
-#uncheckedMessagesWrapper {
-    display: none;
-    position: absolute;
-    padding: 0.3rem 0.5rem;
-    border-radius: 50%;
-    background-color: greenyellow;
-    bottom: 10px;
-    left: 10px;
-}
-
-#uncheckedMessages {
-    margin: 0;
-}
-
-#messagesPreviewModal {
-    display: none;
-    position: absolute;
-    flex-direction: column;
-    border: 1px solid black;
-    background-color: white;
-    top: 40px;
-    height: 400px;
-    overflow-y: scroll;
-}
-
-.conversationWrapper {
-    display: flex;
-    border: 1px solid black;
-}
-
-.messageRead {
-    background-color: white;
-}
-
-.messageUnread {
-    background-color: aquamarine;
-}
-
 #navbarAvatar {
     cursor: pointer;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;    
 }
 
 #navbarAccountMenu {
     display: none;
     flex-direction: column;
-    border: 1px solid black;   
+    top: 85px;
+    background-color: whitesmoke; 
     position: absolute;
-    padding: 1rem;
-    gap: 1rem;
-    background-color: aliceblue;
-    top: 55px;
+    padding: 1.3rem;
+    gap: 1.3rem;
+}
+
+#navbarAccountMenu a{
+    font-family: Tahoma, sans-serif;
+    text-decoration: none;
+    color: rgb(105, 53, 156, 0.9);
 }

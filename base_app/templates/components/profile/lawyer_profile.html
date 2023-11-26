@@ -11,13 +11,11 @@
             {% else %}
             <img src="{{avatar_url}}" id="profilePic" />
             {% endif %} 
-
             <p id="fullname">{{first_name}} {{last_name}}</p>
             <p id="username">@{{username}}</p>
             {% if address is not None %}
             <p id="lawyerAddress"><i class="fas fa-map-marker-alt"></i> {{address}}, {{city}}</p>
-            {% endif %}
-            
+            {% endif %}            
             <p id="memberSinceWrapper">
                 <span id="memberSince"> Member since</span>
                 <span id="memberSinceDate">{{member_since}}</span>
@@ -26,7 +24,6 @@
         </div>  
         <div id="lawyerDetailsWrapper">
             <p>{{ratings}}</p>
-
             {% if can_rate_lawyer %}
             <button id="rateLawyerButton">Rate this Lawyer</button>
             {% include 'components/profile/rating_lawyer_modal.html' %}

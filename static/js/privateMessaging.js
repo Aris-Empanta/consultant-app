@@ -31,10 +31,13 @@ messagesNotificationButton.addEventListener('click', async () => {
         
         uncheckedMessagesWrapper.style.display = 'none'
         messagesPreviewModal.style.display = 'flex'
+        
+        if(appointmentsModal) {
+            appointmentsModal.style.display = 'none'
+        }
+        navbarAccountMenu.style.display = 'none'
 
         const conversations = await fetchConversations()
-
-        loadingMessages.style.display = 'none'
 
         renderConversations(conversations, messagesPreviewModal)
     } else {
@@ -120,20 +123,17 @@ if(currentUrl.startsWith(messagingPageUrl)) {
         }
     }
 } else {
+
+    await handleMessagesNotifications()
     
     websocket.onmessage = async (event) => {
 
-        await handleMessagesNotifications()    
+        await handleMessagesNotifications()
     }
 }
 
 // The message to handle the messages notifications and modal
 async function handleMessagesNotifications() {
-
-    //We close the apointments modal if it exist
-    if(appointmentsModal) {
-        appointmentsModal.style.display = 'none';
-    }
 
     // If the messagesPreviewModal is  closed, just fetch and show the 
     // amount of all the user's unchecked messages.
