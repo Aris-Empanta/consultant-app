@@ -115,12 +115,14 @@
     width: 100%;
     justify-content: center;
     padding-top: 100px;
+    background-color: whitesmoke;
 }
-
+ 
 #allAppointmentsWrapper {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: #DFEDF7;
 }
 
 .appointmentDetailsWrapper {

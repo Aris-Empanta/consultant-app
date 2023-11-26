@@ -1,19 +1,24 @@
 {% load static %}
 
-<form id="searchLawyerWrapper" action="{% url 'search_lawyers' %}" method="get" class="searchLawyerBar">
+<form id="searchLawyerWrapper" class="lawyersSearchBar" action="{% url 'search_lawyers' %}" method="get">
     <div id="filterAreaOfExpertiseWrapper" class="areasOfExpertiseSearchWrapper">
         <input type="text" id="areasOfExpertiseSearchInput" 
-         class="areasOfExpertiseSearchInput" placeholder="Areas of expertise"
-         name="expertise">
-        <button id="showAreasOfExpertiseButton" class="showAreasOfExpertiseButton">
+         class="homePageSearchInput" placeholder="Areas of expertise"
+         name="expertise" autocomplete="off">
+        <button type="button" id="showAreasOfExpertiseButton" class="showAreasOfExpertiseButton">
             <i class="fas fa-arrow-down" id="searchAreasOfExpertiseArrow"></i>
             <div id="areasOfExpertiseloader"></div>
         </button>
         <div id="areasOfExpertiseDropdownList">
         </div>
     </div>
-    <input type="text" id="searchLawyer" placeholder="Name" name="name">
-    <button type="submit" id="searchLawyerButton">Search</button>
+    <div id="lawyerNameAndSearchButtonWrapper">
+        <input type="text" id="searchLawyer" placeholder="Name" name="name"
+        class="homePageSearchInput"  autocomplete="off">
+        <button type="submit" id="searchLawyerButton" class="homePageSearchLawyerButton" class="lawyerSearchBarSearchButton">
+            Search
+        </button>
+    </div>
 </form>
 
-<script  src="{% static 'js/areasOfExpertise.js' %}"></script>
+<script type="module" src="{% static 'js/areasOfExpertise.js' %}"></script>

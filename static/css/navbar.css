@@ -8,7 +8,7 @@
     right: 0;
     left: 0;
 }
- 
+
 .navbarLink {
     margin: 2%;
     text-decoration: none;
@@ -85,4 +85,24 @@
     font-family: Tahoma, sans-serif;
     text-decoration: none;
     color: rgb(105, 53, 156, 0.9);
+}
+
+.lawyersSearchBar {
+    margin-top: 87px;
+    background-color: #DFEDF7;
+    padding: 1%;
+}
+
+.lawyersSearchBar button {
+    font-size: 1.1rem;
+    padding: 0.1rem 0.4rem;
+}
+
+.lawyersSearchBar input {
+    font-size: 1rem;
+    padding: 0.2rem 2.8rem 0.2rem 0.6rem;
+}
+
+.lawyersSearchBar input::placeholder {
+    font-size: 1.1rem;
 }

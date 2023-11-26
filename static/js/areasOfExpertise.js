@@ -10,6 +10,7 @@ const searchAreasOfExpertiseArrow = document.getElementById('searchAreasOfExpert
 showAreasOfExpertiseButton.addEventListener('click', async () => {
     
     let areasOfExpertise = await fetchAreasOfExpertise('all')
+    addChangeFocusHanders()
 })
 
 // Once we write in the areas of expertise input it makes api call to 
@@ -18,6 +19,7 @@ areasOfExpertiseSearchInput.addEventListener('input', async () => {
 
     let input = areasOfExpertiseSearchInput.value
     let areasOfExpertise = await fetchAreasOfExpertise(input)
+    addChangeFocusHanders()
 })
 
 //When we click out of the input box it stops any data fetching
@@ -106,13 +108,13 @@ function dataSuccessfullyFetched(data) {
         areasOfExpertiseDropdownList.innerHTML = '<p class="areasPreviewTitle">All areas</p>'
 
         for(let i=0; i<areas.length; i++) {
-            let area = `<div class="eachAreaOfExpertise">
+            let area = `<div class="eachAreaOfExpertise" tabindex="-1">
                         <p>${areas[i]}</p>
                         </div>`
             areasOfExpertiseDropdownList.innerHTML += area
         }
 
-        //We make each area of expertise to pupulate the search input onclick
+        //We make each area of expertise to populate the search input onclick
         const eachAreaOfExpertise = document.querySelectorAll('.eachAreaOfExpertise')
 
         for(let i=0; i < eachAreaOfExpertise.length; i++) {
@@ -138,4 +140,72 @@ function showNoResults() {
 
     // Then we append the message
     areasOfExpertiseDropdownList.innerHTML = '<p class="areasPreviewTitle">No results found</p>'
+}
+
+let areasOfExpertiseInput = document.getElementById('areasOfExpertiseSearchInput')
+
+//The listener to choose areas of expertise with the keydown and keyup
+areasOfExpertiseInput.addEventListener('keydown', async () => {
+
+    if (areasOfExpertiseDropdownList.style.display !== 'flex') {
+
+        let areasOfExpertise = await fetchAreasOfExpertise('all');
+
+        if(document.activeElement===document.getElementById('areasOfExpertiseSearchInput')) {
+            addChangeFocusHanders()       
+        }
+    } 
+})
+
+function addChangeFocusHanders() {
+
+    // If the focus is in the areas of expertise input element we change it to the first area 
+    // of expertise. Then we put listeners to all the areas of expertise div elements so that 
+    // the focus changes with keydown and key up.
+    
+
+        let areas = document.querySelectorAll('.eachAreaOfExpertise')
+
+        areas[0].focus()
+        
+        // We add the listeners we need to all areas of expertise divs
+        for (let i = 0; i < areas.length; i++) {           
+            
+            // The listeners to change focus on arrow down and arrow up
+            areas[i].addEventListener('keydown', (event) => {
+
+                if (event.key === 'ArrowDown') {
+
+                    if(document.activeElement===areas[areas.length-1]) {
+                        areas[0].focus()
+                        return
+                    }
+            
+                    if(document.activeElement === areas[i]) {
+                        areas[i + 1].focus()
+                    }
+                } else if (event.key === 'ArrowUp') {
+
+                    if(document.activeElement===areas[0]) {
+                        areas[areas.length-1].focus()
+                        return
+                    }
+
+                    if(document.activeElement!==areas[0]) {
+                        areas[i-1].focus()
+                    }
+                } else if (event.key ==='Enter') {
+                    
+                    let focusedArea = document.activeElement.querySelector('p').innerText
+
+                    areasOfExpertiseDropdownList.style.display = 'none'
+                    areasOfExpertiseSearchInput.value = focusedArea
+                }                
+            })   
+            
+            //it changes focus on hover
+            areas[i].addEventListener('mouseover', () => {
+                areas[i].focus()
+            })
+    }
 }
