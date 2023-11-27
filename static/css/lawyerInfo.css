@@ -35,21 +35,30 @@
 }
 
 #areasOfExpertiseList {
+    position: absolute;
     display: none;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 0.5rem;
     padding: 0.5rem;
     color: rgb(105, 53, 156);
     border: 1px solid rgb(105, 53, 156);
-    position: absolute;
+    border-top: none;
     height: 150px;
+    font-size: 1rem;
     overflow-y: scroll;
     background-color: whitesmoke;
+    top: 35px;
+    left: 0;
+    width: 100%;
 }
 
 .areaOfExpertiseChoise {
     font-family: Tahoma, sans-serif;
+    text-align: start;
 }
+
 
 .lawyerInfoFormFieldandLabel label {
     font-family: Tahoma, sans-serif;
@@ -188,15 +197,24 @@
 
 #editLawyerInfoForm {
     position: relative;
-    background-color: blueviolet;
+    background-color: rgb(218, 228, 235);
     padding: 1rem;
+    padding-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+    max-width: 95%;
 }
 
 .lawyerInfoFormFieldandLabel {
     display: flex;
     flex-direction: column;
+}
+
+.lawyerInfoFormFieldandLabel label {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
 }
 
 .lawyerInfoFormFieldandLabel:nth-child(8) {
@@ -215,8 +233,34 @@
 #closeUpdateLawyerInfoModalButton {
     position: absolute;
     cursor: pointer;
-    right: 1rem;
+    right: 0.2rem;
+    top: 0.2rem;
     font-weight: 600;
+    font-size: 1.8rem;
+    background-color: transparent;
+    color: rgb(105, 53, 156);
+    border: none;
+}
+
+#closeUpdateLawyerInfoModalButton:focus {
+    outline: none;
+}
+
+#submitLawyerInfo {
+    cursor: pointer;
+    background-color: #4286A8;
+    border: none;
+    color: whitesmoke;
+    font-family: Tahoma, sans-serif;
+    padding: 0.5rem 0.6rem;
+    justify-self: flex-end;
+    grid-column: span 2;
+    border-radius: 2px;
+    font-size: 1rem;
+}
+
+#submitLawyerInfo:focus {
+    outline: none;
 }
 
 @media only screen and (max-width: 650px) {

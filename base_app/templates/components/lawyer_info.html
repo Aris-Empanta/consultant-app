@@ -7,16 +7,16 @@
             <div >
                 <button id="areasOfExpertiseButton">
                     Areas of expertise 
-                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    <i class="fas fa-chevron-down"></i>                    
+                    <div id="areasOfExpertiseList">
+                        {% for area_of_expertise in areas_of_expertise %}
+                        <span class="areaOfExpertiseChoise">
+                            <input type="checkbox" value="{{area_of_expertise}}" name="areas_of_expertise">
+                            <label>{{area_of_expertise}}</label>
+                        </span>
+                        {% endfor %}
+                    </div>
                 </button>
-                <div id="areasOfExpertiseList">
-                    {% for area_of_expertise in areas_of_expertise %}
-                    <span class="areaOfExpertiseChoise">
-                        <input type="checkbox" value="{{area_of_expertise}}" name="areas_of_expertise">
-                        <label>{{area_of_expertise}}</label>
-                    </span>
-                    {% endfor %}
-                </div>
             </div>
             {% for field in form %}
                 <div class="lawyerInfoFormFieldandLabel">

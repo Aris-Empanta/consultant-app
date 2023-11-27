@@ -1,11 +1,15 @@
 <div id="lawyerAppointmentsWrapper">
-    <a href="{% url 'booked_appointments_page' %}" target="_blank">
+    <a href="{% url 'booked_appointments_page' %}" target="_blank" id="appointmentsLinkInProfile">
         Go to appointments details page
     </a>
     {% for appointment in booked_appointments %}
-    <p>{{appointment.day_name}} <span class="appointmentDates">{{appointment.date}}</span></p>
-    <p> Client: <b>{{appointment.first_name}} {{appointment.last_name}}</b> 
-        Time: <b class="startingTimes">{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b></p>
+    <h2>{{appointment.day_name}} <span class="appointmentDates">{{appointment.date}}</span></h2>
+    <div class="appointmentAndCancelButton">
+        <p> 
+            Client: <b>{{appointment.first_name}} {{appointment.last_name}}</b> 
+            Time: <b class="startingTimes">{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b>
+        </p>
         <button class="cancelAppointmentButton">Cancel Appointment</button>
+    </div>
     {% endfor %}
 </div>

@@ -167,3 +167,26 @@
 .generateAppointmentsButton:focus {
     outline: none;
 }
+
+#editableLawyerAvailableHoursWrapper {
+    min-height: 60vh;
+    padding: 2rem;
+}
+
+#adjustAvailableHoursLinkInProfile {
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    color: #4286A8;
+}
+
+#editableLawyerAvailableHoursWrapper h2 {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    font-size: 1.2rem;
+}
+
+.intervalsInLawyerProfile {
+    color: rgb(105, 53, 156);
+    font-size: 1rem;
+    font-family: Tahoma, sans-serif;
+}

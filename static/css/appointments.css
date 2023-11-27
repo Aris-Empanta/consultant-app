@@ -128,3 +128,46 @@
 .appointmentDetailsWrapper {
     display: flex;
 }
+
+#lawyerAppointmentsWrapper {
+    min-height: 60vh;
+    padding: 2rem;
+}
+
+#appointmentsLinkInProfile {
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    color: #4286A8;   
+}
+
+#lawyerAppointmentsWrapper h2 {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    font-size: 1.1rem;
+}
+
+#lawyerAppointmentsWrapper p {
+    color: rgb(105, 53, 156);
+    font-size: 0.9rem;
+    font-family: Tahoma, sans-serif;
+}
+
+.appointmentAndCancelButton {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.cancelAppointmentButton {
+    background-color: #D2122E;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: whitesmoke;
+    padding: 0 0.6rem;
+    border-radius: 2px;
+}
+
+.cancelAppointmentButton:focus {
+    outline: none;
+}

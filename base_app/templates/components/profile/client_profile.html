@@ -18,10 +18,16 @@
             <img src="{{avatar_url}}" id="profilePic" />
             {% endif %} 
             {% if my_own_profile %}
-                <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_pic' %}">
+            <div class="avatarAndUpdateFormWrapper">       
+                <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_pic' %}"
+                    class="updateAvatarForm">
                     {% csrf_token %}
                     <input type="file" name="profile_pic" accept="image/*" onchange="this.form.submit()">
                 </form>
+                <div class="updateClientAvatarIcon">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
             {% endif %}
             <p id="clientFullname">
                 {{first_name}} {{last_name}}

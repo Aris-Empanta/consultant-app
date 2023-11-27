@@ -70,3 +70,27 @@ document.addEventListener("click", (event) => {
         areasOfExpertiseList.style.display = "none";
     }
 })
+
+// The listeners to change color depending the profile details area
+const infoLink = document.getElementById('lawyerInfoLink')
+const availableHoursLink = document.getElementById('lawyerAvailableHoursLink')
+const appointmentsLink = document.getElementById('lawyerAppointmentsLink')
+
+infoLink.addEventListener('click', () => {
+    highlightProfileLink(infoLink, availableHoursLink, appointmentsLink)
+})
+
+availableHoursLink.addEventListener('click', () => {
+    highlightProfileLink(availableHoursLink, appointmentsLink, infoLink)
+})
+
+appointmentsLink.addEventListener('click', () => {
+    highlightProfileLink(appointmentsLink, infoLink, availableHoursLink)
+})
+
+function highlightProfileLink(highlightLink, secondLink, thirdLink) {
+
+    highlightLink.style.backgroundColor = 'rgb(218, 228, 235)'
+    secondLink.style.backgroundColor = 'transparent'
+    thirdLink.style.backgroundColor = 'transparent'
+}

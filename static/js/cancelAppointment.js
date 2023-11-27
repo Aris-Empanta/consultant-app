@@ -9,7 +9,7 @@ import { getCsrfToken } from './csrf.js';
 
     cancelAppointmentButtons[i].addEventListener('click', async() => {
 
-        cancelAppointmentButtons[i].style.backgroundColor = 'green'
+        cancelAppointmentButtons[i].style.backgroundColor = 'rgb(105, 53, 156)'
         cancelAppointmentButtons[i].innerHTML = 'Please Wait'
 
         try {
@@ -37,16 +37,16 @@ import { getCsrfToken } from './csrf.js';
 
             // Check if the response status is OK (status code 200)
             if (!response.ok) {
-                cancelAppointmentButtons[i].style.backgroundColor = 'silver'
+                cancelAppointmentButtons[i].style.backgroundColor = '#D2122E'
                 cancelAppointmentButtons[i].innerHTML = 'Cancel Appointment'
                 return alert('A Network error occured, please try again later.');
             }    
-            cancelAppointmentButtons[i].style.backgroundColor = 'blue'
+            cancelAppointmentButtons[i].style.backgroundColor = '#4286A8'
             cancelAppointmentButtons[i].innerHTML = 'Appointment Cancelled'
 
             setTimeout(() => window.location.reload(), 2000)
         } catch (error) {
-                cancelAppointmentButtons[i].style.backgroundColor = 'silver'
+                cancelAppointmentButtons[i].style.backgroundColor = '#D2122E'
                 cancelAppointmentButtons[i].innerHTML = 'Cancel Appointment'
                alert('An unexpected error occured, please try again later');
             }

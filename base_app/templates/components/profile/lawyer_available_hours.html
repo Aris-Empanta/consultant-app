@@ -1,9 +1,9 @@
 <div id="editableLawyerAvailableHoursWrapper">
-    <a href="{% url 'lawyer_available_hours' %}">Adjust your available hours</a>
+    <a href="{% url 'lawyer_available_hours' %}" id="adjustAvailableHoursLinkInProfile">Adjust your available hours</a>
     {% for day in available_hours %}
     <h2>{{day.dayname}} {{day.date}}</h2>
         {% for interval in day.intervals %}
-        <p>{{interval.starting_time}} - {{interval.ending_time}}</p>
+        <p class="intervalsInLawyerProfile">{{interval.starting_time}} - {{interval.ending_time}}</p>
         {% endfor %}
     {% endfor %}
 </div>
