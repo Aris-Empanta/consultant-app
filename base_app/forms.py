@@ -12,7 +12,6 @@ class MyUserCreationForm(UserCreationForm):
 
 class LawyerInfoForm(ModelForm):
 
-    hourlyRate = forms.IntegerField()
     class Meta:
         model = Lawyer
         fields = ["city", "yearsOfExperience", "hourlyRate", "address", "lisenceStatus", "phone", "description"]
@@ -25,7 +24,14 @@ class LawyerInfoForm(ModelForm):
             "phone": "Phone",
             "description": "Your profile description"
         }
-        
+        widgets = {
+            'lisenceStatus': forms.Select(attrs={"id": "lisenceStatusField", 'autocomplete': 'off'}),
+            'address': forms.Textarea(attrs={'id': 'addressTextArea', 'placeholder': 'Your address', 'autocomplete': 'off'}),
+            'description': forms.Textarea(attrs={'id': 'descriptionTextArea', 
+                                                 'placeholder': 'Describe yourself as a professional', 'autocomplete': 'off'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Your phone number', 'autocomplete': 'off'}),
+            'city': forms.TextInput(attrs={'placeholder': 'Your city', 'autocomplete': 'off'}),
+        }
 
 class PasswordResetForm(PasswordResetForm):
     email = forms.EmailField(

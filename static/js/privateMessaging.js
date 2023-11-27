@@ -27,10 +27,10 @@ const loadingMessages = document.getElementById('loadingMessages')
 messagesNotificationButton.addEventListener('click', async () => {
 
     if(messagesPreviewModal.style.display !== 'flex') {
-        await markMessagesAsChecked()
         
-        uncheckedMessagesWrapper.style.display = 'none'
         messagesPreviewModal.style.display = 'flex'
+        await markMessagesAsChecked()        
+        uncheckedMessagesWrapper.style.display = 'none'
         
         if(appointmentsModal) {
             appointmentsModal.style.display = 'none'
@@ -144,7 +144,7 @@ async function handleMessagesNotifications() {
         if (uncheckedMessagesAmount > 0 ){
             uncheckedMessagesWrapper.style.display = 'initial'
             uncheckedMessages.innerText = uncheckedMessagesAmount
-        }
+        } 
     }
     // If the messagesPreviewModal is open, re-fetch all the messages
     // and mark them all as checked.

@@ -2,23 +2,21 @@
     background-color: whitesmoke;
 }
 #availableHoursWrapper {
-    background-color: #E6E6FA;
+    background-color: rgb(218, 228, 235);
     min-width: 70%;
     max-width: 96%;
-    margin-top: 10vh;
+    margin-top: 20vh;
     margin-bottom: 10vh;
+    padding: 3rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.5rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
 #availableHoursTitle {
     font-family: Tahoma, sans-serif;
-    color: #202020;
+    color: rgb(105, 53, 156);
     font-size: 1.4rem;
     margin-bottom: 3rem;
 }
@@ -37,7 +35,7 @@
 
 .dateTitle {
     font-family: Tahoma, sans-serif;
-    color: #202020;
+    color: rgb(105, 53, 156);
     font-weight: 600;
     font-size: 0.9rem;
 }
@@ -51,14 +49,14 @@
 
 .intervalInputsWrapper p {
     font-family: Tahoma, sans-serif;
-    color: #151515;
+    color: rgb(105, 53, 156);
     font-size: 0.9rem;
     align-self: center;
 }
 
 .intervalInputsWrapper label {
     font-family: Tahoma, sans-serif;
-    color: #151515;
+    color: rgb(105, 53, 156);
     font-size: 0.9rem;
 }
 
@@ -92,24 +90,27 @@
     border: none;
     align-self: center;
     padding: 0.5rem;
-    border-radius: 3px;
+    border-radius: 2px;
     font-family: Tahoma, sans-serif;
-    color: #151515;
+    color: rgb(105, 53, 156);
     font-size: 0.9rem;
     cursor: pointer;
-    box-shadow: 1px 1px 4px #d3d3d3;
+    background-color: whitesmoke;
+}
+
+.timeInput:focus {
+    outline: none;
 }
 
 .minutesSelector {
     border: none;
-    border-radius: 3px;
+    border-radius: 2px;
     cursor: pointer;
     font-family: Tahoma, sans-serif;
-    color: #151515;
+    color: rgb(105, 53, 156);
     font-size: 0.9rem;
     height: 2.5rem;
     width: 2.5rem;
-    box-shadow: 1px 1px 4px #d3d3d3;
 }
 
 .minutesSelector:focus {
@@ -117,7 +118,7 @@
 }
 
 .removeIntervalButton {
-    color: #CC0000;
+    color: #D2122E;
     padding-top: 0;
     align-self: center;
     border: none;
@@ -141,7 +142,7 @@
     border: none;
     font-size: 1.7rem;
     font-weight: 600;
-    color: #d3d3d3;
+    color: rgb(105, 53, 156, 0.4);
     background-color: whitesmoke;
     width: 2rem;
     height: 2rem;
@@ -154,9 +155,9 @@
     margin-bottom: 1rem;
     cursor: pointer;
     border: none;
-    background-color: #720e9e;
+    background-color: #4286A8;
     padding: 0.7rem;
-    border-radius: 3px;
+    border-radius: 2px;
     color: whitesmoke;
     font-family: Tahoma, sans-serif;
     font-size: 0.9rem;

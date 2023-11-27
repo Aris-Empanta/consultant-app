@@ -1,12 +1,86 @@
+.lawyerInfoPage {
+    background-color: rgb(218, 228, 235);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    padding-bottom: 3rem;
+}
+
 #lawyerInfoForm {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 20vh;
+    grid-template-columns: 1fr 1fr; 
+    margin-top: 10vh;
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+    max-width: 95%;
+}
+
+#areasOfExpertiseButton {
+    position: relative;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    background-color: transparent;
+    font-family: Tahoma, sans-serif;
+    padding: 0.4rem 0.5rem;
+    border-radius: 2px;
+    border: 1px ridge rgb(105, 53, 156, 0.7);
+    font-size: 1.1rem;
+    color: rgb(105, 53, 156);
+}
+
+#areasOfExpertiseButton:focus {
+    outline: none;
+}
+
+#areasOfExpertiseList {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    color: rgb(105, 53, 156);
+    border: 1px solid rgb(105, 53, 156);
+    position: absolute;
+    height: 150px;
+    overflow-y: scroll;
+    background-color: whitesmoke;
+}
+
+.areaOfExpertiseChoise {
+    font-family: Tahoma, sans-serif;
+}
+
+.lawyerInfoFormFieldandLabel label {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    max-width: 95%;
+}
+
+.lawyerInfoFormFieldandLabel input {
+    background-color: rgb(218, 228, 235);
+    font-family: Tahoma, sans-serif;
+    padding: 0.3rem 0.5rem;
+    border-radius: 2px;
+    border: 1px ridge rgb(105, 53, 156, 0.7);
+    font-size: 1.1rem;
+    color: rgb(105, 53, 156);
+    max-width: 95%;
+}
+
+.lawyerInfoFormFieldandLabel input:focus {
+    outline: none;
+}
+
+.lawyerInfoFormFieldandLabel input::placeholder {
+    font-size: 1.1rem;
+    color: rgb(105, 53, 156, 0.8);
 }
 
 .lawyerInfoFormFieldandLabel {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
 .lawyerInfoFormFieldandLabel:nth-child(8) {
@@ -17,24 +91,87 @@
     grid-column: span 2;
 }
 
+#lisenceStatusField {
+    background-color: rgb(218, 228, 235);
+    font-size: 1.1rem;
+    font-family: Tahoma, sans-serif;
+    border: 1px ridge rgb(105, 53, 156, 0.7);
+    color: rgb(105, 53, 156);
+    padding: 0.3rem 0.5rem;
+    border-radius: 2px;
+}
+
+#lisenceStatusField:focus {
+    outline: none;
+}
+
+#addressTextArea {
+    background-color: rgb(218, 228, 235);
+    font-size: 1.1rem;
+    font-family: Tahoma, sans-serif;
+    border: 1px ridge rgb(105, 53, 156, 0.7);
+    color: rgb(105, 53, 156);
+    padding: 0.3rem 0.5rem;
+    border-radius: 2px;
+    width: 300px;
+    height: 130px;
+    max-width: 95%;
+}
+
+#addressTextArea:focus {
+    outline: none;
+}
+
+#addressTextArea::placeholder {
+    font-size: 1.1rem;
+    color: rgb(105, 53, 156, 0.8);
+}
+
+#descriptionTextArea {
+    background-color: rgb(218, 228, 235);
+    font-size: 1.1rem;
+    font-family: Tahoma, sans-serif;
+    border: 1px ridge rgb(105, 53, 156, 0.7);
+    color: rgb(105, 53, 156);
+    padding: 0.3rem 0.5rem;
+    border-radius: 2px;
+    height: 150px;
+}
+
+#descriptionTextArea:focus {
+    outline: none;
+}
+
+#descriptionTextArea::placeholder {
+    font-size: 1.1rem;
+    color: rgb(105, 53, 156, 0.8);
+}
+
 #submitLawyerInfoWrapper {
     justify-self: end;
     grid-column: span 2;
 }
 
-#areasOfExpertiseList {
-    display: none;
-    flex-direction: column;
-    border: 1px solid black;
-    position: absolute;
-    height: 150px;
-    overflow-y: scroll;
-    background-color: white;
+#submitLawyerInfoWrapper a {
+    font-size: 1.1rem;
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    text-decoration: none;
 }
 
-#areasOfExpertiseButton {
-    position: relative;
+#submitLawyerInfoWrapper input {
+    padding: 0.3rem 0.5rem;
+    border: none;
+    font-size: 1.1rem;
+    font-family: Tahoma, sans-serif;
     cursor: pointer;
+    background-color: #4286A8;
+    border-radius: 2px;
+    color: rgb(218, 228, 235);
+}
+
+#submitLawyerInfoWrapper input:focus {
+    outline: none;
 }
 
 #updateLawyerInfoWrapper {
@@ -80,4 +217,16 @@
     cursor: pointer;
     right: 1rem;
     font-weight: 600;
+}
+
+@media only screen and (max-width: 650px) {
+    #lawyerInfoForm {
+        display: flex;
+        flex-direction: column;
+        margin-top: 15vh;
+    }
+
+    #submitLawyerInfoWrapper {
+        align-self: flex-end;
+    }
 }
