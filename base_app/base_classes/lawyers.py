@@ -26,7 +26,7 @@ class BaseLawyer(BaseProfile):
     # their fields with all the info needed to be rendered.
     def format_booked_appointments_data(self,  request, appointments_objects_list)->list:
                 
-        return [
+        return [ 
                   {
                     'day_name': appointment.starting_time.strftime('%A'),
                     'date': appointment.starting_time.strftime('%d/%m/%Y'),

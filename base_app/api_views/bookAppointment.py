@@ -6,7 +6,7 @@ from django.views import View
 from ..models import Appointments
 from ..utils.dates import DateUtils
 from django.db import transaction
-from ..base_classes.lawyers import BaseLawyer
+from ..base_classes.lawyers import BaseLawyer 
 from ..base_classes.clients import BaseClient
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -16,6 +16,7 @@ from ..decorators import allowed_users
 class BookAppointment(View, BaseLawyer, BaseClient):
 
     def patch(self, request):
+
         body = json.loads(request.body)
         client_username = request.user.username
         lawyer_username = body['lawyer']

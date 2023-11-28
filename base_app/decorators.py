@@ -25,7 +25,10 @@ def allowed_users(allowed_roles=[]):
         def wrapper_func(request, *args, **kwargs):
             group = None
 
-            if(request.user.groups.exists()):
+            if not request.user.is_authenticated:
+                return JsonResponse({'data': 'login'})
+
+            if request.user.groups.exists():
                 group = str(request.user.groups.all()[0])
 
             if group in allowed_roles:

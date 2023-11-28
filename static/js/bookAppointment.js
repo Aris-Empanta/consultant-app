@@ -63,6 +63,13 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
             // We parse the JSON response
             const responseData = await response.json();
 
+            if(responseData.data === 'login') {
+                // We redirect to login page if the user is not authenticated
+                bookAppointmentButton[i].innerText = `Book`
+                bookAppointmentButton[i].style.backgroundColor = 'rgb(105, 53, 156, 0.9)'
+                return window.location.href = `${window.location.origin}/login`
+            }
+
             //handle data 
             if(responseData.data === 'Booked!') {
 
@@ -82,12 +89,12 @@ for(let i=0; i < bookAppointmentButton.length; i++) {
 
 function startLoading(button) {
     
-    button.innerText = `Please Wait`
-    button.style.backgroundColor = 'red'
+    button.innerText = `Waiting...`
+    button.style.backgroundColor = '#D2122E'
 }
 
 function appointmentSuccessfullyBooked(button, response) {
 
     button.innerText = response
-    button.style.backgroundColor = 'green'
+    button.style.backgroundColor = '#4286A8'
 }

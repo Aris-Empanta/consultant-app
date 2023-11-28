@@ -2,21 +2,38 @@
     cursor: pointer;
     border: none;
     border-radius: 3px;
-    background-color: #9370DB;
+    background-color: rgb(105, 53, 156, 0.9);
     color: white;
     font-size: 0.9rem;
     font-size: Tahoma, sans-serif; 
     padding: 0.2rem 0.5rem;
 }
 
-#availableAppointmentsDays {
-    display: flex;
-}
-
 #appointmentsModalWrapper {
     display: none;
+    background-color: rgb(0, 0, 0, 0.8);
+    min-height: 100%;
+    min-width: 100%;
+    position: fixed;
+    top: 0;
+    justify-content: center;
+    align-items: center;
 }
 
+#availableAppointmentsDays {
+    display: flex;
+    background-color: rgb(218, 228, 235);
+    width: 500px;
+    max-width: 95%;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    gap: 1rem;
+    border-radius: 2px;   
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 400px;
+}
+ 
 #appointmentsModal {
     display: none;
     position: absolute;
@@ -162,7 +179,7 @@
     background-color: #D2122E;
     border: none;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: whitesmoke;
     padding: 0 0.6rem;
     border-radius: 2px;
@@ -170,4 +187,41 @@
 
 .cancelAppointmentButton:focus {
     outline: none;
+}
+
+#appointmentsDaysSeparatorWrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.appointmentsInADayWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.availableAppointmentDayName {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.availableAppointmentDate {
+    font-family: Tahoma, sans-serif;
+    color: #4286A8;
+    font-size: 0.9rem;
+}
+
+.durationAndBookButtonWrapper {
+    display: flex;
+    min-width: 180px;
+    gap: 1rem;
+}
+
+.appointmentDuration {
+    font-family: Tahoma, sans-serif;
+    color: #4286A8;
+    font-size: 0.9rem;
+    max-width: 100%;
 }

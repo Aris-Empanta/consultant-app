@@ -11,3 +11,13 @@
     display: flex;
     border: 1px solid black;
 }
+
+.lawyerSearchBarSearchButton {
+    padding: 0.3rem 0.7rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    border: none;
+    background-color: #4286A8;
+    color: #DFEDF7;
+    border-radius: 2px;
+}

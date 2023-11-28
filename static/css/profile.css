@@ -6,7 +6,7 @@
 }
 
 #lawyerProfileWrapper {
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     padding-top: 5vh;
     display: flex;
@@ -108,14 +108,19 @@
     font-size: 1.1rem;
 }
 
+#fullname {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+}
+
 .editButton {
     cursor: pointer;
     border: none;
     background-color: transparent;
-    color: rgb(105, 53, 156);
+    color: #4286A8;
     border-radius: 2px;
     padding: 0;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-left: 0.5rem;
 }
 
@@ -203,17 +208,28 @@
     cursor: pointer;
     width: 100%;
     padding: 0.5rem 0;
+    text-align: center;
     font-family: Tahoma, sans-serif;
-    color: #151515;
+    color: #DFEDF7;
+    text-decoration: none;
     font-size: 1rem;
     margin: 1rem 0 0 0;
     border: none;
     border-radius: 3px;
-    background-color: blueviolet;
+    background-color: #4286A8;
 }
 
 #sendMessageToProfile:focus {
     outline: none;
+}
+
+#editableLawyerDetailsWrapper {
+    background-color: rgb(218, 228, 235);
+    border-radius: 2px;
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
 }
 
 #lawyerDetailsWrapper {
@@ -222,6 +238,8 @@
     flex-basis: 60%;
     display: flex;
     flex-direction: column;
+    padding: 2rem;
+    max-width: 100%;
 }
 
 #lawyerDetailsLinks {
@@ -261,9 +279,29 @@
     background-color: transparent;
 }
 
+#ratingValueAndButtonWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #lawyerAverageRating {
     font-family: Tahoma, sans-serif;
     color: rgb(105, 53, 156);
+}
+
+#rateLawyerButton {
+    background-color: rgb(105, 53, 156);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #DFEDF7;
+    padding: 0.6rem;
+    border-radius: 2px;
+}
+
+#rateLawyerButton:focus {
+    outline: none;
 }
 
 #noRatingsYet {
@@ -278,28 +316,24 @@
     gap: 0.5rem;
 }
 
-#appointmentButtonAndPriceWrapper {
-    display: flex;
-    gap: 30%;
-}
-
 #bookAppointment {
     cursor: pointer;
     padding: 0.5rem 0;
     font-family: Tahoma, sans-serif;
     color: whitesmoke;
     font-size: 1rem;
-    margin: 0.5rem 0 0 0;
+    margin: 1rem 0;
     border: none;
     border-radius: 3px;
-    background-color: #F40009;
+    background-color: #e60026;
     align-self: flex-start;
     padding: 0.6rem 1rem;
 }
 
 #pricePerHour {
     font-family: Tahoma, sans-serif;
-    font-size: 0.9rem;
+    color: rgb(105, 53, 156);
+    margin-top: 3rem;
 }
 
 #descriptionTitleAndEditWrapper {
@@ -319,10 +353,10 @@
     cursor: pointer;
     border: none;
     background-color: transparent;
-    color: rgb(105, 53, 156);
+    color: #4286A8;
     border-radius: 2px;
     padding: 0;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-left: 0.5rem;
 }
 
@@ -335,7 +369,7 @@
 }
 
 #yearsOfExperienceWrapper {
-    margin-top: 2rem;
+    margin-top: 1rem;
     background-color: rgb(105, 53, 156);
     align-self: flex-start;
     padding: 0.5rem 0.8rem;
@@ -445,4 +479,20 @@
 #editClientFullNameForm {
     display: none;
     flex-direction: column;
+}
+
+@media only screen and (max-width: 1144px) {
+
+    #editableLawyerDetailsWrapper {
+        flex-basis: 90%;
+    }
+
+    #lawyerDetailsWrapper {
+        flex-basis: 90%;
+    }
+
+    #lawyerProfileWrapper {
+        align-items: center;
+        gap: 3rem;
+    }
 }

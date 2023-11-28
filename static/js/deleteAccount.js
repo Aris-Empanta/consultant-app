@@ -9,7 +9,7 @@ deleteAccountButton.addEventListener('click', async () => {
 
     try {
         const csrftoken = getCsrfToken();
-        const url = 'http://localhost:8000/delete-account/';
+        const url = `${window.location.origin}/delete-account/`;
                 
         //We define the request attributes:
         const request = new Request(url, {

@@ -67,17 +67,17 @@ if(rateLawyerButton) {
 
     function waitingForRating() {
         submitLawyerRatingButton.innerHTML = 'Please Wait'
-        submitLawyerRatingButton.style.backgroundColor = 'green'
+        submitLawyerRatingButton.style.backgroundColor = 'rgb(105, 53, 156)'
     }
 
     function ratingSubmitted() {
         submitLawyerRatingButton.innerHTML = 'Rating submited!'
-        submitLawyerRatingButton.style.backgroundColor = 'blue'
+        submitLawyerRatingButton.style.backgroundColor = '#4286A8'
         setTimeout(() => window.location.reload(), 2000)
     }
 
     function restoreRatingSubmitButton() {
         submitLawyerRatingButton.innerHTML = 'Submit'
-        submitLawyerRatingButton.style.backgroundColor = 'silver'
+        submitLawyerRatingButton.style.backgroundColor = '#4286A8'
     }
 }
