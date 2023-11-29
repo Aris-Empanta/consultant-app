@@ -30,14 +30,14 @@ class BaseProfile:
     # The method to add in avatar's name the /media/ in front  
     # if it is from our server's files.
     def format_avatar_link(self, request, avatar_link):
-        if(not avatar_link.startswith('http') or avatar_link.startswith('/http')):
+        if avatar_link.startswith('/media/'):
+                    avatar_link = avatar_link.replace('/media/', '')
+
+        if(not avatar_link.startswith('http')):
                 protocol = "http"
 
                 if request.is_secure():
-                    protocol = 'https' 
-
-                if avatar_link.startswith('/media/'):
-                    avatar_link = avatar_link.replace('/media/', '')
+                    protocol = 'https'                 
 
                 avatar_link = f'{ protocol }://{request.META["HTTP_HOST"]}/media/{avatar_link}'
                 return avatar_link

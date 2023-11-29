@@ -38,6 +38,7 @@ api_urls = [
     path('lawyer-ratings/', views.LawyerRatings.as_view(), name='lawyer_ratings'),
     path('cancel-appointment/', views.CancelAppointment.as_view(), name='cancel_appointment'),
     path('areas-of-expertise/', views.AreasOfExpertiseView.as_view(), name='areas_of_expertise'),
+    path('get-all-ratings/<slug:username>', views.GetAllRatings.as_view(), name='get_all_ratings'),
 ]
 
 daemon_urls = [
