@@ -41,8 +41,19 @@
 
 #messagesPage {
     height: 90%;
-    margin-top: 100px;
     display: flex;
+}
+
+#conversationsListWrapper {
+    width: 400px;
+}
+
+.conversationWrapper {
+    display: flex;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    align-items: center;
 }
 
 #conversationScreen {
@@ -92,14 +103,6 @@
 
 #uncheckedMessages {
     margin: 0;
-}
-
-.conversationWrapper {
-    display: flex;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    font-family: Tahoma, sans-serif;
-    align-items: center;
 }
 
 .messageRead {

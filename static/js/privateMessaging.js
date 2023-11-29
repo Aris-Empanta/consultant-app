@@ -7,7 +7,7 @@ import { showMessage, isEmptyOrWhiteSpace,
          getUncheckedMessagesAmount, markMessagesAsChecked,
          fetchConversations, renderConversations, markMessagesAsRead } from "./privateMessagingHelpers.js";
 
-// We check if it is the private messaging page to put the listener to 
+// We check if it is the private messaging page to put the listener to
 // the send message button, so that we avoid any malfunction on message 
 // receiving if we are on other pages.
 const currentUrl = window.location.href;
