@@ -4,6 +4,7 @@
 
     {% include 'components/reusable/navbar.html' %}
     {% include 'components/reusable/search-lawyer-bar.html' %}
+    {% include 'components/reusable/all-lawyer-ratings.html' %}
 
     <div id="lawyerProfileWrapper">
         <div id="lawyerInfoWrapper">
@@ -81,4 +82,5 @@
     </div>
     <script type="module" src="{% static 'js/bookAppointment.js' %}"></script>
     <script type="module" src="{% static 'js/rateLawyer.js' %}"></script>
+    <script src="{% static 'js/allLawyerRatings.js' %}" ></script>
 {% endblock content %}

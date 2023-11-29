@@ -4,6 +4,7 @@
 
     {% include 'components/reusable/navbar.html' %}
     {% include 'components/reusable/search-lawyer-bar.html' %}
+    {% include 'components/reusable/all-lawyer-ratings.html' %}
 
     <div id="lawyerProfileWrapper">
         {% for message in messages %}
@@ -77,5 +78,6 @@
     
     <script src="{% static 'js/editLawyerProfileInfo.js' %}"></script>   
     <script src="{% static 'js/lawyerInfo.js' %}"></script>
-    <script type="module" src="{% static 'js/cancelAppointment.js' %}"></script>
+    <script type="module" src="{% static 'js/cancelAppointment.js' %}"></script>4
+    <script src="{% static 'js/allLawyerRatings.js' %}" ></script>
 {% endblock content %}

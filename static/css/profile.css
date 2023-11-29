@@ -1,8 +1,13 @@
 #clientProfileWrapper {
-    height: 100%;
-    padding-top: 10%;
-    display: flex;
     justify-content: space-evenly;
+    min-height: 100%;
+    width: 100%;
+    padding-top: 5vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 5%;
+    background-color: whitesmoke;
 }
 
 #lawyerProfileWrapper {
@@ -13,12 +18,12 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: 5%;
+    gap: 5rem;
     background-color: whitesmoke;
 }
 
 #clientInfoWrapper {
-    background-color: #FFF5EE;
+    background-color: rgb(218, 228, 235);
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -86,7 +91,24 @@
 }
 
 #clientArrangedAppointmentsWrapper {
-    background-color: #FFF5EE;
+    background-color: rgb(218, 228, 235);
+    flex-basis: 60%;
+    border-radius: 2px;
+    padding: 0.8rem;
+}
+
+#arrangedAppointmentsTitle {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 2.5rem;
+}
+
+.arrangedAppointmentDate {
+    font-family: Tahoma, sans-serif;
+    color: #4286A8;
+    text-align: center;
 }
 
 #profilePic {
@@ -104,7 +126,7 @@
     margin: 1rem 0 0 0;
     padding: 0;
     font-family: Tahoma, sans-serif;
-    color: #151515;
+    color: rgb(105, 53, 156);
     font-size: 1.1rem;
 }
 
@@ -479,6 +501,17 @@
 #editClientFullNameForm {
     display: none;
     flex-direction: column;
+}
+
+@media only screen and (max-width: 964px) {
+
+    #clientArrangedAppointmentsWrapper {
+        flex-basis: 100%;
+    }
+
+    #clientProfileWrapper {
+        gap: 2rem;
+    }
 }
 
 @media only screen and (max-width: 1144px) {

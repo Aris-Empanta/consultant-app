@@ -21,4 +21,4 @@ class GetAllRatings(View, BaseLawyer):
 
             ratings_list.append(rating_dictionary)
 
-        return  JsonResponse({'ratings': ratings_list})
+        return  JsonResponse({'all_ratings': ratings_list})

@@ -2,7 +2,7 @@
     position: absolute;
     top: 0;
     display: flex;
-    padding: 1% 2.5% 2.5% 2.5%;
+    padding: 1.7% 2.5% 2.5% 2.5%;
     gap: 0.5%;
     justify-content: flex-end;
     right: 0;
@@ -74,7 +74,7 @@
 #navbarAccountMenu {
     display: none;
     flex-direction: column;
-    top: 85px;
+    top: 75px;
     background-color: whitesmoke; 
     position: absolute;
     padding: 1.3rem;
