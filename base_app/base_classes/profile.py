@@ -74,7 +74,7 @@ class BaseProfile:
         ws_relative_url = "/ws/private-messaging/"
         current_scheme = "wss" if request.is_secure() else "ws"
         websocket_url = f"{current_scheme}://{request.get_host()}{ws_relative_url}"
-        message = 'I am sorry but trhe appointment is cancelled.'
+        message = 'Due to an unexpected occurance, we will have to cancel our appointment. I apologize and look forward to future collaboration.'
 
         asyncio.run(self.handle_appointment_cancellation_message(websocket_url, receiver, message, sender))
     

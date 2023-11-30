@@ -11,10 +11,12 @@ class BaseAppConfig(AppConfig):
 
         if run_once is not None:
             return
+        
         os.environ['CMDLINERUNNER_RUN_ONCE'] = 'True'
 
         # We start the daemon that handles the appointments in a new process
         from .background_services.appointmentsDaemon import AppointmentsDaemon
+        import time
 
         appointments_daemon = AppointmentsDaemon()
         appointments_daemon.start()

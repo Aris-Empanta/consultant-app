@@ -40,12 +40,45 @@
 }
 
 #messagesPage {
-    height: 90%;
+    width: 100%;
     display: flex;
+    background-color: whitesmoke;
 }
 
 #conversationsListWrapper {
     width: 400px;
+}
+
+#loadingSideConversations {
+    margin: 2rem auto;
+    border: 5px solid rgb(105, 53, 156, 0.6);
+    border-radius: 50%;
+    border-top: 5px solid rgb(105, 53, 156);
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+.messagesPageConversationWrapper {
+    background-color: whitesmoke;
+    border-left: 1px solid rgb(218, 228, 235);
+    position: relative;
+    width: 100%;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .conversationWrapper {
@@ -54,28 +87,105 @@
     text-decoration: none;
     font-family: Tahoma, sans-serif;
     align-items: center;
+    border-bottom: 1px solid rgb(218, 228, 235);
 }
 
 #conversationScreen {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    height: 90%;
+    height: 100%;
+}
+
+#outerPrivateMessageWrapper {
+    margin-bottom: 70px;
+}
+
+.privateMessageWrapper {
+    background-color: rgb(218, 228, 235);
+    margin: 1rem;
+    border-radius: 2px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.privateMessageAvatarAndUsernameWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.privateMessageAvatar {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.privateMessageUsername {
+    font-family: Tahoma, sans-serif;
+    text-decoration: none;
+    margin: 0;
+    color: rgb(105, 53, 156, 0.9);
+}
+
+.privateMessage {
+    margin: 0;
+    word-wrap: break-word;
+    width: 90%;
+    align-self: center;
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+}
+
+.privateMessageTimeSent {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    font-size: 0.9rem;
+    margin: 0;
+    align-self: flex-end;
 }
 
 #messageInputFieldWrapper {
     position: absolute;
+    display: flex;
     bottom: 0;
     width: 100%;
-    display: flex;
+    padding: 1rem 0;
+    background-color: rgb(105, 53, 156, 0.6);
 }
 
 #messageInputField {
     width: 90%;
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    padding: 0.4rem;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 2px;
+}
+
+#messageInputField:focus {
+    outline: none;
 }
 
 #sendMessageButton {
-    width: 10%;
+    cursor: pointer;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    border: none;
+    background-color: #4286A8;
+    border-radius: 2px 0 2px 0;
+    color: whitesmoke;
+    font-size: 1rem;
+}
+
+#sendMessageButton:focus {
+    outline: none;
 }
 
 #messagesNotificationButton {
@@ -110,11 +220,11 @@
 }
 
 .messageRead:hover {
-    background-color: #DFEDF7;
+    background-color: rgb(218, 228, 235);
 }
 
 .messageUnread {
-    background-color: #DFEDF7;
+    background-color: rgb(218, 228, 235);
 }
 
 .messagePreviewAndTimeAgoWrapper {
@@ -130,4 +240,14 @@
     text-align: end;
     color: rgb(105, 53, 156, 0.9);
     font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 800px) {
+    #conversationsListWrapper {
+        width: fit-content;
+    }   
+
+    .privateMessageWrapper {
+        margin: 0.5rem 0.3rem;
+    }
 }

@@ -1,23 +1,28 @@
-let conversationScreen = document.getElementById('conversationScreen')
 import { getCsrfToken } from './csrf.js';
+
+const messagePreviewInfo = document.getElementsByClassName('messagePreviewAndTimeAgoWrapper')
+let outerPrivateMessageWrapper = document.getElementById('outerPrivateMessageWrapper')
+let conversationScreen = document.getElementById('conversationScreen')
 
 function showMessage(message, username, avatar, time_sent) {
 
     avatar = formatAvatarUrl(avatar)
 
-    conversationScreen.insertAdjacentHTML('beforeend', 
-                                          `<div class="privateMessage">
-                                              <p>${username}</p>
-                                              <img src=${avatar} >
-                                              <p>${message}</p>
-                                              <p>${time_sent}</p>
-                                           </div>`)
+    outerPrivateMessageWrapper.insertAdjacentHTML('beforeend', 
+                                                `<div class="privateMessageWrapper">
+                                                    <div class="privateMessageAvatarAndUsernameWrapper">
+                                                        <img class="privateMessageAvatar" src=${avatar} >
+                                                        <a class="privateMessageUsername" href=/profile/${username}
+                                                            target="_blank">
+                                                            ${username}
+                                                        </a>
+                                                    </div>
+                                                    <p class="privateMessage">${message}</p>
+                                                    <p class="privateMessageTimeSent">${time_sent}</p>
+                                                </div>`)
 
     // Once a new message is appended, the screen  shoud scroll down to show it.
-    let privateMessages = conversationScreen.querySelectorAll('.privateMessage');
-    let lastElement = privateMessages[privateMessages.length - 1];
-    
-    lastElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    scrollToLatestMessage()
 }
 
 function formatAvatarUrl(avatar) {
@@ -27,7 +32,7 @@ function formatAvatarUrl(avatar) {
       let decodedURL = decodeURIComponent(avatar.replace('/media/', ''));
       return decodedURL
     }
-    console.log('no')
+
     // Configuration for locally stored images in media folder
     return `${window.location.origin}${avatar}`
 }
@@ -155,6 +160,12 @@ function renderConversations(conversations, messagesPreviewModal) {
                                       </div>
                                    </a>`
         messagesPreviewModal.insertAdjacentHTML('beforeend', conversationPreview)
+
+        if(screen.width < 800) {
+            messagePreviewInfo[i].style.display = 'none'
+        } else {
+            messagePreviewInfo[i].style.display = 'initial'
+        }
     }
 }
 
@@ -196,6 +207,12 @@ async function markMessagesAsRead() {
         }
 }
 
+function scrollToLatestMessage() {
+
+    conversationScreen.scrollTop = conversationScreen.scrollHeight;
+}
+
 export {showMessage, isEmptyOrWhiteSpace, 
         getUncheckedMessagesAmount, markMessagesAsChecked, 
-        fetchConversations, renderConversations, markMessagesAsRead }
+        fetchConversations, renderConversations, 
+        markMessagesAsRead, scrollToLatestMessage, messagePreviewInfo }

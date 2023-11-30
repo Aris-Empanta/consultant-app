@@ -7,26 +7,33 @@
 
     <div id="messagesPage">
         <div id="conversationsListWrapper">   
-            <p id="loadingSideConversations">Loading...</p>         
+            <div id="loadingSideConversations"></div>         
         </div>
-        <div id="conversationWrapper">
+        <div id="conversationWrapper" class="messagesPageConversationWrapper">
             <div id="conversationScreen">
-                {% for message in messages %}
-                <div class="privateMessage">
-                    <p>{{message.sender_username}}</p>
-                    <img src='{{message.sender_avatar}}'>
-                    <p>{{message.message}}</p>
-                    <p>{{message.time_sent}}</p>
-                 </div>`
-                {% endfor %}
-            </div>
-            <input type="hidden" id="user-info" value="{{ user.username }}">
-            <div id="messageInputFieldWrapper">
-                <input type="text" id="messageInputField">
-                <button id="sendMessageButton">Send</button>
-            </div>
+                <div id="outerPrivateMessageWrapper">
+                    {% for message in messages %}
+                    <div class="privateMessageWrapper">
+                        <div class="privateMessageAvatarAndUsernameWrapper">
+                            <img class="privateMessageAvatar" src='{{message.sender_avatar}}'>
+                            <a class="privateMessageUsername" href="{% url  'profile' username=message.sender_username%}"
+                                target="_blank">
+                                {{message.sender_username}}
+                            </a>
+                        </div>
+                        <p class="privateMessage">{{message.message}}</p>
+                        <p class="privateMessageTimeSent">{{message.time_sent}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="user-info" value="{{ user.username }}">
+                <div id="messageInputFieldWrapper">
+                    <input type="text" id="messageInputField">
+                    <button id="sendMessageButton">Send</button>
+                </div>
+            </div>            
         </div>
     </div>
 
-    <script src="{% static 'js/messagesPageDOM.js' %}"></script>
+    <script type="module" src="{% static 'js/messagesPageDOM.js' %}"></script>
 {% endblock content %}

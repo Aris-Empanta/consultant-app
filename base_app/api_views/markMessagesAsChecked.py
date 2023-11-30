@@ -13,7 +13,6 @@ class MarkMessagesAsChecked(View):
 
             # We mark the authenticated lawyer's appointments as checked.
             Messages.objects.filter(receiver=user).update(checked=True)
-            print('correct')
 
             return JsonResponse({'data': 'Messages successfully marked as checked'})
         except Exception as e:

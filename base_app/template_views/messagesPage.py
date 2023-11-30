@@ -33,7 +33,7 @@ class MessagesPage(View, BaseProfile):
                                                                             message.sender.profile.avatar.url.replace('/media/', ''))
                                                                             )
                 message_dict['message'] = message.message
-                message_dict['time_sent'] = message.time_sent.strftime('%d/%m%Y %H:%M')
+                message_dict['time_sent'] = message.time_sent.strftime('%d/%m/%Y %H:%M')
                 final_messages.append(message_dict)
 
             context = {
