@@ -6,11 +6,31 @@
 
     <div id="searchLawyersPage">
         <div id="searchLawyersWrapper">
+            <h2 id="lawyersAmountFoundInSearch">{{lawyers_amount}} lawyers found</h2>
             {% for lawyer in lawyers_data %}
             <div class="searchLawyerDataWrapper">
-                <img src="{{lawyer.avatar}}">
-                <p>{{lawyer.first_name}} {{lawyer.last_name}}</p>
-                <p>{{lawyer.ratings}}</p>
+                <div class="searchLawyerImageAndInfo">
+                    <img class="lawyerAvatarInSearchResults" src="{{lawyer.avatar}}">
+                    <div>
+                        <p class="lawyerSearchPageName">{{lawyer.first_name}} {{lawyer.last_name}}</p>
+                        <p class="lawyerSearchPageAddress"><i class="fas fa-map-marker-alt"></i> {{lawyer.address}}, {{lawyer.city}}</p>
+                        <p class="areasOfExpertiseTitleInSearchPage">Areas of Expertise: </p>
+                        <div class="areasOfErxpertiseInSearchResults">
+                            {% for area in lawyer.areas_of_expertise %}
+                            <div class="areaOfExpertiseWrapperInSearchResults">
+                                <p>{{area}}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="searchResultsPageRatingAndProfileLink">
+                    <p class="lawyerSearchPageRating">Average Rating: <span>{{lawyer.ratings}}</span></p>
+                    <a class="lawyerSearchPageProfileLink"
+                        href="{% url 'profile' username=lawyer.username %}" target="_blank">
+                        <p>Check profile</p>
+                    </a>
+                </div>
             </div>
             {% endfor %}
         </div>

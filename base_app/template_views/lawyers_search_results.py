@@ -45,10 +45,12 @@ class LawyersSearchResults(View, BaseLawyer):
             lawyer_info['avatar'] = self.format_avatar_link(request, lawyer.profile.avatar.url)
             lawyer_info['ratings'] = self.calculateAverageRating(lawyer)
             lawyer_info['city'] = lawyer.city
-            lawyer_info['address'] = lawyer_info
+            lawyer_info['address'] = lawyer.address
+            lawyer_info['areas_of_expertise'] = lawyer.areasOfExpertise.split(':')
 
             lawyers_data.append(lawyer_info)
 
-        context = { 'lawyers_data': lawyers_data }
+        context = { 'lawyers_data': lawyers_data, 
+                    'lawyers_amount': len(lawyers_data) }
 
         return render(request, 'components/lawyers_search_results.html', context)

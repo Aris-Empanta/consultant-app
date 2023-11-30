@@ -1,17 +1,3 @@
-#searchLawyersPage {
-    margin-top: 20vh;
-}
-
-#searchLawyersWrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-#searchLawyerDataWrapper {
-    display: flex;
-    border: 1px solid black;
-}
-
 .lawyerSearchBarSearchButton {
     padding: 0.3rem 0.7rem;
     font-size: 1.3rem;

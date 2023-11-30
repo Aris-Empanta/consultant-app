@@ -202,13 +202,14 @@
     margin: 0.3rem 0 0 0;
     padding: 0;
     font-family: Tahoma, sans-serif;
-    color: rgb(105, 53, 156);
+    color: #4286A8;
 }
 
 #lawyerAddress {
     margin: 0.8rem 0;
     font-family: Tahoma, sans-serif;
     color: rgb(105, 53, 156);
+    max-width: 250px;
 }
 
 #memberSinceWrapper {
