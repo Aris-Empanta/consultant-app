@@ -131,19 +131,42 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    padding-top: 100px;
     background-color: whitesmoke;
+    gap: 1rem;
 }
  
 #allAppointmentsWrapper {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    background-color: #DFEDF7;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .appointmentDetailsWrapper {
+    background-color: rgb(218, 228, 235);
+    border-radius: 2px;
+    padding: 1rem;
+}
+
+.appointmentLinkWrapper {
     display: flex;
+    text-decoration: none;
+    color: rgb(105, 53, 156);
+    font-family: Tahoma, sans-serif;
+    gap: 1rem;
+}
+
+.bookedAppointmentClientAvatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.bookedAppointmentDateAndTime {
+    text-align: end;
+    color: #4286A8;
+    font-family: Tahoma, sans-serif;
+    font-size: 0.9rem;
 }
 
 #lawyerAppointmentsWrapper {
