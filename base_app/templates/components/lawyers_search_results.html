@@ -34,22 +34,42 @@
             </div>
             {% endfor %}
             <div id="lawyerSearchPagesLinksWrapper">
-                <a href="{{ base_queries|add:1 }}">1</a>
-                {% if previous_page and previous_page > 1 and previous_page < last_page %}
-                <a href="{{previous_page_link}}">{{previous_page}}</a>
-                {% endif %}
-                {% if current_page > 1 %}
-                    {% if current_page == last_page %}
-                    <a href="{{current_page_link}}">...{{current_page}}</a>
+                {% if lawyers_amount > 0 %}
+                    {% if current_page == 1 %}
+                    <a href="{{ first_page_link }}" class="currentPagePaginationLink">
+                        <p>1</p>
+                    </a>
                     {% else %}
-                    <a href="{{current_page_link}}">{{current_page}}</a>
+                    <a href="{{ first_page_link }}" class="paginationLink">
+                        <p>1</p>
+                    </a>
                     {% endif %}
-                {% endif %}
-                {% if next_page and next_page < last_page %}
-                <a href="{{next_page_link}}">{{next_page}}</a>
-                {% endif %}
-                {% if last_page and last_page > current_page %}
-                <a href="{{last_page_link}}">...{{last_page}}</a>
+                    {% if first_has_dots  %}
+                    <p class="paginationDots">...</p>
+                    {% endif %}
+                    {% if previous_page and previous_page > 1 and previous_page < last_page %}
+                    <a href="{{previous_page_link}}" class="paginationLink">
+                        <p>{{previous_page}}</p>
+                    </a>
+                    {% endif %}
+                    {% if current_page > 1 %}
+                        <a href="{{current_page_link}}" class="currentPagePaginationLink">
+                            <p>{{current_page}}</p>
+                        </a>
+                    {% endif %}
+                    {% if next_page and next_page < last_page %}
+                    <a href="{{next_page_link}}" class="paginationLink">
+                        <p>{{next_page}}</p>
+                    </a>
+                    {% endif %}
+                    {% if last_has_dots  %}
+                    <p class="paginationDots">...</p>
+                    {% endif %}
+                    {% if last_page and last_page > current_page %}
+                    <a href="{{last_page_link}}" class="paginationLink">
+                        <p>{{last_page}}</p>
+                    </a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

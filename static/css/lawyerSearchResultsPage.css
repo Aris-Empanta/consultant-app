@@ -2,8 +2,8 @@
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    min-height: 100%;
 }
 
 #searchLawyersWrapper {
@@ -123,4 +123,43 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.paginationLink {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4286A8;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.currentPagePaginationLink {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(105, 53, 156);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.currentPagePaginationLink p {
+    margin: 0;
+    color: whitesmoke;
+}
+
+.paginationLink p {
+    margin: 0;
+    color: whitesmoke;
+}
+
+.paginationDots {
+    font-family: Tahoma, sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    color: rgb(105, 53, 156);
+    align-self: center;
 }
