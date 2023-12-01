@@ -47,6 +47,7 @@
 .lawyerSearchPageName {
     font-family: Tahoma, sans-serif; 
     color: rgb(105, 53, 156);
+    font-weight: 600;
 }
 
 .lawyerSearchPageAddress {
@@ -116,4 +117,10 @@
 
 .lawyerSearchPageProfileLink p {
     margin: 0;
+}
+
+#lawyerSearchPagesLinksWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }

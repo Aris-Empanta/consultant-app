@@ -33,6 +33,25 @@
                 </div>
             </div>
             {% endfor %}
+            <div id="lawyerSearchPagesLinksWrapper">
+                <a href="{{ base_queries|add:1 }}">1</a>
+                {% if previous_page and previous_page > 1 and previous_page < last_page %}
+                <a href="{{previous_page_link}}">{{previous_page}}</a>
+                {% endif %}
+                {% if current_page > 1 %}
+                    {% if current_page == last_page %}
+                    <a href="{{current_page_link}}">...{{current_page}}</a>
+                    {% else %}
+                    <a href="{{current_page_link}}">{{current_page}}</a>
+                    {% endif %}
+                {% endif %}
+                {% if next_page and next_page < last_page %}
+                <a href="{{next_page_link}}">{{next_page}}</a>
+                {% endif %}
+                {% if last_page and last_page > current_page %}
+                <a href="{{last_page_link}}">...{{last_page}}</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock content %}
