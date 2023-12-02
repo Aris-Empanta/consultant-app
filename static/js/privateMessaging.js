@@ -55,7 +55,7 @@ if(currentUrl.startsWith(messagingPageUrl)) {
     let receiver = receiverWithSlashes.slice(1, receiverWithSlashes.length - 1)
     const conversationsListWrapper = document.getElementById('conversationsListWrapper')
 
-    sendMessageButton.addEventListener('click', () => {
+    sendMessageButton.addEventListener('click', async () => {
 
         let message = messageInputField.value
 
@@ -68,6 +68,11 @@ if(currentUrl.startsWith(messagingPageUrl)) {
 
             websocket.send(JSON.stringify(data))
             messageInputField.value = ''
+
+            //We populate the sidebar with all the conversations
+            let conversations = await fetchConversations()
+
+            renderConversations(conversations, conversationsListWrapper)
           }
     })    
 

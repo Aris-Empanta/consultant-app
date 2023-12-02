@@ -60,7 +60,7 @@ class Profile(View, BaseLawyer, BaseClient):
                     formated_appointments = DateUtils.format_appointments(appointments)
 
                     context['description'] = lawyer.description if lawyer.description is not None else "No description available"
-                    context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise is not None else ""
+                    context['areasOfExpertise']  = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise else []
                     context['city']  = lawyer.city  
                     context['yearsOfExperience']  = lawyer.yearsOfExperience
                     context['hourlyRate']  = lawyer.hourlyRate  if lawyer.hourlyRate is not None else "Contact Lawyer to learn price"

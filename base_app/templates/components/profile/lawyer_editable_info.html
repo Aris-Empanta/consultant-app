@@ -7,18 +7,22 @@
             <button id="editLawyerInfoButton">      
                 <i class="fas fa-pencil"></i>
             </button> 
-        </div>        
+        </div>
         <p id="lawyerDescription">{{description}}</p>
         <div id="yearsOfExperienceWrapper">
             <p id="yearsOfExperience">{{yearsOfExperience}} Years Of Experience</p>
         </div>    
         <p id="areasOfExpertiseTitle">Areas of expertise:</p>
         <div id="areasOfExpertiseWrapper">
-        {% for area in areasOfExpertise %}
-        <div class="areaOfExpertiseBox">
-            <p>{{area}}</p>
-        </div>
-        {% endfor %}  
+            {% if areasOfExpertise|length > 0 %}
+                {% for area in areasOfExpertise %}
+                <div class="areaOfExpertiseBox">
+                    <p>{{area}}</p>
+                </div>
+                {% endfor %} 
+            {% else %}
+                <p class="noAreasOfExpertiseTitle">None</p>
+            {% endif %}
         </div> 
         <p id="lawyerPhone"><i class="fas fa-phone"></i> <span>{{phone}}</span></p>  
     </div>
@@ -26,17 +30,20 @@
     <div id="updateLawyerInfoWrapper" >
         <form action="{% url 'lawyer_info' %}" method="post" id="editLawyerInfoForm">
             {% csrf_token %}
-            <button id="areasOfExpertiseButton">
-                Areas of expertise <i class="fas fa-chevron-down"></i>                    
+            <div class="areasOfExpertiseListWrapper">
+                <button id="areasOfExpertiseButton">
+                    Areas of expertise <i class="fas fa-chevron-down"></i>                    
+                </button>
                 <div id="areasOfExpertiseList">
                     {% for area_of_expertise in areas_of_expertise %}
-                    <span>
-                        <input type="checkbox" value="{{area_of_expertise}}" name="areas_of_expertise">
+                    <span class="areaOfExpertiseChoise">
+                        <input id="areasOfExpertiseCheckbox" type="checkbox" 
+                        value="{{area_of_expertise}}" name="areas_of_expertise">
                         <label>{{area_of_expertise}}</label>
                     </span>
                     {% endfor %}
                 </div>
-            </button>
+            </div>
             {% for field in lawyer_info_form %}
                 <div class="lawyerInfoFormFieldandLabel">
                     <label>{{ field.label}}</label>

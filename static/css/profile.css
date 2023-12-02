@@ -35,10 +35,11 @@
 #lawyerInfoWrapper {
     background-color: rgb(218, 228, 235);
     width: fit-content;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3rem 3.5rem;
+    padding: 3rem 0;
     border-radius: 3px;
 }
 
@@ -95,6 +96,7 @@
     flex-basis: 60%;
     border-radius: 2px;
     padding: 0.8rem;
+    min-height: 400px;
 }
 
 #arrangedAppointmentsTitle {
@@ -210,10 +212,12 @@
     font-family: Tahoma, sans-serif;
     color: rgb(105, 53, 156);
     max-width: 250px;
+    word-wrap: break-word;
+    margin: 0 2rem;
 }
 
 #memberSinceWrapper {
-    margin: 1rem 0;
+    margin: 1rem 2rem;
 }
 
 #memberSince {
@@ -229,8 +233,7 @@
 
 #sendMessageToProfile {
     cursor: pointer;
-    width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.6rem 0.9rem;
     text-align: center;
     font-family: Tahoma, sans-serif;
     color: #DFEDF7;
@@ -252,7 +255,7 @@
     flex-basis: 60%;
     display: flex;
     flex-direction: column;
-    max-width: 100%;
+    max-width: 60%;
 }
 
 #lawyerDetailsWrapper {
@@ -261,8 +264,13 @@
     flex-basis: 60%;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    max-width: 100%;
+    max-width: 60%;
+}
+
+#lawyerDetailsInnerWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem;
 }
 
 #lawyerDetailsLinks {
@@ -291,7 +299,6 @@
 
 #lawyerEditableInfoWrapper {
     padding: 0.5rem 2rem;
-    min-height: 60vh;
 }
 
 #lawyerAvailableHoursLink {
@@ -387,7 +394,8 @@
     font-family: Tahoma, sans-serif;
     color: rgb(105, 53, 156);
     margin: 0.5rem 0 0 0;
-    max-width: 95%;
+    max-width: 100%;
+    word-wrap: break-word;
     font-size: 1.1rem;
 }
 
@@ -439,6 +447,7 @@
 #lawyerPhone {
     color: rgb(105, 53, 156);
     font-family: Tahoma, sans-serif;
+    margin: 0 0 1.5rem 0;
 }
 
 #editClientProfileModal {
@@ -502,6 +511,8 @@
 #editClientFullNameForm {
     display: none;
     flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 0.2rem;
 }
 
 @media only screen and (max-width: 964px) {
@@ -519,10 +530,12 @@
 
     #editableLawyerDetailsWrapper {
         flex-basis: 90%;
+        max-width: 100%;
     }
 
     #lawyerDetailsWrapper {
         flex-basis: 90%;
+        max-width: 100%;
     }
 
     #lawyerProfileWrapper {

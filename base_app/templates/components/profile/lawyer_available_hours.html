@@ -1,5 +1,6 @@
 <div id="editableLawyerAvailableHoursWrapper">
-    <a href="{% url 'lawyer_available_hours' %}" id="adjustAvailableHoursLinkInProfile">Adjust your available hours</a>
+    <a href="{% url 'lawyer_available_hours' %}" target="_blank" 
+       id="adjustAvailableHoursLinkInProfile">Adjust your available hours</a>
     {% for day in available_hours %}
     <h2>{{day.dayname}} {{day.date}}</h2>
         {% for interval in day.intervals %}

@@ -43,16 +43,23 @@ class BaseLawyer(BaseProfile):
                 ] 
     # The method to calculate the average rating if ratings exist.
     def calculateAverageRating(self, lawyer):
-        ratings_queryset = Rating.objects.filter(lawyer=lawyer)
+        ratings_queryset = Rating.objects.filter(lawyer=lawyer) 
 
         if len(ratings_queryset) > 0:
           ratings = list(map(lambda x : x.value , ratings_queryset))
           average_rating = math.ceil((reduce(lambda x, y : x + y, ratings) / len(ratings)) * 10) / 10
 
+          if self.is_whole_number(average_rating):
+              average_rating = int(average_rating)
+
           return average_rating
         
         return 'There are no ratings yet'
     
+    # This method checks if a float number can be converted to an integer.
+    def is_whole_number(self, float_number):
+        return int(float_number) == float_number
+
     # The methods below create random data for the Lawyer model, to be used in 
     # the fake objects production.
     def random_areas_of_expertise(self):

@@ -6,6 +6,7 @@ from ..base_classes.lawyers import BaseLawyer
 from django.core.paginator import Paginator
 
 class LawyersSearchResults(View, BaseLawyer):
+    
     def get(self, request):
         # These query params should exist otherwise we send the 404 page.
         expertise = request.GET.get('expertise')
@@ -48,7 +49,7 @@ class LawyersSearchResults(View, BaseLawyer):
             lawyer_info['ratings'] = self.calculateAverageRating(lawyer)
             lawyer_info['city'] = lawyer.city
             lawyer_info['address'] = lawyer.address
-            lawyer_info['areas_of_expertise'] = lawyer.areasOfExpertise.split(':')
+            lawyer_info['areas_of_expertise'] = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise else []
 
             lawyers_data.append(lawyer_info)       
         

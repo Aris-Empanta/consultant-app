@@ -10,7 +10,7 @@
         {% for message in messages %}
                 {% if message.tags == 'error' %}
                 <div id="editProfileError">{{ message }}</div>
-                {% endif %} 
+                {% endif %}
         {% endfor %}
         <div id="lawyerInfoWrapper">
             {% if is_locally_stored %}   
@@ -53,9 +53,6 @@
             <p id="lawyerAddress">
                 <i class="fas fa-map-marker-alt"></i>
                 <span> No address set</span>
-                <button class="editButton" >
-                    <i class="fas fa-pencil"></i>
-                </button>
             </p>            
             {% endif %}
             <p id="memberSinceWrapper">
@@ -78,6 +75,6 @@
     
     <script src="{% static 'js/editLawyerProfileInfo.js' %}"></script>   
     <script src="{% static 'js/lawyerInfo.js' %}"></script>
-    <script type="module" src="{% static 'js/cancelAppointment.js' %}"></script>4
+    <script type="module" src="{% static 'js/cancelAppointment.js' %}"></script>
     <script src="{% static 'js/allLawyerRatings.js' %}" ></script>
 {% endblock content %}

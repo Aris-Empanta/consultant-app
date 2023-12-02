@@ -22,6 +22,20 @@ areasOfExpertiseSearchInput.addEventListener('input', async () => {
     addChangeFocusHanders()
 })
 
+// If in the input we press the arrow down button the focus will go to 
+// the first area of expertise in the list (if exists)
+areasOfExpertiseSearchInput.addEventListener('keydown', (event) => {
+
+    if (event.key === 'ArrowDown') {
+        let areas = document.querySelectorAll('.eachAreaOfExpertise')
+
+        if(areas.length > 0) {
+            areas[0].focus()
+        }
+    }
+  }
+)
+
 //When we click out of the input box it stops any data fetching
 window.addEventListener('click', () => {
     exitFetchingData()
@@ -162,50 +176,47 @@ function addChangeFocusHanders() {
     // If the focus is in the areas of expertise input element we change it to the first area 
     // of expertise. Then we put listeners to all the areas of expertise div elements so that 
     // the focus changes with keydown and key up.
+    let areas = document.querySelectorAll('.eachAreaOfExpertise')
     
-
-        let areas = document.querySelectorAll('.eachAreaOfExpertise')
-
-        areas[0].focus()
+    // We add the listeners we need to all areas of expertise divs
+    for (let i = 0; i < areas.length; i++) {           
         
-        // We add the listeners we need to all areas of expertise divs
-        for (let i = 0; i < areas.length; i++) {           
-            
-            // The listeners to change focus on arrow down and arrow up
-            areas[i].addEventListener('keydown', (event) => {
+        // The listeners to change focus on arrow down and arrow up
+        areas[i].addEventListener('keydown', (event) => {
 
-                if (event.key === 'ArrowDown') {
+            if (event.key === 'ArrowDown') {
 
-                    if(document.activeElement===areas[areas.length-1]) {
-                        areas[0].focus()
-                        return
-                    }
-            
-                    if(document.activeElement === areas[i]) {
-                        areas[i + 1].focus()
-                    }
-                } else if (event.key === 'ArrowUp') {
+                if(document.activeElement===areas[areas.length-1] ) {
 
-                    if(document.activeElement===areas[0]) {
-                        areas[areas.length-1].focus()
-                        return
-                    }
+                    areas[0].focus()
+                    return
+                }
+        
+                if(document.activeElement === areas[i]) {
+                    areas[i + 1].focus()
+                }
+            } else if (event.key === 'ArrowUp') {
 
-                    if(document.activeElement!==areas[0]) {
-                        areas[i-1].focus()
-                    }
-                } else if (event.key ==='Enter') {
-                    
-                    let focusedArea = document.activeElement.querySelector('p').innerText
+                if(document.activeElement===areas[0]) {
+                    areas[areas.length-1].focus()
+                    return
+                }
 
-                    areasOfExpertiseDropdownList.style.display = 'none'
-                    areasOfExpertiseSearchInput.value = focusedArea
-                }                
-            })   
-            
-            //it changes focus on hover
-            areas[i].addEventListener('mouseover', () => {
-                areas[i].focus()
-            })
+                if(document.activeElement!==areas[0]) {
+                    areas[i-1].focus()
+                }
+            } else if (event.key ==='Enter') {
+                
+                let focusedArea = document.activeElement.querySelector('p').innerText
+
+                areasOfExpertiseDropdownList.style.display = 'none'
+                areasOfExpertiseSearchInput.value = focusedArea
+            }                
+        })   
+        
+        //it changes focus on hover
+        areas[i].addEventListener('mouseover', () => {
+            areas[i].focus()
+        })
     }
 }

@@ -36,10 +36,12 @@
                 {% if my_own_profile %}
                 <form action="{% url 'update_user_fullname' %}" method="POST" id="editClientFullNameForm">
                     {% csrf_token %}
-                    <input type="text" placeholder="First Name" value="{{first_name}}" name="firstName">
-                    <input type="text" placeholder="Last Name" value="{{last_name}}" name="lastName">
-                    <button id="cancelUpdateClientFullname">Cancel</button>
-                    <input type="submit" value="Save">
+                    <input type="text" placeholder="First Name" value="{{first_name}}" name="firstName" class="editNameInput">
+                    <input type="text" placeholder="Last Name" value="{{last_name}}" name="lastName" class="editNameInput">
+                    <div class="editAndCancelButtonWrapper">
+                        <button id="cancelUpdateClientFullname" class="editAndCancelFullnameButton">Cancel</button>
+                        <input type="submit" value="Save" class="editAndCancelFullnameButton">
+                    </div>                    
                 </form>
                 <button class="editButton" id="editClientFullName">
                     <i class="fas fa-pencil"></i>
@@ -57,15 +59,19 @@
         </div> 
         {% if my_own_profile %}
         <div id="clientArrangedAppointmentsWrapper">
-            <h1 id="arrangedAppointmentsTitle">Arranged appointments</h1>
-            {% for appointment in client_booked_appointments %}
-                <p class="arrangedAppointmentDate">{{appointment.day_name}} <span class="appointmentDates">{{appointment.date}}</span></p>
-                <div class="arrangedAppointmentDetails">
-                   <p class="arrangedAppointmentLawyer">Lawyer: <b>{{appointment.lawyer_first_name}} {{appointment.lawyer_last_name}}</b></p>
-                   <p class="arrangedAppointmentTime">Time: <b class="startingTimes">{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b></p>
-                   <button class="cancelAppointmentButton">Cancel Appointment</button>
-                </div>
-            {% endfor %}
+            <h2 id="arrangedAppointmentsTitle">Arranged appointments</h2>
+            {% if client_booked_appointments|length > 0 %}
+                {% for appointment in client_booked_appointments %}
+                    <p class="arrangedAppointmentDate">{{appointment.day_name}} <span class="appointmentDates">{{appointment.date}}</span></p>
+                    <div class="arrangedAppointmentDetails">
+                    <p class="arrangedAppointmentLawyer">Lawyer: <b>{{appointment.lawyer_first_name}} {{appointment.lawyer_last_name}}</b></p>
+                    <p class="arrangedAppointmentTime">Time: <b class="startingTimes">{{appointment.starting_time}}</b> - <b>{{appointment.ending_time}}</b></p>
+                    <button class="cancelAppointmentButton">Cancel Appointment</button>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="clientHasNoAppointmentsTitle">You have no scheduled appointments.</p>
+            {% endif %}
         </div>
         {% endif %} 
     </div>

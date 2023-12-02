@@ -23,62 +23,70 @@
                 <span id="memberSinceDate">{{member_since}}</span>
             </p>              
             <a id="sendMessageToProfile" href="{% url 'messages' username=username %}"> Send Message </a>
-        </div>  
+        </div>
         <div id="lawyerDetailsWrapper">
-            <div id="ratingValueAndButtonWrapper">
-                <p id="lawyerAverageRating">Average Rating: {{ratings}}</p>
-                {% if can_rate_lawyer %}
-                <button id="rateLawyerButton">Rate this Lawyer</button>
-                {% include 'components/profile/rating_lawyer_modal.html' %}
-                {% endif %}
-            </div>
-            <button id="openALLRatingsModal">Check All Ratings</button>
-            {% if not lawyer_authenticated %}
-            <button id="bookAppointment"> Book An Appointment </button>
-            {% endif %}  
-
-            <p id="lawyerDescriptionTitle"><i class="fas fa-user"></i> Who is {{first_name}} {{last_name}}</p>
-            <p id="lawyerDescription">{{description}}</p>
-            {% if not lawyer_authenticated %}
-            <p id="pricePerHour"><b>Price:</b> <span>{{hourlyRate}} </span> EUR / hr</p>
-            {% endif %}  
-            <div id="yearsOfExperienceWrapper">
-                <p id="yearsOfExperience">{{yearsOfExperience}} Years Of Experience</p>
-            </div>    
-            <p id="areasOfExpertiseTitle">Areas of expertise:</p>
-            <div id="areasOfExpertiseWrapper">
-
-            {% for area in areasOfExpertise %}
-            <div class="areaOfExpertiseBox">
-                <p>{{area}}</p>
-            </div>
-            {% endfor %}  
-
-            </div> 
-            <p id="lawyerPhone"><i class="fas fa-phone"></i> <span>{{phone}}</span></p>    
-        </div> 
-        {% if not lawyer_authenticated %}
-        <div id="appointmentsModalWrapper">
-            <div id="availableAppointmentsDays">
-                <button id="closeAppointmentsModal">x</button>
-                <div id="appointmentsDaysSeparatorWrapper">
-                    {% for appointment in appointments %}
-                    <div class="appointmentsInADayWrapper">
-                        <p class="availableAppointmentDayName">{{appointment.0}}</p>
-                        <p class="availableAppointmentDate"><b>{{appointment.1}}</b></p>
-                        {% for duration in appointment.2 %}
-                        <div class="durationAndBookButtonWrapper">
-                            <span class="appointmentDuration">{{duration}}</span>
-                            <button class="bookAppointmentButton">Book</button>
-                            <input type="hidden" value="{{appointment.1}} {{duration}}" class="appointmentDateAndTime">
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% endfor %}
+            <div id="lawyerDetailsInnerWrapper">
+                <div id="ratingValueAndButtonWrapper">
+                    <p id="lawyerAverageRating">Average Rating: {{ratings}}</p>
+                    {% if can_rate_lawyer %}
+                    <button id="rateLawyerButton">Rate this Lawyer</button>
+                    {% include 'components/profile/rating_lawyer_modal.html' %}
+                    {% endif %}
                 </div>
-            </div>
-        </div> 
-        {% endif %} 
+                <button id="openALLRatingsModal">Check All Ratings</button>
+                {% if not lawyer_authenticated %}
+                <button id="bookAppointment"> Book An Appointment </button>
+                {% endif %}  
+
+                <p id="lawyerDescriptionTitle"><i class="fas fa-user"></i> Who is {{first_name}} {{last_name}}</p>
+                <p id="lawyerDescription">{{description}}</p>
+                {% if not lawyer_authenticated %}
+                <p id="pricePerHour"><b>Price:</b> <span>{{hourlyRate}} </span> EUR / hr</p>
+                {% endif %}  
+                <div id="yearsOfExperienceWrapper">
+                    <p id="yearsOfExperience">{{yearsOfExperience}} Years Of Experience</p>
+                </div>    
+                <p id="areasOfExpertiseTitle">Areas of expertise:</p>
+                <div id="areasOfExpertiseWrapper">
+                {% if areasOfExpertise|length > 0 %}
+                    {% for area in areasOfExpertise %}
+                    <div class="areaOfExpertiseBox">
+                        <p>{{area}}</p>
+                    </div>
+                    {% endfor %}   
+                {% else %}
+                    <p class="noAreasOfExpertiseTitle">None</p>
+                {% endif %}
+                </div> 
+                <p id="lawyerPhone"><i class="fas fa-phone"></i> <span>{{phone}}</span></p>    
+            </div> 
+            {% if not lawyer_authenticated %}
+            <div id="appointmentsModalWrapper">
+                <div id="availableAppointmentsDays">
+                    <button id="closeAppointmentsModal">x</button>
+                    {% if appointments|length > 0 %}
+                    <div id="appointmentsDaysSeparatorWrapper">                    
+                            {% for appointment in appointments %}
+                            <div class="appointmentsInADayWrapper">
+                                <p class="availableAppointmentDayName">{{appointment.0}}</p>
+                                <p class="availableAppointmentDate"><b>{{appointment.1}}</b></p>
+                                {% for duration in appointment.2 %}
+                                <div class="durationAndBookButtonWrapper">
+                                    <span class="appointmentDuration">{{duration}}</span>
+                                    <button class="bookAppointmentButton">Book</button>
+                                    <input type="hidden" value="{{appointment.1}} {{duration}}" class="appointmentDateAndTime">
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                    </div>
+                    {% else %}
+                        <h2 class="noAvailableAppointmentsTitle">There are no available appointments</h2>
+                    {% endif %}
+                </div>
+            </div> 
+            {% endif %} 
+        </div>
     </div>
     <script type="module" src="{% static 'js/bookAppointment.js' %}"></script>
     <script type="module" src="{% static 'js/rateLawyer.js' %}"></script>

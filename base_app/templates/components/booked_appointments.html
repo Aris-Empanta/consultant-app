@@ -7,19 +7,23 @@
 
     <div id="bookedAppointmentsPage">
         <div id="allAppointmentsWrapper">
-            {% for appointment in appointments %}
-            <div class="appointmentDetailsWrapper">
-                <a href="{{appointment.profile_link}}" class="appointmentLinkWrapper">
-                    <img class="bookedAppointmentClientAvatar" src="{{appointment.avatar}}">
-                    <p>
-                        You have an appointment with <b>{{appointment.first_name}} {{appointment.last_name}}</b> on 
-                        <b>{{appointment.day_name}} {{appointment.date}}</b> from 
-                        <b>{{appointment.starting_time}}</b> to <b>{{appointment.ending_time}}</b>
-                    </p>
-                </a>    
-                <p class="bookedAppointmentDateAndTime">Booked {{appointment.time_since}} ago</p>
-            </div>
-            {% endfor %}
+            {% if appointments|length > 0 %}
+                {% for appointment in appointments %}
+                <div class="appointmentDetailsWrapper">
+                    <a href="{{appointment.profile_link}}" class="appointmentLinkWrapper">
+                        <img class="bookedAppointmentClientAvatar" src="{{appointment.avatar}}">
+                        <p>
+                            You have an appointment with <b>{{appointment.first_name}} {{appointment.last_name}}</b> on 
+                            <b>{{appointment.day_name}} {{appointment.date}}</b> from 
+                            <b>{{appointment.starting_time}}</b> to <b>{{appointment.ending_time}}</b>
+                        </p>
+                    </a>    
+                    <p class="bookedAppointmentDateAndTime">Booked {{appointment.time_since}} ago</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h2 id="noAppointmentsScheduledTitle">You have no appointments scheduled.</h2>
+            {% endif %}
         </div>
     </div>
      

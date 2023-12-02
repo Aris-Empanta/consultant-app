@@ -16,16 +16,20 @@
                         <p class="lawyerSearchPageAddress"><i class="fas fa-map-marker-alt"></i> {{lawyer.address}}, {{lawyer.city}}</p>
                         <p class="areasOfExpertiseTitleInSearchPage">Areas of Expertise: </p>
                         <div class="areasOfErxpertiseInSearchResults">
-                            {% for area in lawyer.areas_of_expertise %}
-                            <div class="areaOfExpertiseWrapperInSearchResults">
-                                <p>{{area}}</p>
-                            </div>
-                            {% endfor %}
+                            {% if areasOfExpertise|length > 0 %}
+                                {% for area in lawyer.areas_of_expertise %}
+                                <div class="areaOfExpertiseWrapperInSearchResults">
+                                    <p>{{area}}</p>
+                                </div>
+                                {% endfor %}                      
+                            {% else %}
+                                <p class="noAreasOfExpertiseTitle">None</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="searchResultsPageRatingAndProfileLink">
-                    <p class="lawyerSearchPageRating">Average Rating: <span>{{lawyer.ratings}}</span></p>
+                    <p class="lawyerSearchPageRating">Average Rating: <span>{{lawyer.ratings}}/5</span></p>
                     <a class="lawyerSearchPageProfileLink"
                         href="{% url 'profile' username=lawyer.username %}" target="_blank">
                         <p>Check profile</p>

@@ -74,7 +74,6 @@ class PrivateMessagingConsumer(AsyncWebsocketConsumer):
 
         if isinstance(sender_object, AnonymousUser):
             sender = text_data_json['sender']
-            print(sender)
             sender_object = User.objects.filter(username=sender).first()
 
         sender = sender_object.username
