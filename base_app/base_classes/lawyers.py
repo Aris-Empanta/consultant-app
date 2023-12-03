@@ -52,7 +52,7 @@ class BaseLawyer(BaseProfile):
           if self.is_whole_number(average_rating):
               average_rating = int(average_rating)
 
-          return average_rating
+          return f'{average_rating}/5'
         
         return 'There are no ratings yet'
     
@@ -75,7 +75,7 @@ class BaseLawyer(BaseProfile):
     
     def random_description(self):
         fake = Faker()
-        paragraph_amount = random.randint(1, 5)
+        paragraph_amount = random.randint(1, 2)
 
         return fake.paragraph(nb_sentences=paragraph_amount)
     

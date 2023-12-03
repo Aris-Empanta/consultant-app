@@ -47,17 +47,18 @@ class RegisterUser(View):
                 messages.error(request, 'User already exists!')
                 return redirect('.')
             
+            user.save()
+            
             profile = Profile()
             profile.user = user
-            profile.Lawyer = True if self.lawyerRegister else False
-            profile.Client = False if self.lawyerRegister else True
+            profile.isLawyer = True if self.lawyerRegister else False
+            profile.isClient = False if self.lawyerRegister else True
 
-            user.save()
             profile.save()
 
             # Depending the user, we connect the profile to a Lawyer 
             # model or a Client.
-            if profile.Lawyer:
+            if profile.isLawyer:
                 lawyer = Lawyer()
                 lawyer.profile = profile
                 lawyer.save()    

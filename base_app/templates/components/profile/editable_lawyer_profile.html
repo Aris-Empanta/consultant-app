@@ -26,7 +26,18 @@
                 </div>
             </div>  
             {% else %}
-            <img src="{{avatar_url}}" id="profilePic" />
+            <div class="avatarAndUpdateFormWrapper">
+                <img src="{{avatar_url}}" id="profilePic" />
+                <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_pic' %}"
+                        class="updateAvatarForm">
+                    {% csrf_token %}
+                    <input type="file" name="profile_pic" accept="image/*" onchange="this.form.submit()">
+                </form>
+                <div class="updateLawyerAvatarIcon">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>  
+
             {% endif %} 
             <p id="lawyerFullname">
                 {{first_name}} {{last_name}}

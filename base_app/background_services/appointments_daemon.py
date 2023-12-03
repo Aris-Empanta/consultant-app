@@ -55,5 +55,5 @@ class AppointmentsDaemon:
                 print(f"General Exception in Daemon: {e}")
 
 
-            # The daemon will run every 10 minutes for the appointments reminder.
-            time.sleep(10 * 60)
+            # The daemon will run every 5 minutes for the appointments reminder.
+            time.sleep(5 * 60)

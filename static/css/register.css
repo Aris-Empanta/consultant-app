@@ -93,6 +93,8 @@
 
 .errorlist li {
     color: #E32636;
+    margin: 0;
+    font-family: Tahoma, sans-serif;
 }
 
 .alreadyUser {

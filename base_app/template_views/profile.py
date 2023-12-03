@@ -83,7 +83,6 @@ class Profile(View, BaseLawyer, BaseClient):
             # is the same as the username in the url parameter. Then, depending if 
             # the user is a lawyer or a client, we render the appropriate template.
             if request.user.is_authenticated and request.user.username == username:
-
                 self.my_own_profile = True
                 context['my_own_profile'] = self.my_own_profile
 

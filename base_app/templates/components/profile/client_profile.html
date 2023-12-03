@@ -22,7 +22,7 @@
             {% if my_own_profile %}
             <div class="avatarAndUpdateFormWrapper">       
                 <form method="POST" enctype="multipart/form-data" action="{% url 'update_profile_pic' %}"
-                    class="updateAvatarForm">
+                    class="updateClientAvatarForm">
                     {% csrf_token %}
                     <input type="file" name="profile_pic" accept="image/*" onchange="this.form.submit()">
                 </form>

@@ -59,6 +59,18 @@
     border-radius: 50%;
 }
 
+.updateClientAvatarForm input {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    bottom: 0;
+    right: -60px;
+    opacity: 0;
+    z-index: 2;
+    border-radius: 50%;
+}
+
 .updateLawyerAvatarIcon {
     position: absolute;
     width: 40px;

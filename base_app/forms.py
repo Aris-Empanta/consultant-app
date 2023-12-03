@@ -10,6 +10,13 @@ class MyUserCreationForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2'] 
 
+        widgets={
+                 'first_name': forms.TextInput(attrs={"autocomplete": "off"}),
+                 'last_name': forms.TextInput(attrs={"autocomplete": "off"}),
+                 'username': forms.TextInput(attrs={"autocomplete": "off"}),
+                 'email': forms.EmailInput(attrs={"autocomplete": "off"}),
+                }
+
 class LawyerInfoForm(ModelForm):
 
     class Meta:

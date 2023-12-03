@@ -6,7 +6,7 @@
         <div class="registerFormWrapper">
             {% for message in messages %}
                 {% if message.tags == 'error' %}
-                    <div>{{ message }}</div>
+                    <div class="errorOnRegistrationMessage">{{ message }}</div>
                 {% endif %}
             {% endfor %}
             <a href="{% provider_login_url 'google' %}" id="googleRegisterLink">
