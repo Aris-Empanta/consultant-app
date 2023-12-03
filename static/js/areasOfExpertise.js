@@ -84,7 +84,6 @@ async function fetchAreasOfExpertise(areaOfExpertise) {
         return responseData.areas
     } catch (error) {
         exitFetchingData()
-        console.log(error)
         showNoResults()
     }
 }

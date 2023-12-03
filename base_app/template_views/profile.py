@@ -1,7 +1,7 @@
 from typing import Any
 from django.views import View
 from django.shortcuts import render
-from ..models import User, Lawyer, AvailableHours, Appointments, Client
+from ..models import User, Lawyer, AvailableHours, Appointments
 from ..enums import AreasOfExpertise
 import urllib.parse
 from ..utils.dates import DateUtils

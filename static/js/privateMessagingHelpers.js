@@ -177,7 +177,6 @@ function formatMessagePreview(message) {
     return message
 }
 
-
 async function markMessagesAsRead() {
     
     try {

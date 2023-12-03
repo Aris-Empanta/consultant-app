@@ -58,10 +58,6 @@ if(amount > 0) {
 const webHost = window.location.host;
 const socket = new WebSocket(`ws://${webHost}/ws/book-appointment/`);
 
-socket.onopen = () => {
-    console.log('connection established')
-}
-
 socket.onmessage = async (event) => {
 
     // When the appointments modal is closed:

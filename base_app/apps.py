@@ -15,7 +15,7 @@ class BaseAppConfig(AppConfig):
         os.environ['CMDLINERUNNER_RUN_ONCE'] = 'True'
 
         # We start the daemon that handles the appointments in a new process
-        from .background_services.appointmentsDaemon import AppointmentsDaemon
+        from .background_services.appointments_daemon import AppointmentsDaemon
         import time
 
         appointments_daemon = AppointmentsDaemon()

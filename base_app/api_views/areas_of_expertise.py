@@ -6,7 +6,6 @@ import json
 class AreasOfExpertiseView(View):
 
     def post(self, request):
-
         body = json.loads(request.body)
         area = body['areaOfExpertise']
 

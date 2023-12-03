@@ -52,7 +52,6 @@ async function getAllLawyerRatings() {
         renderAllRatings(responseData.all_ratings)
 
     } catch (error) {
-        console.log(error)
         // Handle any errors that occur during the fetch or response handling (change it in production)
         alert('An unexpected error occured, please try again later');
     }
