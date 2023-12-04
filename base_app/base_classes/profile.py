@@ -34,7 +34,7 @@ class BaseProfile:
                     avatar_link = avatar_link.replace('/media/', '')
 
         if(not avatar_link.startswith('http')):
-                protocol = "http"
+                protocol = "https"
 
                 if request.is_secure():
                     protocol = 'https'                 
