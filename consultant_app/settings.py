@@ -43,8 +43,6 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 INSTALLED_APPS = [
-    'daphne',
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
