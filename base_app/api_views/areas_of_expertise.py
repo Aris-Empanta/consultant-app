@@ -1,9 +1,14 @@
 from django.http import JsonResponse
 from django.views import View
 from ..enums import AreasOfExpertise
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 class AreasOfExpertiseView(View):
+
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
     def post(self, request):
         body = json.loads(request.body)
