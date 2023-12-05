@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator 
+from cloudinary.models import CloudinaryField
 
 class User(AbstractUser):
     USERNAME_FIELD = 'email'
@@ -8,7 +9,7 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE)
-    avatar = models.ImageField(null=True, blank=True, default="images/profile-pics/avatar.png", upload_to='images/profile-pics/')
+    avatar = CloudinaryField('image')
     isLawyer = models.BooleanField(default=False)
     isClient = models.BooleanField(default=False)
 

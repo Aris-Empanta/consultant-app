@@ -7,6 +7,8 @@ from pathlib import Path
 from django.contrib import messages
 from ..base_classes.clients import BaseClient
 from ..base_classes.lawyers import BaseLawyer
+import cloudinary.uploader
+
 
 @method_decorator(login_required(login_url="login"), name='dispatch')
 class UpdateProfilePic(View, BaseClient, BaseLawyer):
@@ -29,14 +31,10 @@ class UpdateProfilePic(View, BaseClient, BaseLawyer):
 
         # We get the path to the previous avatar using the Path object
         profile = Profile.objects.filter(user=request.user).first()
-        previous_avatar_path = Path(profile.avatar.path)
-
-        # We delete the previous avatar file (only if it is not avatar.png)
-        if previous_avatar_path.exists() and not profile.avatar.name == self.default_profile_pic_name:
-            previous_avatar_path.unlink()  
-            print(f"File {previous_avatar_path} has been deleted.")
-        else:
-            print(f"File {previous_avatar_path} does not exist.")
+        previous_avatar = profile.avatar
+        print(previous_avatar.public_id)
+        if not previous_avatar.public_id == 'avatar':
+            cloudinary.uploader.destroy(previous_avatar.public_id)
 
         # Save the newly received image as the profile pic
         profile.avatar = new_avatar

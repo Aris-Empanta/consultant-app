@@ -27,9 +27,13 @@ class Profile(View, BaseLawyer, BaseClient):
             member_since = user.date_joined.strftime("%b %Y")
             first_name = user.first_name
             last_name = user.last_name
+
+           
             
             # We parse the url, to get the encoded special characters (/, :, etc...)
             avatar_url = urllib.parse.unquote(avatar.url).replace(self.media_folder, '')
+
+            print(avatar_url)
 
             # we examine if the avatar's url is a file belonging to our server 
             # or a google image url. We save this info in a variable and pass it 

@@ -53,6 +53,7 @@ class RegisterUser(View):
             profile.user = user
             profile.isLawyer = True if self.lawyerRegister else False
             profile.isClient = False if self.lawyerRegister else True
+            profile.avatar = 'avatar.webp'
 
             profile.save()
 

@@ -5,6 +5,7 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from ..utils.authorization import Authorization
 from allauth.socialaccount.models import SocialAccount
+import cloudinary.uploader
 
 # The view class that does all the validation/configurations 
 # after the user authenticates via oauth and returns to the 
@@ -71,8 +72,12 @@ class OauthHandler(View):
         # profile's avatar
         account = SocialAccount.objects.filter(user=request.user)
         social_account_avatar = account[0].extra_data.get('picture')
-        profile.avatar = social_account_avatar
 
+        # Upload the image to Cloudinary and get the public ID
+        response = cloudinary.uploader.upload(social_account_avatar)
+
+        # Save the public ID to the CloudinaryField
+        profile.avatar = response['public_id']
         profile.save()       
 
         # Depending the user, we connect the profile to a Lawyer 

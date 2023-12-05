@@ -22,11 +22,7 @@
                 <div id="loadingAppointments"></div>
             </div>
         {% endif %}
-        {% if request.user.profile.avatar|truncatechars:5 == "http…" %}
-        <img src="{{request.user.profile.avatar}}" id="navbarAvatar">
-        {% else %}
-        <img src="/media/{{request.user.profile.avatar}}" id="navbarAvatar">
-        {% endif %}
+        <img src="{{request.user.profile.avatar.url}}" id="navbarAvatar">
         <div id="navbarAccountMenu">
             <a href="{% url 'profile' request.user.username %}">Profile</a>
             <a href="{% url 'logout' %}">Logout</a>
