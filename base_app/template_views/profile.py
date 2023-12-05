@@ -33,8 +33,6 @@ class Profile(View, BaseLawyer, BaseClient):
             # We parse the url, to get the encoded special characters (/, :, etc...)
             avatar_url = urllib.parse.unquote(avatar.url).replace(self.media_folder, '')
 
-            print(avatar_url)
-
             # we examine if the avatar's url is a file belonging to our server 
             # or a google image url. We save this info in a variable and pass it 
             # to the template through context
@@ -101,7 +99,7 @@ class Profile(View, BaseLawyer, BaseClient):
 
                     context['available_hours'] = available_hours_list
                     context['lawyer_info_form'] = LawyerInfoForm()
-                    context['booked_appointments'] = self.format_booked_appointments_data(request, booked_appointments)
+                    context['booked_appointments'] = self.format_booked_appointments_data(booked_appointments)
                     context['areas_of_expertise'] = areas_of_expertise
                     
                     return render(request, 'components/profile/editable_lawyer_profile.html', context)

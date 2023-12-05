@@ -33,15 +33,13 @@ class GetAllConversations(View, BaseProfile):
         return JsonResponse({'conversations': conversations_list})
     
     def append_conversation(self, request, conversation_object, conversations_list):
-        conversation_dict = dict()
-
-        string_to_remove = '/media/'
-        avatar_url = conversation_object.sender.profile.avatar.url[len(string_to_remove):]
+        conversation_dict = dict()        
+        avatar_url = conversation_object.sender.profile.avatar.url
 
         conversation_dict['sender'] = conversation_object.sender.username
         conversation_dict['time_sent'] = timesince(conversation_object.time_sent, timezone.now())
         conversation_dict['message'] = conversation_object.message
-        conversation_dict['avatar'] = self.format_avatar_link(request, avatar_url)
+        conversation_dict['avatar'] = avatar_url
         conversation_dict['read'] = conversation_object.read
 
         conversations_list.append(conversation_dict)

@@ -14,47 +14,6 @@ class BaseProfile:
         'image/avif',
         'image/tiff',
     ]
-
-    default_profile_pic_name = 'images/profile-pics/avatar.png'
-
-     # The flag to query if the profile's avatar is an 
-     # external link or not.
-    def is_avatar_external_link(self, image_link):
-        is_external = False
-
-        if image_link.startswith('http'):
-            is_external = True
-            
-        return is_external
-    
-    # The method to add in avatar's name the /media/ in front  
-    # if it is from our server's files.
-    def format_avatar_link(self, request, avatar_link):
-        if avatar_link.startswith('/media/'):
-                    avatar_link = avatar_link.replace('/media/', '')
-
-        if(not avatar_link.startswith('http')):
-                protocol = "https"
-
-                if request.is_secure():
-                    protocol = 'https'                 
-
-                avatar_link = f'{ protocol }://{request.META["HTTP_HOST"]}/media/{avatar_link}'
-                return avatar_link
-        
-        return unquote(avatar_link)
-    
-    # The method to rename a profile pic image so that it has a
-    #  unique name in the server
-    def rename_image(self, image_name):
-        # We add the timestamp infront so that the image never starts with 
-        # http or http like google account images. then we add a unique id, 
-        # so that the name is unique, and at the end its extension.
-        random_uuid = str(uuid.uuid4())
-        timestamp = int(time.time())
-        file_extension = image_name.split('.')[-1]
-        
-        return f'{timestamp}_{random_uuid}.{file_extension}'
     
     def cancel_appointment(self, appointment):
         # On appointment cancellation we modify the following variables as: 

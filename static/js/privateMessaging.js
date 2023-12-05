@@ -116,9 +116,8 @@ if(currentUrl.startsWith(messagingPageUrl)) {
 
         renderConversations(conversations, conversationsListWrapper)
 
-        // We handle the messages notifications.
-        await handleMessagesNotifications() 
-        // We mark the sender's messages as read
+        // We mark the sender's messages as checked and read
+        await markMessagesAsChecked()
         await markMessagesAsRead()
 
         // We will show the newly receive message only in the conversation 

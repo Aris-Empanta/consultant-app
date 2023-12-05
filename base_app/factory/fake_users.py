@@ -21,7 +21,7 @@ class FakeUsers(BaseLawyer):
         self.maximum_amount = 6000
 
     def create(self):
-        
+                
         fake = Faker()
 
         # We fetch the list of all the first names that exist in the faker library. 
@@ -51,6 +51,7 @@ class FakeUsers(BaseLawyer):
 
                     profile = Profile.objects.create(
                         user = user,
+                        avatar = 'avatar.webp',
                         isLawyer = False if i < self.clients_amount else True,
                         isClient = False if i >= self.clients_amount else True,
                     )

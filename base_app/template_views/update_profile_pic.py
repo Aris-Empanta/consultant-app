@@ -32,7 +32,7 @@ class UpdateProfilePic(View, BaseClient, BaseLawyer):
         # We get the path to the previous avatar using the Path object
         profile = Profile.objects.filter(user=request.user).first()
         previous_avatar = profile.avatar
-        print(previous_avatar.public_id)
+        
         if not previous_avatar.public_id == 'avatar':
             cloudinary.uploader.destroy(previous_avatar.public_id)
 

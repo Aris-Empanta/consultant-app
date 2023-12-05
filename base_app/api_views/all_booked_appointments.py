@@ -22,7 +22,7 @@ class AllBookedAppointments(View, BaseLawyer):
                 'ending_time': appointment.ending_time.strftime('%H:%M'), 
                 'client_first_name': appointment.client.profile.user.first_name, 
                 'client_last_name': appointment.client.profile.user.last_name,
-                'client_avatar': self.format_avatar_link(request, appointment.client.profile.avatar.name),
+                'client_avatar': appointment.client.profile.avatar.url,
                 'checked': appointment.checked,
                 'time_since': timesince(appointment.time_booked, timezone.now())
             }

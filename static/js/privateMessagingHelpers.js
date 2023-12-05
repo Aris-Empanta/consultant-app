@@ -6,8 +6,6 @@ let conversationScreen = document.getElementById('conversationScreen')
 
 function showMessage(message, username, avatar, time_sent) {
 
-    avatar = formatAvatarUrl(avatar)
-
     outerPrivateMessageWrapper.insertAdjacentHTML('beforeend', 
                                                 `<div class="privateMessageWrapper">
                                                     <div class="privateMessageAvatarAndUsernameWrapper">
@@ -23,18 +21,6 @@ function showMessage(message, username, avatar, time_sent) {
 
     // Once a new message is appended, the screen  shoud scroll down to show it.
     scrollToLatestMessage()
-}
-
-function formatAvatarUrl(avatar) {
-
-    // Configuration for google images
-    if(avatar.startsWith('/media/http')) {
-      let decodedURL = decodeURIComponent(avatar.replace('/media/', ''));
-      return decodedURL
-    }
-
-    // Configuration for locally stored images in media folder
-    return `${window.location.origin}${avatar}`
 }
 
 function isEmptyOrWhiteSpace(str) {

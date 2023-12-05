@@ -15,7 +15,7 @@ class GetAllRatings(View, BaseLawyer):
 
             rating_dictionary['first_name'] = rating.client.profile.user.first_name
             rating_dictionary['last_name'] = rating.client.profile.user.last_name
-            rating_dictionary['avatar'] = self.format_avatar_link(request, rating.client.profile.avatar.url)
+            rating_dictionary['avatar'] = rating.client.profile.avatar.url
             rating_dictionary['value'] = rating.value
             rating_dictionary['comment'] = rating.comments
 

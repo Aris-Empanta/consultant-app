@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.views import View
-from ..models import Lawyer
-from django.db.models import Q
 from ..base_classes.lawyers import BaseLawyer
 from django.core.paginator import Paginator
 
@@ -16,43 +14,13 @@ class LawyersSearchResults(View, BaseLawyer):
         if expertise == None or name==None:
             return render(request, 'components/reusable/404.html')
         
-        name_input = name.split(' ')
+        # We retrieve a Queryset of Lawyer objects based on the user input data
+        lawyers = self.get_lawyers_filtered(expertise, name)     
+           
+        # We modify the Queryset we retrieved to a list of dictionaries with 
+        # all the data we need. 
+        lawyers_data = self.format_lawyers_search_results(lawyers)     
 
-        first_name = ''
-        last_name = ''
-
-        # We separate first name and last name
-        if len(name_input) == 1:
-            first_name = name_input[0].strip()
-        elif len(name_input) > 1:
-            first_name = name_input[0].strip()
-            last_name = name_input[1].strip()
-        else:
-            first_name = ''
-            last_name = ''
-        
-        lawyers = Lawyer.objects.filter(
-                        Q(areasOfExpertise__icontains=expertise) &
-                        Q(profile__user__first_name__icontains=first_name) &
-                        Q(profile__user__last_name__icontains=last_name)
-                    )
-        
-        lawyers_data = list()
-
-        for lawyer in lawyers:
-            lawyer_info = dict()
-
-            lawyer_info['username'] = lawyer.profile.user.username
-            lawyer_info['first_name'] = lawyer.profile.user.first_name
-            lawyer_info['last_name'] = lawyer.profile.user.last_name
-            lawyer_info['avatar'] = self.format_avatar_link(request, lawyer.profile.avatar.url)
-            lawyer_info['ratings'] = self.calculateAverageRating(lawyer)
-            lawyer_info['city'] = lawyer.city
-            lawyer_info['address'] = lawyer.address
-            lawyer_info['areas_of_expertise'] = lawyer.areasOfExpertise.split(':') if lawyer.areasOfExpertise else []
-
-            lawyers_data.append(lawyer_info)       
-        
         paginator = Paginator(lawyers_data, 6)
 
         # If the page of the query exceeds the existing amount, of is is less than 1,

@@ -28,10 +28,7 @@ class MessagesPage(View, BaseProfile):
             for message in messages:
                 message_dict = dict()
                 message_dict['sender_username'] = message.sender.username
-                message_dict['sender_avatar'] = self.format_avatar_link(request, 
-                                                                        unquote(
-                                                                            message.sender.profile.avatar.url.replace('/media/', ''))
-                                                                            )
+                message_dict['sender_avatar'] = message.sender.profile.avatar.url
                 message_dict['message'] = message.message
                 message_dict['time_sent'] = message.time_sent.strftime('%d/%m/%Y %H:%M')
                 final_messages.append(message_dict)
