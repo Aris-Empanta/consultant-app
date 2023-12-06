@@ -20,9 +20,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['lawyer-appointment-app.onrender.com']
 
-CSRF_TRUSTED_ORIGINS = ['https://lawyer-appointment-app.onrender.com/']
-CSRF_ALLOWED_ORIGINS = ['https://lawyer-appointment-app.onrender.com/']
-CORS_ORIGINS_WHITELIST = ['https://lawyer-appointment-app.onrender.com/']
+CSRF_TRUSTED_ORIGINS = ['https://lawyer-appointment-app.onrender.com']
+CSRF_ALLOWED_ORIGINS = ['https://lawyer-appointment-app.onrender.com']
+CORS_ORIGINS_WHITELIST = ['https://lawyer-appointment-app.onrender.com']
 
 # The email sending mechanism configuration
 
