@@ -14,15 +14,15 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
 # Cross origin/CSRF configurations
 
-ALLOWED_HOSTS = ['lawyer-appointment-app.onrender.com']
+ALLOWED_HOSTS = ['localhost', 'lawyer-appointment-app.onrender.com']
 
-CSRF_TRUSTED_ORIGINS = ['https://lawyer-appointment-app.onrender.com']
-CSRF_ALLOWED_ORIGINS = ['https://lawyer-appointment-app.onrender.com']
-CORS_ORIGINS_WHITELIST = ['https://lawyer-appointment-app.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
+CSRF_ALLOWED_ORIGINS = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
+CORS_ORIGINS_WHITELIST = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
 
 # The email sending mechanism configuration
 
