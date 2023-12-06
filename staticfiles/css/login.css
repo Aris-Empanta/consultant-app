@@ -1,0 +1,147 @@
+.loginPage {
+    background-color: whitesmoke;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginFormWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 18vh; 
+    background-color: rgb(218, 228, 235);
+    border-radius: 2px;
+    padding: 2.5%;
+    width: 300px;
+    max-width: 100%;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+} 
+
+.loginInputs {
+    border: none;
+    padding: 0.5rem;
+    font-family: Tahoma, sans-serif;
+    font-size: 1.1rem;
+    width: 95%;
+    align-self: center;
+    color: rgb(105, 53, 156);
+}
+
+.loginInputs:focus {
+    outline: none;
+}
+
+.loginInputs::placeholder {
+    color: rgb(105, 53, 156, 0.6);
+}
+
+#loginTitle {
+    font-family: Tahoma, sans-serif;
+    color: rgb(105, 53, 156);
+    font-size: 1.7rem;
+    margin-bottom: 2.3rem;
+}
+
+.loginErrorMessage {
+    font-family: Tahoma, sans-serif;
+    color: #E32636;
+    margin-bottom: 1rem;
+}
+
+#forgotPasswordLink {
+    margin: 0.8rem 0;
+    text-decoration: none;
+    color: rgb(105, 53, 156);
+    font-size: 1rem;
+    font-family: Tahoma, sans-serif;
+}
+
+#loginButton {
+   width: 103%;
+   border: none;
+   border-radius: 2px;
+   padding: 0.6rem;
+   font-family: Tahoma, sans-serif;
+   font-size: 1.2rem;
+   cursor: pointer;
+   background-color: #4286A8;
+   color: #DFEDF7;
+}
+
+#signupPrompt {
+    font-size: 1rem;
+    font-family: Tahoma, sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #146b97;
+}
+
+#signupLink {
+    text-decoration: none;
+    color: rgb(105, 53, 156);
+}
+
+#localOrOauth2 {
+    font-family: Tahoma, sans-serif;
+    position: relative;
+    max-width: 500px;
+    text-align: center;
+    color: rgb(105, 53, 156);
+    font-size: 1.1rem;
+}
+
+#localOrOauth2::before {
+    content:" ";
+    display: block;
+    height: 1px;
+    width: 90px;
+    position: absolute;
+    left: -100px;
+    top: 11px;
+    background: #4286A8;
+}
+
+#localOrOauth2::after {
+    content:" ";
+    display: block;
+    height: 1px;
+    width: 90px;
+    position: absolute;
+    left: 22px;
+    top: 11px;
+    background: #4286A8;
+}
+
+#googleLoginLink {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    color: #151515;
+    background-color: rgb(105, 53, 156, 0.9);
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    width: 91%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 23%;
+}
+
+#googleLoginLogo {
+    width: 22px;
+    height: 22px;
+}
+
+#loginWithGooglePhrase {
+    font-family: Tahoma, sans-serif;
+    color: rgb(218, 228, 235);
+    font-size: 1.1rem;
+}
