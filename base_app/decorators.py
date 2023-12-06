@@ -47,10 +47,7 @@ def allowed_referers(referers=[]):
         def wrapper_func(request, *args, **kwargs):
 
                 referer = request.META.get("HTTP_REFERER", None)
-                protocol = "http"
-
-                if request.is_secure():
-                    protocol = 'https' 
+                protocol = "https"
 
                 url = f'{ protocol }://{request.META["HTTP_HOST"]}'
                 
