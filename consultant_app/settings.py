@@ -14,9 +14,15 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+# Cross origin/CSRF configurations
+
+ALLOWED_HOSTS = ['lawyer-appointment-app.onrender.com']
+
+CSRF_TRUSTED_ORIGINS = ['https://lawyer-appointment-app.onrender.com/']
+CSRF_ALLOWED_ORIGINS = ['https://lawyer-appointment-app.onrender.com/']
+CORS_ORIGINS_WHITELIST = ['https://lawyer-appointment-app.onrender.com/']
 
 # The email sending mechanism configuration
 
@@ -102,10 +108,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://lawyer-appointment-app.onrender.com/'
 ]
 
 ROOT_URLCONF = 'consultant_app.urls'
