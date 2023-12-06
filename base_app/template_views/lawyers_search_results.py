@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.views import View
 from ..base_classes.lawyers import BaseLawyer
 from django.core.paginator import Paginator
-import os 
-import cloudinary
 
 class LawyersSearchResults(View, BaseLawyer):
     
@@ -18,13 +16,6 @@ class LawyersSearchResults(View, BaseLawyer):
         
         # We retrieve a Queryset of Lawyer objects based on the user input data
         lawyers = self.get_lawyers_filtered(expertise, name)     
-
-        # the configuration from cloudinary
-        cloudinary.config(
-            cloud_name=os.getenv('MEDIA_CLOUD_NAME'),
-            api_key=os.getenv('MEDIA_API_KEY'),
-            api_secret=os.getenv('MEDIA_API_SECRET')
-        )
            
         # We modify the Queryset we retrieved to a list of dictionaries with 
         # all the data we need. 

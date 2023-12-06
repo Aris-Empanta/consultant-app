@@ -5,28 +5,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Cloudinary imports
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition
- 
-SITE_ID=3
+# The email sending mechanism configuration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.getenv("EMAIL_HOST")  
@@ -58,6 +50,7 @@ INSTALLED_APPS = [
 ASGI_APPLICATION = "consultant_app.asgi.application"
 
 # We use Redis for the channel layer only in production.
+
 if DEBUG:
     CHANNEL_LAYERS = {
     "default": {
@@ -77,6 +70,9 @@ else:
 AUTH_USER_MODEL = "base_app.User"
 
 #Configurations needed for allauth
+
+SITE_ID=3
+
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": [
@@ -89,6 +85,14 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+
+LOGIN_REDIRECT_URL = "/examine-oauth/"
+LOGOUT_REDIRECT_URL = "/"
+
+#We set this to true to skip the default consent redirecting screen/
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -98,6 +102,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://lawyer-appointment-app.onrender.com/'
 ]
 
 ROOT_URLCONF = 'consultant_app.urls'
@@ -121,8 +129,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'consultant_app.wsgi.application'
 
 
-# Database
+# Database Configurations
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 import dj_database_url
 
 DATABASE_URL = os.getenv('DATABASE_URL')
@@ -131,17 +140,6 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL)
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': "django.db.backends.postgresql",
-#         'HOST': os.getenv('DB_HOST'),
-#         'NAME': os.getenv('DB_NAME'),
-#         'USER': os.getenv('DB_USER'),
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-#         'PORT': os.getenv('DB_PORT')
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -182,16 +180,14 @@ USE_TZ = True
 #     BASE_DIR / 'static'
 # ]
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-# The url and path to save editable media files.
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -205,13 +201,12 @@ AUTHENTICATION_BACKENDS = (
 
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
-LOGIN_REDIRECT_URL = "/examine-oauth/"
-LOGOUT_REDIRECT_URL = "/"
-
-#We set this to true to skip the default consent redirecting screen/
-SOCIALACCOUNT_LOGIN_ON_GET=True
-
 # Cloudinary - django integration
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 cloudinary.config(
     cloud_name= os.getenv('MEDIA_CLOUD_NAME'),
     api_key=os.getenv('MEDIA_API_KEY'),
