@@ -26,9 +26,7 @@ class Profile(View, BaseLawyer, BaseClient):
             avatar = user.profile.avatar
             member_since = user.date_joined.strftime("%b %Y")
             first_name = user.first_name
-            last_name = user.last_name
-
-           
+            last_name = user.last_name          
             
             # We parse the url, to get the encoded special characters (/, :, etc...)
             avatar_url = urllib.parse.unquote(avatar.url).replace(self.media_folder, '')

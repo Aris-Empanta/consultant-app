@@ -25,9 +25,6 @@ class UpdateProfilePic(View, BaseClient, BaseLawyer):
         if  new_avatar.size > 300000:
             messages.error(request, 'The image is too big')
             return redirect('profile', username=request.user.username)
-        
-        # We rename the image with a unique name
-        new_avatar.name = self.rename_image(new_avatar.name)
 
         # We get the path to the previous avatar using the Path object
         profile = Profile.objects.filter(user=request.user).first()

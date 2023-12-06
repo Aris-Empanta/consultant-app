@@ -32,7 +32,7 @@ class RegisterUser(View):
     lawyerRegister = False
     template = 'registerClient'
 
-   # @method_decorator(allowed_referers(referers=['question-specialty', 'examine-oauth']))
+    @method_decorator(allowed_referers(referers=['question-specialty', 'examine-oauth']))
     def get(self, request):
         return self.renderRegisterTemplate(request)
 
