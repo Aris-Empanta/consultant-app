@@ -1,6 +1,6 @@
 //The client's websocket that handles the message exchanging with the websocket server (consumer) 
 const webHost = window.location.host;
-const websocket = new WebSocket(`ws://${webHost}/ws/private-messaging/`);
+const websocket = new WebSocket(`wss://${webHost}/ws/private-messaging/`);
 
 //The necessary functions imports
 import { showMessage, isEmptyOrWhiteSpace, 
