@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from ..models import User
 from pathlib import Path
 from ..base_classes.profile import BaseProfile
+import cloudinary.uploader
 
 @method_decorator(login_required(login_url="login"), name='dispatch')
 class DeleteAccount(View, BaseProfile):
@@ -20,14 +21,11 @@ class DeleteAccount(View, BaseProfile):
 
             # We delete the user's profile pic file.
             profile = user.profile
-            previous_avatar_path = Path(profile.avatar.path)
+            previous_avatar = profile.avatar
 
-            # We delete the previous avatar file (only if it is not avatar.png)
-            if previous_avatar_path.exists() and not profile.avatar.name == self.default_profile_pic_name:
-                previous_avatar_path.unlink()  
-                print(f"File {previous_avatar_path} has been deleted.")
-            else:
-                print(f"File {previous_avatar_path} does not exist.")
+            # We delete the previous avatar file (only if it is not avatar.webp)
+            if not previous_avatar.public_id == 'avatar':
+                cloudinary.uploader.destroy(previous_avatar.public_id)
 
             # We delete the user object
             user.delete()
