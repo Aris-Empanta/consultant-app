@@ -56,7 +56,7 @@ if(amount > 0) {
 // We configure and handle the websocket client, which sends request 
 // to our backend's consumer (websocket server).
 const webHost = window.location.host;
-const socket = new WebSocket(`ws://${webHost}/ws/book-appointment/`);
+const socket = new WebSocket(`wss://${webHost}/ws/book-appointment/`);
 
 socket.onmessage = async (event) => {
 
