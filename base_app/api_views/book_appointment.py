@@ -11,9 +11,15 @@ from ..base_classes.clients import BaseClient
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from ..decorators import allowed_users
+from django.views.decorators.csrf import csrf_exempt
+
 
 @method_decorator(allowed_users(allowed_roles=["clients"]), name='dispatch')
 class BookAppointment(View, BaseLawyer, BaseClient):
+
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
     def patch(self, request):
 
