@@ -37,6 +37,7 @@ class OauthHandler(View):
                 User.objects.get(id=id).delete()
                 messages.error(request, f'There is no user with email {request.user.email}!')
                 logout(request)
+                request.session['loggingIn'] = False
                 return redirect('login')
         
         isLawyer = False
