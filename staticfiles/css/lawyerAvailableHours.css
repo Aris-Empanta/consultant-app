@@ -149,10 +149,28 @@
     box-shadow: 1px 1px 4px #d3d3d3;
 }
 
-.generateAppointmentsButton {
-    align-self: flex-end;
+#createAndCancelAppointmentsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+#cancelAvailableHours {
+    background-color: #D2122E;
+    text-decoration: none;
+    color: white;
+    padding: 0.7rem;
+    font-family: Tahoma, sans-serif;
+    font-size: 0.9rem;
+    border-radius: 2px;
+}
+
+.generateAppointmentsButton {
+    align-self: flex-end;
     cursor: pointer;
     border: none;
     background-color: #4286A8;
@@ -161,7 +179,6 @@
     color: whitesmoke;
     font-family: Tahoma, sans-serif;
     font-size: 0.9rem;
-    box-shadow: 1px 1px 4px #606060;
 }
 
 .generateAppointmentsButton:focus {

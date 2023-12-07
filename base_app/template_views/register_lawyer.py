@@ -52,7 +52,7 @@ class LawyerInfo(View):
             if referring_url and 'lawyer_info' in referring_url:
                 return redirect("lawyer_available_hours")
             
-            return redirect('profile', username=request.user.username)    
+            return redirect('lawyer_available_hours')    
         except Lawyer.DoesNotExist as e:
             print(e)
         except Exception as e:

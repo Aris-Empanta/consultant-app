@@ -55,7 +55,10 @@
                 <button class="addIntervalButton{{forloop.counter}} addIntervalButton" disabled>+</button>
             </div>
             {% endfor %}  
-            <input type="submit" value="Generate Appointments" class="generateAppointmentsButton">     
+            <div id="createAndCancelAppointmentsWrapper">
+                <a href="{% url 'profile' username=user.username %}" id="cancelAvailableHours">Cancel</a>
+                <input type="submit" value="Generate Appointments" class="generateAppointmentsButton">     
+            </div>
             </form>
         </div>
     </div>    

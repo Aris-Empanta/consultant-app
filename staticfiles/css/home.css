@@ -109,6 +109,7 @@
     background-color: whitesmoke;
     height: 30vh;
     overflow-y: scroll;
+    z-index: 3;
 }
 
 #lawyerNameAndSearchButtonWrapper {

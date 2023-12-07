@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 # Cross origin/CSRF configurations
 
@@ -92,8 +92,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
-
 LOGIN_REDIRECT_URL = "/examine-oauth/"
 LOGOUT_REDIRECT_URL = "/"
 
@@ -111,6 +109,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Uncomment in production
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
@@ -182,10 +184,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Uncomment in development
+
 # STATIC_URL = '/static/'
+
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static'
 # ]
+
+
+# Uncomment in production
+
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
