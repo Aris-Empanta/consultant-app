@@ -6,7 +6,7 @@ from django.contrib import messages
 from ..utils.authorization import Authorization
 from allauth.socialaccount.models import SocialAccount
 import cloudinary.uploader
-from django.db import IntegrityError
+from django.db import IntegrityErrors
 
 # The view class that does all the validation/configurations 
 # after the user authenticates via oauth and returns to the 

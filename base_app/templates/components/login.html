@@ -19,6 +19,9 @@
             </form>
             <span id="signupPrompt">Don't have an account? <a href="{% url 'question-specialty' %}" id="signupLink">Sign up</a></span>
             <p id="localOrOauth2">or</p>
+
+
+            
             <a href="{% provider_login_url 'google' %}" id="googleLoginLink">
                 <img src="{% static 'img/google_logo.webp' %}" id="googleLoginLogo">
                 <span id="loginWithGooglePhrase">Login with Google</span>
