@@ -5,7 +5,7 @@ from ...factory.fake_ratings import FakeRatings
 class Command(BaseCommand):
     def handle(self, *args, **options):
         # First we create clients and lawyers
-        users = FakeUsers(30, 50)
+        users = FakeUsers(20, 50)
         users.create()
 
         # Then the lawyers' ratings

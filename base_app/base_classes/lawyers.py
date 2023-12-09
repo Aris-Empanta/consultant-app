@@ -92,20 +92,22 @@ class BaseLawyer(BaseProfile):
         tommorow = timezone.make_aware(datetime.now() + timedelta(days=1))
         tommorow_noon = tommorow.replace(hour=12, minute=0, second=0, microsecond=0) 
 
-        starting_time = tommorow_noon
-        ending_time = starting_time + timedelta(hours=6)
-        duration = 45
-        breaks = 15
+        # We create appointments for the next 7 days
+        for i in range(7):
+            starting_time = tommorow_noon + timedelta(days=i)
+            ending_time = starting_time + timedelta(hours=7)
+            duration = 45
+            breaks = 15
 
-        appointments = DateUtils.generate_appointments_per_interval(starting_time, 
-                                                                    ending_time,
-                                                                    duration,
-                                                                    breaks)
-        # We save the available hours and the appointments in the database
-        DateUtils.save_intervals_and_appointments(lawyer,
-                                                  starting_time, 
-                                                  ending_time,
-                                                  appointments)
+            appointments = DateUtils.generate_appointments_per_interval(starting_time,
+                                                                        ending_time,
+                                                                        duration,
+                                                                        breaks)
+            # We save the available hours and the appointments in the database
+            DateUtils.save_intervals_and_appointments(lawyer,
+                                                    starting_time, 
+                                                    ending_time,
+                                                    appointments)
         
     # the method that does the lawyer searching in the database.
     def get_lawyers_filtered(self, expertise, name_input):

@@ -38,6 +38,7 @@
 }
 
 #closeAppointmentsModal {
+    position: fixed;
     cursor: pointer;
     align-self: flex-end;
     padding: 0;
@@ -272,6 +273,7 @@
 #appointmentsDaysSeparatorWrapper {
     display: flex;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
 .appointmentsInADayWrapper {

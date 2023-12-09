@@ -372,6 +372,10 @@
     padding: 0.6rem 1rem;
 }
 
+#bookAppointment:focus {
+    outline: none;
+}
+
 #pricePerHour {
     font-family: Tahoma, sans-serif;
     color: rgb(105, 53, 156);

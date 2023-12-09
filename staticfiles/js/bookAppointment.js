@@ -18,6 +18,16 @@ closeAppointmentsModal.addEventListener('click', () => {
     modal.style.display = 'none'
 })
 
+// Book appointment modal should close with esc button
+document.addEventListener('keydown', (event) => {
+
+    let bookAppointmentModal = document.getElementById('appointmentsModalWrapper')
+
+    if (event.key === 'Escape') {
+        bookAppointmentModal.style.display = 'none'
+    }
+});
+
 const bookAppointmentButton = document.querySelectorAll('.bookAppointmentButton')
 
 for(let i=0; i < bookAppointmentButton.length; i++) {

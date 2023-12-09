@@ -5,6 +5,14 @@ const loadingAllRatings = document.getElementById('loadingAllRatings')
 const allRatingsModal = document.getElementById('allRatingsModal')
 const allFetchedRatingsWrapper = document.getElementById('allFetchedRatingsWrapper')
 
+// Rating lawyer modal should close with esc button
+document.addEventListener('keydown', (event) => {
+
+    if (event.key === 'Escape') {
+        allRatingsModalWrapper.style.display = 'none'
+    }
+});
+
 openALLRatingsModal.addEventListener('click', () => {
 
     openRatingsModal() 

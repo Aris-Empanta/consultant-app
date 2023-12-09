@@ -32,7 +32,6 @@ class RemindAppointments(View):
             if appointment.informed_client == False:
                 client_email = appointment.client.profile.user.email
                 mail_sent = self.remind_client(client_email, appointment)
-                print(mail_sent)
 
         return JsonResponse({'message': 'appointments reminded'})
     
