@@ -4,7 +4,9 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 
 [View Live Web App](https://lawyer-appointment-app.onrender.com)
 
-![front page](screenshots/front-page.webp)
+|Front Page|
+|:-:|
+|![front page](screenshots/front-page.webp)|
 
 ## Index
 
@@ -32,7 +34,7 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 &nbsp;&nbsp;&nbsp;&nbsp;A user can register with **username/password** or **google account**.
 
 |Login Screen|
-|:-:|:-:|
+|:-:|
 |![Login Screen](screenshots/login.webp)|
 
 &nbsp;&nbsp;&nbsp;&nbsp;The user can choose between registering as a **client** or a **lawyer**.
@@ -50,9 +52,13 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 &nbsp;&nbsp;&nbsp;&nbsp;If a user registers as a lawyer, he/she is redirected to a screen to add some informations regarding his/her qualifications as a lawyer/legal advisor.
 
 |Lawyer's Info|
-|:-:|:-:|
+|:-:|
 |![Lawyer's Info Screen](screenshots/lawyer-info.webp)|
 
 #### Lawyer's Available Hours
 
-&nbsp;&nbsp;&nbsp;&nbsp;After the lawyer fills up his/her information, he/she is redirected to a page to choose the hours that he/she is available for the next 2 weeks, the appointments' duration and the breaks in between. Then, the algorithm generates the available appointments, which can be chosen by a client.
+&nbsp;&nbsp;&nbsp;&nbsp;After the lawyer fills up his/her information, he/she is redirected to a page to choose the hours that he/she is available for the next 2 weeks, the appointments' duration and the breaks in between. Then, the algorithm generates the available appointments, which can be chosen by a client. 
+
+|Lawyer's Available Hours|
+|:-:|
+|![Lawyer's Available Hours](screenshots/available-hours.webp)|
