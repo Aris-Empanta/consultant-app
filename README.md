@@ -15,6 +15,7 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 - PostgreSQL
 - Redis (message broker)
 - Django channels (websockets)
+- Faker
 - Vanilla JavaScript
 
 ## Features
@@ -27,9 +28,15 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 &nbsp;&nbsp;&nbsp;&nbsp;[Lawyer's Info](#lawyers-info)\
 &nbsp;&nbsp;&nbsp;&nbsp;[Lawyer's Available Hours](#lawyers-available-hours)\
 &nbsp;&nbsp;&nbsp;&nbsp;[User Profile](#user-profile)\
+&nbsp;&nbsp;&nbsp;&nbsp;[Update Profile Picture](#update-profile-picture)\
 &nbsp;&nbsp;&nbsp;&nbsp;[Book an Appointment](#book-an-appointment)\
 &nbsp;&nbsp;&nbsp;&nbsp;[Messaging](#messaging)\
-&nbsp;&nbsp;&nbsp;&nbsp;[Cancel Appointment](#cancel-appointment)
+&nbsp;&nbsp;&nbsp;&nbsp;[Cancel Appointment](#cancel-appointment)\
+&nbsp;&nbsp;&nbsp;&nbsp;[Rate Lawyer](#rate-lawyer)\
+&nbsp;&nbsp;&nbsp;&nbsp;[Delete Account](#delete-account)\
+&nbsp;&nbsp;&nbsp;&nbsp;[Fake Users Factory](#fake-users-factory)\
+&nbsp;&nbsp;&nbsp;&nbsp;[Remind Appointments](#remind-appointments)\
+&nbsp;&nbsp;&nbsp;&nbsp;[Delete Past Appointments](#delete-past-appointments)
 
 #### Search Lawyers
 &nbsp;&nbsp;&nbsp;&nbsp;Any visitor of the app, authenticated or not, can browse through all the registered lawyers via a search bar which exists in most of the pages. The search result can be filtered by existing areas of expertise of the lawyer, and/or his/her name. By applying no filter, you can browse through all the registered lawyers. **Pagination** is applied of course:
@@ -83,6 +90,7 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 
 &nbsp;&nbsp;&nbsp;&nbsp;Each user's profile looks different, depending on whether they are a client or a lawyer, and it further varies based on whether they are viewing their own profile or that of another user.
 If a user check's someone else's profile it looks like this:
+
 |Client's Profile|Lawyer's Profile|
 |:-:|:-:|
 |![Client's Profile](screenshots/client-profile.webp)|![Lawyer's Profile](screenshots/lawyer-profile.webp)|
@@ -97,6 +105,10 @@ If a user check's someone else's profile it looks like this:
 |Edit Info|Set available Hours|
 |:-:|:-:|
 |![Edit Info](screenshots/edit-lawyer-info.webp)|![Set available Hours](screenshots/set-available-hours.webp)|
+
+#### Update Profile Picture
+
+&nbsp;&nbsp;&nbsp;&nbsp;The profile picture of a user can be updated like the user's personal informations. All these pictures are stored in a cloud service called Cloudinary. Once a picture is updated, the previous user's picture is deleted in order to save space.
 
 #### Book an Appointment
 
@@ -127,3 +139,37 @@ If a user check's someone else's profile it looks like this:
 |Cancel Appointment|Automated Message|
 |:-:|:-:|
 |![Edit Info](screenshots/cancel-appointment.webp)|![Set available Hours](screenshots/automated-message.webp)|
+
+#### Rate Lawyer
+
+&nbsp;&nbsp;&nbsp;&nbsp;After the scheduled appointment time has elapsed, clients have a 48-hour window to provide a rating for the lawyer.
+
+|Rate Lawyer Button|Rate Lawyer Modal|
+|:-:|:-:|
+|![Edit Info](screenshots/rate-lawyer-button.webp)|![Set available Hours](screenshots/rate-lawyer-modal.webp)|
+
+&nbsp;&nbsp;&nbsp;&nbsp;This ratings can be seen by anyone in the lawyer's profile:
+
+|Lawyer's Ratings|
+|:-:|
+|![Lawyer's Ratings](screenshots/all-lawyers-ratings.webp)|
+
+#### Delete Account
+
+&nbsp;&nbsp;&nbsp;&nbsp;A user can permanently delete his/her account. By clicking on the profile pic in navbar, a modal opens, which has a link to the delete account page.
+
+|Delete Account Page|
+|:-:|
+|![Delete Account Page](screenshots/delete-account-page.webp)|
+
+#### Fake Users Factory
+
+&nbsp;&nbsp;&nbsp;&nbsp;In order to test and debug the app, I had to populate the database with fake clients and lawyers. Since I needed a large amount, I used the **Faker** library and created a command with Django in order to generate as many clients and lawyers as I needed. The command can be used in debugging mode by typing: **"python manage.py create_testing_data"**.
+
+#### Remind Appointments
+
+&nbsp;&nbsp;&nbsp;&nbsp;Three hours before an appointment starts, a notification email is sent to the client. This is done by a scheduler that every 15 minutes queries if there are appointments that start within the next 3 hours.
+
+#### Delete Past Appointments
+
+&nbsp;&nbsp;&nbsp;&nbsp;Every day at 23:00, a scheduler deletes all the appointments that have been completed over 1 week before.

@@ -41,11 +41,11 @@ api_urls = [
     path('get-all-ratings/<slug:username>', views.GetAllRatings.as_view(), name='get_all_ratings'),
 ]
 
-daemon_urls = [
+scheduler_urls = [
     path('delete-past-appointments/', views.DeletePastAppointments.as_view(), name='delete_past_appointments'),
     path('remind-appointments/', views.RemindAppointments.as_view(), name='remind_appointments'),
 ]
 
 urlpatterns += template_urls
 urlpatterns += api_urls
-urlpatterns += daemon_urls
+urlpatterns += scheduler_urls

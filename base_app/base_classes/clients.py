@@ -24,14 +24,14 @@ class BaseClient(BaseProfile):
         if request.user.is_authenticated and request.user.profile.isClient:
             current_client = Client.objects.filter(profile=request.user.profile).first()
             client_appointments = Appointments.objects.filter(client=current_client).order_by('ending_time')
-            
+            print(current_client)
             # We check if the client had appointment(s) with the lawyer, and if the oldest 
             # appointment arranged has been completed.
             if len(client_appointments) > 0:
                 timezone_difference = int(os.getenv('TIMEZONE_DIFFERENCE'))
                 time_now =  timezone.now() + timedelta(hours=timezone_difference)
                 appointment_ending_time = client_appointments[0].ending_time
-            
+
                 if(appointment_ending_time < time_now):
                     client_can_rate = True
            
