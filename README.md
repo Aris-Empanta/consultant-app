@@ -24,8 +24,8 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 
 ### Shortcuts
 
-&nbsp;&nbsp;&nbsp;&nbsp;[Login/Register](#login/register)\
-&nbsp;&nbsp;&nbsp;&nbsp;[Reset Password](#resetpassword)
+&nbsp;&nbsp;&nbsp;&nbsp;[Login/Register](#loginregister)\
+&nbsp;&nbsp;&nbsp;&nbsp;[Reset Password](#reset-password)
 
 #### Login/Register
 &nbsp;&nbsp;&nbsp;&nbsp;A user can register with **username/password** or **google account**.
