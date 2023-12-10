@@ -23,7 +23,8 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 &nbsp;&nbsp;&nbsp;&nbsp;[Login/Register](#loginregister)\
 &nbsp;&nbsp;&nbsp;&nbsp;[Reset Password](#reset-password)\
 &nbsp;&nbsp;&nbsp;&nbsp;[Lawyer's Info](#lawyers-info)\
-&nbsp;&nbsp;&nbsp;&nbsp;[Lawyer's Available Hours](#lawyers-available-hours)
+&nbsp;&nbsp;&nbsp;&nbsp;[Lawyer's Available Hours](#lawyers-available-hours)\
+&nbsp;&nbsp;&nbsp;&nbsp;[User Profile](#user-profile)
 
 #### Login/Register
 &nbsp;&nbsp;&nbsp;&nbsp;A user can register with **username/password** or **google account**.
@@ -61,3 +62,16 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 ||
 |:-:|
 |![Lawyer's Available Hours](screenshots/available-hours.webp)|
+
+#### User Profile
+
+&nbsp;&nbsp;&nbsp;&nbsp;Each user's profile looks different, depending on whether they are a client or a lawyer, and it further varies based on whether they are viewing their own profile or that of another user.
+If a user check's someone else's profile it looks like this:
+|Client's Profile|Lawyer's Profile|
+|:-:|:-:|
+|![Client's Profile](screenshots/client-profile.webp)|![Lawyer's Profile](screenshots/lawyer-profile.webp)|
+
+And if a user check's his own profile ehile logged in it may look like this:
+|Own Client's Profile|Own Lawyer's Profile|
+|:-:|:-:|
+|![Own Client's Profile](screenshots/own-client-profile.webp)|![Own Lawyer's Profile](screenshots/own-lawyer-profile.webp)|
