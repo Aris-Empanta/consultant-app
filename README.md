@@ -8,11 +8,6 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 |:-:|
 |![front page](screenshots/front-page.webp)|
 
-## Index
-
-&nbsp;&nbsp;&nbsp;&nbsp;[Main technologies](#maintechnologies)\
-&nbsp;&nbsp;&nbsp;&nbsp;[Features](#features)
-
 ## Main Technologies
 
 - Python
@@ -33,13 +28,13 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 #### Login/Register
 &nbsp;&nbsp;&nbsp;&nbsp;A user can register with **username/password** or **google account**.
 
-|Login Screen|
+||
 |:-:|
 |![Login Screen](screenshots/login.webp)|
 
 &nbsp;&nbsp;&nbsp;&nbsp;The user can choose between registering as a **client** or a **lawyer**.
 
-|Question Specialty|Register|
+|||
 |:-:|:-:|
 |![Login Screen](screenshots/question-specialty.webp)|![Register Screen](screenshots/register.webp)|
 
@@ -47,11 +42,15 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 
 &nbsp;&nbsp;&nbsp;&nbsp;In case a user has registered with username/password, he/she can reset the password if he/she forgot it.
 
+|||
+|:-:|:-:|
+|![Forgot Password](screenshots/forgot-password.webp)|![Reset Password](screenshots/reset-password.webp)|
+
 #### Lawyer's Info
 
 &nbsp;&nbsp;&nbsp;&nbsp;If a user registers as a lawyer, he/she is redirected to a screen to add some informations regarding his/her qualifications as a lawyer/legal advisor.
 
-|Lawyer's Info|
+||
 |:-:|
 |![Lawyer's Info Screen](screenshots/lawyer-info.webp)|
 
@@ -59,6 +58,6 @@ A platform for booking appointments with registered lawyers and legal advisors, 
 
 &nbsp;&nbsp;&nbsp;&nbsp;After the lawyer fills up his/her information, he/she is redirected to a page to choose the hours that he/she is available for the next 2 weeks, the appointments' duration and the breaks in between. Then, the algorithm generates the available appointments, which can be chosen by a client. 
 
-|Lawyer's Available Hours|
+||
 |:-:|
 |![Lawyer's Available Hours](screenshots/available-hours.webp)|
