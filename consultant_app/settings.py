@@ -14,12 +14,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 # Cross origin/CSRF configurations
 
-# ALLOWED_HOSTS = ['localhost', 'lawyer-appointment-app.onrender.com']
-ALLOWED_HOSTS =['*']
+ALLOWED_HOSTS = ['localhost', 'lawyer-appointment-app.onrender.com']
+
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
 CSRF_ALLOWED_ORIGINS = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
 CORS_ORIGINS_WHITELIST = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
@@ -111,10 +111,10 @@ MIDDLEWARE = [
 
 # Uncomment in production
 
-# ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
 ROOT_URLCONF = 'consultant_app.urls'
 
@@ -185,24 +185,24 @@ USE_TZ = True
 
 # Uncomment in development
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
 
 
 # Uncomment in production
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

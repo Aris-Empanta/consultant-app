@@ -28,19 +28,3 @@ class AreasOfExpertiseView(View):
                     specific_areas_of_expertise.append(area_of_expertise)
 
             return JsonResponse({'areas': specific_areas_of_expertise})
-        
-
-
-
-from django.http import JsonResponse
-from django.views import View
-import time
-
-class Scheduler(View):
-    def get(self, request):
-
-        while True:
-            print('hey')
-            time.sleep(1)
-
-        return JsonResponse({'res': 'daemon stopped'})
