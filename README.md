@@ -1,6 +1,6 @@
 # User's Guide
 
-A platform for booking appointments with registered lawyers and legal advisors, built in Django.
+A Django-based platform designed for scheduling appointments with registered lawyers and legal advisors.
 
 [View Live Web App](https://lawyer-appointment-app.onrender.com)
 
