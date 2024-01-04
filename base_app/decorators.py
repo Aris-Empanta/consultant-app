@@ -58,9 +58,10 @@ def allowed_referers(referers=[]):
 
                 # we want at least the referer to contain one of the allowed referers in its start 
                 for ref in referers:
-                    if referer.startswith(ref):
-                        referer = ref
-                    break
+                    if referer is not None:
+                        if referer.startswith(ref):
+                            referer = ref
+                        break
                     
                 if referer in referers:
                     sys.stdout.write(f'Referer is: {referer}')
