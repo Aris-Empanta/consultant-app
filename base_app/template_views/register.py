@@ -34,9 +34,8 @@ class RegisterUser(View):
 
     def get(self, request):
         if 'isLawyer' in request.session:
-            return self.renderRegisterTemplate(request)
-        else:
-            return render(request, "components/reusable/400.html")
+            print(request.session['isLawyer'])
+        return self.renderRegisterTemplate(request)
 
     def post(self, request):
 
