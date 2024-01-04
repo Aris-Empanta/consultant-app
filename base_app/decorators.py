@@ -55,13 +55,6 @@ def allowed_referers(referers=[]):
                 # we get the referer's url name (if exists)
                 if referer:
                     referer = resolve(referer.replace(url, "")).url_name
-
-                # we want at least the referer to contain one of the allowed referers in its start 
-                # for ref in referers:
-                #     if referer is not None:
-                #         if referer.startswith(ref):
-                #             referer = ref
-                #         break
                     
                 if referer in referers:
                     sys.stdout.write(f'Referer is: {referer} ok')

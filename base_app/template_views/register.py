@@ -32,9 +32,11 @@ class RegisterUser(View):
     lawyerRegister = False
     template = 'registerClient'
 
-    @method_decorator(allowed_referers(referers=['question-specialty', 'examine-oauth']))
     def get(self, request):
-        return self.renderRegisterTemplate(request)
+        if 'isLawyer' in request.session:
+            return self.renderRegisterTemplate(request)
+        else:
+            return render(request, "components/reusable/400.html")
 
     def post(self, request):
 
