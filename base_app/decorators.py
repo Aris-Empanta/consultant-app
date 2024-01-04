@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.urls import resolve
 import os
 from dotenv import load_dotenv
+import sys 
 
 load_dotenv()
 
@@ -56,9 +57,12 @@ def allowed_referers(referers=[]):
                     referer = resolve(referer.replace(url, "")).url_name
                     
                 if referer in referers:
+                    sys.stdout.write(f'Referer is: {referer}')
                     return view_func(request, *args, **kwargs)
                 else:
+                    sys.stdout.write(f'Referer is: {referer}')
                     return render(request, "components/reusable/400.html")
+                
         return wrapper_func
     return decorator
 
