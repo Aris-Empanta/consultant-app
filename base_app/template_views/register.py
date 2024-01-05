@@ -33,8 +33,6 @@ class RegisterUser(View):
     template = 'registerClient'
 
     def get(self, request):
-        if 'isLawyer' in request.session:
-            print(request.session['isLawyer'])
         return self.renderRegisterTemplate(request)
 
     def post(self, request):

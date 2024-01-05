@@ -7,6 +7,7 @@ from ..utils.authorization import Authorization
 from allauth.socialaccount.models import SocialAccount
 import cloudinary.uploader
 from django.db import IntegrityError
+import sys
 
 # The view class that does all the validation/configurations 
 # after the user authenticates via oauth and returns to the 
@@ -47,7 +48,11 @@ class OauthHandler(View):
             # was for a client or a lawyer.
             if 'isLawyer' in request.session:
                 isLawyer = request.session['isLawyer']
-                registerUrl = 'register-lawyer' if isLawyer else 'register-client' 
+                sys.stdout.write(request.session['isLawyer'])
+                registerUrl = 'register-lawyer' if isLawyer else 'register-client'
+            else:
+                 sys.stdout.write('There is no lawyer')
+            
 
             # The current user's email should be unique. If it 
             # exists more than once , we logout and erase the user.

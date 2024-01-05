@@ -18,8 +18,8 @@ DEBUG = False
 
 # Cross origin/CSRF configurations
 
-# ALLOWED_HOSTS = ['localhost', 'lawyer-appointment-app.onrender.com']
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['localhost', 'lawyer-appointment-app.onrender.com']
+# ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
 CSRF_ALLOWED_ORIGINS = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
 CORS_ORIGINS_WHITELIST = ['http://localhost:8000', 'https://lawyer-appointment-app.onrender.com']
@@ -94,7 +94,7 @@ SOCIALACCOUNT_PROVIDERS = {
 LOGIN_REDIRECT_URL = "/examine-oauth/"
 LOGOUT_REDIRECT_URL = "/"
 
-#We set this to true to skip the default consent redirecting screen/
+# We set this to true to skip the default consent redirecting screen/
 
 SOCIALACCOUNT_LOGIN_ON_GET=True
 
